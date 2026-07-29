@@ -1,0 +1,54 @@
+{
+  "acceptance_checks": {
+    "compileall": "PASS",
+    "contract_raw_sha256": "PASS",
+    "git_diff_check": "PASS",
+    "out_of_scope_large_file_audit": "PASS",
+    "secret_pattern_audit": "PASS",
+    "pytest": {
+      "failed": 0,
+      "passed": 130,
+      "result": "PASS"
+    }
+  },
+  "claim_state": {
+    "exact_synthetic_proof": "PENDING_TASK_4",
+    "formal_proof_replay_verifier": "UNAVAILABLE",
+    "independence_proved": false,
+    "new_library_certificate": "HARD_NO_GO",
+    "observed_dataset_closure_and_qa_execution": "NOT_ESTABLISHED",
+    "scientific_certificates_issued": 0,
+    "within_library_proof_validity": "PENDING"
+  },
+  "contract_sha256": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+  "engineering_results": [
+    "TASK_2_STRUCTURAL_SEMANTIC_GUARDS_PASS",
+    "EXACT_CANDIDATE_BOUND_ARITHMETIC_PASS",
+    "REGISTRY_REFERENCE_AND_CANDIDATE_BINDINGS_PASS",
+    "TEST_FIXTURE_RECEIPT_BINDING_PASS",
+    "NUISANCE_CONDITIONING_AND_UNIFORM_WORST_CASE_PATHS_BOUND_PENDING_PROOF"
+  ],
+  "failure_policy_definition_sha256": "fca71a81a1c4aec402ab6718334db85d0ae7a6550015ce095ec5a25fd48ef5cb",
+  "final_acceptance_evidence": {
+    "closure_record": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task2-acceptance-20260730T001620p0800/closure.json",
+    "run_id": "task2-acceptance-20260730T001620p0800",
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task2-acceptance-20260730T001620p0800/run.log",
+    "source_snapshot_index": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task2-acceptance-20260730T001620p0800/source_files.sha256"
+  },
+  "forbidden_claims_not_established": [
+    "PROBABILITY_SEMANTICS_SCIENTIFICALLY_VALIDATED",
+    "STATISTICAL_INDEPENDENCE_PROVED",
+    "MODEL_CONDITIONAL_WITHIN_LIBRARY_RISK_CERTIFICATE",
+    "EXACT_SYNTHETIC_RISK_COVERAGE_PROOF",
+    "REAL_RNA_FINITE_DATASET_QA_RESULT",
+    "PROSPECTIVE_COVERAGE_CERTIFICATE",
+    "NEW_LIBRARY_RISK_CERTIFICATE",
+    "NATIVE_T4",
+    "RNA_POPULATION_GENERALIZATION"
+  ],
+  "registered_commit_title": "feat(probability): separate empirical QA from model-conditional risk",
+  "schema_id": "d2t_rna.task_acceptance",
+  "schema_version": "1.0",
+  "semantic_registry_sha256": "25604dac2cf94384d3c908293e2139c2f96321cb1582668647b651923fbb2c28",
+  "task_id": "TASK_2"
+}

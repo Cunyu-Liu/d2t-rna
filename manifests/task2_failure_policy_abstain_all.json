@@ -1,0 +1,23 @@
+{
+  "branches": [
+    {
+      "action": "ABSTAIN",
+      "failure": "QC"
+    },
+    {
+      "action": "ABSTAIN",
+      "failure": "GOF"
+    },
+    {
+      "action": "ABSTAIN",
+      "failure": "SOLVER"
+    },
+    {
+      "action": "ABSTAIN",
+      "failure": "YIELD"
+    }
+  ],
+  "schema_id": "d2t_rna.failure_policy_definition",
+  "schema_version": "1.0",
+  "unknown_failure_action": "ABSTAIN"
+}

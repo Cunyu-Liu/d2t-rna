@@ -1,0 +1,76 @@
+{
+  "members": [
+    {
+      "member_hash": "1e4052f988a61c7164411e5f5c5688611b8fc661ce6bc745e06fec52a7b78922",
+      "registry_id": "channel.synthetic.known",
+      "role": "SYNTHETIC_KNOWN_CHANNEL"
+    },
+    {
+      "member_hash": "eed12fe95f8614b4206efa159725e60a2d7d8023df52e8a92feff647f0764972",
+      "registry_id": "dataset.D_obs",
+      "role": "OBSERVED_DATASET"
+    },
+    {
+      "member_hash": "e3e8c1162a501f52e7ba969365cf882802769aefc1b6cee7cefa86ef3cd68204",
+      "registry_id": "dependency.umi_family",
+      "role": "DEPENDENCY_UNIT"
+    },
+    {
+      "member_hash": "b1a5dbc8223ca0917a9798008555cf489ea1f6676f8f80d21296dbc109c020a1",
+      "registry_id": "duplicate_ess.registered",
+      "role": "DUPLICATE_ESS_POLICY"
+    },
+    {
+      "member_hash": "7383515677e78c42988c91a48c9d76d572d2ac11cb08790514e7bf2808e4b9e3",
+      "registry_id": "estimand.empirical_feature_distribution",
+      "role": "OBSERVED_ESTIMAND"
+    },
+    {
+      "member_hash": "83bdcde667e9f2bd65d338f4cacbf43781e1845140276a8d986092fd19759f11",
+      "registry_id": "estimand.synthetic_known_channel_decision_risk",
+      "role": "SYNTHETIC_ESTIMAND"
+    },
+    {
+      "member_hash": "dcccf9da8ad5bd4350828230cfc1d76d6bcd26a8620544efefa65f625f727fbb",
+      "registry_id": "estimand.within_realized_library_latent_ensemble",
+      "role": "WITHIN_LIBRARY_ESTIMAND"
+    },
+    {
+      "member_hash": "fca71a81a1c4aec402ab6718334db85d0ae7a6550015ce095ec5a25fd48ef5cb",
+      "registry_id": "failure.abstain_all_registered",
+      "role": "FAILURE_POLICY"
+    },
+    {
+      "member_hash": "cf950eb89a2f136170a3fc2e74b6e655130d7d0cbeef666fdd199b60e3f82350",
+      "registry_id": "observation.weighting.registered",
+      "role": "OBSERVATION_WEIGHTING_LAW"
+    },
+    {
+      "member_hash": "56e52ce36f635653e3883ac7ae5150e589b0c0e50314b9ccab60865f398037d5",
+      "registry_id": "subsample.index.I",
+      "role": "SUBSAMPLING_INDEX"
+    },
+    {
+      "member_hash": "0ad8ae25594785b3a9d524a9e9cc2a58644e8f7d03a8aee30041c69d89e04ca5",
+      "registry_id": "target.full_observed_dataset_empirical_feature_distribution",
+      "role": "OBSERVED_TARGET"
+    },
+    {
+      "member_hash": "8128a1b27b8c8488baa0b4155eb10d9db17a102bc7cee69b23de35d4a714f31e",
+      "registry_id": "target.synthetic_known_channel_risk_coverage",
+      "role": "SYNTHETIC_TARGET"
+    },
+    {
+      "member_hash": "7898eb7a3280d2ad87448233045ec47841ee2efca4f34a59dae04c8bc455fa41",
+      "registry_id": "target.within_realized_library_latent_ensemble",
+      "role": "WITHIN_LIBRARY_TARGET"
+    },
+    {
+      "member_hash": "670042694dfc7a791a878cdfe56b2ac0427bda48ed9b4f0fe427c71cae73e8ae",
+      "registry_id": "verifier.task2.fixture",
+      "role": "TEST_FIXTURE_VERIFIER"
+    }
+  ],
+  "schema_id": "d2t_rna.semantic_registry",
+  "schema_version": "1.0"
+}
