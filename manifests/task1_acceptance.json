@@ -1,0 +1,53 @@
+{
+  "acceptance_checks": {
+    "compileall": "PASS",
+    "contract_raw_sha256": "PASS",
+    "git_diff_check": "PASS",
+    "nonfinite_literal_audit": "PASS",
+    "out_of_scope_large_file_audit": "PASS",
+    "pytest": {
+      "failed": 0,
+      "passed": 77,
+      "result": "PASS"
+    }
+  },
+  "contract_sha256": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+  "dependency_versions": {
+    "hypothesis": "6.163.0",
+    "numpy": "2.4.6",
+    "pydantic": "2.13.4",
+    "pytest": "9.1.1",
+    "python": "3.11.15",
+    "scipy": "1.17.1"
+  },
+  "engineering_results": [
+    "SCHEMA_PRIMITIVES_PASS",
+    "A_C_PAYLOAD_BOUND_PREFIX_PASS",
+    "A_D_LINK_TOPOLOGY_ONLY_PASS"
+  ],
+  "environment_evidence": {
+    "failed_nfs_attempt": "/mnt/cunyuliu/d2t-rna/logs/env-py311-20260729T2145p0800.log",
+    "recovery_attempt": "/mnt/cunyuliu/d2t-rna/logs/env-py311-home-20260729T2212p0800.log",
+    "resolved_dependencies": "/mnt/cunyuliu/d2t-rna/logs/deps-task1-20260729T2225p0800.log"
+  },
+  "final_acceptance_evidence": {
+    "closure_record": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task1-acceptance-20260729T225345p0800/closure.json",
+    "integrity_binding": "EXTERNAL_CLOSURE_RECORD_BINDS_FINAL_COMMIT_LOG_AND_SOURCE_INDEX",
+    "run_id": "task1-acceptance-20260729T225345p0800",
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task1-acceptance-20260729T225345p0800/run.log",
+    "source_snapshot_index": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task1-acceptance-20260729T225345p0800/source_files.sha256"
+  },
+  "forbidden_claims_not_established": [
+    "PROBABILITY_SEMANTICS_VALIDATED",
+    "TRUTH_BLINDING_VALIDATED",
+    "PROSPECTIVE_COVERAGE_CERTIFICATE",
+    "NEW_LIBRARY_RISK_CERTIFICATE",
+    "NATIVE_T4",
+    "RNA_POPULATION_GENERALIZATION"
+  ],
+  "lock_d_payload_verification": "NOT_IMPLEMENTED_FAIL_CLOSED_UNTIL_TASK_3",
+  "registered_commit_title": "feat(contracts): freeze probability and data-lock schemas",
+  "schema_id": "d2t_rna.task_acceptance",
+  "schema_version": "1.0",
+  "task_id": "TASK_1"
+}

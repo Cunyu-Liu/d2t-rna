@@ -1,0 +1,17 @@
+{
+  "artifact_root": "/mnt/cunyuliu/d2t-rna",
+  "blocked_scientific_states": [
+    "T2_LEMMA_PENDING_QUANTITATIVE_INTERVENTION_CONSEQUENCE",
+    "NO_GO_PROSPECTIVE_COVERAGE_CERTIFICATE",
+    "NO_GO_NEW_LIBRARY_CERTIFICATE",
+    "NO_GO_NATIVE_T4",
+    "NO_GO_POPULATION_GENERALIZATION"
+  ],
+  "code_root": "/home/cunyuliu/d2t-rna",
+  "contract_path": "contracts/D2T-RNA-v6.1-frozen-plan.md",
+  "contract_sha256": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+  "preflight_record": "docs/audit/preflight-2026-07-29.md",
+  "preflight_status": "PASS_WITH_REGISTERED_CONSTRAINTS",
+  "schema_id": "d2t_rna.project_contract_manifest",
+  "schema_version": "1.0"
+}
