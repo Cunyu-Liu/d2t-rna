@@ -2,7 +2,7 @@
 
 D2T-RNA is being implemented against the frozen v6.1 contract for exact synthetic risk–coverage proofs, finite-observed-dataset subsampling QA, carefully delimited within-realized-library model-conditional risk, and fail-closed RORC stress evaluation.
 
-Current status: Tasks 1–2 provide immutable schema primitives, a payload-bound Lock A–C prefix, topology-only Lock A–D validation, and fail-closed structural guards for probability scopes, split relations, nuisance handling, and exact candidate-bound arithmetic. Task 2 issues no scientific certificate: within-library proof validity remains pending replay, the synthetic exact engine is deferred to Task 4, new-library certification is a hard no-go, and observed-dataset closure/QA has not yet been executed. Truth blinding, real-data QA, exact proofs, RORC stress results, and the payload-bound Lock D reveal are not yet implemented.
+Current status: Tasks 1–3 provide immutable schema primitives, fail-closed structural guards for probability scopes and split relations, salted and domain-separated truth commitments, structured pre-D semantic auditing, and complete raw A–D software replay. Task 3 does not prove real access chronology or scientific truth validity; its credential must be replayed from raw inputs and is not a bearer token. No scientific certificate has been issued: within-library proof validity remains pending replay, the synthetic exact engine is deferred to Task 4, new-library certification is a hard no-go, and observed-data closure/QA has not been executed. add, SAM-III, and RORC remain historically semantically exposed and retrospective-only.
 
 The sole active scientific and engineering authority is:
 

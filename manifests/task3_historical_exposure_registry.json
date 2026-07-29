@@ -1,0 +1,39 @@
+{
+  "records": [
+    {
+      "basis_contract_hash": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+      "basis_section_id": "task3.historical_exposure",
+      "dataset_id": "add",
+      "display_name": "add",
+      "exposure_status": "HISTORICALLY_SEMANTICALLY_EXPOSED_RETROSPECTIVE",
+      "held_out_claim_allowed": false,
+      "prospective_claim_allowed": false,
+      "schema_id": "d2t_rna.historical_exposure_record",
+      "schema_version": "1.0"
+    },
+    {
+      "basis_contract_hash": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+      "basis_section_id": "task3.historical_exposure",
+      "dataset_id": "rorc",
+      "display_name": "RORC",
+      "exposure_status": "HISTORICALLY_SEMANTICALLY_EXPOSED_RETROSPECTIVE",
+      "held_out_claim_allowed": false,
+      "prospective_claim_allowed": false,
+      "schema_id": "d2t_rna.historical_exposure_record",
+      "schema_version": "1.0"
+    },
+    {
+      "basis_contract_hash": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+      "basis_section_id": "task3.historical_exposure",
+      "dataset_id": "sam-iii",
+      "display_name": "SAM-III",
+      "exposure_status": "HISTORICALLY_SEMANTICALLY_EXPOSED_RETROSPECTIVE",
+      "held_out_claim_allowed": false,
+      "prospective_claim_allowed": false,
+      "schema_id": "d2t_rna.historical_exposure_record",
+      "schema_version": "1.0"
+    }
+  ],
+  "schema_id": "d2t_rna.historical_exposure_registry",
+  "schema_version": "1.0"
+}

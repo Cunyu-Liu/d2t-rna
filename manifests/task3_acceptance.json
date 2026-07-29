@@ -1,0 +1,78 @@
+{
+  "acceptance_checks": {
+    "compileall": "PASS",
+    "contract_raw_sha256": "PASS",
+    "data_and_contract_pytest": {
+      "failed": 0,
+      "passed": 192,
+      "result": "PASS"
+    },
+    "git_diff_check": "PASS",
+    "out_of_scope_large_file_audit": "PASS_COMMITTABLE_PATHS_ONLY",
+    "secret_pattern_audit": "PASS_WITH_GREP_FALLBACK_RG_UNAVAILABLE",
+    "tdd_red_evidence_preserved": "PASS",
+    "whole_project_pytest": {
+      "failed": 0,
+      "passed": 245,
+      "result": "PASS"
+    }
+  },
+  "claim_state": {
+    "authenticated_chronology_and_access_audit": "UNAVAILABLE",
+    "bound_certificate_decision_plan_scoring_byte_replay": "UNAVAILABLE",
+    "lock_d_credential_status": "STRUCTURAL_A_D_PAYLOAD_BOUND_VERIFIED",
+    "scientific_certificates_issued": 0,
+    "scoring_allowed": false
+  },
+  "contract_sha256": "87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d",
+  "engineering_results": [
+    "REAL_PACKAGE_CONTENT_BOUND_SANITIZER_REPLAY_PASS",
+    "SALTED_DOMAIN_SEPARATED_TRUTH_COMMITMENTS_PASS",
+    "CONTRACT_EVALUATION_CHAIN_CONTEXT_BINDING_PASS",
+    "A_C_IMMUTABLE_COMMITMENT_SET_PASS",
+    "STRUCTURAL_A_D_RAW_PAYLOAD_REPLAY_PASS",
+    "TOPOLOGY_OR_SERIALIZED_RECEIPT_CANNOT_AUTHORIZE_SCORING_PASS",
+    "HISTORICAL_EXPOSURE_RETROSPECTIVE_ONLY_PASS"
+  ],
+  "final_acceptance_evidence": {
+    "closure_record": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task3-acceptance-recovery-20260730T011748p0800/closure.json",
+    "run_id": "task3-acceptance-recovery-20260730T011748p0800",
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task3-acceptance-recovery-20260730T011748p0800/run.log",
+    "source_snapshot_index": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task3-acceptance-recovery-20260730T011748p0800/source_files.sha256"
+  },
+  "preserved_failed_acceptance_attempt": {
+    "failure_reasons": [
+      "RG_UNAVAILABLE_ON_REMOTE_HOST",
+      "LARGE_FILE_AUDIT_SCOPE_INCLUDED_IGNORED_RUNTIME_AND_PACKAGE_CACHES"
+    ],
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task3-acceptance-20260730T011547p0800/run.log",
+    "run_log_sha256": "b4dab6f162b17e332a5c10ce24f47095df0cb9310a3a650eb7222b288d9633df",
+    "status": "FAILED_WITH_EVIDENCE_PRESERVED"
+  },
+  "forbidden_claims_not_established": [
+    "NO_UNREGISTERED_TRUTH_CHANNEL_EXISTS",
+    "AUTHENTICATED_PRECOMMIT_CHRONOLOGY",
+    "AUTHENTICATED_ABSENCE_OF_EARLY_REVEAL",
+    "SCIENTIFIC_TRUTH_VALIDITY",
+    "SCIENTIFIC_RISK_CERTIFICATE",
+    "PROSPECTIVE_COVERAGE_CERTIFICATE",
+    "HELD_OUT_STATUS_FOR_ADD_SAM_III_OR_RORC",
+    "NEW_LIBRARY_RISK_CERTIFICATE",
+    "NATIVE_T4",
+    "RNA_POPULATION_GENERALIZATION"
+  ],
+  "historical_exposure_registry_sha256": "37a07b09f0476b6eb17b7d2f06e560a9ed93609ef88a30cb21175bb33056f8b1",
+  "registered_commit_title": "feat(data-lock): seal truth payloads until post-certificate audit",
+  "schema_id": "d2t_rna.task_acceptance",
+  "schema_version": "1.0",
+  "task_id": "TASK_3",
+  "task_entry_gate": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/gates/task3-entry-gate-open-20260730T003558p0800.json",
+    "sha256": "2729f50d132e42c3be1285051c300f7f56b2d0cff6b65b0194a4f9b0b9c10c34"
+  },
+  "tdd_red_evidence": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task3-red-20260730T004410p0800/red-test.json",
+    "sha256": "e57fd6d4d32b8523b4999f1aab096fefc30122b6acc901a5348c27b5c3c86665"
+  },
+  "verifier_code_sha256": "830c209449693866e646bd18df49140b160a545f99328e2055021c4337a44549"
+}

@@ -92,7 +92,7 @@ def test_pre_reveal_lock_payload_accepts_only_hash_commitments(
         SealedTruthLockPayload.model_validate(raw)
 
 
-def test_full_a_b_c_d_topology_validates_but_payload_bundle_fails_closed() -> None:
+def test_legacy_topology_placeholder_cannot_pass_task3_payload_replay() -> None:
     links, sealed_payloads = make_full_chain()
     validate_lock_topology(links, require_complete=True)
     records = tuple(
@@ -105,8 +105,15 @@ def test_full_a_b_c_d_topology_validates_but_payload_bundle_fails_closed() -> No
             '"schema_version":"1.0","task3_placeholder":true}',
         ),
     )
-    with pytest.raises(NotImplementedError):
-        validate_complete_payload_bound_chain(records)
+    with pytest.raises((ValidationError, ValueError)):
+        validate_complete_payload_bound_chain(
+            records,
+            planning_package_roots=(
+                "/nonexistent/task3-a",
+                "/nonexistent/task3-b",
+                "/nonexistent/task3-c",
+            ),
+        )
 
 
 def test_a_to_c_links_are_bound_to_the_actual_registered_payloads() -> None:
