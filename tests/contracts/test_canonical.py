@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import os
-import subprocess
-import sys
+import json
+from pathlib import Path
 
 import pytest
 from pydantic import ValidationError
@@ -15,6 +14,7 @@ from d2t_rna.contracts.base import (
     parse_contract_json,
 )
 from d2t_rna.contracts.primitives import RegistryRef
+from tests.exact.conftest import run_task4_isolated_child
 
 
 GOLDEN_BYTES = b'{"a":1,"b":["x",true,null]}'
@@ -69,20 +69,29 @@ def test_raw_json_still_rejects_type_coercion() -> None:
         parse_contract_json(RegistryRef, raw)
 
 
-def test_hash_is_stable_across_processes_and_hash_seeds() -> None:
+def test_hash_is_stable_across_processes_and_hash_seeds(
+    tmp_path: Path,
+) -> None:
     code = (
+        "import json;"
         "from d2t_rna.contracts.base import canonical_sha256;"
-        "print(canonical_sha256({'b':['x',True,None],'a':1}))"
+        "print(json.dumps({"
+        "'digest':canonical_sha256({'b':['x',True,None],'a':1}),"
+        "'hash_probe':hash('d2t-rna-task4-seed-probe')"
+        "},sort_keys=True))"
     )
-    outputs: list[str] = []
-    for seed in ("1", "777"):
-        env = os.environ.copy()
-        env["PYTHONHASHSEED"] = seed
-        outputs.append(
-            subprocess.check_output(
-                [sys.executable, "-c", code],
-                env=env,
-                text=True,
-            ).strip()
+    outputs: list[dict[str, object]] = []
+    for process_index in range(4):
+        completed = run_task4_isolated_child(
+            child_artifact_dir=(
+                tmp_path / f"canonical-hash-child-{process_index}"
+            ),
+            source=code,
         )
-    assert outputs == [GOLDEN_SHA256, GOLDEN_SHA256]
+        assert completed.returncode == 0, completed.stderr
+        outputs.append(json.loads(completed.stdout))
+
+    assert [output["digest"] for output in outputs] == [
+        GOLDEN_SHA256
+    ] * len(outputs)
+    assert len({output["hash_probe"] for output in outputs}) > 1
