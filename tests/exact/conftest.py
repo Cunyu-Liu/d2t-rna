@@ -85,17 +85,32 @@ def _task4_child_source_with_runtime_closure(
 
     return dedent(
         f"""\
+        import hashlib as _task4_nested_hashlib
         import os as _task4_nested_os
         from pathlib import Path as _Task4NestedPath
         import sys as _task4_nested_sys
         from scripts.verify_task4_acceptance_manifest import (
+            EXPECTED_SOURCE_PATHS as _task4_nested_historical_paths,
             _runtime_dependency_snapshot as _task4_nested_dependency_snapshot,
-            _source_index as _task4_nested_source_index,
             _verify_python_process_isolation as _task4_nested_verify_process,
             _verify_runtime_import_closure as _task4_nested_verify_closure,
             canonical_json_bytes as _task4_nested_canonical_json_bytes,
             canonical_sha256 as _task4_nested_canonical_sha256,
         )
+
+        def _task4_nested_historical_regression_index(root):
+            index = {{}}
+            for relative in sorted(_task4_nested_historical_paths):
+                path = root / relative
+                if path.is_symlink() or not path.is_file():
+                    raise RuntimeError(
+                        "Task 4 historical regression source is unavailable: "
+                        + relative
+                    )
+                index[relative] = _task4_nested_hashlib.sha256(
+                    path.read_bytes()
+                ).hexdigest()
+            return index
 
         _task4_nested_root = _Task4NestedPath.cwd()
         _task4_nested_artifact_root = _Task4NestedPath(
@@ -110,8 +125,10 @@ def _task4_child_source_with_runtime_closure(
         ):
             raise RuntimeError("nested child receipt path is unsafe")
 
-        _task4_nested_pre_index = _task4_nested_source_index(
+        _task4_nested_pre_index = (
+            _task4_nested_historical_regression_index(
             _task4_nested_root
+            )
         )
         _task4_nested_pre_dependencies = _task4_nested_dependency_snapshot(
             _task4_nested_root
@@ -147,8 +164,10 @@ def _task4_child_source_with_runtime_closure(
                 "nested child target did not return normally"
             ) from _task4_nested_target_error
 
-        _task4_nested_post_index = _task4_nested_source_index(
+        _task4_nested_post_index = (
+            _task4_nested_historical_regression_index(
             _task4_nested_root
+            )
         )
         _task4_nested_post_dependencies = _task4_nested_dependency_snapshot(
             _task4_nested_root

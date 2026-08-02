@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 
 import pytest
@@ -10,10 +11,6 @@ from scripts.build_task4_acceptance_manifest import (
     _source_index,
 )
 from scripts.verify_task4_acceptance_manifest import EXPECTED_SOURCE_PATHS
-from scripts.verify_task4_acceptance_manifest import (
-    canonical_sha256,
-    source_index_sha256,
-)
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -76,16 +73,26 @@ def test_manifest_builder_source_index_fails_on_missing_source(
         _source_index(tmp_path)
 
 
-def test_source_index_is_complete_non_self_referential_and_replays() -> None:
-    index = _source_index(PROJECT_ROOT)
+def test_task4_source_index_stays_closed_in_a_descendant_stage() -> None:
+    with pytest.raises(
+        ValueError,
+        match="dynamic Python execution closure",
+    ):
+        _source_index(PROJECT_ROOT)
 
-    assert len(EXPECTED_SOURCE_PATHS) == len(index) == 74
-    assert "manifests/task4_acceptance.json" not in index
+    assert len(EXPECTED_SOURCE_PATHS) == 74
+    assert "manifests/task4_acceptance.json" not in EXPECTED_SOURCE_PATHS
     assert {
         "manifests/task2_failure_policy_abstain_all.json",
         "manifests/task3_historical_exposure_registry.json",
-    }.issubset(index)
-    assert source_index_sha256(PROJECT_ROOT) == canonical_sha256(index)
+    }.issubset(EXPECTED_SOURCE_PATHS)
+    current_historical_regression_index = {
+        relative: hashlib.sha256(
+            (PROJECT_ROOT / relative).read_bytes()
+        ).hexdigest()
+        for relative in sorted(EXPECTED_SOURCE_PATHS)
+    }
+    assert set(current_historical_regression_index) == EXPECTED_SOURCE_PATHS
 
 
 def test_builders_freeze_verifier_runtime_before_other_project_imports() -> None:

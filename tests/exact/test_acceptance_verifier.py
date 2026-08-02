@@ -69,7 +69,7 @@ def _live_run_dir(artifact_root: Path) -> Path:
 
 
 def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
-    expected = frozenset(
+    historical_task4 = frozenset(
         path
         for path in EXPECTED_SOURCE_PATHS
         if (
@@ -80,7 +80,30 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             )
         )
     )
-    assert _discover_python_execution_paths(PROJECT_ROOT) == expected
+    registered_task5_descendants = frozenset(
+        {
+            "scripts/build_task5_acceptance_fixture.py",
+            "scripts/build_task5_acceptance_manifest.py",
+            "scripts/build_task5_post_commit_closure.py",
+            "scripts/verify_task5_acceptance_manifest.py",
+            "src/d2t_rna/evaluation/baselines.py",
+            "src/d2t_rna/evaluation/milp_check.py",
+            "src/d2t_rna/evaluation/planner.py",
+            "src/d2t_rna/evaluation/risk_binding.py",
+            "src/d2t_rna/evaluation/scenario.py",
+            "tests/evaluation/__init__.py",
+            "tests/evaluation/factories.py",
+            "tests/evaluation/test_baselines.py",
+            "tests/evaluation/test_planner.py",
+            "tests/evaluation/test_scenario.py",
+            "tests/evaluation/test_task5_acceptance_closure.py",
+            "tests/evaluation/test_task5_acceptance_verifier.py",
+        }
+    )
+    assert historical_task4.isdisjoint(registered_task5_descendants)
+    assert _discover_python_execution_paths(PROJECT_ROOT) == (
+        historical_task4 | registered_task5_descendants
+    )
 
 
 def test_dynamic_execution_discovery_rejects_injection_inputs(
