@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = c690aaf7b48966d0e438ad583f15a782ca7c8a10
-origin/main    = cae90f383ad3ea6766afaf16870c6f87ac955703
-worktree state = DIRTY
+current HEAD   = cf1126a5d00aad765e1f84c308e94801c8f70cf9
+origin/main    = cf1126a5d00aad765e1f84c308e94801c8f70cf9
+worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+cf1126a chore(paper): regeneration of readiness report + manifest bound to c690aaf and commit build provenance
 c690aaf docs(paper): tighten theorem rigor per reviewer 1 and rebalance novelty framing per reviewer 2
 cae90f3 chore(paper): sync readiness report + manifest to 947ef1f and commit build provenance
 947ef1f chore(paper): refresh readiness report bound to 74e4553
 74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)
 1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)
-eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script
 ```
 
-The readiness report is re-generated from the current HEAD (c690aaf7b48966d0e438ad583f15a782ca7c8a10), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> c690aaf.
+The readiness report is re-generated from the current HEAD (cf1126a5d00aad765e1f84c308e94801c8f70cf9), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> cf1126a.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD c690aaf (this file).
+- P0 readiness report synced to HEAD cf1126a (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on c690aaf with provenance (see build_provenance).
+- P1 full build on cf1126a with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 

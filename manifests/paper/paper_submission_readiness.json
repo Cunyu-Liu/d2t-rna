@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "c690aaf7b48966d0e438ad583f15a782ca7c8a10",
-  "origin_main": "cae90f383ad3ea6766afaf16870c6f87ac955703",
-  "worktree_clean": false,
+  "head": "cf1126a5d00aad765e1f84c308e94801c8f70cf9",
+  "origin_main": "cf1126a5d00aad765e1f84c308e94801c8f70cf9",
+  "worktree_clean": true,
   "lineage": [
+    "cf1126a chore(paper): regeneration of readiness report + manifest bound to c690aaf and commit build provenance",
     "c690aaf docs(paper): tighten theorem rigor per reviewer 1 and rebalance novelty framing per reviewer 2",
     "cae90f3 chore(paper): sync readiness report + manifest to 947ef1f and commit build provenance",
     "947ef1f chore(paper): refresh readiness report bound to 74e4553",
     "74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)",
-    "1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)",
-    "eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script"
+    "1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)"
   ],
   "file_exists": {
     "manuscript": true,
@@ -89,5 +89,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785937497.3482974
+  "run_finished": 1785937514.1251302
 }
