@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" font-family="Helvetica,Arial,sans-serif" font-size="11">
+<rect x="0" y="0" width="720" height="440" fill="white"/>
+<line x1="60" y1="360" x2="660" y2="360" stroke="#333" stroke-width="1"/>
+<line x1="60" y1="360" x2="60" y2="60" stroke="#333" stroke-width="1"/>
+<text x="360.0" y="48" text-anchor="middle" font-size="12" font-weight="bold">Fig 2 - baseline minimax error, case='strict_positive_separation' (model-conditional)</text>
+<text x="52" y="54" text-anchor="end" font-size="10">minimax error</text>
+<rect x="77" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="97" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="97" y="374" text-anchor="end" transform="rotate(45 97 374)" font-size="8">exhaustive_oracle</text>
+<rect x="152" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="172" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="172" y="374" text-anchor="end" transform="rotate(45 172 374)" font-size="8">full_matrix</text>
+<rect x="227" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="247" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="247" y="374" text-anchor="end" transform="rotate(45 247 374)" font-size="8">random</text>
+<rect x="302" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="322" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="322" y="374" text-anchor="end" transform="rotate(45 322 374)" font-size="8">greedy_test_cover</text>
+<rect x="377" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="397" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="397" y="374" text-anchor="end" transform="rotate(45 397 374)" font-size="8">eig</text>
+<rect x="452" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="472" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="472" y="374" text-anchor="end" transform="rotate(45 472 374)" font-size="8">chernoff</text>
+<rect x="527" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="547" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="547" y="374" text-anchor="end" transform="rotate(45 547 374)" font-size="8">lm2r_heuristic</text>
+<rect x="602" y="360" width="41" height="0" fill="#2b6cb0"/>
+<text x="622" y="356" text-anchor="middle" font-size="8" fill="#2b6cb0">0</text>
+<text x="622" y="374" text-anchor="end" transform="rotate(45 622 374)" font-size="8">t2_integer_lp</text>
+</svg>
