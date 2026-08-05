@@ -1,94 +1,116 @@
 {
-  "activated_at": "2026-08-05T14:14:09+08:00",
+  "boundary_note": "R2 is confined to a fixed observed dataset; no held-out/blinded/prospective/independent-validation claim. Empirical metrics are gated on R1 materialization and observation-model/dependency-graph/independence proof (fail-closed, contract 8.4). sam-iii is a post-freeze modality-transfer diagnostic (\u00a78.5) and is crossreferenced by verdict, not merged into a benchmark.",
   "certificate_guard": "NOT_ESTABLISHED",
-  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
-  "contract_version": "v7.0.0",
-  "deliverable": "TASK6_R_R2_RETROSPECTIVE_FAILL_CLOSED_FRAMEWORK",
-  "registered_datasets": [
-    {
-      "dataset_id": "add",
-      "gates": {
-        "dependency_graph_available": false,
-        "independence_proof_available": false,
-        "no_held_out_blinded_prospective": true,
-        "observation_model_available": false,
-        "observed_data_materialized": false,
-        "within_registered_fixed_dataset": true
-      },
-      "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
-      "missing_gates": [
-        "observed_data_materialized",
-        "observation_model_available",
-        "dependency_graph_available",
-        "independence_proof_available"
-      ],
-      "reason_codes": [
-        "add: observed data not materialized within fixed dataset",
-        "add: observation model unavailable",
-        "add: dependency graph unavailable",
-        "add: independence proof unavailable"
-      ],
-      "role": "COUNTERFACTUAL_RETROSPECTIVE_FULL_MATRIX_COMPRESSION",
-      "status": "NOT_ESTABLISHED"
+  "contract_section": "8.4",
+  "gate_profiles": {
+    "add": {
+      "dependency_graph_available": false,
+      "independence_proof_available": false,
+      "no_held_out_blinded_prospective": true,
+      "observation_model_available": false,
+      "observed_data_materialized": true,
+      "within_registered_fixed_dataset": true
     },
-    {
-      "dataset_id": "sam-iii",
-      "gates": {
-        "dependency_graph_available": true,
-        "independence_proof_available": false,
-        "no_held_out_blinded_prospective": true,
-        "observation_model_available": true,
-        "observed_data_materialized": false,
-        "within_registered_fixed_dataset": true
-      },
-      "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
-      "missing_gates": [
-        "observed_data_materialized",
-        "independence_proof_available"
-      ],
-      "reason_codes": [
-        "sam-iii: observed data not materialized within fixed dataset",
-        "sam-iii: independence proof unavailable"
-      ],
-      "role": "RETROSPECTIVE_MODALITY_TRANSFER_DIAGNOSTIC",
-      "status": "NOT_ESTABLISHED"
+    "rorc": {
+      "dependency_graph_available": false,
+      "independence_proof_available": false,
+      "no_held_out_blinded_prospective": true,
+      "observation_model_available": false,
+      "observed_data_materialized": false,
+      "within_registered_fixed_dataset": true
     },
-    {
-      "dataset_id": "rorc",
-      "gates": {
-        "dependency_graph_available": false,
-        "independence_proof_available": false,
-        "no_held_out_blinded_prospective": true,
-        "observation_model_available": false,
-        "observed_data_materialized": false,
-        "within_registered_fixed_dataset": true
-      },
-      "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
-      "missing_gates": [
-        "observed_data_materialized",
-        "observation_model_available",
-        "dependency_graph_available",
-        "independence_proof_available"
-      ],
-      "reason_codes": [
-        "rorc: observed data not materialized within fixed dataset",
-        "rorc: observation model unavailable",
-        "rorc: dependency graph unavailable",
-        "rorc: independence proof unavailable"
-      ],
-      "role": "HISTORICALLY_EXPOSED_THIRD_STATE_MISSPECIFICATION_STRESS",
-      "status": "NOT_ESTABLISHED"
+    "sam-iii": {
+      "dependency_graph_available": true,
+      "independence_proof_available": false,
+      "no_held_out_blinded_prospective": true,
+      "observation_model_available": true,
+      "observed_data_materialized": true,
+      "within_registered_fixed_dataset": true
     }
-  ],
-  "report_sha256": "b5aef03f2eff2abb573b37b766828dea3ac8f33815ae210891ba383a85f4d6fc",
-  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r2-20260805T141409+0800",
+  },
+  "kind": "R2_RETROSPECTIVE_FAILL_CLOSED_REPORT",
+  "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
+  "report": {
+    "all_established": false,
+    "datasets": [
+      {
+        "dataset_id": "add",
+        "gates": {
+          "dependency_graph_available": false,
+          "independence_proof_available": false,
+          "no_held_out_blinded_prospective": true,
+          "observation_model_available": false,
+          "observed_data_materialized": true,
+          "within_registered_fixed_dataset": true
+        },
+        "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
+        "missing_gates": [
+          "observation_model_available",
+          "dependency_graph_available",
+          "independence_proof_available"
+        ],
+        "reason_codes": [
+          "add: observation model unavailable",
+          "add: dependency graph unavailable",
+          "add: independence proof unavailable"
+        ],
+        "role": "COUNTERFACTUAL_RETROSPECTIVE_FULL_MATRIX_COMPRESSION",
+        "status": "NOT_ESTABLISHED"
+      },
+      {
+        "dataset_id": "sam-iii",
+        "gates": {
+          "dependency_graph_available": true,
+          "independence_proof_available": false,
+          "no_held_out_blinded_prospective": true,
+          "observation_model_available": true,
+          "observed_data_materialized": true,
+          "within_registered_fixed_dataset": true
+        },
+        "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
+        "missing_gates": [
+          "independence_proof_available"
+        ],
+        "reason_codes": [
+          "sam-iii: independence proof unavailable"
+        ],
+        "role": "RETROSPECTIVE_MODALITY_TRANSFER_DIAGNOSTIC",
+        "status": "NOT_ESTABLISHED"
+      },
+      {
+        "dataset_id": "rorc",
+        "gates": {
+          "dependency_graph_available": false,
+          "independence_proof_available": false,
+          "no_held_out_blinded_prospective": true,
+          "observation_model_available": false,
+          "observed_data_materialized": false,
+          "within_registered_fixed_dataset": true
+        },
+        "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
+        "missing_gates": [
+          "observed_data_materialized",
+          "observation_model_available",
+          "dependency_graph_available",
+          "independence_proof_available"
+        ],
+        "reason_codes": [
+          "rorc: observed data not materialized within fixed dataset",
+          "rorc: observation model unavailable",
+          "rorc: dependency graph unavailable",
+          "rorc: independence proof unavailable"
+        ],
+        "role": "HISTORICALLY_EXPOSED_THIRD_STATE_MISSPECIFICATION_STRESS",
+        "status": "NOT_ESTABLISHED"
+      }
+    ],
+    "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION"
+  },
+  "report_sha256": "92b7bfe9e165b764d92719ecfc3a78b204f2c003b0d8bdad889475412a2d7c83",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r2-20260805T154617+0800",
+  "run_finished": 1785915977.7143552,
+  "sam_iii_modality_diagnostic_verdict": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE",
   "scientific_claim_authorized": false,
-  "status": "R2_FAILL_CLOSED_FRAMEWORK_ACCEPTED",
-  "test_log_sha256": "7b1721e5331bb08434d738a736ca473a4b70ea77ab50fb7c7edf6180679dc908",
-  "tests": {
-    "r2_fail_closed": {
-      "failed": 0,
-      "passed": 9
-    }
-  }
+  "self_check_ok": true,
+  "test_log_sha256": "c5cc3cb1a439268bd42ce5a13e0644e45566a7ecf169f05d8d43f8d11b197483"
 }
