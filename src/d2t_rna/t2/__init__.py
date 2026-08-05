@@ -21,6 +21,8 @@ from .witness import (
 )
 from .verify import verify_collision, verify_separation
 from .theorem import T2bCertificate, collision_or_separation
+from .costed import CostedDesign, LpRelaxation, lp_relax_exact, no_go_lower_bound, no_go_status, achievable_integer_design, integrality_gap
+from .costed_verify import CostedCheckReceipt
 
 __all__ = [
     "Action",
@@ -36,4 +38,12 @@ __all__ = [
     "verify_separation",
     "T2bCertificate",
     "collision_or_separation",
+    "CostedDesign",
+    "LpRelaxation",
+    "lp_relax_exact",
+    "no_go_lower_bound",
+    "no_go_status",
+    "achievable_integer_design",
+    "integrality_gap",
+    "CostedCheckReceipt",
 ]
