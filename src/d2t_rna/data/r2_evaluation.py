@@ -26,8 +26,39 @@ from typing import Mapping, Sequence
 
 NOT_ESTABLISHED = "NOT_ESTABLISHED"
 ESTABLISHED = "ESTABLISHED"
+NOT_APPLICABLE = "NOT_APPLICABLE"
+NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL = (
+    "NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL"
+)
+# sam-iii uses the modality-transfer diagnostic's distinct action-space verdict.
+NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE = (
+    "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE"
+)
 
 EVALUATION_LABEL = "POST_FREEZE_RETROSPECTIVE_EVALUATION"
+
+# §12.3-6 authority amendment (2026-08-05): dataset-level terminal-outcome
+# attributes.  These are static *registration facts*, not gate booleans:
+#   - ineligible: no public official accession to materialize (fail-closed).
+#   - observation_model_registered_categorical: the observed modality is a
+#     registered categorical observation channel over latent states.  Both add
+#     (SHAPE) and sam-iii (DMS) are continuous per-nucleotide reactivity with no
+#     such channel, so their observation/action semantics are not comparable by
+#     the registered action space; rorc has no public data at all.
+DATASET_ATTRIBUTES: dict[str, dict[str, bool]] = {
+    "add": {
+        "ineligible": False,
+        "observation_model_registered_categorical": False,
+    },
+    "sam-iii": {
+        "ineligible": False,
+        "observation_model_registered_categorical": False,
+    },
+    "rorc": {
+        "ineligible": True,
+        "observation_model_registered_categorical": False,
+    },
+}
 
 # Contract §8.5 fixed roles for the three separate retrospective cases.
 DATASET_ROLE: dict[str, str] = {
@@ -71,6 +102,7 @@ class R2DatasetStatus:
     missing_gates: tuple[str, ...] = field(default_factory=tuple)
     reason_codes: tuple[str, ...] = field(default_factory=tuple)
     status: str = NOT_ESTABLISHED
+    outcome: str = NOT_ESTABLISHED
     label: str = EVALUATION_LABEL
 
     def as_dict(self) -> dict:
@@ -81,8 +113,33 @@ class R2DatasetStatus:
             "missing_gates": list(self.missing_gates),
             "reason_codes": list(self.reason_codes),
             "status": self.status,
+            "outcome": self.outcome,
             "label": self.label,
         }
+
+
+def classify_outcome(dataset_id: str, gates: Mapping[str, bool]) -> str:
+    """Classify a dataset's terminal R2 outcome (§8.4/§8.5 + §12.3-6 amendment).
+
+    Priority:
+      1. every positive gate holds -> ``ESTABLISHED``
+      2. dataset ineligible (rorc: no public accession) -> ``NOT_APPLICABLE``
+      3. observation modality continuous / no registered categorical channel
+         (add SHAPE, sam-iii DMS) -> ``NOT_COMPARABLE_BY_REGISTERED_*
+      4. otherwise -> ``NOT_ESTABLISHED``
+    """
+    if dataset_id not in DATASET_ATTRIBUTES:
+        raise ValueError(f"unknown registered dataset: {dataset_id!r}")
+    if all(gates.values()):
+        return ESTABLISHED
+    attrs = DATASET_ATTRIBUTES[dataset_id]
+    if attrs["ineligible"]:
+        return NOT_APPLICABLE
+    if not attrs["observation_model_registered_categorical"]:
+        if dataset_id == "sam-iii":
+            return NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE
+        return NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL
+    return NOT_ESTABLISHED
 
 
 def _reason_code(dataset_id: str, gate: str) -> str:
@@ -128,12 +185,14 @@ def r2_dataset_status(
         "no_held_out_blinded_prospective": no_held_out_blinded_prospective,
     }
     missing = [g for g, ok in gates.items() if not ok]
+    outcome = classify_outcome(dataset_id, gates)
     if not missing:
         return R2DatasetStatus(
             dataset_id=dataset_id,
             role=DATASET_ROLE[dataset_id],
             gates=gates,
             status=ESTABLISHED,
+            outcome=outcome,
             label=EVALUATION_LABEL,
         )
     return R2DatasetStatus(
@@ -143,6 +202,7 @@ def r2_dataset_status(
         missing_gates=tuple(missing),
         reason_codes=tuple(_reason_code(dataset_id, g) for g in missing),
         status=NOT_ESTABLISHED,
+        outcome=outcome,
         label=EVALUATION_LABEL,
     )
 

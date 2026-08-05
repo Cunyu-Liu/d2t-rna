@@ -1,5 +1,5 @@
 {
-  "boundary_note": "R2 is confined to a fixed observed dataset; no held-out/blinded/prospective/independent-validation claim. Empirical metrics are gated on R1 materialization and observation-model/dependency-graph/independence proof (fail-closed, contract 8.4). sam-iii is a post-freeze modality-transfer diagnostic (\u00a78.5) and is crossreferenced by verdict, not merged into a benchmark.",
+  "boundary_note": "R2 is confined to a fixed observed dataset; no held-out/blinded/prospective/independent-validation claim. Empirical metrics are gated on R1 materialization and observation-model/dependency-graph/independence proof (fail-closed, contract 8.4). Under authority amendment V7_AMEND_12_3_6_20260805 each dataset's terminal outcome is classified: add (continuous SHAPE) is NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL, sam-iii (continuous DMS) is NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE (\u00a78.5), and rorc (no public accession) is NOT_APPLICABLE. These are fail-closed terminal roles, not established quantitative instances.",
   "certificate_guard": "NOT_ESTABLISHED",
   "contract_section": "8.4",
   "gate_profiles": {
@@ -49,6 +49,7 @@
           "dependency_graph_available",
           "independence_proof_available"
         ],
+        "outcome": "NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL",
         "reason_codes": [
           "add: observation model unavailable",
           "add: dependency graph unavailable",
@@ -71,6 +72,7 @@
         "missing_gates": [
           "independence_proof_available"
         ],
+        "outcome": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE",
         "reason_codes": [
           "sam-iii: independence proof unavailable"
         ],
@@ -94,6 +96,7 @@
           "dependency_graph_available",
           "independence_proof_available"
         ],
+        "outcome": "NOT_APPLICABLE",
         "reason_codes": [
           "rorc: observed data not materialized within fixed dataset",
           "rorc: observation model unavailable",
@@ -106,9 +109,9 @@
     ],
     "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION"
   },
-  "report_sha256": "92b7bfe9e165b764d92719ecfc3a78b204f2c003b0d8bdad889475412a2d7c83",
-  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r2-20260805T154617+0800",
-  "run_finished": 1785915977.7143552,
+  "report_sha256": "4fb096a3b3571f54f2316869b57e71f294f91881f746855f5a5206c483029e8d",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r2-20260805T174239+0800",
+  "run_finished": 1785922959.6794732,
   "sam_iii_modality_diagnostic_verdict": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE",
   "scientific_claim_authorized": false,
   "self_check_ok": true,

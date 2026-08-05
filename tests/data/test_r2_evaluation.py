@@ -7,6 +7,9 @@ import pytest
 from d2t_rna.data.r2_evaluation import (
     ESTABLISHED,
     EVALUATION_LABEL,
+    NOT_APPLICABLE,
+    NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE,
+    NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL,
     NOT_ESTABLISHED,
     certificate_guard,
     r2_dataset_status,
@@ -106,3 +109,36 @@ def test_as_dict_roundtrip() -> None:
     assert d["status"] == NOT_ESTABLISHED
     assert d["label"] == EVALUATION_LABEL
     assert "not materialized" in d["reason_codes"][0]
+
+
+# --- §12.3-6 amendment: terminal-outcome classification ---
+
+def test_add_continuous_observation_model_not_comparable() -> None:
+    """add is SHAPE reactivity (continuous, no categorical channel); when the
+    observation-model gate fails, its terminal outcome is NOT_COMPARABLE_BY_
+    REGISTERED_OBSERVATION_MODEL (amendment V7_AMEND_12_3_6_20260805)."""
+    s = r2_dataset_status("add", **_full_gates(observation_model_available=False))
+    assert s.status == NOT_ESTABLISHED
+    assert s.outcome == NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL
+
+
+def test_add_established_when_all_gates_pass() -> None:
+    s = r2_dataset_status("add", **_full_gates())
+    assert s.status == ESTABLISHED
+    assert s.outcome == ESTABLISHED
+
+
+def test_sam_iii_not_comparable_by_action_space() -> None:
+    s = r2_dataset_status("sam-iii", **_full_gates(observation_model_available=False))
+    assert s.outcome == NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE
+
+
+def test_rorc_ineligible_is_not_applicable() -> None:
+    s = r2_dataset_status("rorc", **_full_gates(observed_data_materialized=False))
+    assert s.outcome == NOT_APPLICABLE
+
+
+def test_rorc_established_when_all_gates_pass() -> None:
+    s = r2_dataset_status("rorc", **_full_gates())
+    assert s.status == ESTABLISHED
+    assert s.outcome == ESTABLISHED

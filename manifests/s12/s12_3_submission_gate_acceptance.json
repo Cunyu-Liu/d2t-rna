@@ -1,0 +1,35 @@
+{
+  "amendment": "V7_AMEND_12_3_6_20260805",
+  "boundary_note": "READY_FOR_THEORETICAL_RNA_METHODS_SUBMISSION is an internal evidence gate (\u00a712.3); it is not acceptance, not SCIENTIFIC_SUCCESS, and authorizes no scientific claim. Final reference/venue/license review is deferred to the author at submission (\u00a715, \u00a70.1 rule 6).",
+  "certificate_guard": "ESTABLISHED",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "gate": {
+    "certificate_guard": "ESTABLISHED",
+    "condition_6_mode": "COMPLETE_FAIL_CLOSED_ONLY_AUDIT",
+    "conditions": {
+      "data_role_dependency_claim_audit_pass": true,
+      "executable_certificate": true,
+      "oracle_baselines_misspecification_pass": true,
+      "reproducible": true,
+      "retrospective_qualified_or_complete_fail_closed": true,
+      "t2b_exact_collision_separation": true,
+      "t2c_finite_sample": true,
+      "task5_closure_complete": true
+    },
+    "gate_state": "READY_FOR_THEORETICAL_RNA_METHODS_SUBMISSION",
+    "scientific_claim_authorized": false,
+    "submission_ready": true
+  },
+  "kind": "S12_3_SUBMISSION_READINESS_GATE",
+  "r2_audited": true,
+  "r2_outcomes": [
+    "NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL",
+    "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE",
+    "NOT_APPLICABLE"
+  ],
+  "report_sha256": "9e8467f7d7658560a40105a51dfb78dd2c76bf1cd7b89ca318599757e8c0558d",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/s12-3-submission-gate-20260805T174240+0800",
+  "run_finished": 1785922960.3095763,
+  "scientific_claim_authorized": false
+}

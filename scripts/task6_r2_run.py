@@ -117,9 +117,13 @@ def main() -> int:
             "R2 is confined to a fixed observed dataset; no held-out/blinded/"
             "prospective/independent-validation claim. Empirical metrics are "
             "gated on R1 materialization and observation-model/dependency-graph/"
-            "independence proof (fail-closed, contract 8.4). sam-iii is a "
-            "post-freeze modality-transfer diagnostic (§8.5) and is cross"
-            "referenced by verdict, not merged into a benchmark."
+            "independence proof (fail-closed, contract 8.4). Under authority "
+            "amendment V7_AMEND_12_3_6_20260805 each dataset's terminal outcome "
+            "is classified: add (continuous SHAPE) is "
+            "NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL, sam-iii (continuous "
+            "DMS) is NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE (§8.5), and rorc "
+            "(no public accession) is NOT_APPLICABLE. These are fail-closed "
+            "terminal roles, not established quantitative instances."
         ),
     }
     report_json = run_dir / "report.json"

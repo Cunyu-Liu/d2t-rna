@@ -100,10 +100,77 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/evaluation/test_task5_acceptance_verifier.py",
         }
     )
-    assert historical_task4.isdisjoint(registered_task5_descendants)
-    assert _discover_python_execution_paths(PROJECT_ROOT) == (
-        historical_task4 | registered_task5_descendants
+    registered_task6_descendants = frozenset(
+        {
+            "src/d2t_rna/data/manifest.py",
+            "src/d2t_rna/data/validate.py",
+            "tests/data/test_manifests.py",
+            "src/d2t_rna/data/r1_materialize.py",
+            "src/d2t_rna/data/r1_materialize_sam_iii.py",
+            "src/d2t_rna/data/r2_evaluation.py",
+            "src/d2t_rna/data/r2_sam_iii_diagnostic.py",
+            "tests/data/test_r1_materialize.py",
+            "tests/data/test_r1_materialize_sam_iii.py",
+            "tests/data/test_r2_evaluation.py",
+            "tests/data/test_r2_sam_iii_diagnostic.py",
+            "scripts/task6_r1_run.py",
+            "scripts/task6_r1_samiii_run.py",
+            "scripts/task6_r1_rorc_run.py",
+            "scripts/task6_r2_run.py",
+            "scripts/task6_r2_samiii_diagnostic_run.py",
+        }
     )
+    registered_t2_descendants = frozenset(
+        {
+            "src/d2t_rna/t2/__init__.py",
+            "src/d2t_rna/t2/bounds.py",
+            "src/d2t_rna/t2/costed.py",
+            "src/d2t_rna/t2/costed_verify.py",
+            "src/d2t_rna/t2/decision.py",
+            "src/d2t_rna/t2/fixtures.py",
+            "src/d2t_rna/t2/info.py",
+            "src/d2t_rna/t2/lp.py",
+            "src/d2t_rna/t2/model.py",
+            "src/d2t_rna/t2/rna.py",
+            "src/d2t_rna/t2/theorem.py",
+            "src/d2t_rna/t2/verify.py",
+            "src/d2t_rna/t2/witness.py",
+            "src/d2t_rna/evaluation/matrix.py",
+            "src/d2t_rna/evaluation/t2_planner_binding.py",
+            "src/d2t_rna/evaluation/validation.py",
+            "tests/evaluation/test_matrix.py",
+            "tests/evaluation/test_t2_planner_binding.py",
+            "tests/evaluation/test_validation.py",
+            "tests/t2/test_costed_design.py",
+            "tests/t2/test_rna.py",
+            "tests/t2/test_theorem_t2b.py",
+            "tests/t2/test_theorem_t2c.py",
+            "tests/t2/test_witness_engine.py",
+            "scripts/t9_matrix_run.py",
+            "scripts/t10_validation_run.py",
+        }
+    )
+    registered_delivery_descendants = frozenset(
+        {
+            "src/d2t_rna/contracts/submission_gate.py",
+            "tests/contracts/test_submission_gate.py",
+            "scripts/s12_3_submission_gate_run.py",
+            "scripts/s14_delivery_bundle.py",
+            "tests/scripts/test_s14_delivery_bundle.py",
+            "scripts/m0_activate_v7.py",
+        }
+    )
+    assert historical_task4.isdisjoint(registered_task5_descendants)
+    assert historical_task4.isdisjoint(registered_task6_descendants)
+    assert registered_task5_descendants.isdisjoint(registered_task6_descendants)
+    all_registered = (
+        historical_task4
+        | registered_task5_descendants
+        | registered_task6_descendants
+        | registered_t2_descendants
+        | registered_delivery_descendants
+    )
+    assert _discover_python_execution_paths(PROJECT_ROOT) == all_registered
 
 
 def test_dynamic_execution_discovery_rejects_injection_inputs(
