@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "cbddae46501d1479629069b52bdc1f74d154157d",
-  "origin_main": "cbddae46501d1479629069b52bdc1f74d154157d",
+  "head": "b8e3d81cc1902c9af4a988519dd0811c7fba5eac",
+  "origin_main": "b8e3d81cc1902c9af4a988519dd0811c7fba5eac",
   "worktree_clean": false,
   "lineage": [
+    "b8e3d81 feat(paper): measured 1M7 SHAPE observation channel for add riboswitch",
     "cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4",
     "ed27de4 chore(paper): add self-contained Docker reproducibility artifact",
     "69db410 chore(paper): commit build provenance bound to 731e604",
     "731e604 chore(paper): re-bind readiness report + manifest to final HEAD 457dc11",
-    "457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper",
-    "dea8be1 chore(paper): re-bind readiness report + manifest to final HEAD cf1126a"
+    "457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper"
   ],
   "file_exists": {
     "manuscript": true,
@@ -98,5 +98,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785952295.9473598
+  "run_finished": 1785953819.9385953
 }
