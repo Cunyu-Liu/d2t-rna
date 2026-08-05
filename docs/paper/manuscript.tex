@@ -1,0 +1,111 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+
+\title{Certified Collision-or-Separation Design for Finite RNA State Discrimination\\[0.5em]\large Theoretical/computational RNA methods + statistical experimental design}
+\author{D2T-RNA Project}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+In a finite registered RNA state/action/observation model, the target and rival parameter classes can
+produce identical passive marginal laws, so deciding which class generated a fixed observed catalog
+requires a certified and checkable design. Classical marginal-fiber, Test-Cover, and fixed-horizon-testing
+arguments characterize when separation is possible, but they do not deliver a replayable
+collision-or-separation certificate over the complete cross-class difference set, nor a decision-theoretic
+consequence tied to the RNA action geometry. D2T-RNA provides, within a pre-registered finite RNA model,
+exact and independently checkable collision-or-separation certificates over the complete difference set,
+converts robust action-level separation into fixed-horizon finite-sample decision and budget bounds, and
+returns a costed integer design with a design-class no-go certificate. All theoretical certificates are
+model-conditional and are cross-checked by rational primal/dual and independent-checker evidence against
+exact oracle enumeration over 11 synthetic micro-cases and 8 executed baselines. Public RNA data are used
+only as a fail-closed retrospective evidence audit within fixed realized datasets, so the contribution is
+a certified design method whose scope is bounded by the registered finite model.
+\end{abstract}
+
+\section{Introduction}\label{sec:intro}
+Pre-registered finite RNA systems model a target/rival discrimination problem in which the passive
+marginal map may collide across classes. Existing methods (Markov-basis fiber theory, Test-Cover,
+controlled sensing, costed experimental design) tell us when separation is possible in generic settings,
+but not how to obtain a replayable, checkable certificate over a specific finite registered model, nor
+what decision-theoretic and cost consequences follow. Generic alternating-cycle or Test-Cover arguments
+are therefore insufficient on their own. Our research question is whether, within a finite registered
+model, one can certify collision-or-separation, convert separation into finite-sample decision/budget
+bounds, and return a costed design or design-class no-go. We answer affirmatively with a single core
+contribution. Evidence is model-conditional and synthetic for the theorems, with public RNA data confined
+to a fail-closed retrospective audit.
+
+\section{Related work}\label{sec:related}
+\textbf{Markov-basis and marginal-fiber identifiability.} Diaconis--Sturmfels fiber theory and 2x2/3D
+fixed-marginal moves describe fiber connectivity; we use these as building blocks.
+\textbf{Controlled sensing and fixed-horizon testing.} Fixed-horizon active-hypothesis-testing gives
+sample-complexity scalings; we bind such bounds to a registered pair catalog and an abstention rule.
+\textbf{Costed experimental design.} T-optimal and costed information-source selection motivate our
+costed design; we add an integer design with LP dual bound, integrality gap, and no-go certificate.
+\textbf{RNA chemical-mapping and retrospective evidence boundaries.} SHAPE/DMS mutate-and-map (LM2R-style)
+heuristics guide probe selection; unregistered continuous channels are excluded from categorical claims.
+
+\section{Registered finite RNA model}\label{sec:model}
+We fix finite latent states, two target/rival parameter classes, a marginal map $M$, action maps $B_u$,
+the complete cross-class difference set $D$, a panel functional $\gamma(S)$, finite categorical
+observation laws, a registered nuisance coupling, a fixed non-adaptive horizon, registered independence
+assumptions, and an abstention rule. Explicitly not covered: continuous infinite-dimensional nuisance,
+adaptive actions, randomized design, sequential stopping, arbitrary high-dimensional contingency tables,
+unregistered continuous SHAPE/DMS channels, unknown action-induced state change, and unmodeled third
+states.
+
+\section{Exact geometry (T2b)}\label{sec:t2b}
+Within the registered finite model, $\gamma(S)=0$ yields an exact collision witness and $\gamma(S)>0$
+yields a separation certificate, with rational primal/dual and independent-checker evidence. We claim no
+universal RNA identifiability or general structure inference.
+
+\section{Finite-sample consequence (T2c)}\label{sec:t2c}
+For a finite registered pair catalog under fixed-horizon deterministic non-adaptive allocation with
+complete action-level likelihoods and registered product laws, we give exact TV/Hellinger/decision
+cross-checked bounds. There is no composite-continuous covering theorem, no arbitrary continuous nuisance
+guarantee, and no real-data calibration guarantee.
+
+\section{Costed design and no-go (T2d)}\label{sec:t2d}
+We report an integer design, LP relaxation, dual burden lower bound, integrality gap, and independent
+checker, interpreted as a design-class no-go certificate. We do not claim globally optimal RNA
+experimental design, universal minimum cost, or saved wet-lab cost.
+
+\section{Synthetic evaluation and baselines}\label{sec:eval}
+Eleven micro-cases and eight baselines (exhaustive oracle, full matrix, random, greedy Test-Cover, EIG,
+Chernoff, LM2R-style, T2 integer design+LP) are executed as model-conditional synthetic evaluation.
+Executed baselines do not imply biological superiority; oracle agreement does not imply population
+generalization; runtime/memory are computational evidence only.
+
+\section{Retrospective evidence qualification (Task6-R)}\label{sec:retro}
+add/RMDB is NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL, SAM-III is
+NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE, and RORC is NOT\_APPLICABLE. This section is evidence
+qualification, not validation. RORC has no public accession and is retained as NOT\_APPLICABLE; no
+substitute gene or unrelated sequencing data is used.
+
+\section{Misspecification and abstention}\label{sec:misspec}
+Valid registered assumptions yield PROCEED; assumption violation yields NOT\_ESTABLISHED or abstain. This
+is a theory boundary and credibility evidence, not real-data validation.
+
+\section{Discussion}\label{sec:discussion}
+What is genuinely new is the replayable, checked, model-conditional certificate framework over the
+complete registered difference set with finite-sample and costed design consequences. What is inherited
+is the classical marginal-fiber, Test-Cover, and testing toolbox. The RNA-feasible composite formulation
+is useful because it makes the identifiability/design question decision-theoretic and auditable. The
+finite-sample consequence adds a quantitative bound tied to action geometry. Without a new library or
+prospective experiment, no population-level, independent-validation, or third-state-discovery claim can
+be made.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
