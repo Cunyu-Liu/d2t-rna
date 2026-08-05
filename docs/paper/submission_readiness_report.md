@@ -7,34 +7,34 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = cf1126a5d00aad765e1f84c308e94801c8f70cf9
-origin/main    = cf1126a5d00aad765e1f84c308e94801c8f70cf9
+current HEAD   = 457dc11ba70d307703861013b350ac2f356a3949
+origin/main    = dea8be15903c950a9259579c2dcc02d4611a6152
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper
+dea8be1 chore(paper): re-bind readiness report + manifest to final HEAD cf1126a
 cf1126a chore(paper): regeneration of readiness report + manifest bound to c690aaf and commit build provenance
 c690aaf docs(paper): tighten theorem rigor per reviewer 1 and rebalance novelty framing per reviewer 2
 cae90f3 chore(paper): sync readiness report + manifest to 947ef1f and commit build provenance
 947ef1f chore(paper): refresh readiness report bound to 74e4553
-74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)
-1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)
 ```
 
-The readiness report is re-generated from the current HEAD (cf1126a5d00aad765e1f84c308e94801c8f70cf9), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> cf1126a.
+The readiness report is re-generated from the current HEAD (457dc11ba70d307703861013b350ac2f356a3949), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 457dc11.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
 See `manifests/paper/paper_submission_readiness.json` for the full set. Key files:
 
 ```text
-manuscript.tex      = a23e576980f87ef536c7d3c70c5d7be29a356a3fc161efb04ea6b8478560d45e
-supplementary.tex   = f659b38099c38f6d6c125b422ce1897d4a2f73e16b62a4d33eb7dcef287dd338
-references.bib      = 33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4
-retro_table.tex     = 551adb143e55c122132380c8f532089c0e3e9b6be6d5b2049a140676b1131503
+manuscript.tex      = 5f4e3ef1e9a12b6e7ea8398467597016f9bfbace9283030558d8accc6a37cb34
+supplementary.tex   = 2078c49a9ad95311d867700ce5ca5bbb3153548a21e5e969245ccb2240ef0672
+references.bib      = b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d
+retro_table.tex     = 499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596
 supp88.tex          = 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58
 evidence_lock.json  = f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2
 ```
@@ -43,8 +43,8 @@ evidence_lock.json  = f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f4
 
 PAPER-EVIDENCE-LOCK-GATE / PAPER-AUTHORITY-PRECEDENCE-GATE / PAPER-CONTRIBUTION-GATE / PAPER-PRIOR-ART-NOVELTY-GATE / PAPER-RESULTS-VALIDATION-GATE / PAPER-CLAIM-BOUNDARY-GATE / PAPER-REVIEWER-AUDIT-GATE / PAPER-REPRODUCIBILITY-GATE.
 
-Abstract: 5 sentences, prohibited hits=none.
-Citations: 10 bib entries, 0 uncited (none).
+Abstract: 6 sentences, prohibited hits=none.
+Citations: 19 bib entries, 0 uncited (none).
 Novelty verdict: METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED).
 
 ## 5. Novelty verdict (revised 2026-08-05)
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD cf1126a (this file).
+- P0 readiness report synced to HEAD 457dc11 (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on cf1126a with provenance (see build_provenance).
+- P1 full build on 457dc11 with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 

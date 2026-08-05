@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "cf1126a5d00aad765e1f84c308e94801c8f70cf9",
-  "origin_main": "cf1126a5d00aad765e1f84c308e94801c8f70cf9",
+  "head": "457dc11ba70d307703861013b350ac2f356a3949",
+  "origin_main": "dea8be15903c950a9259579c2dcc02d4611a6152",
   "worktree_clean": true,
   "lineage": [
+    "457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper",
+    "dea8be1 chore(paper): re-bind readiness report + manifest to final HEAD cf1126a",
     "cf1126a chore(paper): regeneration of readiness report + manifest bound to c690aaf and commit build provenance",
     "c690aaf docs(paper): tighten theorem rigor per reviewer 1 and rebalance novelty framing per reviewer 2",
     "cae90f3 chore(paper): sync readiness report + manifest to 947ef1f and commit build provenance",
-    "947ef1f chore(paper): refresh readiness report bound to 74e4553",
-    "74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)",
-    "1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)"
+    "947ef1f chore(paper): refresh readiness report bound to 74e4553"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,9 +33,9 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "a23e576980f87ef536c7d3c70c5d7be29a356a3fc161efb04ea6b8478560d45e",
-    "supplementary": "f659b38099c38f6d6c125b422ce1897d4a2f73e16b62a4d33eb7dcef287dd338",
-    "references": "33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4",
+    "manuscript": "5f4e3ef1e9a12b6e7ea8398467597016f9bfbace9283030558d8accc6a37cb34",
+    "supplementary": "2078c49a9ad95311d867700ce5ca5bbb3153548a21e5e969245ccb2240ef0672",
+    "references": "b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
     "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
     "contribution": "e8d70db27ec16c7a48a14b64b04f5eb7fb41049b009ec8f2052e3ec389bc73a4",
@@ -47,10 +47,10 @@
     "section_blueprint": "b3168bbea9c7d88a329cf6a8b827606e19c00b8ab5ec258483ff17aa2bbc4f79",
     "limitation": "0aefc6a3e8b637657b89b4a606112b718374b4855b049c3a92d4b9b798b51db7",
     "supp88": "206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58",
-    "retro_table": "551adb143e55c122132380c8f532089c0e3e9b6be6d5b2049a140676b1131503"
+    "retro_table": "499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596"
   },
   "abstract_check": {
-    "abstract_sentence_count": 5,
+    "abstract_sentence_count": 6,
     "abstract_prohibited_hits": [],
     "abstract_required_phrases_present": [
       "model-conditional",
@@ -61,18 +61,27 @@
     "abstract_ok": true
   },
   "citation_check": {
-    "bib_entry_count": 10,
+    "bib_entry_count": 19,
     "cited_keys": [
+      "chaloner1995bayesian",
       "cheng2015consistent",
       "chernoff1959sequential",
+      "cohn1996active",
       "cordero2012importance",
       "deloera1995grobner",
       "diaconis1998markov",
+      "hajdin2013shapeknots",
       "hellinger1909neue",
       "hoeffding1963probability",
       "kladwang2011mutate",
+      "lai1985asymptotically",
+      "leamy2016in-vivo",
+      "lindley1956information",
       "moret1991test",
-      "pukelsheim2006optimal"
+      "pukelsheim2006optimal",
+      "sloma2016exact",
+      "wald1945sequential",
+      "weeks2010advances"
     ],
     "uncited_keys": [],
     "all_cited": true
@@ -89,5 +98,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785937514.1251302
+  "run_finished": 1785944729.6873164
 }
