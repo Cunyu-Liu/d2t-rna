@@ -1,0 +1,109 @@
+{
+  "schema": "d2t_rna.t10_validation_acceptance.v1",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "deliverable": "VALIDATION_SCENARIOS_AND_INDEPENDENT_REVIEW",
+  "status": "PASS",
+  "state": "VALIDATION_SCENARIOS_INDEPENDENT_REVIEW_ACCEPTED",
+  "activated_at": "2026-08-05T13:33:58+08:00",
+
+  "deliverable_checklist": {
+    "sec101_mathematical_scenarios_covered": true,
+    "sec101_registered_coupling_pairwise_authorized": true,
+    "sec102_assumption_violation_gate_all_correct": true,
+    "sec13_claim_lint_clean_and_forbidden_both_correct": true,
+    "sec103_collision_independently_verified": true,
+    "sec103_separation_independently_verified": true,
+    "sec103_lp_dual_feasibility_independent": true,
+    "sec103_budget_cost_accounting_consistent": true,
+    "sec103_product_law_information_consistent": true,
+    "scientific_claim_authorized_false": true
+  },
+
+  "assumption_gate": {
+    "valid_profile": "PROCEED",
+    "violation_cases": [
+      "action_changes_state",
+      "omitted_third_state",
+      "unregistered_nuisance",
+      "unknown_dependency_unit",
+      "no_complete_obs_model",
+      "dependent_observations"
+    ],
+    "violation_verdict_all": "NOT_ESTABLISHED",
+    "note": "no input condition is force-fit into the theorem-required form; any broken assumption abstains (contract 10.2)"
+  },
+
+  "coupling": {
+    "registered": ["CARTESIAN", "EQUAL_REALIZED_VALUE"],
+    "pairwise_verdicts": ["AUTHORIZED", "AUTHORIZED", "NOT_ESTABLISHED"],
+    "note": "only registered couplings authorize the action-level product law (contract 2.1/2.3)"
+  },
+
+  "claim_lint": {
+    "clean_claim_gate": "PASS",
+    "forbidden_claim_gate": "FAIL",
+    "forbidden_examples": ["prospective", "new-library", "independent validation"],
+    "note": "CLAIM-BOUNDARY-GATE: forbidden words / out-of-scope claims fail and cannot be recovered by extra hashes or figures"
+  },
+
+  "independent_checkers": {
+    "scenario_count": 10,
+    "scenarios": [
+      "cancellation_counterexample",
+      "exact_collision",
+      "near_collision",
+      "no_cycle",
+      "repeated_action",
+      "strict_separation",
+      "symmetric_states",
+      "three_way_fixed_marginal",
+      "two_by_two_alternating",
+      "zero_margin"
+    ],
+    "counts": {
+      "collision_verified": 2,
+      "separation_verified": 5,
+      "lp_dual_feasible": 10,
+      "budget_cost_consistent": 10,
+      "product_tv_consistent": 10
+    },
+    "note": "each independent check is a separate re-derivation from first principles, never a re-run of the same solver (contract 10.3)"
+  },
+
+  "run": {
+    "run_id": "t10-validation-20260805T133358+0800",
+    "interpreter": "editflow311 (CPython 3.11.15)",
+    "gpu_required": false,
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t10-validation-20260805T133358+0800/run.log",
+    "run_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "run_report": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t10-validation-20260805T133358+0800/report.json",
+    "run_report_sha256": "91cf463da71333fd142c7e9dc3a465c391b49b2a435d0a5762d4722127ee403d"
+  },
+
+  "source_files_sha256": {
+    "scripts/t10_validation_run.py": "54e6a410eab3a2e3147cec988da913a7af25533ccf50d6ad79a9384f76ddb6b6",
+    "src/d2t_rna/evaluation/validation.py": "d630850d173b12b2959a71f72c9eb70b6b3ea21c8e35ef269cdf82e23141bc24",
+    "tests/evaluation/test_validation.py": "6172f99f665d3443f028b649c333de051ebfcbbade05100482a7842355b53d30"
+  },
+
+  "test_evidence": {
+    "suite": "tests/evaluation/test_validation.py",
+    "passed": 12,
+    "failed": 0,
+    "collected": 12
+  },
+
+  "claim_boundary": {
+    "scientific_claim_authorized": false,
+    "claim_kind": "model-conditional synthetic validation scenarios and independent review only",
+    "gate_passed": "MISSPECIFICATION-GATE | STATISTICAL-UNIT-GATE | CLAIM-BOUNDARY-GATE | REPRODUCIBILITY-GATE",
+    "not_authorized": [
+      "prospective/blinded/held-out/out-of-sample/independent validation",
+      "population generalization / new-library guarantee / native-T4 truth",
+      "method superiority over any baseline",
+      "actual wet-lab cost savings",
+      "reads/umi/pcr copies/random-seed as biological replicates"
+    ]
+  }
+}
