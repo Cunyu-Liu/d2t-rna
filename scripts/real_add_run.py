@@ -18,6 +18,7 @@ Usage:
 from __future__ import annotations
 
 import json
+import os
 import time
 from decimal import Decimal
 from fractions import Fraction
@@ -48,7 +49,10 @@ from d2t_rna.t2.real_add import (
 )
 from d2t_rna.t2.theorem import collision_or_separation
 
-ARTIFACTS_ROOT = Path("/mnt/cunyuliu/d2t-rna/artifacts")
+# Artifact root is env-configurable so the runner is reproducible in a clean
+# container (e.g. D2T_RNA_ARTIFACTS_ROOT=/app/artifacts).  The default matches
+# the server layout so existing invocations are unchanged.
+ARTIFACTS_ROOT = Path(os.environ.get("D2T_RNA_ARTIFACTS_ROOT", "/mnt/cunyuliu/d2t-rna/artifacts"))
 
 KAPPA = Fraction(99, 100)  # correct-declaration target 0.99
 

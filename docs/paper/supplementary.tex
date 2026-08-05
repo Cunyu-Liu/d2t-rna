@@ -215,7 +215,13 @@ integrality gap is $4.5\%$. At budget $1$ the design is a certified no-go (statu
 The certificates are emitted by \texttt{scripts/real\_add\_run.py} over the registered model in
 \texttt{src/d2t\_rna/t2/real\_add.py}; \texttt{tests/t2/test\_real\_add.py} locks the model
 construction, the noise channel, the finiteness/positivity of the Hellinger information, and the
-sufficiency bound. The certificate JSON is written to the artifacts run directory.
+sufficiency bound. The certificate JSON is written to the artifacts run directory (path
+env-configurable via \texttt{D2T\_RNA\_ARTIFACTS\_ROOT}). A self-contained reproducibility image is
+provided by \texttt{Dockerfile} (\texttt{docker build -t d2t-rna/paper-artifact .}); its build step
+installs the package from a clean copy, emits the real-data certificate, and runs the locked T2 suite,
+so the artifact is reproducible without any server-local state. The decision-theoretic certificate
+path is pure-Python stdlib; \texttt{pyproject.toml} additionally declares \texttt{numpy}/\texttt{scipy}/
+\texttt{pydantic} for other package modules.
 
 \section{Complete baseline table (88 rows)}\label{sec:supp88}
 \input{tables/supp88.tex}
