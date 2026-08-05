@@ -20,6 +20,7 @@ from .witness import (
     SingleActionResidual,
 )
 from .verify import verify_collision, verify_separation
+from .theorem import T2bCertificate, collision_or_separation
 
 __all__ = [
     "Action",
@@ -33,4 +34,6 @@ __all__ = [
     "SingleActionResidual",
     "verify_collision",
     "verify_separation",
+    "T2bCertificate",
+    "collision_or_separation",
 ]
