@@ -26,7 +26,7 @@
     "passive_marginal_map_M": {
       "kind": "linear_projection_of_state_distribution",
       "domain": "distributions over finite state space",
-      "note": "fixing M defines the collision fiber; cross-class difference set D={"}x_1-x_0: x_i in Theta_i, M x_0 = M x_1{"}"
+      "note": "fixing M defines the collision fiber; cross-class difference set D={x_1-x_0: x_i in Theta_i, M x_0 = M x_1}"
     },
     "nuisance": {
       "domain": "Xi_FINITE",

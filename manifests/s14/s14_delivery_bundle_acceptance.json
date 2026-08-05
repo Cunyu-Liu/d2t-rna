@@ -1,0 +1,14 @@
+{
+  "bundle_sha256": "fda6388485b0ce87389c008680123c907bc6bd34d1b0b467fe5d74b9f4150306",
+  "claim_lint_pass": true,
+  "commit": "847362ad61017b3f5dbb50a4d788d11826390b9d",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "kind": "S14_DELIVERY_RESULT_BUNDLE",
+  "replay_order_failures": [],
+  "replay_order_pass": true,
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/s14-delivery-bundle-20260805T162006+0800",
+  "run_finished": 1785918007.5517154,
+  "scientific_claim_authorized": false,
+  "status": "DELIVERY_BUNDLE"
+}
