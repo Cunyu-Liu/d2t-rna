@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = 457dc11ba70d307703861013b350ac2f356a3949
-origin/main    = dea8be15903c950a9259579c2dcc02d4611a6152
+current HEAD   = ed27de4cfd66c487daa65db94ab0010c3a567cb4
+origin/main    = 69db410d3715a049cd5fb4480fd15e61c597a30d
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+ed27de4 chore(paper): add self-contained Docker reproducibility artifact
+69db410 chore(paper): commit build provenance bound to 731e604
+731e604 chore(paper): re-bind readiness report + manifest to final HEAD 457dc11
 457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper
 dea8be1 chore(paper): re-bind readiness report + manifest to final HEAD cf1126a
 cf1126a chore(paper): regeneration of readiness report + manifest bound to c690aaf and commit build provenance
-c690aaf docs(paper): tighten theorem rigor per reviewer 1 and rebalance novelty framing per reviewer 2
-cae90f3 chore(paper): sync readiness report + manifest to 947ef1f and commit build provenance
-947ef1f chore(paper): refresh readiness report bound to 74e4553
 ```
 
-The readiness report is re-generated from the current HEAD (457dc11ba70d307703861013b350ac2f356a3949), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> 457dc11.
+The readiness report is re-generated from the current HEAD (ed27de4cfd66c487daa65db94ab0010c3a567cb4), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> ed27de4.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -32,7 +32,7 @@ See `manifests/paper/paper_submission_readiness.json` for the full set. Key file
 
 ```text
 manuscript.tex      = 5f4e3ef1e9a12b6e7ea8398467597016f9bfbace9283030558d8accc6a37cb34
-supplementary.tex   = 2078c49a9ad95311d867700ce5ca5bbb3153548a21e5e969245ccb2240ef0672
+supplementary.tex   = bcd697ced83ac1922f2726fb0ba45837ece689590dbdc93bb7dcfe037b3841be
 references.bib      = b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d
 retro_table.tex     = 499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596
 supp88.tex          = 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD 457dc11 (this file).
+- P0 readiness report synced to HEAD ed27de4 (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on 457dc11 with provenance (see build_provenance).
+- P1 full build on ed27de4 with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
