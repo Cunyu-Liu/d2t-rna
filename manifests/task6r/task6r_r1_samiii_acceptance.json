@@ -49,7 +49,7 @@
       "condition",
       "nucleotide"
     ],
-    "downloaded_at": "2026-08-05T07:27:42Z",
+    "downloaded_at": "2026-08-05T07:42:54Z",
     "layering": {
       "author_truth": "DMS reactivity / SHAPE profile (native_truth_label_generated=false)",
       "derived": "task6 sam-iii modality-transfer diagnostic (R2, gated)",
@@ -57,7 +57,7 @@
       "raw": "/mnt/cunyuliu/d2t-rna/data/task6/sam-iii/raw"
     },
     "license": "NCBI GEO public; authors' supplementary data",
-    "observed_dataset_hash": "4dee9059bf873c60638ddb4d48375b001025c151f0580f4ad722a89694f99515",
+    "observed_dataset_hash": "10b974a30a921b4c6c78913cab3101822a1c8d39040c2a2fbd4ba3bf7cc6bd00",
     "raw_archive_shas": {
       "GSE278422_dancemap_reactivities.tar.gz": "ded9955f8d5b9fa74c1c0b2309486a3a35a9628cdde02c6341bcfa5de063d327",
       "GSE278422_fasta_references.tar.gz": "652a4fdded597372d2ff607103cdd16834654ba20c7be4cc8d8592a510b9ac90",
@@ -68,11 +68,11 @@
     "source_version": "GSE278422_suppl (DANCE-MaP)",
     "status": "MATERIALIZED"
   },
-  "report_sha256": "0688dc7f67d35d784737155ddbeabc96b25c35d92861611fdbd0484508d3b6e8",
-  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r1-samiii-20260805T152742+0800",
-  "run_finished": 1785914862.9657693,
+  "report_sha256": "e2cbe78e90a5dd44da644ccd0a26053f2ea8d75fa6106df0a7db60595cac4fee",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r1-samiii-20260805T154254+0800",
+  "run_finished": 1785915774.4189537,
   "scientific_claim_authorized": false,
   "self_check_ok": true,
   "status": "MATERIALIZED",
-  "test_log_sha256": "6ace0eba444a56ee493a206e44375f7ce19310e82ca39516fad613b1b7f66d70"
+  "test_log_sha256": "54985ec7d878cf9bd792a79def753e8b751773853c6ea8df612cd18e634b4c82"
 }

@@ -1,0 +1,140 @@
+{
+  "boundary_note": "R2 sam-iii is a post-freeze modality-transfer diagnostic, not a merged benchmark or prospective/blinded/held-out validation (contract 8.4/8.5). DMS reactivity is continuous per-nucleotide and not a registered categorical observation channel over latent states, so action semantics are not comparable by the registered action space.",
+  "contract_section": "8.5",
+  "kind": "R2_SAMIII_MODALITY_TRANSFER_DIAGNOSTIC",
+  "report": {
+    "boundary_note": "R2 sam-iii is a post-freeze modality-transfer diagnostic, not a merged benchmark or prospective/blinded/held-out validation (contract 8.4/8.5). DMS reactivity is continuous per-nucleotide and not a registered categorical observation channel over latent states, so action semantics are not comparable by the registered action space.",
+    "canonical_source": "/mnt/cunyuliu/d2t-rna/data/task6/sam-iii/sam-iii.canonical.json",
+    "condition_count": 10,
+    "contract_section": "8.5",
+    "diagnostic": {
+      "action_semantics_comparable": false,
+      "conditions": [
+        {
+          "condition": "SAM",
+          "construct": "native",
+          "coverage": 0.615894,
+          "covered": 93,
+          "max_reactivity": 0.1746,
+          "mean_reactivity": 0.030996,
+          "min_reactivity": 0.0008,
+          "n_positions": 151
+        },
+        {
+          "condition": "noSAM",
+          "construct": "native",
+          "coverage": 0.761589,
+          "covered": 115,
+          "max_reactivity": 0.1906,
+          "mean_reactivity": 0.036321,
+          "min_reactivity": 0.0006,
+          "n_positions": 151
+        },
+        {
+          "condition": "SAM",
+          "construct": "MutON1",
+          "coverage": 0.615894,
+          "covered": 93,
+          "max_reactivity": 0.2782,
+          "mean_reactivity": 0.035627,
+          "min_reactivity": 0.0016,
+          "n_positions": 151
+        },
+        {
+          "condition": "noSAM",
+          "construct": "MutON1",
+          "coverage": 0.615894,
+          "covered": 93,
+          "max_reactivity": 0.2728,
+          "mean_reactivity": 0.035286,
+          "min_reactivity": 0.0015,
+          "n_positions": 151
+        },
+        {
+          "condition": "SAM",
+          "construct": "MutON2",
+          "coverage": 0.615894,
+          "covered": 93,
+          "max_reactivity": 0.1964,
+          "mean_reactivity": 0.034259,
+          "min_reactivity": 0.0016,
+          "n_positions": 151
+        },
+        {
+          "condition": "noSAM",
+          "construct": "MutON2",
+          "coverage": 0.615894,
+          "covered": 93,
+          "max_reactivity": 0.216,
+          "mean_reactivity": 0.03636,
+          "min_reactivity": 0.0015,
+          "n_positions": 151
+        },
+        {
+          "condition": "SAM",
+          "construct": "MutOFF1",
+          "coverage": 0.602649,
+          "covered": 91,
+          "max_reactivity": 0.1947,
+          "mean_reactivity": 0.033799,
+          "min_reactivity": 0.0018,
+          "n_positions": 151
+        },
+        {
+          "condition": "noSAM",
+          "construct": "MutOFF1",
+          "coverage": 0.602649,
+          "covered": 91,
+          "max_reactivity": 0.1796,
+          "mean_reactivity": 0.036953,
+          "min_reactivity": 0.0018,
+          "n_positions": 151
+        },
+        {
+          "condition": "SAM",
+          "construct": "MutOFF2",
+          "coverage": 0.609272,
+          "covered": 92,
+          "max_reactivity": 0.2008,
+          "mean_reactivity": 0.033243,
+          "min_reactivity": 0.0004,
+          "n_positions": 151
+        },
+        {
+          "condition": "noSAM",
+          "construct": "MutOFF2",
+          "coverage": 0.609272,
+          "covered": 92,
+          "max_reactivity": 0.1806,
+          "mean_reactivity": 0.036479,
+          "min_reactivity": 0.0004,
+          "n_positions": 151
+        }
+      ],
+      "dataset_id": "sam-iii",
+      "dependency_unit_known": false,
+      "label": "POST_FREEZE_RETROSPECTIVE_EVALUATION",
+      "observation_model_registered": false,
+      "reads_independent": false,
+      "reason_codes": [
+        "action semantics not comparable: DMS reactivity is not a registered categorical observation channel over latent states",
+        "dependency unit unknown",
+        "reads not independent"
+      ],
+      "role": "RETROSPECTIVE_MODALITY_TRANSFER_DIAGNOSTIC",
+      "verdict": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE"
+    },
+    "kind": "R2_SAMIII_MODALITY_TRANSFER_DIAGNOSTIC",
+    "run_finished": 1785915826.8248649,
+    "scientific_claim_authorized": false,
+    "verdict": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE"
+  },
+  "report_sha256": "951fa52cd271ea852175b88ca9fa6a52759d4f41ffa48bc35d7d66008ebaf0cb",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r2-samiii-20260805T154346+0800",
+  "run_finished": 1785915826.9720638,
+  "scientific_claim_authorized": false,
+  "self_check_ok": true,
+  "status": "DIAGNOSTIC_RUN",
+  "test_log_sha256": "1685099357e093e0fce7c71b0b0dff4bb7b1f003851bf140afeec5324c7c3aae",
+  "verdict": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE"
+}

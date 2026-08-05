@@ -27,6 +27,33 @@ FIXTURE_FASTA = ">SAMIII_native\nGGAAACUCGGU\n"
 
 FIXTURE_ARCHIVE = b"dummy tar.gz payload"
 
+# Single-mutant reactivity tables report 1 component (5 columns:
+# Nt Seq nReact Raw Background).  The parser must not apply the
+# 2-component minimum-column rule to them (contract 8.3 materialization).
+FIXTURE_REACT_1COMP = (
+    "1 components; BIC=20956395.8\n"
+    "p 1.000\n"
+    "Nt      Seq     nReact  Raw             Background\n"
+    "1       G       nan     nan             nan\n"
+    "15      G       -0.0296 0.0019          0.0029 i\n"
+    "16      U       0.2060  0.0136          0.0065\n"
+    "17      U       0.2874  0.0113          0.0014\n"
+)
+
+
+def test_parse_reactivity_table_1component() -> None:
+    """1-component (single-mutant) tables must parse fully, not as 0 positions."""
+    raw = FIXTURE_REACT_1COMP.encode("utf-8")
+    tab = parse_reactivity_table(raw, "abc")
+    assert tab.n_components == 1
+    assert tab.mixture == (1.0,)
+    assert tab.n_positions == 4
+    assert tab.positions == (1, 15, 16, 17)
+    # row = [nReact, Raw, Background], so row[1] is the modified-channel rate.
+    assert tab.rows[1][0] == -0.0296
+    assert tab.rows[1][1] == 0.0019
+    assert tab.rows[1][2] == 0.0029
+
 
 def test_parse_reactivity_table_basic() -> None:
     raw = FIXTURE_REACT.encode("utf-8")

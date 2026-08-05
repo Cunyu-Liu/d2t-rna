@@ -104,7 +104,12 @@ def _to_float(tok: str) -> float:
 
 
 def parse_reactivity_table(raw: bytes, source_sha256: str) -> SamIIIReactivity:
-    """Parse one DANCE-MaP ``-reactivities.txt`` table."""
+    """Parse one DANCE-MaP ``-reactivities.txt`` table.
+
+    The table has ``Nt Seq (nReact Raw) x n_components Background`` columns.
+    The number of components is read from the header line (``N components``)
+    and varies per construct (native = 2, single-mutant = 1).
+    """
     text = raw.decode("utf-8", errors="replace")
     lines = text.splitlines()
 
@@ -125,17 +130,16 @@ def parse_reactivity_table(raw: bytes, source_sha256: str) -> SamIIIReactivity:
         if _REACT_HDR.match(line):
             continue
         parts = line.split()
-        if len(parts) < 7:
+        # columns: Nt Seq (nReact Raw) x n_components Background
+        need = 2 + 2 * n_components + 1
+        if len(parts) < need:
             continue
         try:
             pos = int(parts[0])
         except ValueError:
             continue
         seq = parts[1]
-        # columns: Nt Seq (nReact Raw) x components Background
-        # -> for 2 components: idx2..6 = comp1_count, comp1_raw, comp2_count,
-        #    comp2_raw, background
-        vals = [_to_float(x) for x in parts[2:7]]
+        vals = [_to_float(x) for x in parts[2 : 2 + 2 * n_components + 1]]
         positions.append(pos)
         sequence.append(seq)
         rows.append(tuple(vals))
