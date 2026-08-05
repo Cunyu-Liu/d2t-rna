@@ -47,10 +47,14 @@ mathematical component as novel. See `docs/paper/prior_art_novelty_matrix_REVISE
 - S14 source commit `728dec61` 与当前 HEAD 差异已显式记录（非同一 commit）。
 - historical t9_4 记录为 HISTORICAL_SYNTHESIS_RECORD（precedence 7），非当前 authority。
 
-## 6. Remaining author decisions
+## 6. Author decisions (resolved 2026-08-05)
 
-- 确认 working title（现为中性候选，未冻结）：Certified Collision-or-Separation Design for
-  Finite RNA State Discrimination。
-- 确认 novelty 定位为 METHODS_LEVEL_NOVELTY_ONLY（methods/experimental-design 论文）。
-- 确认投稿 venue（建议 methods/experimental-design 类，非 broad-theory 顶会）。
-- 作者列表、通讯信息、最终引用与许可复核（§0.1 rule 6 / §15）。
+- **Working title: FROZEN.** "Certified Collision-or-Separation Design for Finite RNA State
+  Discrimination" is adopted as the submission title.
+- **Novelty positioning: FROZEN.** METHODS_LEVEL_NOVELTY_ONLY (methods/experimental-design paper).
+- **Target venue class: methods / experimental-design journal** (e.g. BMC Bioinformatics,
+  Bioinformatics Methods, PLOS Comput Biol); not a broad-theory flagship.
+- **License: not annotated in the manuscript**; decided at submission time by the journal.
+- **Authors: placeholder "D2T-RNA Project" retained.** Actual author list, affiliation, and
+  corresponding-email MUST be supplied by the authors before submission (per rule 6 / RamSci 15).
+  Final citation list and license review are likewise deferred to that point.
