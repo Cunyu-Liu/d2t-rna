@@ -1,1 +1,28 @@
-% Placeholder: retrospective evidence qualification table (manuscript Sec 8).
+% Retrospective evidence qualification table (Task6-R), D2T-RNA v7.
+% This is the canonical table included in manuscript Sec \ref{sec:retro}.
+\caption{Retrospective evidence qualification. \textbf{Question:} how do the registered datasets
+close, and what may/may not be reported? \textbf{Result:} add, SAM-III, and RORC close fail-closed
+with distinct terminal outcomes. \textbf{Interpretation:} data are used only as fixed realized catalogs
+for a fail-closed audit. \textbf{Boundary:} no categorical replay, no quantitative T2 validation, no
+future cost saving, no independent validation.}
+\label{tab:retro}
+\begin{tabular}{@{}p{2.0cm}p{3.2cm}p{3.4cm}p{3.2cm}p{3.2cm}@{}}
+\toprule
+Dataset & Registered role & R2 outcome & What can be reported & What cannot be claimed \\
+\midrule
+add/RMDB & retrospective full-matrix compression if qualified &
+  NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL &
+  modality limitation; raw provenance; fail-closed audit &
+  categorical replay; quantitative T2 validation; future cost saving \\
+\addlinespace
+SAM-III/GSE278422 & modality-transfer diagnostic &
+  NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE &
+  action/modality incompatibility; diagnostic failure &
+  unified benchmark; quantitative transfer \\
+\addlinespace
+RORC & exposed misspecification stress &
+  NOT\_APPLICABLE &
+  explicit terminal audit and boundary semantics &
+  independent validation; unseen OOD; third-state discovery \\
+\bottomrule
+\end{tabular}

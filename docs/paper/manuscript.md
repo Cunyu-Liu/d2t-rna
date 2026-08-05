@@ -1,6 +1,11 @@
 # Certified Collision-or-Separation Design for Finite RNA State Discrimination
 
-**Working title (not frozen).** Theoretical/computational RNA methods + statistical experimental design.
+**Working title (FROZEN 2026-08-05).** Theoretical/computational RNA methods + statistical experimental design.
+
+> **Authoritative source:** the formal manuscript is `manuscript.tex` (498 lines) with numbered
+> theorem blocks (T2b/T2c/T2d), formal citations (all 10 .bib entries cited), worked numerical cases,
+> per-figure question/result/interpretation/boundary, and a companion `supplementary.tex` with full
+> proofs and the complete 88-row baseline table. This `.md` file is a lightweight mirror only.
 
 ## Abstract
 

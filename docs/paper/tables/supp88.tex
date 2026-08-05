@@ -1,0 +1,100 @@
+\begin{table}[p]
+\centering
+\small
+\setlength{\tabcolsep}{3pt}
+\caption{Complete 88-row model-conditional baseline summary (11 micro-cases $\times$ 8 baselines). Long rationals are truncated to 9 leading digits; full values are in the packaged TSV.\label{tab:supp88}}
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+case & baseline & cost & product TV & minmax err & abstain & correct \\
+\midrule
+alternating\_rectangle\_2x2 & exhaustive\_oracle & 0 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & full\_matrix & 8 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & random & 8 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & greedy\_test\_cover & 8 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & eig & 8 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & chernoff & 8 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & lm2r\_heuristic & 8 & 0 & 1/2 & 0 & 1/2 \\
+alternating\_rectangle\_2x2 & t2\_integer\_lp & 8 & 0 & 1/2 & 0 & 1/2 \\
+boundary & exhaustive\_oracle & 6 & 63/64 & 1/128 & 0 & 127/128 \\
+boundary & full\_matrix & 8 & 255/256 & 1/512 & 0 & 511/512 \\
+boundary & random & 8 & 255/256 & 1/512 & 0 & 511/512 \\
+boundary & greedy\_test\_cover & 8 & 255/256 & 1/512 & 0 & 511/512 \\
+boundary & eig & 8 & 255/256 & 1/512 & 0 & 511/512 \\
+boundary & chernoff & 8 & 255/256 & 1/512 & 0 & 511/512 \\
+boundary & lm2r\_heuristic & 8 & 255/256 & 1/512 & 0 & 511/512 \\
+boundary & t2\_integer\_lp & 1 & 1/2 & 1/4 & 0 & 3/4 \\
+cancellation\_cycled & exhaustive\_oracle & 0 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & full\_matrix & 8 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & random & 8 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & greedy\_test\_cover & 8 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & eig & 8 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & chernoff & 8 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & lm2r\_heuristic & 8 & 0 & 1/2 & 0 & 1/2 \\
+cancellation\_cycled & t2\_integer\_lp & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & exhaustive\_oracle & 0 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & full\_matrix & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & random & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & greedy\_test\_cover & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & eig & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & chernoff & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & lm2r\_heuristic & 8 & 0 & 1/2 & 0 & 1/2 \\
+exact\_collision & t2\_integer\_lp & 8 & 0 & 1/2 & 0 & 1/2 \\
+near\_collision & exhaustive\_oracle & 6 & 187686999.. & 998123130.. & 0 & 100187686.. \\
+near\_collision & full\_matrix & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+near\_collision & random & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+near\_collision & greedy\_test\_cover & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+near\_collision & eig & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+near\_collision & chernoff & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+near\_collision & lm2r\_heuristic & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+near\_collision & t2\_integer\_lp & 8 & 437935747.. & 199562064.. & 0 & 200437935.. \\
+no\_cycle & exhaustive\_oracle & 1 & 1 & 0 & 0 & 1 \\
+no\_cycle & full\_matrix & 8 & 1 & 0 & 0 & 1 \\
+no\_cycle & random & 8 & 1 & 0 & 0 & 1 \\
+no\_cycle & greedy\_test\_cover & 8 & 1 & 0 & 0 & 1 \\
+no\_cycle & eig & 8 & 1 & 0 & 0 & 1 \\
+no\_cycle & chernoff & 8 & 1 & 0 & 0 & 1 \\
+no\_cycle & lm2r\_heuristic & 8 & 1 & 0 & 0 & 1 \\
+no\_cycle & t2\_integer\_lp & 1 & 1 & 0 & 0 & 1 \\
+nondecomposable\_3d & exhaustive\_oracle & 0 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & full\_matrix & 8 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & random & 8 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & greedy\_test\_cover & 8 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & eig & 8 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & chernoff & 8 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & lm2r\_heuristic & 8 & 0 & 1/2 & 0 & 1/2 \\
+nondecomposable\_3d & t2\_integer\_lp & 8 & 0 & 1/2 & 0 & 1/2 \\
+repeated\_action & exhaustive\_oracle & 7 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & full\_matrix & 8 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & random & 8 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & greedy\_test\_cover & 8 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & eig & 8 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & chernoff & 8 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & lm2r\_heuristic & 8 & 1759/2048 & 289/4096 & 0 & 3807/4096 \\
+repeated\_action & t2\_integer\_lp & 4 & 11/16 & 5/32 & 0 & 27/32 \\
+strict\_positive\_separation & exhaustive\_oracle & 1 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & full\_matrix & 8 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & random & 8 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & greedy\_test\_cover & 8 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & eig & 8 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & chernoff & 8 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & lm2r\_heuristic & 8 & 1 & 0 & 0 & 1 \\
+strict\_positive\_separation & t2\_integer\_lp & 1 & 1 & 0 & 0 & 1 \\
+symmetric\_states & exhaustive\_oracle & 0 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & full\_matrix & 8 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & random & 8 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & greedy\_test\_cover & 8 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & eig & 8 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & chernoff & 8 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & lm2r\_heuristic & 8 & 0 & 1/2 & 0 & 1/2 \\
+symmetric\_states & t2\_integer\_lp & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & exhaustive\_oracle & 0 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & full\_matrix & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & random & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & greedy\_test\_cover & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & eig & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & chernoff & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & lm2r\_heuristic & 8 & 0 & 1/2 & 0 & 1/2 \\
+zero\_margin & t2\_integer\_lp & 8 & 0 & 1/2 & 0 & 1/2 \\
+\bottomrule
+\end{tabular}
+\end{table}
