@@ -1,0 +1,30 @@
+{
+  "activation_status": "ACTIVE_SUCCESSOR_FOR_FUTURE_TASKS",
+  "activation_time": "2026-08-05T16:06:16+08:00",
+  "approver": "liucunyu",
+  "boundary_note": "M0 activation moves the v7 successor contract from PROPOSED_NOT_ACTIVE to ACTIVE_SUCCESSOR_FOR_FUTURE_TASKS only. It reinterprets no historical Task1-5 result, authorizes no scientific claim, and does not change licenses or release gates (contract 0.1/1.3).",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "historical_tasks_reinterpreted": false,
+  "kind": "M0_V7_CONTRACT_ACTIVATION",
+  "replay": {
+    "all_conditions_pass": true,
+    "fresh_read_only_replay": {
+      "acceptance_manifest_source_runtime_public_refs_and_closure_hash_replay_identical": true,
+      "closure_commit_exactly_required_commit": true,
+      "closure_file_exists": true,
+      "closure_raw_status_exactly_CLOSED_ACCEPTED_PUSHED_PUBLIC": true,
+      "closure_sha256_freezes": true,
+      "explicit_human_approval_after_fresh_read_only_replay": true
+    },
+    "required_closure": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task5-final-20260803T071200+0800/closure.json",
+    "required_commit": "aef31f1b6a5b2cecd9fac94c2b799d37416a6c39",
+    "required_manifest_sha256": "047de63a0c6781b34b8ddf4ba9312520df3cfda75053a6fc458f48f589a54762",
+    "required_status": "CLOSED_ACCEPTED_PUSHED_PUBLIC"
+  },
+  "report_sha256": "9279a9e1f3236b4e23ca3fd8534a982591233f58e73e41b7ac4120865ec6c896",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/m0-v7-activation-20260805T160616+0800",
+  "scientific_claim_authorized": false,
+  "supersedes_for_future_tasks_only": true,
+  "test_log_sha256": "0ba1d9285073b72b7e1870c390c20079d55101eb90c45e39c87b85404c4f772f"
+}
