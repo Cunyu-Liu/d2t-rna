@@ -1,0 +1,86 @@
+{
+  "schema": "d2t_rna.t2_5_acceptance.v1",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "theorem_version": "T2-5.0",
+  "theorem": "T2_5_PLANNER_SCENARIO_BINDING",
+  "status": "PASS",
+  "theorem_state": "T2_PLANNER_SCENARIO_BINDING_ACCEPTED",
+  "activated_at": "2026-08-05T12:14:03+08:00",
+  "deliverable_checklist": {
+    "bind_accepted_t2_artifacts_to_planner_layer": true,
+    "binding_role_restricted_to_design_class_obstruction_or_structural_input": true,
+    "revalidate_accepted_acceptance_manifests_by_content_hash_status_pass": true,
+    "revalidate_existing_planner_classification": true,
+    "planner_status_is_theorem_proof_fail_closed": true,
+    "synthetic_certificate_as_real_data_validation_fail_closed": true,
+    "planner_no_certificate_never_promoted_to_theorem_no_go": true,
+    "execution_closure_sha256_replay": true
+  },
+  "scope": {
+    "catalog_kind": "FINITE_REGISTERED_PAIR_CATALOG",
+    "composite_continuous_uniform_claim": false,
+    "binding_kind": "replayable common record, not theorem re-derivation and not real-data validation",
+    "note": "a T2-5 binding references accepted T2b/T2c/T2d acceptance manifests and the existing planner layer; it never authorizes a scientific claim or real-data validation (contract 6.7)"
+  },
+  "binding": {
+    "allowed_roles": [
+      "DESIGN_CLASS_OBSTRUCTION",
+      "STRUCTURAL_INPUT"
+    ],
+    "referenced_artifact_kinds": [
+      "T2B_COLLISION_OR_SEPARATION",
+      "T2C_FINITE_SAMPLE_BOUNDS",
+      "T2D_COSTED_DESIGN_NO_GO"
+    ],
+    "theorem_no_go_bases_allowed": [
+      "T2C_BUDGET_LOWER_BOUND",
+      "T2D_COSTED_NO_GO_CERTIFICATE"
+    ],
+    "hard_false_fields": [
+      "scientific_claim_authorized",
+      "real_data_validation_authorized",
+      "planner_status_is_theorem_proof",
+      "synthetic_certificate_as_real_data_validation"
+    ],
+    "fail_closed_guards": {
+      "planner_no_certificate_to_theorem_no_go": "planner NO_CERTIFICATE_FOUND is never promoted to a theorem no-go",
+      "theorem_no_go_requires_certificate": "a theorem no-go requires an accepted T2c budget lower-bound or T2d costed-design no-go certificate",
+      "non_pass_manifest_rejected": "acceptance_status is Literal[PASS]; a non-PASS ref is structurally unrepresentable"
+    }
+  },
+  "run": {
+    "run_id": "t2-5-acceptance-20260805T121403+0800",
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t2-5-acceptance-20260805T121403+0800/run.log",
+    "junit": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t2-5-acceptance-20260805T121403+0800/junit/t2.xml",
+    "interpreter": "editflow311 (CPython 3.11.15)",
+    "gpu_required": false
+  },
+  "test_evidence": {
+    "suite": "tests/evaluation",
+    "passed": 45,
+    "failed": 0,
+    "collected": 45,
+    "planner_tests": 36,
+    "t2_5_binding_tests": 9,
+    "t2_5_failed": 0
+  },
+  "source_files_sha256": {
+    "src/d2t_rna/evaluation/t2_planner_binding.py": "28f87396fdc7375c885a7bbdf59cf5a8e87161ffd997d5a4dfdd86653b45ec79",
+    "src/d2t_rna/evaluation/planner.py": "342128c07dd4c10413dc5ab52edcd39885e2fffef2a70d418ffd44213516c042",
+    "tests/evaluation/test_t2_planner_binding.py": "6934220784ca6b75ac3a265ca8e914e993d6d40dbef56a24ea83471907a0d076"
+  },
+  "claim_boundary": {
+    "scientific_claim_authorized": false,
+    "claim_kind": "replayable planner/scenario binding of accepted T2 artifacts only",
+    "gate_passed": "T2-PLANNER-BINDING-FAIL-CLOSED-GATE",
+    "not_authorized": [
+      "planner status as theorem proof",
+      "synthetic model-conditional certificate as real-data validation",
+      "theorem no-go from planner NO_CERTIFICATE_FOUND alone",
+      "prospective/blinded/held-out/out-of-sample/independent validation",
+      "population generalization / new-library guarantee / native-T4 truth",
+      "actual wet-lab cost savings"
+    ]
+  }
+}
