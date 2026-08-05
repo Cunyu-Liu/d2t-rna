@@ -21,12 +21,16 @@
 
 \section{Setup and notation}\label{sec:setup}
 We use the registered finite model of Definition~\ref{def:model} in the main text: finite latent states
-$\Theta=\Theta_0\sqcup\Theta_1$, finite actions $A$, finite categorical alphabet $\mathcal{Y}$, passive
-marginal map $M$, action-level laws $B_u$, registered nuisance coupling $\mathcal{C}$, fixed non-adaptive
-horizon $h$, and abstention rule $\mathcal{R}$. The complete cross-class difference set is
-$D=\Theta_0\times\Theta_1$. For a panel $S\subseteq A$, the induced product law of $\theta$ is
-$P_S(\theta)=\bigotimes_{u\in S}B_u(\theta)$, authorized by $\mathcal{C}$. The separation functional is
-$\gamma(S)=\min_{(\theta_0,\theta_1)\in D}\mathrm{TV}(P_S(\theta_0),P_S(\theta_1))$.
+$\Theta=\Theta_0\sqcup\Theta_1$ (disjoint, so $\Theta_0\cap\Theta_1=\emptyset$), finite actions $A$, finite
+categorical alphabet $\mathcal{Y}$, passive marginal map $M$, action-level laws $B_u$, registered nuisance
+coupling $\mathcal{C}$, fixed non-adaptive horizon $h$, and abstention rule $\mathcal{R}$. The complete
+cross-class difference set is $D=\Theta_0\times\Theta_1$, which is finite and contains no trivial diagonal
+pair $(\theta,\theta)$. For a panel $S\subseteq A$, the induced product law of $\theta$ is
+$P_S(\theta)=\bigotimes_{u\in S}B_u(\theta)$, authorized by $\mathcal{C}$, and
+$\gamma(S)=\min_{(\theta_0,\theta_1)\in D}\mathrm{TV}(P_S(\theta_0),P_S(\theta_1))$ is the
+\emph{observation-probability} separation (total-variation over $\mathcal{Y}^{|S|}$, not a state-space
+metric). Because $D$ is finite and the laws are finite categorical laws, the minimum is attained, so every
+collision witness is non-trivial and attained.
 
 We assume (Assumptions 1--2): the model is pre-registered, and the action-level likelihoods are
 complete and positive.
@@ -116,10 +120,9 @@ the proof.
 
 \paragraph{Tightness microcase.}
 For alphabet size $2$, $P_0=(1/4,3/4)$, $P_1=(1,0)$: $\rho_u=\sqrt{1/4\cdot1}+\sqrt{3/4\cdot0}=1/2$,
-$I_u=\ln2$. The exact minimax error is $\tfrac12\rho_u^n=\tfrac12(1/4)^n$? No: the exact minimax error
-for this pair is $\tfrac12(1/4)^n$ (computed by exhaustive enumeration), and the certified upper bound
-$\tfrac12 e^{-nI_u}=\tfrac12(1/2)^n$ brackets the Bhattacharyya ideal. Hence the certified bound
-dominates the exact oracle error for every $n\ge 1$.
+$I_u=\ln2$. The exact minimax error for this pair (computed by exhaustive enumeration) is
+$\tfrac12(1/4)^n$, and the certified upper bound $\tfrac12 e^{-nI_u}=\tfrac12(1/2)^n$ brackets the
+Bhattacharyya ideal. Hence the certified bound dominates the exact oracle error for every $n\ge 1$.
 
 \section{Proof of Theorem 3 (T2d: costed design and no-go)}\label{sec:proof-t2d}
 

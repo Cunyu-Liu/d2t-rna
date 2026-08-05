@@ -31,9 +31,11 @@
 In a finite registered RNA state/action/observation model, the target and rival parameter classes can
 produce identical passive marginal laws, so deciding which class generated a fixed observed catalog
 requires a certified and checkable design. Classical marginal-fiber, Test-Cover, and fixed-horizon-testing
-arguments characterize when separation is possible, but they do not deliver a replayable
-collision-or-separation certificate over the complete cross-class difference set, nor a decision-theoretic
-consequence tied to the RNA action geometry. D2T-RNA provides, within a pre-registered finite RNA model,
+arguments provide the component tools (fiber connectivity, test cover, sample-complexity scalings,
+costed design), but none by itself binds them into a single pre-registered finite RNA
+state/action/observation contract that emits a replayable collision-or-separation certificate over the
+complete cross-class difference set together with decision-theoretic and costed-design consequences.
+D2T-RNA provides, within a pre-registered finite RNA model,
 exact and independently checkable collision-or-separation certificates over the complete difference set,
 converts robust action-level separation into fixed-horizon finite-sample decision and budget bounds, and
 returns a costed integer design with a design-class no-go certificate. All theoretical certificates are
@@ -121,7 +123,9 @@ A \emph{finite registered RNA state/action/observation model} is a tuple
 $(\Theta,A,\mathcal{Y},M,\{B_u\}_{u\in A},\mathcal{C},h,\mathcal{R})$ where:
 \begin{itemize}[nosep]
   \item $\Theta=\Theta_0\sqcup\Theta_1$ is a finite set of latent states, partitioned into a
-        \emph{target} class $\Theta_0$ and a \emph{rival} class $\Theta_1$;
+        \emph{target} class $\Theta_0$ and a \emph{rival} class $\Theta_1$; the two classes are
+        \emph{disjoint} ($\Theta_0\cap\Theta_1=\emptyset$), so no pair in
+        Definition~\ref{def:D} is the trivial diagonal pair $\theta_0=\theta_1$;
   \item $A$ is a finite set of \emph{actions} (probes/perturbations);
   \item $\mathcal{Y}$ is a finite categorical \emph{observation alphabet};
   \item $M:\Theta\to\Delta(\mathcal{Y})$ is the \emph{passive marginal map};
@@ -136,8 +140,29 @@ $(\Theta,A,\mathcal{Y},M,\{B_u\}_{u\in A},\mathcal{C},h,\mathcal{R})$ where:
 \begin{definition}[Complete cross-class difference set $D$]\label{def:D}
 The \emph{complete cross-class difference set} is
 $D=\Theta_0\times\Theta_1$, the set of all target/rival pairs. It is the full cross product, not a
-hand-picked cycle subset.
+hand-picked cycle subset. Because $\Theta_0$ and $\Theta_1$ are finite and disjoint
+(Definition~\ref{def:model}), $D$ is finite and contains no trivial diagonal pair $(\theta,\theta)$.
 \end{definition}
+
+\begin{remark}[Relation to the contract difference set]\label{rem:D-relation}
+This paper's $D=\Theta_0\times\Theta_1$ is the finite-catalog representation of the contract's
+cross-class difference set: each pair $(\theta_0,\theta_1)\in D$ indexes the difference of the two
+latent state distributions, and certifying separation over the \emph{full} cross product (rather than
+only the passive collision fiber, i.e.\ those pairs whose passive marginal laws coincide) is
+a conservative, stronger certificate. It is the full cross product, not a hand-picked subset.
+\end{remark}
+
+\begin{remark}[Finite catalog, attainment, and triviality]\label{rem:attain}
+The paper restricts the model to \emph{finite} state classes (finite catalog), so $D$ is finite and the
+minimum in Definition~\ref{def:gamma} is attained. Consequently $\gamma(S)=0$ always yields a
+\emph{non-trivial, attained} exact collision witness $(\theta_0,\theta_1)\in D$ with
+$\theta_0\neq\theta_1$ (disjointness excludes the diagonal). The contract's general framework also
+allows \emph{rational polyhedral} classes, in which case $D$ is a difference set of state
+distributions and the infimum may not be attained; there the equivalence degrades to
+necessary-only / sufficient-only forms and the infimum-only obstruction boundary (contract 5.2), which
+is out of scope here. We therefore do \emph{not} claim an attained witness when the infimum is only
+approached.
+\end{remark}
 
 \begin{definition}[Action panel and induced law]\label{def:panel}
 For a panel $S\subseteq A$ of actions, the \emph{induced observation law} of state $\theta$ is the
@@ -145,10 +170,24 @@ product law $P_S(\theta)=\bigotimes_{u\in S}B_u(\theta)$, where the product is a
 registered coupling $\mathcal{C}$.
 \end{definition}
 
+\begin{remark}[Passive marginal, induced law, and the action map]\label{rem:passive}
+$M$ is the \emph{passive} (no-action) observation law and defines the collision fiber: a pair
+$(\theta_0,\theta_1)$ is passively collision-equivalent exactly when the two induced passive laws
+coincide. The action map $B_u$ induces, on the categorical alphabet $\mathcal{Y}$, the atomic
+observation law used to \emph{separate} the pair; the complete \emph{categorical observation law} for a
+panel $S$ is the product law $P_S(\theta)=\bigotimes_{u\in S}B_u(\theta)$ over
+$\mathcal{Y}^{|S|}$,
+authorized by the registered coupling $\mathcal{C}$. Thus $\gamma(S)$ measures, in
+\emph{observation-probability} terms, how well the action maps separate every target/rival pair in $D$.
+\end{remark}
+
 \begin{definition}[Separation functional $\gamma(S)$]\label{def:gamma}
 $\gamma(S)=\min_{(\theta_0,\theta_1)\in D}\mathrm{TV}\bigl(P_S(\theta_0),P_S(\theta_1)\bigr)$,
-the minimum total-variation separation of induced laws over the complete difference set. Because $D$ is
-finite and the laws are finite categorical laws, the minimum is attained.
+the minimum total-variation separation of the induced laws over the complete difference set. Explicitly,
+$\gamma(S)$ is a norm on pairs of \emph{categorical observation-probability} laws over
+$\mathcal{Y}^{|S|}$ (the product law $P_S$ of Definition~\ref{def:panel}), \emph{not} a metric on the
+state space $\Theta$. Because $D$ is finite and the laws are finite categorical laws, the minimum is
+attained (Remark~\ref{rem:attain}).
 \end{definition}
 
 \begin{assumption}[Registered structure]\label{ass:reg}
@@ -194,9 +233,22 @@ strong-duality + primal feasibility check supplies the rational primal/dual pair
 \end{proof}
 
 \begin{remark}[Direction semantics]\label{rem:direction}
-For finite catalogs the infimum in $\gamma(S)$ is attained, so the theorem is \emph{iff}. The
-necessary-only / sufficient-only forms are reserved for the non-atomic / infimum-only obstruction
-boundary (contract 5.2), which we do not treat here.
+For finite catalogs the infimum in $\gamma(S)$ is attained, so the theorem is \emph{iff}. Both
+registered couplings ($\mathcal{C}=\textsc{CARTESIAN}$ and $\mathcal{C}=\textsc{EQUAL\_REALIZED\_VALUE}$)
+fully specify the product law under Assumption~\ref{ass:likelihood}, so the iff holds under either
+coupling. The necessary-only / sufficient-only forms are reserved for the non-atomic / infimum-only
+obstruction boundary (contract 5.2), which we do not treat here (Remark~\ref{rem:attain}).
+\end{remark}
+
+\begin{remark}[What the rational certificate verifies]\label{rem:certificate}
+The certificate is a statement about \emph{observation-probability separation}, not a purely geometric
+($\Theta$) claim. The attaining pair $(\theta_0^\star,\theta_1^\star)\in D$ with
+$\mathrm{TV}(P_S(\theta_0^\star),P_S(\theta_1^\star))=\gamma(S)$ is a witnessed element of $D$, and the
+value $\gamma(S)>0$ is the categorical-law separation it certifies. The LP dual is an
+\emph{intermediate} certificate for the costed-design consequence (T2d): it certifies that every
+feasible design has cost at least the dual bound, not a second, independent geometric claim. The
+independent checker re-derives both the witnessed collision/separation and the dual from first
+principles (\texttt{verify.py} and \texttt{lp.py}).
 \end{remark}
 
 \begin{figure}[ht]
@@ -219,16 +271,32 @@ Under $n_u$ repeated non-adaptive observations of action $u$ with the registered
 information is $I_{\mathrm{tot}}=\sum_{u\in A}n_u\,I_u(\theta_0,\theta_1)$.
 \end{definition}
 
+\begin{definition}[Decision-theoretic endpoints]\label{def:endpoints}
+Fix a \emph{decision-or-abstain} rule $\mathcal{R}$ that, on each realized catalog, returns either a
+declared class or \emph{inconclusive} (abstain). The registered endpoints are:
+\begin{itemize}[nosep]
+  \item $\alpha$: the type-I wrong-declaration bound (declaring the rival when the target generated the data);
+  \item $\beta$: the type-II wrong-declaration bound (declaring the target when the rival generated the data);
+  \item $\kappa_0$: the minimum correct-declaration probability under the target hypothesis (H0);
+  \item $\kappa_1$: the minimum correct-declaration probability under the rival hypothesis (H1);
+  \item $\rho=\mathbb{P}(\text{abstain})$: the probability the rule returns \emph{inconclusive}.
+\end{itemize}
+Every declaration is exactly one of correct, wrong, or abstained; abstention is neither correct nor
+wrong, so $\mathbb{P}(\mathrm{correct})+\mathbb{P}(\mathrm{wrong})+\rho=1$.
+\end{definition}
+
 \begin{theorem}[Finite-sample decision bound, T2c]\label{thm:t2c}
 Consider a finite registered pair catalog under a fixed-horizon deterministic non-adaptive allocation
-with complete action-level likelihoods and registered product laws.
+with complete action-level likelihoods and registered product laws, with endpoints as in
+Definition~\ref{def:endpoints}.
 \begin{enumerate}[nosep]
   \item \emph{(Upper bound.)} For every pair, the probability of a wrong declaration satisfies
-        $\mathbb{P}(\mathrm{wrong})\le \tfrac12\exp(-I_{\mathrm{tot}})$, and the correct-declaration
-        probability satisfies $\mathbb{P}(\mathrm{correct})\ge 1-\tfrac12\exp(-I_{\mathrm{tot}})-\rho$,
-        where $\rho$ is the abstention probability under rule $\mathcal{R}$.
+        $\mathbb{P}(\mathrm{wrong})\le \tfrac12\exp(-I_{\mathrm{tot}})$, so in particular
+        $\alpha,\beta\le\tfrac12\exp(-I_{\mathrm{tot}})$; the correct-declaration probability satisfies
+        $\mathbb{P}(\mathrm{correct})\ge 1-\tfrac12\exp(-I_{\mathrm{tot}})-\rho$, where $\rho$ is the
+        abstention probability under rule $\mathcal{R}$.
   \item \emph{(Lower bound / structural no-go.)} To reach a correct-declaration floor
-        $\kappa\in(1/2,1)$, the total information must satisfy
+        $\kappa=\max(\kappa_0,\kappa_1)\in(1/2,1)$, the total information must satisfy
         $I_{\mathrm{tot}}\ge -\tfrac12\log\!\bigl(1-(2\kappa-1)^2\bigr)$. If the certified total
         information is strictly below this threshold, no allocation within the budget can meet the
         floor.
@@ -253,6 +321,18 @@ For alphabet size 2, $P_0=(1/4,3/4)$, $P_1=(1,0)$: the Bhattacharyya coefficient
 information is $\ln2$, the exact minimax error is $\tfrac12(1/4)^n$, and the certified upper bound
 $\tfrac12\exp(-nI)$ brackets the Bhattacharyya-ideal $\tfrac12(1/2)^n$, i.e.\ the finite-sample bound
 dominates the exact minimax error and is conservative by the intended margin.
+\end{remark}
+
+\begin{remark}[Budget and sample complexity]\label{rem:budget}
+To meet a correct-declaration floor $\kappa=\max(\kappa_0,\kappa_1)$ with abstention $\rho$, T2c~(ii)
+requires $I_{\mathrm{tot}}\ge -\tfrac12\log\!\bigl(1-(2\kappa-1)^2\bigr)$. Expressed as a budget, the
+minimal non-adaptive allocation is the integer solution of
+$\min_{n\in\mathbb{Z}_{\ge0}^{A}}\sum_{u\in A}c_u n_u$ subject to
+$\sum_{u\in A}n_u I_{uw}\ge -\tfrac12\log\!\bigl(1-(2\kappa_w-1)^2\bigr)$ for every active pair $w$,
+which is exactly the T2d program (Section~\ref{sec:t2d}) with $\tau_w$ set to that per-pair threshold.
+Thus T2c supplies the per-pair information/budget target and T2d turns it into a costed design or a
+design-class no-go. The bounds are stated for the finite registered pair catalog only; no
+composite-continuous covering or real-data calibration guarantee is made.
 \end{remark}
 
 \begin{figure}[ht]
@@ -316,6 +396,15 @@ LP$=3/2$, IP$=2$, gap $=1/3$. \emph{No-go demonstration:} a fractional cover wit
 bound is NO\_GO.
 \end{remark}
 
+\begin{remark}[No-go logic and scope]\label{rem:nogo}
+The no-go is a \emph{design-class} certificate: a dual bound above budget rules out \emph{every}
+feasible design within budget, even though the LP relaxation may itself be feasible ---
+LP-feasible does not imply integer-feasible. The certificate is not a claim that no RNA assay exists;
+it certifies the registered costed design class over the finite pair catalog $D'$. The integrality-gap
+values above make the ``LP-feasible but not integer-feasible'' gap concrete (gap $=1/3$ for the
+fractional cases).
+\end{remark}
+
 \begin{figure}[ht]
 \centering
 \includesvg[width=0.85\textwidth]{figures/fig3_costed_design}
@@ -372,6 +461,18 @@ Eleven micro-cases and eight baselines are executed as model-conditional synthet
 Table~\ref{tab:baselines} states the comparison variables on which every baseline is evaluated. Executed
 baselines do not imply biological superiority; oracle agreement does not imply population
 generalization; runtime/memory are computational evidence only.
+
+\paragraph{Definition of metrics.}
+Fix an active pair $(\theta_0,\theta_1)\in D'$ and a baseline design (a selected panel $S$ with a
+decision-or-abstain rule). \emph{Product TV} is the total-variation distance between the induced
+categorical observation laws, $\mathrm{TV}(P_S(\theta_0),P_S(\theta_1))$. \emph{Minimax error} is the
+exact two-class minimax decision error of the oracle,
+$\tfrac12\bigl(1-\mathrm{TV}(P_S(\theta_0),P_S(\theta_1))\bigr)$, which is attained by the likelihood-ratio
+test under the registered product law. \emph{Correct} and \emph{abstain} are the empirical
+correct-declaration probability $\mathbb{P}(\mathrm{correct})$ and abstention probability
+$\rho=\mathbb{P}(\mathrm{abstain})$ of the baseline rule (Definition~\ref{def:endpoints}). Because the
+oracle minimax error is an affine decreasing function of product TV, the two columns are not independent;
+we report both for auditability. $\mathrm{abstain}=0$ means the rule always declares.
 
 \begin{table}[ht]
 \centering
