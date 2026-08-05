@@ -1,0 +1,69 @@
+{
+  "active_manifest": "manifests/m0/m0_v7_activation.json",
+  "amendment": "docs/contracts/amendments/v7_amend_12_3_6_20260805.md",
+  "authority_precedence": {
+    "1": "active_v7_activation_and_approved_amendment",
+    "2": "accepted_T2_manifests",
+    "3": "accepted_T9_T10_manifests",
+    "4": "accepted_Task6R_R1_R2_manifests",
+    "5": "S12_submission_gate",
+    "6": "S14_delivery_bundle",
+    "7": "historical_t9_4_synthesis_record",
+    "8": "legacy_project_contract_manifest"
+  },
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "current_head": "f50e2510b473a4dcb9981790e7e060b2919dd1e6",
+  "delivery_bundle": "manifests/s14/s14_delivery_bundle_acceptance.json",
+  "historical_records": {
+    "docs/audit/t9_4_paper_scientific_units.md": {
+      "current_authority": false,
+      "reason": "superseded_for_current_Task6R_status_by_S12_and_R2",
+      "status": "HISTORICAL_SYNTHESIS_RECORD"
+    },
+    "manifests/project_contract.json": {
+      "current_authority_for_v7": false,
+      "reason": "retains historical T2 lemma-pending blocked state",
+      "status": "LEGACY_V6_1_PROJECT_CONTRACT_MANIFEST"
+    }
+  },
+  "input_sha256": {
+    "docs/audit/t9_4_paper_scientific_units.md": "2df89e3df835f9560fdd0a5711e283b91b8290c0e512d37f2921536f7156d634",
+    "docs/contracts/amendments/v7_amend_12_3_6_20260805.md": "0c81880d4c7d4bbac307c2b3a16745a479b1d50ce0518082c3fd356b8df65dd1",
+    "manifests/m0/m0_v7_activation.json": "eae4ba941577515083926f5248b26d927c14592467be6532686524d6f330922f",
+    "manifests/project_contract.json": "1371c443dbdebf25f4f933ca2ca7842bab2b1b4b72d31a59f014fce168d3e7f0",
+    "manifests/s12/s12_3_submission_gate_acceptance.json": "4af1735cfbc6758b7dd9dafbc72a42287d3b449693d80ad9c12a0184e2e7013f",
+    "manifests/s14/s14_delivery_bundle_acceptance.json": "e81ed5c2e6aae5e84d4057db24c5fd1772b36b1e96eb9bfb4add9f4e90eb81a0",
+    "manifests/t10/t10_validation_acceptance.json": "0fc567f4453b18fa78feb170f9df97339ec41da679ed6498754eae3b5b7f25ec",
+    "manifests/t2/t2_2_acceptance.json": "a1711025f9a748a2a5e966d761a72ae24848ec0aa937ea03942b8fb7601970a4",
+    "manifests/t2/t2_3_acceptance.json": "aad9a03504b78888e839702fe3a6f548fe9ac16e4846dd4adb93f90e2b00b79d",
+    "manifests/t2/t2_4_acceptance.json": "6ac0d5b4a0202b4985dc46f5ea60187e653f868c966de8a2f34bc1600d2bfbb1",
+    "manifests/t2/t2_5_acceptance.json": "c84b7cbe5938390a04d63cd7b3011ade4915ac714643eb2a1d96f01cbbc62d26",
+    "manifests/t2/t2_coupled_pair_uncertainty_spec.json": "3cb613b3f1e8fe17d929dfd4e61b005d799f125d481f03882f55987e3709da42",
+    "manifests/t2/t2_problem_spec.json": "f44e5acc0883722d6edabdc4cc2bc2eac02f7e4ba3f2fb7d010bb3cadf74dbb4",
+    "manifests/t9/t9_matrix_acceptance.json": "a0b56f5ac0609482407ec8e6bfab2b456d0dbc893e3a324db2341f60b4a5812f",
+    "manifests/task6r/task6r_r1_acceptance.json": "5e1b0ab895330780c9b70d8ac4bba204b142b02a1d6a0a01e3bcd7d248b40d36",
+    "manifests/task6r/task6r_r2_acceptance.json": "6928e7ca10666e0d8b29faf892b6f1f35532cd23b3a382252dad4c7631d94109"
+  },
+  "origin_main": "f50e2510b473a4dcb9981790e7e060b2919dd1e6",
+  "r2_terminal_outcomes": {
+    "add": "NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL",
+    "rorc": "NOT_APPLICABLE",
+    "sam-iii": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE"
+  },
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/paper-evidence-lock-20260805T190042+0800",
+  "run_finished": 1785927648.4921343,
+  "schema": "d2t_rna.paper_evidence_lock.v1",
+  "scientific_claim_authorized": false,
+  "scientific_interpretation": {
+    "S10_validation": "synthetic validation of assumptions, independence checker and claim boundaries",
+    "S12_submission_readiness": "internal evidence gate, not scientific claim authorization",
+    "S14_delivery_bundle": "delivery/replay bundle, not a biological validation",
+    "S9_matrix": "model-conditional synthetic evaluation and executed baselines",
+    "T2b_T2c_T2d": "model-conditional synthetic/theoretical certificates",
+    "Task6_R": "complete fail-closed audit but no qualified quantitative retrospective instance"
+  },
+  "status": "PAPER_EVIDENCE_LOCKED",
+  "submission_gate": "manifests/s12/s12_3_submission_gate_acceptance.json",
+  "worktree_clean": true
+}

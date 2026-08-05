@@ -1,0 +1,56 @@
+{
+  "abstract_check": {
+    "abstract_ok": true,
+    "abstract_prohibited_hits": [],
+    "abstract_required_phrases_present": [
+      "model-conditional",
+      "fixed-horizon",
+      "retrospective",
+      "fail-closed"
+    ],
+    "abstract_sentence_count": 5
+  },
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "file_exists": {
+    "blueprint": true,
+    "claim_register": true,
+    "claim_register_json": true,
+    "contribution": true,
+    "evidence_lock": true,
+    "evidence_lock_json": true,
+    "limitation": true,
+    "manuscript": true,
+    "prior_art": true,
+    "references": true,
+    "results_validation": true,
+    "reviewer_audit": true
+  },
+  "file_hashes": {
+    "blueprint": "b3168bbea9c7d88a329cf6a8b827606e19c00b8ab5ec258483ff17aa2bbc4f79",
+    "claim_register": "4e48bf18ee58b6d910d6ed547d7f0a6f18fa026923e051c5d3263349c5bfbaa8",
+    "claim_register_json": "c56d7e181ecfea810ef17fb7f5df32725a79a445c3297759a6d954b4fc0dbdbb",
+    "contribution": "e8d70db27ec16c7a48a14b64b04f5eb7fb41049b009ec8f2052e3ec389bc73a4",
+    "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
+    "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
+    "limitation": "0aefc6a3e8b637657b89b4a606112b718374b4855b049c3a92d4b9b798b51db7",
+    "manuscript": "ea90c57d56ca91479a7c28db43c02e16d9eb66e5333c3b10d63000dc5e18dc8b",
+    "prior_art": "c9b81146ebc52cbfa251397212e0e023e6244db6cd2a91074d859fe9d9bfca9c",
+    "references": "33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4",
+    "results_validation": "934bd310f61ef971fe28e9392439be7c673a5c401d634c5a7131113333e91af0",
+    "reviewer_audit": "ab6d5962b595b23b41b13b0319ac7aaedddfba9d98a9cbcbd337161866bed278"
+  },
+  "gates": {
+    "PAPER-AUTHORITY-PRECEDENCE-GATE": true,
+    "PAPER-CLAIM-BOUNDARY-GATE": true,
+    "PAPER-CONTRIBUTION-GATE": true,
+    "PAPER-EVIDENCE-LOCK-GATE": true,
+    "PAPER-PRIOR-ART-NOVELTY-GATE": true,
+    "PAPER-REPRODUCIBILITY-GATE": true,
+    "PAPER-RESULTS-VALIDATION-GATE": true,
+    "PAPER-REVIEWER-AUDIT-GATE": true
+  },
+  "run_finished": 1785927845.1766858,
+  "schema": "d2t_rna.paper_submission_readiness.v1",
+  "scientific_claim_authorized": false,
+  "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW"
+}

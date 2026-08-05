@@ -1,0 +1,62 @@
+{
+  "allowed_claims": {
+    "C1": {
+      "authorized": true,
+      "claim": "exact collision-or-separation certificate over complete registered D",
+      "evidence": "manifests/t2/t2_2_acceptance.json",
+      "strength": "within registered finite model"
+    },
+    "C2": {
+      "authorized": true,
+      "claim": "finite-sample decision/budget bounds from action-level separation",
+      "evidence": "manifests/t2/t2_3_acceptance.json",
+      "strength": "finite registered pair catalog, fixed non-adaptive horizon"
+    },
+    "C3": {
+      "authorized": true,
+      "claim": "costed integer design and design-class no-go certificate",
+      "evidence": "manifests/t2/t2_4_acceptance.json",
+      "strength": "design-class level"
+    },
+    "C4": {
+      "authorized": true,
+      "claim": "executed model-conditional synthetic evaluation (11 microcases, 8 baselines)",
+      "evidence": "manifests/t9/t9_matrix_acceptance.json",
+      "strength": "executed model-conditional; no superiority"
+    },
+    "C5": {
+      "authorized": true,
+      "claim": "complete fail-closed retrospective evidence audit",
+      "evidence": "manifests/task6r/task6r_r2_acceptance.json; manifests/s12/s12_3_submission_gate_acceptance.json",
+      "strength": "fail-closed audit; no qualitative instance"
+    },
+    "C6": {
+      "authorized": true,
+      "claim": "assumption violation returns NOT_ESTABLISHED/abstain under registered coupling",
+      "evidence": "manifests/t10/t10_validation_acceptance.json",
+      "strength": "theory boundary"
+    }
+  },
+  "claim_register_sha256_inputs": [
+    "4e48bf18ee58b6d910d6ed547d7f0a6f18fa026923e051c5d3263349c5bfbaa8"
+  ],
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "prohibited_claims": {
+    "P1": "prospective/blinded/held-out/independent validation",
+    "P10": "reads/PCR/UMI/random seed as biological replicates",
+    "P2": "universal RNA identifiability/general inference",
+    "P3": "population-level RNA generalization",
+    "P4": "new-library/independent-library validation",
+    "P5": "actual future wet-lab cost saving",
+    "P6": "biological discovery or independent validation from add/SAM-III/RORC",
+    "P7": "pretrain/foundation model/representation learning/fine-tuning/neural architecture",
+    "P8": "categorical T2 quantitative validation on SHAPE/DMS continuous channel",
+    "P9": "third-state biological discovery"
+  },
+  "prohibited_present_in_manuscript": false,
+  "retrospective_failure_omitted": false,
+  "run_finished": 1785927748.9094238,
+  "schema": "d2t_rna.paper_claim_register.v1",
+  "scientific_claim_authorized": false,
+  "status": "CLAIM_BOUNDARY_GATE_PASS"
+}
