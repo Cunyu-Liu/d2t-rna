@@ -1,0 +1,39 @@
+{
+  "boundary_note": "R1 freezes observed-dataset evidence only; it authorizes no claim and is not a prospective/blinded/held-out validation (contract 8.3).",
+  "contract_section": "8.3",
+  "kind": "R1_OBSERVED_DATASET_MATERIALIZATION",
+  "report": {
+    "accession": "ADDRSW_SHP_0003",
+    "construct_count": 72,
+    "data_point_count": 7272,
+    "dataset_id": "add",
+    "dependency_units": [
+      "construct",
+      "seqpos",
+      "mutation"
+    ],
+    "downloaded_at": "2026-08-05T07:11:21Z",
+    "layering": {
+      "author_truth": "STRUCTURE dot-bracket in raw (native_truth_label_generated=false)",
+      "derived": "task6 add full-matrix replay (R2, gated)",
+      "processed": "/mnt/cunyuliu/d2t-rna/data/task6/add/ADDRSW_SHP_0003.canonical.json",
+      "raw": "/mnt/cunyuliu/d2t-rna/data/task6/add/ADDRSW_SHP_0003.rdat"
+    },
+    "license": "add/RMDB terms (Kladwang et al. 2011); see accession page",
+    "observed_dataset_hash": "57bf55018ec16fb3ff00378a08592b9f087fd3eec1b4cc11f2cefe67ad4ce0a2",
+    "raw_bytes": 58238,
+    "raw_path": "/mnt/cunyuliu/d2t-rna/data/task6/add/ADDRSW_SHP_0003.rdat",
+    "raw_sha256": "cb2d8c218512fbbe76149399c0e88c6e5f9f43957413de254a49a7c40b2e53e5",
+    "role": "COUNTERFACTUAL_RETROSPECTIVE_FULL_MATRIX_COMPRESSION",
+    "seqpos_count": 101,
+    "source_version": "RMDB_RDAT_0.24",
+    "status": "MATERIALIZED"
+  },
+  "report_sha256": "95122e372cf71a63657c62e871714afbcf3dd3c651fb7dab16386b040ad4f9d2",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r1-20260805T151121+0800",
+  "run_finished": 1785913881.872881,
+  "scientific_claim_authorized": false,
+  "self_check_ok": true,
+  "status": "MATERIALIZED",
+  "test_log_sha256": "2d39af5d7565b21c75332d0c94067165c7be7161f477714bf949f09701b79f46"
+}

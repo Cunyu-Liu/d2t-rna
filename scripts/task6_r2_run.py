@@ -27,7 +27,23 @@ from d2t_rna.data.r2_evaluation import (
 from d2t_rna.contracts.base import parse_contract_json
 
 
-def _gate_profile(manifests_root: Path, dataset_id: str) -> dict[str, bool]:
+def _r1_materialized(data_root: Path, dataset_id: str) -> bool:
+    """True when the §8.3 R1 materialization evidence exists on disk.
+
+    R1 writes a canonical JSON + a sha256 sidecar next to the raw file.  For
+    add/RMDB the observed data is a reactivity matrix (not fastq reads), so the
+    materialization state is read from these artifacts, not from the manifest's
+    ``raw_fastq_downloaded`` field.
+    """
+    if dataset_id != "add":
+        return False
+    add_dir = data_root / "task6" / "add"
+    return (add_dir / "ADDRSW_SHP_0003.canonical.json").exists() and (
+        add_dir / "ADDRSW_SHP_0003.sha256"
+    ).exists()
+
+
+def _gate_profile(manifests_root: Path, data_root: Path, dataset_id: str) -> dict[str, bool]:
     root = manifests_root / dataset_id.replace("-", "_")
     public = parse_contract_json(PublicPlanningStub, (root / "public_planning_stub.json").read_bytes())
     private = parse_contract_json(
@@ -40,7 +56,7 @@ def _gate_profile(manifests_root: Path, dataset_id: str) -> dict[str, bool]:
     obs_available = dataset_id == "sam-iii"
     return {
         "within_registered_fixed_dataset": True,
-        "observed_data_materialized": bool(private.raw_fastq_downloaded),
+        "observed_data_materialized": _r1_materialized(data_root, dataset_id),
         "observation_model_available": obs_available,
         "dependency_graph_available": dep_status == "REGISTERED",
         "independence_proof_available": False,
@@ -50,7 +66,11 @@ def _gate_profile(manifests_root: Path, dataset_id: str) -> dict[str, bool]:
 
 def main() -> int:
     manifests_root = Path("/home/cunyuliu/d2t-rna/manifests")
-    profiles = {did: _gate_profile(manifests_root, did) for did in REGISTERED_DATASETS}
+    data_root = Path("/mnt/cunyuliu/d2t-rna/data")
+    profiles = {
+        did: _gate_profile(manifests_root, data_root, did)
+        for did in REGISTERED_DATASETS
+    }
     report = r2_evaluate_all(profiles)
     payload = {
         "contract_section": "8.4",
