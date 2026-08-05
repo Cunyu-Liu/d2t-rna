@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "ed27de4cfd66c487daa65db94ab0010c3a567cb4",
-  "origin_main": "69db410d3715a049cd5fb4480fd15e61c597a30d",
-  "worktree_clean": true,
+  "head": "cbddae46501d1479629069b52bdc1f74d154157d",
+  "origin_main": "cbddae46501d1479629069b52bdc1f74d154157d",
+  "worktree_clean": false,
   "lineage": [
+    "cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4",
     "ed27de4 chore(paper): add self-contained Docker reproducibility artifact",
     "69db410 chore(paper): commit build provenance bound to 731e604",
     "731e604 chore(paper): re-bind readiness report + manifest to final HEAD 457dc11",
     "457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper",
-    "dea8be1 chore(paper): re-bind readiness report + manifest to final HEAD cf1126a",
-    "cf1126a chore(paper): regeneration of readiness report + manifest bound to c690aaf and commit build provenance"
+    "dea8be1 chore(paper): re-bind readiness report + manifest to final HEAD cf1126a"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,8 +33,8 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "5f4e3ef1e9a12b6e7ea8398467597016f9bfbace9283030558d8accc6a37cb34",
-    "supplementary": "bcd697ced83ac1922f2726fb0ba45837ece689590dbdc93bb7dcfe037b3841be",
+    "manuscript": "c24120f101a6e320d01d9662a6038568012b7406a99ca62199ac9da234e95e7d",
+    "supplementary": "cbe6e3895b3af2933b66ee4f345aade672a40bc8c77e69dff1216d95d1f0fafa",
     "references": "b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
     "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
@@ -98,5 +98,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785946631.7268457
+  "run_finished": 1785952295.9473598
 }

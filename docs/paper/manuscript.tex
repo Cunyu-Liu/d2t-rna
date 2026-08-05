@@ -607,6 +607,33 @@ $1/5$  & $6/5$ & $18$ & $13$ & cost $18$, gap $2.7\%$ \\
 no-go at budget $1$ for every $\varepsilon$.
 \end{table}
 
+\subsection{Measured observation channel: 1M7 SHAPE reactivity}\label{sec:real-measured}
+The model above reads a \emph{model-conditional} protected/reactivity channel with a synthetic noise
+coupling. We now replace that coupling with \emph{measured} nucleotide-resolution reactivity from a
+published assay, so the certificate is separable with respect to real measurements rather than a
+registered synthetic channel. We register the RMDB accession \texttt{ADD71\_STD\_0001} (Tian, Kladwang
+\& Das, \emph{eLife} 2018, doi:10.7554/eLife.29602), 1M7 (SHAPE) mapping of the add riboswitch
+(residues 13--83, 71~nt) in two conformations: apo (RDAT channel 1) and $5$~mM adenine-bound (RDAT
+channel 2). For each position the probability of reading \emph{unpaired/reactive} is the published
+normalized reactivity, clamped to a registered $1\%$ readout floor (so the per-position Hellinger
+information stays finite and the finite-sample bound is non-trivial). This binarized measured channel
+replaces the noise coupling $\varepsilon$ above; the two latent states, marginal $M=(1,1)$, and one
+action per position are unchanged.
+
+The measured certificate is stronger and immediate. Of the $71$ positions, $64$ are
+\emph{measured-separating} (apo/bound binarized reactivity differ). A panel of the eight strongest
+measured separators certifies exact (\texttt{iff}) separation with $\gamma=49/25$
+(Definition~\ref{def:gamma}); the rational LP and the enumeration checker agree and strong duality
+holds. For T2c the strongest measured separator (position $10$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $64$ separating positions have a
+certified finite sufficiency bound. For T2d the achievable integer design repeats position $10$ three
+times (certified cost $3$); at a user budget of $B=1$ read the design is a certified
+\texttt{NO\_GO}, and at $B=3$ it is feasible. The decision-support story is therefore operational:
+``budget $B=1$ $\Rightarrow$ no-go (refine model / relax floor / raise budget); budget $B=3$ $\Rightarrow$
+feasible design (probe position $10$ three times).'' The full per-position reactivity, error, binarized
+probabilities, and per-probe sufficiency bounds are in the supplementary
+(Section~\ref{sec:supp-measured}).
+
 \subsection{Transferability: registering a second published assay}\label{sec:real-transfer}
 Reviewer transferability concerns are answered by inspection, not by narrative. A second published
 RNA-structure probing workflow --- e.g.\ the mutate-and-map / quantitative SHAPE-DMS-MaPseq pipeline of
