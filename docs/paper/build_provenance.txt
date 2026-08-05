@@ -1,14 +1,14 @@
 D2T-RNA paper build provenance
 ==============================
-captured_at        : 2026-08-05T13:42:45Z
-source_commit      : c690aaf
+captured_at        : 2026-08-05T15:44:00Z
+source_commit      : 731e604
 tectonic_version   : Tectonic 0.17.0
 rsvg-convert_ver   : rsvg-convert version 2.62.3
 
 == source file checksums (SHA-256) ==
-a23e576980f87ef536c7d3c70c5d7be29a356a3fc161efb04ea6b8478560d45e  manuscript.tex
-f659b38099c38f6d6c125b422ce1897d4a2f73e16b62a4d33eb7dcef287dd338  supplementary.tex
-33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4  references.bib
+5f4e3ef1e9a12b6e7ea8398467597016f9bfbace9283030558d8accc6a37cb34  manuscript.tex
+2078c49a9ad95311d867700ce5ca5bbb3153548a21e5e969245ccb2240ef0672  supplementary.tex
+b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d  references.bib
 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58  tables/supp88.tex
 
 == figure file checksums (SHA-256) ==
@@ -30,14 +30,14 @@ manuscript: 1, supplementary: 0
 $ tectonic manuscript_verify.tex
 exit=0
 warning: Trying to include PDF file with version (1.7), which is newer than current output PDF setting (1.5).
-note: Writing `manuscript_verify.pdf` (268.0732421875 KiB)
+note: Writing `manuscript_verify.pdf` (298.8173828125 KiB)
 note: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)
 == tectonic build (supplementary) ==
 $ tectonic supplementary_verify.tex
 exit=0
 note: Running xdvipdfmx ...
-note: Writing `supplementary_verify.pdf` (67.853515625 KiB)
+note: Writing `supplementary_verify.pdf` (74.650390625 KiB)
 note: Skipped writing 1 intermediate files (use --keep-intermediates to keep them)
 == PDF checksums (SHA-256) ==
-459b9ffc0490f43791eada3a258debf431d43b0a5dd535d0475e21e167fd6e4c  manuscript_verify.pdf
-28285e22680210f0c1303f5a2ed52e52949307a98e06419dca803d6729223b3e  supplementary_verify.pdf
+a02c029f263de04f3f4d7d6bcf1aa6442bfc14b73963c2696ab7b2db1e10ee42  manuscript_verify.pdf
+a2a8a38dc2ee003ea533c2ea5e7913d8133ec1edffc4c1c5a7e526a0c3691985  supplementary_verify.pdf
