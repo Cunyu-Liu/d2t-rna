@@ -1,0 +1,79 @@
+{
+  "schema": "d2t_rna.t9_4_paper_scientific_units_acceptance.v1",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "deliverable": "PAPER_SCIENTIFIC_UNITS_SYNTHESIS",
+  "status": "SYNTHESIS_RECORD",
+  "state": "T9_4_PAPER_SCIENTIFIC_UNITS_SYNTHESIS_RECORDED",
+  "activated_at": "2026-08-05T14:34:00+08:00",
+
+  "scientific_units": [
+    {
+      "id": 1,
+      "name": "T2_geometry",
+      "status": "ESTABLISHED",
+      "evidence": {
+        "manifest": "manifests/t2/t2_2_acceptance.json",
+        "commit": "80bd16e",
+        "module": "src/d2t_rna/t2/theorem.py"
+      }
+    },
+    {
+      "id": 2,
+      "name": "finite_sample_tightness",
+      "status": "ESTABLISHED",
+      "evidence": {
+        "manifest": "manifests/t2/t2_3_acceptance.json",
+        "commit": "92f767c",
+        "module": "src/d2t_rna/t2/info.py"
+      }
+    },
+    {
+      "id": 3,
+      "name": "algorithm_scalability",
+      "status": "ESTABLISHED",
+      "evidence": {
+        "manifest": "manifests/t9/t9_matrix_acceptance.json",
+        "commit": "cb5f66c",
+        "run_report": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t9-matrix-20260805T131421+0800.json",
+        "baselines_executed": 8,
+        "microcases": 11,
+        "oracle_in_interval_all": true
+      }
+    },
+    {
+      "id": 4,
+      "name": "three_retrospective_cases",
+      "status": "PENDING_TASK6_R",
+      "evidence": {
+        "data_manifests_built": ["manifests/add", "manifests/sam_iii", "manifests/rorc"],
+        "rorc_eligibility": "INELIGIBLE_UNRESOLVED_METADATA",
+        "note": "retrospective evaluation (R2) and full eligibility gate pending Task6-R; RORC stays fail-closed and must not be substituted"
+      }
+    },
+    {
+      "id": 5,
+      "name": "misspecification_abstention_boundary",
+      "status": "ESTABLISHED",
+      "evidence": {
+        "manifest": "manifests/t10/t10_validation_acceptance.json",
+        "commit": "11fa850",
+        "module": "src/d2t_rna/evaluation/validation.py"
+      }
+    }
+  ],
+
+  "summary": {
+    "established_units": [1, 2, 3, 5],
+    "pending_units": [4],
+    "scientific_claim_authorized": false,
+    "main_claim_blocked_by": "unit 4 retrospective data role (Task6-R) not complete; replay row 'retrospective data role' not satisfied (contract 14)"
+  },
+
+  "synthesis_document": {
+    "path": "docs/audit/t9_4_paper_scientific_units.md",
+    "sha256": "2df89e3df835f9560fdd0a5711e283b91b8290c0e512d37f2921536f7156d634"
+  },
+
+  "boundary_note": "hash/schema/provenance/run-gates go into methods or supplementary; they do not occupy the main-result center and cannot substitute for the theorem. No main-claim is generated until the full replay chain (contract 14) is satisfied."
+}
