@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="360" font-family="Helvetica,Arial,sans-serif" font-size="11">
+<rect x="0" y="0" width="720" height="360" fill="white"/>
+<text x="360.0" y="30" text-anchor="middle" font-size="13" font-weight="bold">Retrospective evidence qualification (Task6-R): fail-closed terminal outcomes</text>
+<text x="360.0" y="48" text-anchor="middle" font-size="10" fill="#666">no established quantitative instance; each dataset closes fail-closed (certificate_guard=NOT_ESTABLISHED)</text>
+<text x="166.5" y="270" text-anchor="middle" font-size="12" font-weight="bold">add</text>
+<text x="166.5" y="284" text-anchor="middle" font-size="8" fill="#666">COUNTERFACTUAL_RETROSPECTIVE_FULL_MATRIX_COMPRESSION</text>
+<rect x="80.0" y="310" width="173" height="120" rx="6" fill="#fff5f5" stroke="#c53030" stroke-width="1.5"/>
+<text x="166.5" y="332" text-anchor="middle" font-size="8" fill="#c53030">OUTCOME</text>
+<text x="166.5" y="350" text-anchor="middle" font-size="8" fill="#333">Not Comparable By</text>
+<text x="166.5" y="364" text-anchor="middle" font-size="8" fill="#333">Registered Observation</text>
+<text x="166.5" y="378" text-anchor="middle" font-size="8" fill="#333">Model</text>
+<text x="166.5" y="448" text-anchor="middle" font-size="9" fill="#c53030">status: NOT_ESTABLISHED</text>
+<text x="359.5" y="270" text-anchor="middle" font-size="12" font-weight="bold">sam-iii</text>
+<text x="359.5" y="284" text-anchor="middle" font-size="8" fill="#666">RETROSPECTIVE_MODALITY_TRANSFER_DIAGNOSTIC</text>
+<rect x="273.0" y="310" width="173" height="120" rx="6" fill="#fff5f5" stroke="#c53030" stroke-width="1.5"/>
+<text x="359.5" y="332" text-anchor="middle" font-size="8" fill="#c53030">OUTCOME</text>
+<text x="359.5" y="350" text-anchor="middle" font-size="8" fill="#333">Not Comparable By</text>
+<text x="359.5" y="364" text-anchor="middle" font-size="8" fill="#333">Registered Action Space</text>
+<text x="359.5" y="448" text-anchor="middle" font-size="9" fill="#c53030">status: NOT_ESTABLISHED</text>
+<text x="552.5" y="270" text-anchor="middle" font-size="12" font-weight="bold">rorc</text>
+<text x="552.5" y="284" text-anchor="middle" font-size="8" fill="#666">HISTORICALLY_EXPOSED_THIRD_STATE_MISSPECIFICATION_STRESS</text>
+<rect x="466.0" y="310" width="173" height="120" rx="6" fill="#fff5f5" stroke="#c53030" stroke-width="1.5"/>
+<text x="552.5" y="332" text-anchor="middle" font-size="8" fill="#c53030">OUTCOME</text>
+<text x="552.5" y="350" text-anchor="middle" font-size="8" fill="#333">Not Applicable</text>
+<text x="552.5" y="448" text-anchor="middle" font-size="9" fill="#c53030">status: NOT_ESTABLISHED</text>
+</svg>

@@ -14,6 +14,9 @@
 \author{D2T-RNA Project}
 \date{}
 
+% SVG support: compile with --shell-escape for \includesvg, or convert SVG to PDF/PNG.
+\usepackage{svg}
+
 \begin{document}
 \maketitle
 
@@ -69,28 +72,80 @@ Within the registered finite model, $\gamma(S)=0$ yields an exact collision witn
 yields a separation certificate, with rational primal/dual and independent-checker evidence. We claim no
 universal RNA identifiability or general structure inference.
 
+\begin{figure}[ht]
+\centering
+\includesvg[width=0.85\textwidth]{figures/fig1_geometry}
+\caption{Oracle minimax decision error per synthetic microcase (model-conditional). Colliding pairs
+(collision witness) reach error $1/2$; separated pairs reach error $0$, matching the exact
+collision-or-separation certificate.}
+\label{fig:geometry}
+\end{figure}
+
 \section{Finite-sample consequence (T2c)}\label{sec:t2c}
 For a finite registered pair catalog under fixed-horizon deterministic non-adaptive allocation with
 complete action-level likelihoods and registered product laws, we give exact TV/Hellinger/decision
 cross-checked bounds. There is no composite-continuous covering theorem, no arbitrary continuous nuisance
 guarantee, and no real-data calibration guarantee.
 
+\begin{figure}[ht]
+\centering
+\includesvg[width=0.85\textwidth]{figures/fig2_finiteness}
+\caption{Baseline minimax decision error computed by exact oracle enumeration for a representative
+separated case (model-conditional). This cross-checks the finite-sample decision consequence against
+the exact enumeration.}
+\label{fig:finiteness}
+\end{figure}
+
 \section{Costed design and no-go (T2d)}\label{sec:t2d}
 We report an integer design, LP relaxation, dual burden lower bound, integrality gap, and independent
 checker, interpreted as a design-class no-go certificate. We do not claim globally optimal RNA
 experimental design, universal minimum cost, or saved wet-lab cost.
 
+\begin{figure}[ht]
+\centering
+\includesvg[width=0.85\textwidth]{figures/fig3_costed_design}
+\caption{Costed design: log-scale LP dual lower bound per microcase, with the achieved integer upper
+cost where feasible. Cases marked no-go are infeasible, supporting the design-class no-go certificate.}
+\label{fig:costed}
+\end{figure}
+
 \section{Synthetic evaluation and baselines}\label{sec:eval}
 Eleven micro-cases and eight baselines (exhaustive oracle, full matrix, random, greedy Test-Cover, EIG,
 Chernoff, LM2R-style, T2 integer design+LP) are executed as model-conditional synthetic evaluation.
 Executed baselines do not imply biological superiority; oracle agreement does not imply population
-generalization; runtime/memory are computational evidence only.
+generalization; runtime/memory are computational evidence only. The full per-case/baseline summary is in
+Table~\ref{tab:baselines}.
+
+\begin{table}[ht]
+\centering
+\caption{Abbreviated model-conditional baseline summary (cost, oracle minimax error). Full 88-row
+table in \texttt{tables/t9\_baseline\_summary.tsv}.}
+\label{tab:baselines}
+\begin{tabular}{llccccc}
+\toprule
+case & method & cost & err & tv & abstain & correct \\
+\midrule
+no\_cycle & t2\_integer\_lp & 1 & 0 & 1 & 0 & 1 \\
+boundary & t2\_integer\_lp & 1 & 1/4 & 1/2 & 0 & 3/4 \\
+strict\_positive\_separation & t2\_integer\_lp & 1 & 0 & 1 & 0 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Retrospective evidence qualification (Task6-R)}\label{sec:retro}
 add/RMDB is NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL, SAM-III is
 NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE, and RORC is NOT\_APPLICABLE. This section is evidence
 qualification, not validation. RORC has no public accession and is retained as NOT\_APPLICABLE; no
 substitute gene or unrelated sequencing data is used.
+
+\begin{figure}[ht]
+\centering
+\includesvg[width=0.9\textwidth]{figures/fig4_retro}
+\caption{Retrospective evidence qualification: the three registered datasets close fail-closed with
+distinct terminal outcomes (observation-model, action-space, applicability). No established quantitative
+instance is claimed.}
+\label{fig:retro}
+\end{figure}
 
 \section{Misspecification and abstention}\label{sec:misspec}
 Valid registered assumptions yield PROCEED; assumption violation yields NOT\_ESTABLISHED or abstain. This
