@@ -1,0 +1,106 @@
+{
+  "schema": "d2t_rna.t2_problem_spec.v1",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "theorem_version": "T2-0.0",
+  "status": "FROZEN_STATEMENT_NOT_THEOREM_PASS",
+  "frozen_at": "2026-08-05T00:00:00+08:00",
+
+  "model": {
+    "latent_state_space": {
+      "finite": true,
+      "size": "S_INTEGER_LOCKED_AT_T2-1",
+      "representation": "finite set of RNA structural/eligibility states",
+      "note": "first version locks a finite S; no continuous infinite states"
+    },
+    "theta_0": {
+      "class_kind": "FINITE_CATALOG_OR_RATIONAL_POLYHEDRAL",
+      "constraints": "linear inequalities over probability simplex",
+      "coupling_role": "TARGET"
+    },
+    "theta_1": {
+      "class_kind": "FINITE_CATALOG_OR_RATIONAL_POLYHEDRAL",
+      "constraints": "linear inequalities over probability simplex",
+      "coupling_role": "RIVAL"
+    },
+    "passive_marginal_map_M": {
+      "kind": "linear_projection_of_state_distribution",
+      "domain": "distributions over finite state space",
+      "note": "fixing M defines the collision fiber; cross-class difference set D={"}x_1-x_0: x_i in Theta_i, M x_0 = M x_1{"}"
+    },
+    "nuisance": {
+      "domain": "Xi_FINITE",
+      "coupling": "REGISTERED_CARTESIAN_OR_EQUAL_REALIZED_VALUE",
+      "conditioning": "registered",
+      "independence": "action-level repeats independent under registered nuisance"
+    }
+  },
+
+  "action_library": {
+    "U": {
+      "finite": true,
+      "rna_feasibility_rule": "registered action catalog with RNA-feasibility rules",
+      "observation_alphabet": "finite Y_u per action",
+      "law": "complete categorical q_u(theta_i, xi_i) in Delta",
+      "allocation": "deterministic non-adaptive fixed-horizon n_u"
+    }
+  },
+
+  "design": {
+    "design_class": "D_design",
+    "fixed_horizon": "n",
+    "budget": "n integer vector",
+    "action_cost": "c_u per action",
+    "decision_rule": "fixed-horizon with possible abstention/inconclusive"
+  },
+
+  "endpoints": {
+    "correct_declaration_event": "kappa_1",
+    "wrong_decision_event": "alpha",
+    "abstention_rule": "inconclusive -> neither correct nor wrong",
+    "parameters": {
+      "alpha": "type-I wrong-decision bound",
+      "beta": "type-II wrong-decision bound",
+      "kappa_0": "min correct-declaration prob under H0",
+      "kappa_1": "min correct-declaration prob under H1"
+    }
+  },
+
+  "quantifier_rule": {
+    "forbidden_swap": "sup_d inf_xi R(d,xi) != inf_xi sup_d R(d,xi)",
+    "must_declare": [
+      "nuisance domain and coupling",
+      "action observation law",
+      "fixed horizon/budget",
+      "wrong/correct-declaration event",
+      "abstention rule",
+      "uniformity domain and certified numerical error"
+    ]
+  },
+
+  "claim_scope": {
+    "authorized_claims": [
+      "RNA_FEASIBLE_COMPOSITE_UNCERTAINTY_COLLISION_OR_SEPARATION_CERTIFICATE",
+      "UNIFORM_FINITE_SAMPLE_RISK_COVERAGE_OR_BUDGET_CONSEQUENCE",
+      "COSTED_DESIGN_OR_DESIGN_CLASS_NO_GO_CERTIFICATE",
+      "RETROSPECTIVE_WITHIN_REALIZED_DATASET_COMPRESSION_MODALITY_DIAGNOSTIC_AND_MIS_SPECIFICATION_STRESS"
+    ],
+    "prohibited_extrapolations": [
+      "prospective/blinded/held-out/unseen/out-of-sample/independent validation",
+      "new-library guarantee / population generalization / cross-lab generalization / native-T4 truth",
+      "actual future wet-lab cost savings / real success rate gains",
+      "pretraining/foundation model/representation learning/fine-tuning/neural-architecture novelty",
+      "arbitrary high-dimensional contingency tables / continuous infinite uncertainty / adaptive actions / randomized design / sequential stopping theorem",
+      "biological infeasibility solely from absence of certificate",
+      "reads/PCR copies/UMI/random seeds as biological replicates"
+    ],
+    "scientific_claim_authorized": false
+  },
+
+  "theorem_stack_in_scope": {
+    "T2a": "SCOPED_ALTERNATING_CYCLE_LEMMA",
+    "T2b": "EXACT_COLLISION_OR_SEPARATION_THEOREM",
+    "T2c": "FINITE_SAMPLE_QUANTITATIVE_THEOREM",
+    "T2d": "COSTED_DESIGN_AND_NO_GO_COROLLARY"
+  }
+}

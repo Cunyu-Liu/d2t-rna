@@ -1,0 +1,28 @@
+{
+  "schema": "d2t_rna.t2_coupled_pair_uncertainty_spec.v1",
+  "theorem_version": "T2-0.0",
+  "status": "FROZEN_STATEMENT",
+  "left_class": "Theta_0 (TARGET)",
+  "right_class": "Theta_1 (RIVAL)",
+  "cross_hypothesis_coupling": "shared latent state distribution coupling over registered nuisance",
+  "cross_action_sharing": "registered: action observation laws may share nuisance realization per coupling",
+  "conditioning_variables": "registered finite nuisance Xi",
+  "admissible_pair_set": "finite, per registered coupling",
+  "pair_set_finiteness": "FINITE_OR_POLYHEDRAL_OR_UNIFORM_COVERED",
+  "collision_object": {
+    "cross_class_difference_set_D": "x_1 - x_0 : x_i in Theta_i, M x_0 = M x_1",
+    "action_image": "B_u v for u in U",
+    "separation": "gamma(S) = inf_{v in D} max_{u in S} || B_u v ||",
+    "complete_D_requirement": "must optimize over full D, not cycle-generator subset, absent a completeness theorem"
+  },
+  "observation_law": {
+    "alphabet": "finite Y_u per action",
+    "law_form": "complete categorical q_u(theta_i, xi_i)",
+    "product_law_permitted_only_if": "registered action-level independence holds"
+  },
+  "prohibited": [
+    "hand-listed cycle-generator subset as D",
+    "exchanging sup_d inf_xi with inf_xi sup_d",
+    "continuous infinity / adaptive / randomized / sequential without theorem and registration"
+  ]
+}
