@@ -1,13 +1,13 @@
 D2T-RNA paper build provenance
 ==============================
-captured_at        : 2026-08-05T12:02:47Z
-source_commit      : 947ef1f32a87fe7658c4a43b6257fbeac4c451ba
+captured_at        : 2026-08-05T13:42:45Z
+source_commit      : c690aaf
 tectonic_version   : Tectonic 0.17.0
 rsvg-convert_ver   : rsvg-convert version 2.62.3
 
 == source file checksums (SHA-256) ==
-924383b169b29910083f80b927b7f18729df90af6b4be96289d61ed79266a5da  manuscript.tex
-4fcefb5ce7fe7b40108020ca90be6ad72449848d1e05d114b3572bb86dd98a0f  supplementary.tex
+a23e576980f87ef536c7d3c70c5d7be29a356a3fc161efb04ea6b8478560d45e  manuscript.tex
+f659b38099c38f6d6c125b422ce1897d4a2f73e16b62a4d33eb7dcef287dd338  supplementary.tex
 33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4  references.bib
 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58  tables/supp88.tex
 
@@ -30,14 +30,14 @@ manuscript: 1, supplementary: 0
 $ tectonic manuscript_verify.tex
 exit=0
 warning: Trying to include PDF file with version (1.7), which is newer than current output PDF setting (1.5).
-note: Writing `manuscript_verify.pdf` (251.8232421875 KiB)
+note: Writing `manuscript_verify.pdf` (268.0732421875 KiB)
 note: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)
 == tectonic build (supplementary) ==
 $ tectonic supplementary_verify.tex
 exit=0
 note: Running xdvipdfmx ...
-note: Writing `supplementary_verify.pdf` (67.423828125 KiB)
+note: Writing `supplementary_verify.pdf` (67.853515625 KiB)
 note: Skipped writing 1 intermediate files (use --keep-intermediates to keep them)
 == PDF checksums (SHA-256) ==
-bd494fc67780b343416eb3a087a62fa24852bc6722a3e59c4b3a17b2fc8ac379  manuscript_verify.pdf
-406f6fd686f7bcb328c4f8e9d90e87ae8e917ae8f9cfb59201d7239b1d0a0d96  supplementary_verify.pdf
+459b9ffc0490f43791eada3a258debf431d43b0a5dd535d0475e21e167fd6e4c  manuscript_verify.pdf
+28285e22680210f0c1303f5a2ed52e52949307a98e06419dca803d6729223b3e  supplementary_verify.pdf

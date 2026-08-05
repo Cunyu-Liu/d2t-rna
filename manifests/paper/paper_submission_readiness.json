@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "947ef1f32a87fe7658c4a43b6257fbeac4c451ba",
-  "origin_main": "947ef1f32a87fe7658c4a43b6257fbeac4c451ba",
-  "worktree_clean": true,
+  "head": "c690aaf7b48966d0e438ad583f15a782ca7c8a10",
+  "origin_main": "cae90f383ad3ea6766afaf16870c6f87ac955703",
+  "worktree_clean": false,
   "lineage": [
+    "c690aaf docs(paper): tighten theorem rigor per reviewer 1 and rebalance novelty framing per reviewer 2",
+    "cae90f3 chore(paper): sync readiness report + manifest to 947ef1f and commit build provenance",
     "947ef1f chore(paper): refresh readiness report bound to 74e4553",
     "74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)",
     "1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)",
-    "eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script",
-    "40895a2 docs(paper): formal T2b/T2c/T2d theorem blocks, complete citations, worked numerics, structured figure captions, supplementary with full proofs and 88-row baseline table",
-    "051f30f docs(paper): freeze working title, novelty positioning, venue class, license; author details deferred to submission"
+    "eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,8 +33,8 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "924383b169b29910083f80b927b7f18729df90af6b4be96289d61ed79266a5da",
-    "supplementary": "4fcefb5ce7fe7b40108020ca90be6ad72449848d1e05d114b3572bb86dd98a0f",
+    "manuscript": "a23e576980f87ef536c7d3c70c5d7be29a356a3fc161efb04ea6b8478560d45e",
+    "supplementary": "f659b38099c38f6d6c125b422ce1897d4a2f73e16b62a4d33eb7dcef287dd338",
     "references": "33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
     "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
@@ -89,5 +89,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785931425.961536
+  "run_finished": 1785937497.3482974
 }
