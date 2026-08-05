@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "74e45536d4a3d8a6bf5a5a2dca67b64e22442bc8",
-  "origin_main": "1ef13f4a191fe3522520aad751d3a4966d862bbf",
+  "head": "947ef1f32a87fe7658c4a43b6257fbeac4c451ba",
+  "origin_main": "947ef1f32a87fe7658c4a43b6257fbeac4c451ba",
   "worktree_clean": true,
   "lineage": [
+    "947ef1f chore(paper): refresh readiness report bound to 74e4553",
     "74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)",
     "1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)",
     "eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script",
     "40895a2 docs(paper): formal T2b/T2c/T2d theorem blocks, complete citations, worked numerics, structured figure captions, supplementary with full proofs and 88-row baseline table",
-    "051f30f docs(paper): freeze working title, novelty positioning, venue class, license; author details deferred to submission",
-    "af601ac docs(paper): add fig5 misspecification boundary and fix NOT_ESTABLISHED subscript in caption"
+    "051f30f docs(paper): freeze working title, novelty positioning, venue class, license; author details deferred to submission"
   ],
   "file_exists": {
     "manuscript": true,
@@ -89,5 +89,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785931073.6256852
+  "run_finished": 1785931425.961536
 }

@@ -1,0 +1,43 @@
+D2T-RNA paper build provenance
+==============================
+captured_at        : 2026-08-05T12:02:47Z
+source_commit      : 947ef1f32a87fe7658c4a43b6257fbeac4c451ba
+tectonic_version   : Tectonic 0.17.0
+rsvg-convert_ver   : rsvg-convert version 2.62.3
+
+== source file checksums (SHA-256) ==
+924383b169b29910083f80b927b7f18729df90af6b4be96289d61ed79266a5da  manuscript.tex
+4fcefb5ce7fe7b40108020ca90be6ad72449848d1e05d114b3572bb86dd98a0f  supplementary.tex
+33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4  references.bib
+206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58  tables/supp88.tex
+
+== figure file checksums (SHA-256) ==
+f9b162fe624bcced7e5b6f86a228c6814a83a96facea66b8a36eae80de11e7e1  figures/fig1_geometry.svg
+000b8c76da076682c8ad62cb73b77f0dbfe5f5da16eeab46aa4dc1e7fcea1f9f  figures/fig2_finiteness.svg
+a26e92449e8e8394b2445d5ed1f9bd76ed0e3232e39691e631fd5acfc7b5bf4e  figures/fig3_costed_design.svg
+e3ef2814edf69d6a9d452f0e0b3954d5ad66ddaf8f8e62130d3615223bf1c7ab  figures/fig4_retro.svg
+d66722a451151b352e1f61af2075feaea183ffbbe36b58e0ef76d6196f2d8b0f  figures/fig5_misspec.svg
+
+== rsvg-convert (SVG -> PDF) ==
+$ rsvg-convert -f pdf -o figures/fig1_geometry.pdf figures/fig1_geometry.svg
+$ rsvg-convert -f pdf -o figures/fig2_finiteness.pdf figures/fig2_finiteness.svg
+$ rsvg-convert -f pdf -o figures/fig3_costed_design.pdf figures/fig3_costed_design.svg
+$ rsvg-convert -f pdf -o figures/fig4_retro.pdf figures/fig4_retro.svg
+$ rsvg-convert -f pdf -o figures/fig5_misspec.pdf figures/fig5_misspec.svg
+== includesvg remaining in code (expected 1 = comment only) ==
+manuscript: 1, supplementary: 0
+== tectonic build (main manuscript) ==
+$ tectonic manuscript_verify.tex
+exit=0
+warning: Trying to include PDF file with version (1.7), which is newer than current output PDF setting (1.5).
+note: Writing `manuscript_verify.pdf` (251.8232421875 KiB)
+note: Skipped writing 3 intermediate files (use --keep-intermediates to keep them)
+== tectonic build (supplementary) ==
+$ tectonic supplementary_verify.tex
+exit=0
+note: Running xdvipdfmx ...
+note: Writing `supplementary_verify.pdf` (67.423828125 KiB)
+note: Skipped writing 1 intermediate files (use --keep-intermediates to keep them)
+== PDF checksums (SHA-256) ==
+bd494fc67780b343416eb3a087a62fa24852bc6722a3e59c4b3a17b2fc8ac379  manuscript_verify.pdf
+406f6fd686f7bcb328c4f8e9d90e87ae8e917ae8f9cfb59201d7239b1d0a0d96  supplementary_verify.pdf

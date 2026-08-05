@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = 74e45536d4a3d8a6bf5a5a2dca67b64e22442bc8
-origin/main    = 1ef13f4a191fe3522520aad751d3a4966d862bbf
+current HEAD   = 947ef1f32a87fe7658c4a43b6257fbeac4c451ba
+origin/main    = 947ef1f32a87fe7658c4a43b6257fbeac4c451ba
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+947ef1f chore(paper): refresh readiness report bound to 74e4553
 74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)
 1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)
 eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script
 40895a2 docs(paper): formal T2b/T2c/T2d theorem blocks, complete citations, worked numerics, structured figure captions, supplementary with full proofs and 88-row baseline table
 051f30f docs(paper): freeze working title, novelty positioning, venue class, license; author details deferred to submission
-af601ac docs(paper): add fig5 misspecification boundary and fix NOT_ESTABLISHED subscript in caption
 ```
 
-The readiness report is re-generated from the current HEAD (74e45536d4a3d8a6bf5a5a2dca67b64e22442bc8), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> 74e4553.
+The readiness report is re-generated from the current HEAD (947ef1f32a87fe7658c4a43b6257fbeac4c451ba), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 947ef1f.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD 74e4553 (this file).
+- P0 readiness report synced to HEAD 947ef1f (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on 74e4553 with provenance (see build_provenance).
+- P1 full build on 947ef1f with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
