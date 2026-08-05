@@ -30,17 +30,21 @@ from d2t_rna.contracts.base import parse_contract_json
 def _r1_materialized(data_root: Path, dataset_id: str) -> bool:
     """True when the §8.3 R1 materialization evidence exists on disk.
 
-    R1 writes a canonical JSON + a sha256 sidecar next to the raw file.  For
-    add/RMDB the observed data is a reactivity matrix (not fastq reads), so the
+    R1 writes a canonical JSON + a sha256 sidecar next to the raw data.  For
+    add/RMDB the observed data is a reactivity matrix and for sam-iii it is the
+    DANCE-MaP reactivity supplement (neither is fastq reads), so the
     materialization state is read from these artifacts, not from the manifest's
-    ``raw_fastq_downloaded`` field.
+    ``raw_fastq_downloaded`` field.  rorc has no public official accession to
+    materialize (contract 8.5; INELIGIBLE_UNRESOLVED_METADATA).
     """
-    if dataset_id != "add":
+    sentinels = {
+        "add": ("ADDRSW_SHP_0003.canonical.json", "ADDRSW_SHP_0003.sha256"),
+        "sam-iii": ("sam-iii.canonical.json", "sam-iii.sha256"),
+    }
+    if dataset_id not in sentinels:
         return False
-    add_dir = data_root / "task6" / "add"
-    return (add_dir / "ADDRSW_SHP_0003.canonical.json").exists() and (
-        add_dir / "ADDRSW_SHP_0003.sha256"
-    ).exists()
+    ds_dir = data_root / "task6" / dataset_id
+    return all((ds_dir / name).exists() for name in sentinels[dataset_id])
 
 
 def _gate_profile(manifests_root: Path, data_root: Path, dataset_id: str) -> dict[str, bool]:

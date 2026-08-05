@@ -1,0 +1,16 @@
+{
+  "accession_status": "NOT_RESOLVED",
+  "contract_section": "8.3",
+  "dataset_id": "rorc",
+  "decision": "NOT_APPLICABLE",
+  "eligibility_status": "INELIGIBLE_UNRESOLVED_METADATA",
+  "explanation": "rorc has no public official accession to materialize; its only source is the internal audit document.  R1 is NOT APPLICABLE; observed-data materialization is not fabricated (fail-closed, contract 8.4/8.5).",
+  "kind": "R1_MATERIALIZATION_DECISION",
+  "observed_data_materialized": false,
+  "reason_code": "NO_PRIMARY_OFFICIAL_ACCESSION_RESOLVED",
+  "report_sha256": "743758cfede8e1b4ce89571771f78f16d47b0804d74d95df274f6c528967a439",
+  "run_finished": 1785914897.266081,
+  "scientific_claim_authorized": false,
+  "status": "NOT_APPLICABLE",
+  "stress_execution_allowed": false
+}

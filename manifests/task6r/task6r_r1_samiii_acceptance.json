@@ -1,0 +1,78 @@
+{
+  "boundary_note": "R1 freezes observed-dataset evidence only; it authorizes no claim and is not a prospective/blinded/held-out validation (contract 8.3).",
+  "contract_section": "8.3",
+  "kind": "R1_OBSERVED_DATASET_MATERIALIZATION_SAMIII",
+  "report": {
+    "accession": "GSE278422",
+    "condition_constructs": [
+      "native",
+      "native",
+      "MutON1",
+      "MutON1",
+      "MutON2",
+      "MutON2",
+      "MutOFF1",
+      "MutOFF1",
+      "MutOFF2",
+      "MutOFF2"
+    ],
+    "condition_count": 10,
+    "condition_names": [
+      "native_SAM",
+      "native_noSAM",
+      "MutON1_SAM",
+      "MutON1_noSAM",
+      "MutON2_SAM",
+      "MutON2_noSAM",
+      "MutOFF1_SAM",
+      "MutOFF1_noSAM",
+      "MutOFF2_SAM",
+      "MutOFF2_noSAM"
+    ],
+    "construct_sequence_hashes": {
+      "SAMIII_MutOFF1": "a6474ccf1ca93da1bd93ab3a30811bae5e510e5635a45ed0487c8da430012499",
+      "SAMIII_MutOFF2": "75646e526505d8dd38f12630ff5d38179d17fb25fac10e076e97f329b92fdc32",
+      "SAMIII_MutON1": "143578722057f967cd2d4333e17bb36dd25e4702d14b7a96825a5abfdb0a46c9",
+      "SAMIII_MutON2": "965f01076ab9e92c76aa1119584c43ff5c863f10b75227b0caec87347584b024",
+      "SAMIII_native": "dc52cbdfc0b6e555275e1a649384925a5417e70c066e9425754621ac45f6553d"
+    },
+    "construct_sequences": {
+      "SAMIII_MutOFF1": "ggccttcgggccaaGTTACAAGCTCCCGAACGGATTTAGCAAGTAATTGTCGTTACTTACTAAAGATGCCGTGTAACCGAAACTATTTAGGGGGAGCAACATTATGAAaagatccggttcgccggatccaaatcgggcttcggtccggttc",
+      "SAMIII_MutOFF2": "ggccttcgggccaaGAATTAAGTTCCCGAAAGGATTTAGCAAGTAATTGTCGTTACTTACTAAAGATGCCTTGTAACCGAAACTATTTAGGGGGAATAACATTATGAAaagatccggttcgccggatccaaatcgggcttcggtccggttc",
+      "SAMIII_MutON1": "ggccttcgggccaaGTTACGCGTTCCCGAAAGGATTTAGCAAGTAATTGTCGTTACTTACTAAAGATGCCGCGTAACCGAAACTATTTAGGGGGAATAACATTATGAAaagatccggttcgccggatccaaatcgggcttcggtccggttc",
+      "SAMIII_MutON2": "ggccttcgggccaaGTTACAAGTTCCCGAAAGGATTTAGCAAGTAATTGTCGTTACTTACTAAAGATGCCTTGTAACCGAAACTATTTAGGGACTACAACATTATGAAaagatccggttcgccggatccaaatcgggcttcggtccggttc",
+      "SAMIII_native": "ggccttcgggccaaGTTACAAGTTCCCGAAAGGATTTAGCAAGTAATTGTCGTTACTTACTAAAGATGCCTTGTAACCGAAACTATTTAGGGGGAATAACATTATGAAaagatccggttcgccggatccaaatcgggcttcggtccggttc"
+    },
+    "dataset_id": "sam-iii",
+    "dependency_units": [
+      "construct",
+      "condition",
+      "nucleotide"
+    ],
+    "downloaded_at": "2026-08-05T07:27:42Z",
+    "layering": {
+      "author_truth": "DMS reactivity / SHAPE profile (native_truth_label_generated=false)",
+      "derived": "task6 sam-iii modality-transfer diagnostic (R2, gated)",
+      "processed": "/mnt/cunyuliu/d2t-rna/data/task6/sam-iii/sam-iii.canonical.json",
+      "raw": "/mnt/cunyuliu/d2t-rna/data/task6/sam-iii/raw"
+    },
+    "license": "NCBI GEO public; authors' supplementary data",
+    "observed_dataset_hash": "4dee9059bf873c60638ddb4d48375b001025c151f0580f4ad722a89694f99515",
+    "raw_archive_shas": {
+      "GSE278422_dancemap_reactivities.tar.gz": "ded9955f8d5b9fa74c1c0b2309486a3a35a9628cdde02c6341bcfa5de063d327",
+      "GSE278422_fasta_references.tar.gz": "652a4fdded597372d2ff607103cdd16834654ba20c7be4cc8d8592a510b9ac90",
+      "GSE278422_shapemap_profiles.tar.gz": "54a693e6e179738ceec6e5f7f6efef9b2b8c21417603b05d69bfdb20d6be2644"
+    },
+    "raw_dir": "/mnt/cunyuliu/d2t-rna/data/task6/sam-iii/raw",
+    "role": "RETROSPECTIVE_MODALITY_TRANSFER_DIAGNOSTIC",
+    "source_version": "GSE278422_suppl (DANCE-MaP)",
+    "status": "MATERIALIZED"
+  },
+  "report_sha256": "0688dc7f67d35d784737155ddbeabc96b25c35d92861611fdbd0484508d3b6e8",
+  "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task6-r1-samiii-20260805T152742+0800",
+  "run_finished": 1785914862.9657693,
+  "scientific_claim_authorized": false,
+  "self_check_ok": true,
+  "status": "MATERIALIZED",
+  "test_log_sha256": "6ace0eba444a56ee493a206e44375f7ce19310e82ca39516fad613b1b7f66d70"
+}
