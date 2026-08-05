@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "eb69f19a4556e80d9868a4f5883eae1a8a0e72f0",
-  "origin_main": "eb69f19a4556e80d9868a4f5883eae1a8a0e72f0",
+  "head": "74e45536d4a3d8a6bf5a5a2dca67b64e22442bc8",
+  "origin_main": "1ef13f4a191fe3522520aad751d3a4966d862bbf",
   "worktree_clean": true,
   "lineage": [
+    "74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)",
+    "1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)",
     "eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script",
     "40895a2 docs(paper): formal T2b/T2c/T2d theorem blocks, complete citations, worked numerics, structured figure captions, supplementary with full proofs and 88-row baseline table",
     "051f30f docs(paper): freeze working title, novelty positioning, venue class, license; author details deferred to submission",
-    "af601ac docs(paper): add fig5 misspecification boundary and fix NOT_ESTABLISHED subscript in caption",
-    "07a0ce7 docs(paper): downgrade novelty verdict to METHODS_LEVEL_NOVELTY_ONLY",
-    "28660be feat(paper): integrate real SVG figures into LaTeX manuscript + add fig4"
+    "af601ac docs(paper): add fig5 misspecification boundary and fix NOT_ESTABLISHED subscript in caption"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,7 +33,7 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "f0bc0504a02a36c3caf7dae21e9052eec8c8a00d04fb626e1706ab42c75b5c29",
+    "manuscript": "924383b169b29910083f80b927b7f18729df90af6b4be96289d61ed79266a5da",
     "supplementary": "4fcefb5ce7fe7b40108020ca90be6ad72449848d1e05d114b3572bb86dd98a0f",
     "references": "33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
@@ -89,5 +89,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785930955.7244644
+  "run_finished": 1785931073.6256852
 }

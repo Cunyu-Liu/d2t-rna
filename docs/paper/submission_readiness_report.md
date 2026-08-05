@@ -7,31 +7,31 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = eb69f19a4556e80d9868a4f5883eae1a8a0e72f0
-origin/main    = eb69f19a4556e80d9868a4f5883eae1a8a0e72f0
+current HEAD   = 74e45536d4a3d8a6bf5a5a2dca67b64e22442bc8
+origin/main    = 1ef13f4a191fe3522520aad751d3a4966d862bbf
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+74e4553 docs(paper): reword abbreviated baseline caption (remove placeholder phrasing)
+1ef13f4 chore(paper): refresh readiness report + manifest bound to eb69f19 (origin/main in sync)
 eb69f19 chore(paper): regenerate submission readiness report + manifest bound to 40895a2; add reproducible readiness gate script
 40895a2 docs(paper): formal T2b/T2c/T2d theorem blocks, complete citations, worked numerics, structured figure captions, supplementary with full proofs and 88-row baseline table
 051f30f docs(paper): freeze working title, novelty positioning, venue class, license; author details deferred to submission
 af601ac docs(paper): add fig5 misspecification boundary and fix NOT_ESTABLISHED subscript in caption
-07a0ce7 docs(paper): downgrade novelty verdict to METHODS_LEVEL_NOVELTY_ONLY
-28660be feat(paper): integrate real SVG figures into LaTeX manuscript + add fig4
 ```
 
-The readiness report is re-generated from the current HEAD (eb69f19a4556e80d9868a4f5883eae1a8a0e72f0), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> eb69f19.
+The readiness report is re-generated from the current HEAD (74e45536d4a3d8a6bf5a5a2dca67b64e22442bc8), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 74e4553.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
 See `manifests/paper/paper_submission_readiness.json` for the full set. Key files:
 
 ```text
-manuscript.tex      = f0bc0504a02a36c3caf7dae21e9052eec8c8a00d04fb626e1706ab42c75b5c29
+manuscript.tex      = 924383b169b29910083f80b927b7f18729df90af6b4be96289d61ed79266a5da
 supplementary.tex   = 4fcefb5ce7fe7b40108020ca90be6ad72449848d1e05d114b3572bb86dd98a0f
 references.bib      = 33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4
 retro_table.tex     = 551adb143e55c122132380c8f532089c0e3e9b6be6d5b2049a140676b1131503
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD eb69f19 (this file).
+- P0 readiness report synced to HEAD 74e4553 (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on eb69f19 with provenance (see build_provenance).
+- P1 full build on 74e4553 with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
