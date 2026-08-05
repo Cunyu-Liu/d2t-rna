@@ -49,7 +49,7 @@
     "PAPER-RESULTS-VALIDATION-GATE": true,
     "PAPER-REVIEWER-AUDIT-GATE": true
   },
-  "run_finished": 1785927845.1766858,
+  "run_finished": 1785928331.3912249,
   "schema": "d2t_rna.paper_submission_readiness.v1",
   "scientific_claim_authorized": false,
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW"
