@@ -8,7 +8,8 @@
       "retrospective",
       "fail-closed"
     ],
-    "abstract_sentence_count": 5
+    "abstract_sentence_count": 5,
+    "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)"
   },
   "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
   "file_exists": {
@@ -34,7 +35,7 @@
     "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
     "limitation": "0aefc6a3e8b637657b89b4a606112b718374b4855b049c3a92d4b9b798b51db7",
     "manuscript": "ea90c57d56ca91479a7c28db43c02e16d9eb66e5333c3b10d63000dc5e18dc8b",
-    "prior_art": "c9b81146ebc52cbfa251397212e0e023e6244db6cd2a91074d859fe9d9bfca9c",
+    "prior_art": "82b74158c86d5ed2c3abfa113732bb74bfdcb7c2a3b844b2bf501295b0e771e2",
     "references": "33f7d5a802861d5cf9f58573879cf300258d4635e0b64495798b3a8fa5c27cf4",
     "results_validation": "934bd310f61ef971fe28e9392439be7c673a5c401d634c5a7131113333e91af0",
     "reviewer_audit": "ab6d5962b595b23b41b13b0319ac7aaedddfba9d98a9cbcbd337161866bed278"
@@ -49,7 +50,7 @@
     "PAPER-RESULTS-VALIDATION-GATE": true,
     "PAPER-REVIEWER-AUDIT-GATE": true
   },
-  "run_finished": 1785928331.3912249,
+  "run_finished": 1785928681.6050155,
   "schema": "d2t_rna.paper_submission_readiness.v1",
   "scientific_claim_authorized": false,
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW"

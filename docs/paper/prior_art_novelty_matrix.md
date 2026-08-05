@@ -47,6 +47,8 @@ Potential novelty delta (composite, model-conditional, replayable):
 
 **判定：`T2_NOVELTY_ESTABLISHED`（可防守的复合框架 novelty delta）。**
 
+> [!IMPORTANT] Author re-evaluation (2026-08-05): this verdict is SUPERSEDED by > `prior_art_novelty_matrix_REVISED.md`, which downgrades it to `METHODS_LEVEL_NOVELTY_ONLY` > (theorem-level novelty NOT ESTABLISHED; framework-level novelty modest and methods-only). > The paper must be positioned as a methods/experimental-design contribution.
+
 依据：本论文的贡献不是"一个新的通用图论/统计学定理"，而是把一个 classical
 building block（marginal-fiber、Test-Cover、fixed-horizon testing、costed design）
 组合成一个**预注册有限 RNA 模型上的可重放、可独立检查的证书框架**，并给出
