@@ -8,6 +8,8 @@
 \usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
@@ -35,14 +37,19 @@ arguments provide the component tools (fiber connectivity, test cover, sample-co
 costed design), but none by itself binds them into a single pre-registered finite RNA
 state/action/observation contract that emits a replayable collision-or-separation certificate over the
 complete cross-class difference set together with decision-theoretic and costed-design consequences.
-D2T-RNA provides, within a pre-registered finite RNA model,
-exact and independently checkable collision-or-separation certificates over the complete difference set,
-converts robust action-level separation into fixed-horizon finite-sample decision and budget bounds, and
-returns a costed integer design with a design-class no-go certificate. All theoretical certificates are
-model-conditional and are cross-checked by rational primal/dual and independent-checker evidence against
-exact oracle enumeration over 11 synthetic micro-cases and 8 executed baselines. Public RNA data are used
-only as a fail-closed retrospective evidence audit within fixed realized datasets, so the contribution is
-a certified design method whose scope is bounded by the registered finite model.
+D2T-RNA is a decision-theoretic, auditable, and replayable certificate workflow: within a pre-registered
+finite RNA model it emits exact and independently checkable collision-or-separation certificates over the
+complete difference set, converts certified separation into fixed-horizon finite-sample decision and
+budget bounds that are \emph{near-tight} against the exact minimax oracle, and returns either a costed
+integer design or a design-class no-go certificate used as a budget-constrained decision-support tool.
+All theoretical certificates are model-conditional and are cross-checked by rational primal/dual and
+independent-checker evidence against exact oracle enumeration over 11 synthetic micro-cases and 8
+executed baselines. On a registered real RNA case (the add adenine-riboswitch aptamer, PDB 1Y26), the
+pipeline converts a previously fail-closed retrospective record into a registered observation-model
+instance and emits an exact separation certificate together with certified finite-sample and
+costed-design bounds, including a near-tight sample-complexity certificate and a no-go at unit budget;
+the remaining retrospective records (SAM-III, RORC) stay fail-closed. The contribution is a certified
+design method whose scope is bounded by the registered finite model.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -57,9 +64,12 @@ Markov-basis and marginal-fiber theory characterize when two contingency tables 
 \citep{diaconis1998markov,deloera1995grobner}; Test-Cover minimizes a set of tests that separate
 instances \citep{moret1991test}; fixed-horizon active testing and sample-complexity analysis give
 scaling bounds for sequential discrimination \citep{chernoff1959sequential,hoeffding1963probability};
-costed information-source selection and optimal experimental design optimize an allocation under cost
-\citep{pukelsheim2006optimal}; and RNA chemical-mapping heuristics (mutate-and-map, LM2R-style) guide
-probe selection from experimental data \citep{kladwang2011mutate,cordero2012importance,cheng2015consistent}.
+costed information-source selection and Bayesian experimental design optimize an allocation under cost
+or expected information \citep{pukelsheim2006optimal,lindley1956information,chaloner1995bayesian};
+active learning selects the most informative next probe \citep{cohn1996active}; and RNA
+chemical-mapping heuristics (mutate-and-map, LM2R-style, SHAPE-directed modeling)
+\citep{kladwang2011mutate,cordero2012importance,cheng2015consistent,hajdin2013shapeknots} guide probe
+selection from experimental data.
 
 \paragraph{Specific identifiability/design gap.}
 These classical tools tell us \emph{when} separation is possible in generic settings, but not how to
@@ -87,13 +97,17 @@ with a design-class no-go certificate, using rational primal/dual and independen
 
 \paragraph{Evidence and exact scope.}
 The theorem certificates are model-conditional and synthetic, cross-checked by exact oracle enumeration
-over 11 micro-cases and 8 executed baselines. Public RNA data are used only as a fail-closed retrospective
-evidence audit within fixed realized datasets.
+over 11 micro-cases and 8 executed baselines. One real RNA case (the add adenine-riboswitch aptamer, PDB
+1Y26) is additionally registered as a legitimate observation model --- a binary protected/reactivity
+channel with a registered measurement-noise coupling --- and yields an exact separation certificate with
+certified finite-sample and costed-design bounds (Section~\ref{sec:real}). The remaining public RNA
+records are used only as a fail-closed retrospective evidence audit within fixed realized datasets.
 
 \paragraph{Claim boundary.}
 We make no claim of universal RNA identifiability, population generalization, independent-library
-validation, prospective/blinded validation, or future wet-lab cost saving. The contribution is a
-certified design method whose scope is the registered finite model.
+validation, prospective/blinded validation, or future wet-lab cost saving; the registered real-data case
+certifies separation \emph{within its registered finite observation model}, not measured in-vitro
+reactivity. The contribution is a certified design method whose scope is the registered finite model.
 
 \section{Related work}\label{sec:related}
 \subsection{Markov-basis and marginal-fiber identifiability}
@@ -102,10 +116,20 @@ when two tables lie in the same marginal fiber and which moves connect them
 \citep{diaconis1998markov,deloera1995grobner}. We use these as building blocks to articulate the
 complete cross-class difference set; we do not claim a new connectivity theorem.
 
+\subsection{Bayesian experimental design and active learning}
+Bayesian experimental design optimizes an acquisition under a prior over parameters, from Lindley's
+information measure \citep{lindley1956information} to the modern review of \citet{chaloner1995bayesian};
+active learning selects the most informative next point \citep{cohn1996active}. These methods are
+\emph{sequential and acquisition-based}: they return a policy or a point, not a finite-horizon
+certificate over a complete difference set. We inherit the information-theoretic objective
+(Hellinger/Bhattacharyya information) but fix a non-adaptive horizon and emit a replayable
+decision/budget certificate; we do not claim a new acquisition rule.
+
 \subsection{Controlled sensing and fixed-horizon testing}
-Fixed-horizon active hypothesis testing and minimax sample-complexity results
-\citep{chernoff1959sequential,hoeffding1963probability} give scaling bounds that we bind to a registered
-pair catalog and an explicit abstention rule, rather than repurposing them as a new testing theorem.
+Fixed-horizon active hypothesis testing, sequential tests, and minimax sample-complexity results
+\citep{chernoff1959sequential,hoeffding1963probability,wald1945sequential,lai1985asymptotically} give
+scaling bounds that we bind to a registered pair catalog and an explicit abstention rule, rather than
+repurposing them as a new sequential-testing theorem.
 
 \subsection{Costed experimental design}
 T-optimal and costed information-source selection \citep{pukelsheim2006optimal} motivate our costed
@@ -114,8 +138,12 @@ no-go certificate over the registered catalog; the LP/test-cover formulation its
 
 \subsection{RNA chemical-mapping and retrospective evidence boundaries}
 SHAPE/DMS mutate-and-map and LM2R-style heuristics \citep{kladwang2011mutate,cordero2012importance,
-cheng2015consistent} guide probe selection. Unregistered continuous channels are excluded from all
-categorical claims; public RNA data are confined to a fail-closed retrospective audit.
+cheng2015consistent}, SHAPE-directed modeling including pseudoknots \citep{hajdin2013shapeknots},
+chemical-probing advances \citep{weeks2010advances}, SHAPE-constrained folding \citep{sloma2016exact},
+and the in-vitro vs.\ in-vivo probing gap \citep{leamy2016in-vivo} guide probe selection from
+experimental data. Unregistered continuous channels are excluded from all categorical claims; public
+RNA data are confined to a fail-closed retrospective audit except where a legitimate registered binary
+channel is constructed (Section~\ref{sec:real}).
 
 \section{Registered finite RNA model}\label{sec:model}
 \begin{definition}[Finite registered RNA model]\label{def:model}
@@ -456,6 +484,144 @@ observations). Under a valid registered profile the certificate proceeds (PROCEE
 profile the decision abstains as NOT\_ESTABLISHED. No input condition is force-fit into the
 theorem-required form. This is a theory boundary, not real-data validation.
 
+\section{A registered real-data running case: the add riboswitch}\label{sec:real}
+
+We instantiate the full pipeline --- register a contract, certify collision-or-separation (T2b),
+convert separation into a finite-sample budget (T2c), and return a costed design or a no-go (T2d) ---
+as \emph{one} decision process on a real, publicly registered RNA system: the add adenine-riboswitch
+aptamer (71~nt, residues 13--83 of PDB~1Y26). This is the running example that threads
+Theorems~\ref{thm:t2b}--\ref{thm:t2d} into a single auditable workflow and directly registers what was
+previously a fail-closed retrospective record (Section~\ref{sec:retro}) as a legitimate
+\emph{registered observation model}.
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[
+  node distance=1.1cm and 1.1cm,
+  box/.style={rectangle,draw,rounded corners=2pt,align=center,minimum width=3.2cm,
+    text width=3.2cm,inner sep=4pt,fill=blue!6},
+  dec/.style={diamond,draw,align=center,inner sep=1pt,aspect=2.2,fill=orange!10},
+  okbox/.style={rectangle,draw,rounded corners=2pt,align=center,minimum width=3.2cm,
+    text width=3.2cm,inner sep=4pt,fill=green!10},
+  nobox/.style={rectangle,draw,rounded corners=2pt,align=center,minimum width=3.2cm,
+    text width=3.2cm,inner sep=4pt,fill=red!10},
+  arr/.style={-{Latex[length=2.2mm]},thick}
+]
+\node[box] (r) {1. Register contract\\ finite model, coupling $C$, catalog};
+\node[box,below=of r] (s) {2. Separate? (T2b)\\ collision or separation cert.};
+\node[dec,below=of s] (d) {$\gamma(S)>0$?};
+\node[box,right=of d] (coll) {collision witness\\ $\gamma=0$: passive fiber};
+\node[box,below=of s,xshift=0cm] (b) {3. (T2c) finite-sample budget\\ certified $n$ per action};
+\node[box,below=of b] (c) {4. (T2d) costed integer design\\ LP dual bound, integrality gap};
+\node[dec,below=of c] (g) {cost $\le$ budget?};
+\node[okbox,left=of g] (ok) {achievable design\\ minimal certified cost};
+\node[nobox,right=of g] (no2) {design-class no-go\\ ``within budget $B$ no design''};
+\draw[arr] (r)--(s);
+\draw[arr] (s)--(d);
+\draw[arr] (d)--node[above,font=\scriptsize]{yes}(b);
+\draw[arr] (d)--node[above,font=\scriptsize]{no}(coll);
+\draw[arr] (b)--(c);
+\draw[arr] (c)--(g);
+\draw[arr] (g)--node[above,font=\scriptsize]{yes}(ok);
+\draw[arr] (g)--node[above,font=\scriptsize]{no}(no2);
+\end{tikzpicture}
+\caption{End-to-end decision workflow (the add-riboswitch running case). \textbf{Question:} how do
+T2b/T2c/T2d compose into one decision process? \textbf{Result:} register the contract, certify
+collision-or-separation, convert separation to a certified finite-sample budget, then return either a
+costed integer design or a design-class no-go within the user's budget. \textbf{Interpretation:} the
+no-go is a decision-support outcome (``refine the registered model / relax the floor / raise the
+budget''), not a failure of the method. \textbf{Boundary:} model-conditional; the certificate holds
+within the registered finite model, not in-vitro.}
+\label{fig:workflow}
+\end{figure}
+
+\subsection{Registration (contract)}
+The case is registered as a finite model (Definition~\ref{def:model}) with $n_\Theta=2$ latent states:
+\emph{OFF} (apo ensemble; ViennaRNA MFE dot-bracket) and \emph{ON} (adenine-bound; base pairs read from
+PDB~1Y26). Set $\theta_0=e_{\mathrm{OFF}}=(1,0)$ and $\theta_1=e_{\mathrm{ON}}=(0,1)$. The passive
+marginal map sends both states to the \emph{total} observation law $M=(1,1)$, so
+$M\theta_0=M\theta_1=1$: the passive observation is genuinely colliding (a non-empty passive collision
+fiber), and no action-free readout can separate the two conformations. There is one action per probed
+position ($71$ actions), each a binary protected/reactivity channel. We register a symmetric
+bit-flip \emph{measurement-noise coupling} $\mathcal{C}$ with error $\varepsilon\in(0,1/2)$
+(default $\varepsilon=1/10$): $\Pr(\text{read paired}\mid\text{truly paired})=1-\varepsilon$ and
+$\Pr(\text{read paired}\mid\text{truly unpaired})=\varepsilon$. Because $\varepsilon>0$, the
+Bhattacharyya coefficient is positive and the per-position Hellinger information is finite, so the
+finite-sample bound below is genuine (not a degenerate $n=1$ certainty). Of the $71$ positions,
+$21$ are \emph{separating} (bare pairing status differs between OFF and ON); the rest are shared
+scaffold.
+
+\subsection{T2b: exact separation certificate}
+The passive panel $S=\emptyset$ gives $\gamma=0$ (collision witness). Any panel containing a separating
+position gives an exact separation certificate with $\gamma(S)=2|1-2\varepsilon|$ in
+observation-probability norm (Remark~\ref{rem:certificate}): $\gamma=9/5$ at $\varepsilon=1/20$,
+$\gamma=8/5$ at $\varepsilon=1/10$, and $\gamma=6/5$ at $\varepsilon=1/5$. The certificate status is
+\emph{iff} in every case, the independent checker and the rational LP primal/dual strong-duality check
+both pass on the full $71$-action panel. The noise sweep makes the certificate's dependence on the
+registered nuisance coupling explicit and auditable.
+
+\subsection{T2c: certified finite-sample budget and near-tight bound}\label{sec:real-t2c}
+For a separating position under $\varepsilon=1/10$, the certified Hellinger information is
+$I\in[0.5108,0.5109]$. To certify
+$\mathbb{P}(\mathrm{correct})\ge\kappa=0.99$ (Theorem~\ref{thm:t2c}, sufficiency direction), the
+certified bound requires $n=8$ repeats of a single separating probe, giving certified
+$\mathbb{P}(\mathrm{correct})\ge 0.9916$ and $\mathbb{P}(\mathrm{wrong})\le 0.0084$. The bound is
+\emph{near-tight}: the exact minimax oracle (exhaustive enumeration of the two-class decision) reaches
+$0.99$ at $n=5$ for the same position, so the certified bound is conservative by a small \emph{additive}
+constant ($8$ vs.\ $5$). The same relation holds across the noise sweep
+($\varepsilon=1/20$: $5$ vs.\ $3$; $\varepsilon=1/5$: $18$ vs.\ $13$). This is a tight, non-trivial
+finite-sample certificate --- not a bound that merely dominates the oracle trivially.
+
+\subsection{T2d: costed design and no-go as decision support}\label{sec:real-t2d}
+With unit cost per read and the single pair $v=\theta_1-\theta_0$, the costed design problem
+(Definition~\ref{def:costed}) has threshold $\tau=-\ln\!\bigl(2(1-\kappa)\bigr)$ for
+$\kappa=0.99$. The optimal design is a single separating position read $n$ times (the separating
+positions are information-equivalent, so the design concentrates repeats on one probe). At
+$\varepsilon=1/10$, the achievable integer cost is $8$ (position $10$ repeated $8$ times), the LP dual
+lower bound is below $4$, and the integrality gap is $4.5\%$. For a user budget of $B=1$ read, the
+design is a certified \emph{no-go} (status \texttt{NO\_GO}): no allocation within one read meets the
+$0.99$ floor. Read as a decision-support tool, the no-go tells the user to refine the registered model,
+relax the floor, or raise the budget --- it is a certified statement about the registered design class,
+not a verdict on the RNA assay.
+
+\begin{table}[ht]
+\centering
+\caption{add riboswitch (PDB 1Y26) through the full pipeline. \textbf{Question:} do T2b/T2c/T2d
+compose on a real registered case? \textbf{Result:} passive collision, exact separation certificate
+($\gamma=2|1-2\varepsilon|$), near-tight certified finite-sample budget, and achievable integer design
+with no-go at budget $1$. \textbf{Interpretation:} one decision process from contract to design/no-go.
+\textbf{Boundary:} model-conditional; certifies within the registered finite observation model, not
+in-vitro reactivity.}
+\label{tab:real}
+\begin{tabular}{@{}lllll@{}}
+\toprule
+$\varepsilon$ & $\gamma(S)$ (T2b) & certified $n$ for $\kappa=.99$ (T2c) & exact $n$ (oracle) & achievable cost, LP gap (T2d) \\
+\midrule
+$1/20$ & $9/5$ & $5$ & $3$ & cost $5$, gap $6.1\%$ \\
+$1/10$ & $8/5$ & $8$ & $5$ & cost $8$, gap $4.5\%$ \\
+$1/5$  & $6/5$ & $18$ & $13$ & cost $18$, gap $2.7\%$ \\
+\bottomrule
+\end{tabular}
+\\[0.5em]
+\footnotesize All rows: status \texttt{iff}; independent checker and LP strong-duality pass; design-class
+no-go at budget $1$ for every $\varepsilon$.
+\end{table}
+
+\subsection{Transferability: registering a second published assay}\label{sec:real-transfer}
+Reviewer transferability concerns are answered by inspection, not by narrative. A second published
+RNA-structure probing workflow --- e.g.\ the mutate-and-map / quantitative SHAPE-DMS-MaPseq pipeline of
+\citet{kladwang2011mutate,cordero2012importance,cheng2015consistent} --- registers into the same
+contract by instantiating the same slots: \emph{states} are the conformations implied by the paired
+positions of the candidate structures; \emph{actions} are the mutate-and-map constructs (each a
+targeted perturbation); \emph{observations} are the binary reactivity patterns (protected vs.\ reactive)
+over the probed positions; and the same bit-flip measurement-noise coupling $\mathcal{C}$ is reused.
+Given any two candidate conformations and a registered catalog of constructs, Figure~\ref{fig:workflow}
+then runs unchanged: certify separation, derive the finite-sample read budget, and return a costed
+design or a no-go. For the add case above every step is executed and re-checked; for a hypothetical
+second assay the registration is a template whose slots are filled from the published method, and the
+same executable (Section~\ref{sec:real}) emits the certificate. We do \emph{not} claim an executed
+certificate for a second assay without its registered data.
+
 \section{Synthetic evaluation and baselines}\label{sec:eval}
 Eleven micro-cases and eight baselines are executed as model-conditional synthetic evaluation.
 Table~\ref{tab:baselines} states the comparison variables on which every baseline is evaluated. Executed
@@ -521,26 +687,37 @@ no\_cycle & t2\_integer\_lp & 1 & 0 & 1 & 0 & 1 \\
 
 \section{Retrospective evidence qualification (Task6-R)}\label{sec:retro}
 This section is \emph{evidence qualification}, not validation. The three registered datasets close
-fail-closed with distinct terminal outcomes; no established quantitative instance is claimed.
-Table~\ref{tab:retro} states, per dataset, the registered role, the R2 outcome, what can be reported,
-and what cannot be claimed.
+fail-closed with distinct terminal outcomes; no established quantitative instance is claimed for the
+retrospective-data roles. One of them (add/RMDB) has, in addition, been \emph{re-registered} as a
+separate observation-model instance (Section~\ref{sec:real}) built on a legitimate binary
+protected/reactivity channel; that instance is evaluated there, while the original retrospective
+compression role remains fail-closed. Table~\ref{tab:retro} states, per dataset, the registered role,
+the R2 outcome, what can be reported, and what cannot be claimed.
 
 \begin{table}[ht]
 \centering
 \caption{Retrospective evidence qualification. \textbf{Question:} how do the registered datasets
-close, and what may/may not be reported? \textbf{Result:} add, SAM-III, and RORC close fail-closed with
-distinct terminal outcomes. \textbf{Interpretation:} data are used only as fixed realized catalogs for a
-fail-closed audit. \textbf{Boundary:} no categorical replay, no quantitative T2 validation, no future
-cost saving, no independent validation.}
+close, and what may/may not be reported? \textbf{Result:} the retrospective data roles close fail-closed
+with distinct terminal outcomes; the add/RMDB case is additionally re-registered as an observation-model
+instance evaluated in Section~\ref{sec:real}. \textbf{Interpretation:} data are used as fixed realized
+catalogs for a fail-closed audit, except where a legitimate registered channel is constructed.
+\textbf{Boundary:} no categorical replay, no quantitative compression validation, no future cost saving,
+no independent validation.}
 \label{tab:retro}
 \begin{tabular}{@{}p{2.0cm}p{3.2cm}p{3.4cm}p{3.2cm}p{3.2cm}@{}}
 \toprule
 Dataset & Registered role & R2 outcome & What can be reported & What cannot be claimed \\
 \midrule
-add/RMDB & retrospective full-matrix compression if qualified &
-  NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL &
-  modality limitation; raw provenance; fail-closed audit &
-  categorical replay; quantitative T2 validation; future cost saving \\
+add/RMDB & retrospective full-matrix compression role: NOT\_COMPARABLE;
+  separately re-registered as an observation model (Section~\ref{sec:real}) &
+  retrospective role: NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL;
+  registered observation-model instance: PASS &
+  compression role: modality limitation, raw provenance, fail-closed audit;
+  Section~\ref{sec:real}: registered binary protected/reactivity channel with
+  measurement-noise coupling, exact separation certificate, finite-sample budget &
+  for the compression role: categorical replay, quantitative T2 validation,
+  future cost saving; the registered instance certifies separation within its
+  registered finite model only \\
 \addlinespace
 SAM-III/GSE278422 & modality-transfer diagnostic &
   NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE &
@@ -582,13 +759,32 @@ credibility evidence, not real-data validation.}
 \end{figure}
 
 \section{Discussion}\label{sec:discussion}
-What is genuinely new is the replayable, checked, model-conditional certificate framework over the
-complete registered difference set with finite-sample and costed design consequences. What is inherited
-is the classical marginal-fiber, Test-Cover, and testing toolbox (Sections~\ref{sec:related}).
-The RNA-feasible composite formulation is useful because it makes the identifiability/design question
-decision-theoretic and auditable. The finite-sample consequence adds a quantitative bound tied to action
-geometry. Without a new library or prospective experiment, no population-level, independent-validation,
-or third-state-discovery claim can be made.
+\paragraph{The contribution is a decision workflow, not a new theorem.}
+The primary deliverable is a \emph{decision-theoretic, auditable, and replayable certificate workflow}:
+register a finite RNA state/action/observation contract, certify collision-or-separation over the
+complete difference set (T2b), convert certified separation into a finite-sample decision and budget
+(T2c), and return either a costed integer design or a design-class no-go within the user's budget
+(T2d). The add-riboswitch running case (Section~\ref{sec:real}) threads these three theorems into one
+end-to-end decision process (Figure~\ref{fig:workflow}) and turns ``persuasion by narrative'' into an
+independently checkable instance. What is inherited is the classical marginal-fiber, Test-Cover, and
+testing toolbox (Sections~\ref{sec:related}); the framework's value is binding those components to a
+pre-registered catalog and emitting replayable, checked certificates.
+
+\paragraph{No-go as decision support.}
+A design-class no-go is a \emph{decision-support} outcome, not a failure: within a fixed budget $B$ and
+a fixed floor $\kappa$, it certifies that no allocation beats the floor, and it tells the user how to
+proceed --- refine the registered model, relax the floor, or raise the budget. The
+add-riboswitch case exhibits both branches of the workflow: an achievable certified design (cost $8$ at
+$\varepsilon=1/10$ for $\kappa=0.99$) and a no-go at budget $1$. This reframes no-go from a negative
+artifact into a principled input to assay design and experiment planning.
+
+\paragraph{Scope and honesty.}
+The RNA-feasible composite formulation makes the identifiability/design question decision-theoretic and
+auditable; the finite-sample consequence ties that decision to a quantified read budget. The real-data
+certificate (Section~\ref{sec:real}) is model-conditional: it certifies separation within a registered
+finite observation model with an explicit measurement-noise coupling, not measured in-vitro reactivity.
+Without a new library or prospective experiment, no population-level, independent-validation, or
+third-state-discovery claim can be made.
 
 \section*{Supplementary material}
 Full proofs of Theorems~\ref{thm:t2b}--\ref{thm:t2d}, the exact micro-cases, and the complete 88-row

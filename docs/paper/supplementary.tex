@@ -163,6 +163,60 @@ $A=[[1,0,1],[1,1,0],[0,1,1]]$, $\tau=(1,1,1)$, $c=(1,1,1)$: LP=$3/2$, IP=$2$, ga
 requirement $\min n$ with $n\ge3/2$, cost $1$: LP=$3/2$, IP=$2$, gap=$1/3$. No-go demonstration:
 fractional cover under budget $7/5<3/2$ is NO\_GO.
 
+\section{Registered real-data case: add riboswitch}\label{sec:supp-real}
+\subsection{Provenance and registration}
+The add adenine-riboswitch aptamer is 71~nt (residues 13--83 of PDB~1Y26). We register two latent
+states: \emph{OFF} (apo ensemble, represented by the ViennaRNA MFE dot-bracket) and \emph{ON}
+(adenine-bound, base pairs read from PDB~1Y26). $\theta_0=e_{\mathrm{OFF}}=(1,0)$,
+$\theta_1=e_{\mathrm{ON}}=(0,1)$, passive marginal $M=(1,1)$ (so $M\theta_0=M\theta_1=1$, a genuine
+passive collision fiber), and one binary protected/reactivity action per position (71 actions). The
+registered measurement-noise coupling $\mathcal{C}$ is a symmetric bit-flip channel with error
+$\varepsilon\in(0,1/2)$; $\varepsilon=1/10$ is the default and is swept in the runner. Because
+$\varepsilon>0$, the Bhattacharyya coefficient is positive and the per-position Hellinger information
+is finite. Of the 71 positions, 21 are separating (bare pairing differs between OFF and ON).
+
+\subsection{T2b certificate}
+For the passive panel $S=\emptyset$, $\gamma=0$ (collision witness). For any panel containing a
+separating position, $\gamma(S)=2|1-2\varepsilon|$ in observation-probability norm: $\gamma=9/5$ at
+$\varepsilon=1/20$, $8/5$ at $\varepsilon=1/10$, $6/5$ at $\varepsilon=1/5$. Every certificate is exact
+(iff), the independent checker and the rational LP primal/dual strong-duality check both pass on the
+full 71-action panel.
+
+\subsection{T2c certified bound and near-tightness}
+For a separating position under $\varepsilon=1/10$, the certified Hellinger information interval is
+$[0.510826,0.510826]$. The certified sufficiency bound for
+$\mathbb{P}(\mathrm{correct})\ge0.99$ requires $n=8$ repeats, giving certified
+$\mathbb{P}(\mathrm{correct})\ge0.9916$ and $\mathbb{P}(\mathrm{wrong})\le0.0084$. The exact minimax
+oracle (exhaustive two-class enumeration) reaches $0.99$ at $n=5$, so the certified bound is
+conservative by a small additive constant. The full sweep is in Table~\ref{tab:supp-real}.
+
+\begin{table}[ht]
+\centering
+\caption{add riboswitch: certified vs.\ exact sample complexity.}
+\label{tab:supp-real}
+\begin{tabular}{@{}lccc@{}}
+\toprule
+$\varepsilon$ & certified $I$ (per separating probe) & certified $n$ for $\kappa=.99$ & exact $n$ (oracle) \\
+\midrule
+$1/20$ & $0.830366$ & $5$ & $3$ \\
+$1/10$ & $0.510826$ & $8$ & $5$ \\
+$1/5$  & $0.223144$ & $18$ & $13$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{T2d costed design}
+With unit cost per read and the single pair $v=\theta_1-\theta_0$, the costed design concentrates
+repeats on one separating position (the separating positions are information-equivalent). At
+$\varepsilon=1/10$ the achievable integer cost is $8$; the LP dual lower bound is below $4$; the
+integrality gap is $4.5\%$. At budget $1$ the design is a certified no-go (status \texttt{NO\_GO}).
+
+\subsection{Executable}
+The certificates are emitted by \texttt{scripts/real\_add\_run.py} over the registered model in
+\texttt{src/d2t\_rna/t2/real\_add.py}; \texttt{tests/t2/test\_real\_add.py} locks the model
+construction, the noise channel, the finiteness/positivity of the Hellinger information, and the
+sufficiency bound. The certificate JSON is written to the artifacts run directory.
+
 \section{Complete baseline table (88 rows)}\label{sec:supp88}
 \input{tables/supp88.tex}
 

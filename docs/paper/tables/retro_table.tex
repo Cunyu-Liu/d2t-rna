@@ -1,19 +1,27 @@
 % Retrospective evidence qualification table (Task6-R), D2T-RNA v7.
 % This is the canonical table included in manuscript Sec \ref{sec:retro}.
 \caption{Retrospective evidence qualification. \textbf{Question:} how do the registered datasets
-close, and what may/may not be reported? \textbf{Result:} add, SAM-III, and RORC close fail-closed
-with distinct terminal outcomes. \textbf{Interpretation:} data are used only as fixed realized catalogs
-for a fail-closed audit. \textbf{Boundary:} no categorical replay, no quantitative T2 validation, no
-future cost saving, no independent validation.}
+close, and what may/may not be reported? \textbf{Result:} the retrospective data roles close fail-closed
+with distinct terminal outcomes; the add/RMDB case is additionally re-registered as an observation-model
+instance evaluated in Section~\ref{sec:real}. \textbf{Interpretation:} data are used as fixed realized
+catalogs for a fail-closed audit, except where a legitimate registered channel is constructed.
+\textbf{Boundary:} no categorical replay, no quantitative compression validation, no future cost saving,
+no independent validation.}
 \label{tab:retro}
 \begin{tabular}{@{}p{2.0cm}p{3.2cm}p{3.4cm}p{3.2cm}p{3.2cm}@{}}
 \toprule
 Dataset & Registered role & R2 outcome & What can be reported & What cannot be claimed \\
 \midrule
-add/RMDB & retrospective full-matrix compression if qualified &
-  NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL &
-  modality limitation; raw provenance; fail-closed audit &
-  categorical replay; quantitative T2 validation; future cost saving \\
+add/RMDB & retrospective full-matrix compression role: NOT\_COMPARABLE;
+  separately re-registered as an observation model (Section~\ref{sec:real}) &
+  retrospective role: NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL;
+  registered observation-model instance: PASS &
+  compression role: modality limitation, raw provenance, fail-closed audit;
+  Section~\ref{sec:real}: registered binary protected/reactivity channel with
+  measurement-noise coupling, exact separation certificate, finite-sample budget &
+  for the compression role: categorical replay, quantitative T2 validation,
+  future cost saving; the registered instance certifies separation within its
+  registered finite model only \\
 \addlinespace
 SAM-III/GSE278422 & modality-transfer diagnostic &
   NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE &

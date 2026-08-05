@@ -225,6 +225,11 @@ def hellinger_info_interval(
     ln_bc = ln_interval(bc, prec)
     lo = ln_bc.hi.copy_negate()
     hi = ln_bc.lo.copy_negate()
+    # Hellinger information is non-negative by construction (-log BC, BC<=1).
+    # For coincident laws BC=1 and the certified enclosure can dip a hair below
+    # 0 on the lower edge purely from directed-rounding noise; clamp it.
+    if lo < 0:
+        lo = Decimal(0)
     return Interval(lo, hi)
 
 
