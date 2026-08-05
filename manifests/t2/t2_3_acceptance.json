@@ -1,0 +1,110 @@
+{
+  "schema": "d2t_rna.t2_3_acceptance.v1",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "theorem_version": "T2-3.0",
+  "theorem": "T2c_FINITE_SAMPLE_QUANTITATIVE_BOUNDS",
+  "status": "PASS",
+  "theorem_state": "T2_SAMPLE_COMPLEXITY_BOUND_ACCEPTED",
+  "activated_at": "2026-08-05T11:41:51+08:00",
+
+  "deliverable_checklist": {
+    "product_law_information": true,
+    "uniform_upper_bound_achievable": true,
+    "uniform_lower_bound_no_go": true,
+    "abstention_rule_fixed_horizon": true,
+    "budget_lower_bound_consequence": true,
+    "exact_tv_hellinger_decision_crosscheck": true,
+    "tightness_microcase_report": true
+  },
+
+  "certified_numerical_arithmetic": {
+    "arithmetic": "fractions.Fraction for exact rationals; decimal.Decimal directed-rounding intervals for irrational sqrt/ln/exp",
+    "interval_construction": "every transcendental widened by relative margin >= 0.5 ulp via _enlarge; negation via copy_negate; high-precision +20 guard digits for +/-/*",
+    "unbracketed_claim": "no floating tolerance or caller hash treated as proof",
+    "limitation": "Decimal.ln/exp/sqrt are correctly rounded regardless of rounding-mode; intervals are certified via outward widening, not via rounding-mode directed ln/exp"
+  },
+
+  "information_form": {
+    "per_pair_per_action": "I_uw = -log sum_y sqrt(p0uw(y) p1uw(y))",
+    "product_law_total": "I_total = sum_u n_u I_uw",
+    "scope": "finite registered pair catalog (finite competitor family); no composite-continuous covering claim"
+  },
+
+  "upper_bound": {
+    "wrong_decl_prob": "(1/2) exp(-I_total)",
+    "correct_decl_lower": "1 - (1/2) exp(-I_total) - abstention",
+    "rule": "fixed-horizon, decision-or-abstain, deterministic non-adaptive allocation",
+    "implementation": "wrong_prob_upper_interval / correct_decl_lower_interval"
+  },
+
+  "lower_bound_budget": {
+    "formula": "I_total >= -(1/2) log(1 - (2*kappa-1)^2)",
+    "no_go": "if certified total info strictly below threshold => structural budget lower bound / design-class infeasibility",
+    "implementation": "budget_lower_bound_info / no_go_status / required_repeats"
+  },
+
+  "independent_checker_evidence": {
+    "exact_minimax_error": "decision.py exact_minimax_error (exhaustive LR-test enumeration)",
+    "exact_product_law_tv": "decision.py exact_product_law_tv; info.py product_law_tv",
+    "exact_product_bhattacharyya": "decision.py exact_product_bhattacharyya (perfect-square microcase)",
+    "upper_bound_vs_exact": "test_upper_bound_honors_exact_minimax_error: exact <= ub.hi for n=1..5 and certified interval brackets ideal (1/2)(1/2)^n",
+    "tightness": "BC=1/2 microcase (P0=(1/4,3/4), P1=(1,0)): exact minimax = (1/2)(1/4)^n, certified upper brackets ideal (1/2)(1/2)^n"
+  },
+
+  "tightness_microcase": {
+    "alphabet_size": 2,
+    "p0": "(1/4, 3/4)",
+    "p1": "(1, 0)",
+    "bhattacharyya_exact": "1/2",
+    "info_exact": "ln 2",
+    "exact_minimax_error": "(1/2)(1/4)^n",
+    "certified_upper": "(1/2) exp(-n I) in certified interval, brackets ideal (1/2)(1/2)^n",
+    "conservativeness": "certified upper bound dominates exact minimax; interval brackets the Bhattacharyya-ideal (1/2)(1/2)^n"
+  },
+
+  "run": {
+    "run_id": "t2-3-acceptance-20260805T114151+0800",
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t2-3-acceptance-20260805T114151+0800/run.log",
+    "junit": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t2-3-acceptance-20260805T114151+0800/junit/t2.xml",
+    "interpreter": "editflow311 (CPython 3.11.15)",
+    "gpu_required": false
+  },
+
+  "test_evidence": {
+    "suite": "tests/t2",
+    "passed": 39,
+    "failed": 0,
+    "collected": 39,
+    "t2c_tests": 12,
+    "t2c_failed": 0
+  },
+
+  "source_files_sha256": {
+    "src/d2t_rna/t2/__init__.py": "1422f82f85c0ec6ca8a53bb866558d60fddb8f1afb276fd464776f8d3fe57169",
+    "src/d2t_rna/t2/model.py": "d187047aa45d8fe47077b8060f3fdf4c090e4dd31413fcda3ef0537eeb222fc1",
+    "src/d2t_rna/t2/witness.py": "7d974715f7b8ec34e5e90f381b558ac35f95da7d6c7b5c9b8b9f7ee656578766",
+    "src/d2t_rna/t2/verify.py": "5af5febb460c1295bcb9c868a68ac99314ae97c68366fca83eced221b8fb12b4",
+    "src/d2t_rna/t2/fixtures.py": "891abc64d5d3ea19dced04298c9e49402f33efa39edb78b96e629e81804a399b",
+    "src/d2t_rna/t2/lp.py": "d8d5a196bef5a590382429815354df45dedd140e9502808fd8f1af8110f8efba",
+    "src/d2t_rna/t2/theorem.py": "6dff317c64064a71c924b2ffff49933c6e5baa729921de66341e6492caa8bd69",
+    "src/d2t_rna/t2/info.py": "68f721f182255e10613bb12aa874fe4d4c5ba661f3caee848e2d3cb59710ba45",
+    "src/d2t_rna/t2/bounds.py": "c6be623fee8eef13a477c57255c4d2645673a9a6873e19f4e2292024950f57f7",
+    "src/d2t_rna/t2/decision.py": "d218dc5bce219f2cf8a862935b92e62878fcdb2ee1cc9a1cdcf0dda90c5e1481",
+    "tests/t2/test_theorem_t2b.py": "283645f2f3d01cc92a8d785193b3ba90f76c3dd2bb4380961cd5882d93c0a65e",
+    "tests/t2/test_witness_engine.py": "d6c80f08a065a9916b065ab130e8e787b5f4f6c64d4a710cfa6812d3ed482c79",
+    "tests/t2/test_theorem_t2c.py": "70c393a88979c6e25b3aad10189e7ee3c02be4e40985015d6b7ab0023112e2a3"
+  },
+
+  "claim_boundary": {
+    "scientific_claim_authorized": false,
+    "claim_kind": "model-conditional synthetic bound certificate only",
+    "gate_passed": "T2-SAMPLE-COMPLEXITY-BOUND-GATE",
+    "not_authorized": [
+      "prospective/blinded/held-out/out-of-sample/independent validation",
+      "population generalization / new-library guarantee / native-T4 truth",
+      "actual wet-lab cost savings",
+      "composite-continuous-class uniform guarantee without covering proof"
+    ]
+  }
+}
