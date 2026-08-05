@@ -1,0 +1,96 @@
+{
+  "activated_at": "2026-08-05T13:14:21+08:00",
+  "baselines": {
+    "all_executed": true,
+    "count": 8,
+    "methods": [
+      "chernoff",
+      "eig",
+      "exhaustive_oracle",
+      "full_matrix",
+      "greedy_test_cover",
+      "lm2r_heuristic",
+      "random",
+      "t2_integer_lp"
+    ],
+    "unexecuted_flag_values_seen": []
+  },
+  "claim_boundary": {
+    "claim_kind": "model-conditional synthetic evaluation matrix and baseline execution only",
+    "gate_passed": "BASELINE-EXECUTION-GATE",
+    "not_authorized": [
+      "real-data / prospective / blinded / held-out / out-of-sample validation",
+      "population generalization / new-library guarantee / native-T4 truth",
+      "method superiority over any baseline",
+      "actual wet-lab cost savings"
+    ],
+    "scientific_claim_authorized": false
+  },
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "contract_version": "v7.0.0",
+  "deliverable": "EVALUATION_MATRIX_AND_BASELINE_EXECUTION",
+  "deliverable_checklist": {
+    "no_method_superiority_claim": true,
+    "scientific_claim_authorized_false": true,
+    "sec91_cross_validate_oracle_vs_theory_bounds_all_in_interval": true,
+    "sec91_exhaustive_oracle_consistent_in_all_microcases": true,
+    "sec91_microcases_cover_all_contract_scenarios": true,
+    "sec92_certified_omitted_mass_reported": true,
+    "sec92_lp_lower_bound_and_integer_gap_reported": true,
+    "sec92_memory_reported": true,
+    "sec92_metrics_reported_cost_risk_correct_decl_abstention_runtime": true,
+    "sec92_optimality_gap_covered": true,
+    "sec93_all_eight_baselines_actually_executed": true,
+    "sec93_no_baseline_flagged_not_execution_verified": true
+  },
+  "microcases": {
+    "all_cross_validation_passed": true,
+    "count": 11,
+    "names": [
+      "alternating_rectangle_2x2",
+      "boundary",
+      "cancellation_cycled",
+      "exact_collision",
+      "near_collision",
+      "no_cycle",
+      "nondecomposable_3d",
+      "repeated_action",
+      "strict_positive_separation",
+      "symmetric_states",
+      "zero_margin"
+    ]
+  },
+  "run": {
+    "gpu_required": false,
+    "interpreter": "editflow311 (CPython 3.11.15)",
+    "run_id": "t9-matrix-20260805T131421+0800",
+    "run_log": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t9-matrix-20260805T131421+0800.run.log",
+    "run_log_sha256": "8ab06ca8add013731454f7eba98211a918f9dcd3f7490244bfa20fd077b2789a",
+    "run_report": "/mnt/cunyuliu/d2t-rna/artifacts/runs/t9-matrix-20260805T131421+0800.json",
+    "run_report_sha256": "79b6ad1cae70865c2d51d0b0fd1092bbb4dd702a4af6f8904b023b0e9110af1c"
+  },
+  "schema": "d2t_rna.t9_matrix_acceptance.v1",
+  "scope": {
+    "catalog_kind": "FINITE_REGISTERED_PAIR_CATALOG",
+    "comparator_kind": "same registered action/cost space only",
+    "evaluation_kind": "model-conditional synthetic evaluation matrix",
+    "note": "section-9 delivers an actually-executed evaluation matrix and baselines; it is not real-data validation and no method-superiority claim is made (contract 9.3, 9.4)",
+    "real_data_validation_authorized": false
+  },
+  "source_files_sha256": {
+    "scripts/t9_matrix_run.py": "430f16f979deee63d5e9e8aff48e277507dbb40ea53c094aad2903eaad98d9c1",
+    "src/d2t_rna/evaluation/matrix.py": "f2905d54dfcf3f1025b0ae0d74111ccc605534f1a462d397d18aa5ae9fc67828",
+    "src/d2t_rna/t2/bounds.py": "75d733503698ae1f8d67b209d0d18ab9e6ec7852f6dd4d150a06316100153def",
+    "tests/evaluation/test_matrix.py": "67ddf586be58a8f33e0b84f7bdbfd004cfbf3f5a884015d2b0734bd36098ed2e"
+  },
+  "state": "EVALUATION_MATRIX_EXECUTED_MODEL_CONDITIONAL",
+  "status": "PASS",
+  "test_evidence": {
+    "collected": 23,
+    "failed": 0,
+    "matrix_tests": 14,
+    "passed": 23,
+    "planner_binding_tests": 9,
+    "suite": "tests/evaluation"
+  }
+}

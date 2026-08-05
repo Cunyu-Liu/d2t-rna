@@ -32,26 +32,12 @@ returned interval.  No floating tolerance or caller hash is treated as proof.
 
 from __future__ import annotations
 
-from decimal import Decimal, ROUND_FLOOR, ROUND_CEILING, localcontext
+from decimal import Decimal, localcontext
 from fractions import Fraction
 
-from .info import Interval, ln_interval
+from .info import Interval, ln_interval, exp_interval
 
 _HALF = Decimal("0.5")
-
-
-def _exp_floor(x: Decimal, prec: int) -> Decimal:
-    with localcontext() as c:
-        c.prec = prec
-        c.rounding = ROUND_FLOOR
-        return x.exp()
-
-
-def _exp_ceil(x: Decimal, prec: int) -> Decimal:
-    with localcontext() as c:
-        c.prec = prec
-        c.rounding = ROUND_CEILING
-        return x.exp()
 
 
 def wrong_prob_upper_interval(
@@ -63,11 +49,21 @@ def wrong_prob_upper_interval(
     error ``(1/2) exp(-I)`` lies in ``[(1/2) exp(-I_hi), (1/2) exp(-I_lo)]``;
     the certified upper edge ``hi`` is the conservative achievability bound we
     assert.
+
+    ``Decimal.exp`` is correctly rounded regardless of the context rounding
+    mode, so naive directed rounding (ROUND_FLOOR/ROUND_CEILING) does *not*
+    widen the endpoint and the "upper" bound can fall below the true value.
+    We therefore use the certified :func:`exp_interval`, which widens each
+    endpoint by a relative margin that dominates 0.5 ulp, guaranteeing a
+    rigorous enclosure of ``exp(-I)`` in ``[hi_edge_dn, lo_edge_up]``.
     """
+    # I in [I_lo, I_hi]  =>  -I in [-I_hi, -I_lo].
+    neg = Interval(total_info.hi.copy_negate(), total_info.lo.copy_negate())
+    e = exp_interval(neg, prec)
     with localcontext() as c:
-        c.prec = prec + 20
-        lo = _HALF * _exp_floor(total_info.hi.copy_negate(), prec)
-        hi = _HALF * _exp_ceil(total_info.lo.copy_negate(), prec)
+        c.prec = prec
+        lo = _HALF * e.lo
+        hi = _HALF * e.hi
     return Interval(lo, hi)
 
 
@@ -76,11 +72,18 @@ def correct_decl_lower_interval(
 ) -> Interval:
     """Certified lower bound on the correct-declaration probability.
 
-    ``correct >= 1 - (1/2) exp(-I_total)``, worst case at ``I = I_lo``.
+    ``correct >= 1 - (1/2) exp(-I_total)``, worst case at ``I = I_lo``.  Uses
+    the certified :func:`exp_interval` for the same reason as
+    :func:`wrong_prob_upper_interval`.
     """
     with localcontext() as c:
-        c.prec = prec + 20
-        worst_err = _HALF * _exp_ceil(total_info.lo.copy_negate(), prec)
+        c.prec = prec
+        # worst-case error at -I_lo, upper-bounded conservatively.
+        e = exp_interval(
+            Interval(total_info.lo.copy_negate(), total_info.lo.copy_negate()),
+            prec,
+        )
+        worst_err = _HALF * e.hi
         lo = Decimal(1) - worst_err
         hi = Decimal(1)
     return Interval(lo, hi)
