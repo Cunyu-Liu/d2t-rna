@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "ebdb7f61afb78b27098db9625543bcc48ec349fd",
+  "head": "171b794ece8cee75d8877e10ead40d16f6b5e247",
   "origin_main": "eb2ac0a599d4f8bc2f1f6023364ac702acde9d5c",
-  "worktree_clean": false,
+  "worktree_clean": true,
   "lineage": [
+    "171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6",
     "ebdb7f6 feat(paper): close test suite (B1) - frozen index registration + isolate >1h acceptance tests",
     "6d1a913 feat(paper): add 'How to read a D2T no-go' decision manual (B2) + self-contained figure refs",
     "eb2ac0a feat(paper): add scope table to Discussion (certified vs not guaranteed vs upgrade)",
     "67c4543 feat(paper): third real-data case - miniTTR designed metal-ion switch (DMS)",
-    "6dc05af feat(paper): fail-closed negative control on measured add data (A3)",
-    "d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70"
+    "6dc05af feat(paper): fail-closed negative control on measured add data (A3)"
   ],
   "file_exists": {
     "manuscript": true,
@@ -99,5 +99,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786010084.0651324
+  "run_finished": 1786010097.1823874
 }

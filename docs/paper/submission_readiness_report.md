@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = ebdb7f61afb78b27098db9625543bcc48ec349fd
+current HEAD   = 171b794ece8cee75d8877e10ead40d16f6b5e247
 origin/main    = eb2ac0a599d4f8bc2f1f6023364ac702acde9d5c
-worktree state = DIRTY
+worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6
 ebdb7f6 feat(paper): close test suite (B1) - frozen index registration + isolate >1h acceptance tests
 6d1a913 feat(paper): add 'How to read a D2T no-go' decision manual (B2) + self-contained figure refs
 eb2ac0a feat(paper): add scope table to Discussion (certified vs not guaranteed vs upgrade)
 67c4543 feat(paper): third real-data case - miniTTR designed metal-ion switch (DMS)
 6dc05af feat(paper): fail-closed negative control on measured add data (A3)
-d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70
 ```
 
-The readiness report is re-generated from the current HEAD (ebdb7f61afb78b27098db9625543bcc48ec349fd), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> ebdb7f6.
+The readiness report is re-generated from the current HEAD (171b794ece8cee75d8877e10ead40d16f6b5e247), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 171b794.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD ebdb7f6 (this file).
+- P0 readiness report synced to HEAD 171b794 (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on ebdb7f6 with provenance (see build_provenance).
+- P1 full build on 171b794 with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
