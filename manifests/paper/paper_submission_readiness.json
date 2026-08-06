@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "171b794ece8cee75d8877e10ead40d16f6b5e247",
-  "origin_main": "eb2ac0a599d4f8bc2f1f6023364ac702acde9d5c",
-  "worktree_clean": true,
+  "head": "73d8fa33bebba26ff831c8e4b7a6a5b180c608be",
+  "origin_main": "74e66ff974d0f142d5649dc614eeb29b3aeebb9c",
+  "worktree_clean": false,
   "lineage": [
+    "73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)",
+    "74e66ff chore(paper): re-bind readiness report + manifest to HEAD 171b794",
     "171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6",
     "ebdb7f6 feat(paper): close test suite (B1) - frozen index registration + isolate >1h acceptance tests",
     "6d1a913 feat(paper): add 'How to read a D2T no-go' decision manual (B2) + self-contained figure refs",
-    "eb2ac0a feat(paper): add scope table to Discussion (certified vs not guaranteed vs upgrade)",
-    "67c4543 feat(paper): third real-data case - miniTTR designed metal-ion switch (DMS)",
-    "6dc05af feat(paper): fail-closed negative control on measured add data (A3)"
+    "eb2ac0a feat(paper): add scope table to Discussion (certified vs not guaranteed vs upgrade)"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,7 +33,7 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "d36ceaffc9139f75b699ec196792bab5f1d2046c8bdb3bfb0da2768be8d1c2ad",
+    "manuscript": "48edfead47f657d3b5f9d8a0818dfacdf44e270ee8fb37335b0fd807f65b3e84",
     "supplementary": "6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317",
     "references": "957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
@@ -99,5 +99,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786010097.1823874
+  "run_finished": 1786011992.7567208
 }
