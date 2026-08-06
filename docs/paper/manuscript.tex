@@ -44,7 +44,9 @@ budget bounds that are \emph{near-tight} against the exact minimax oracle, and r
 integer design or a design-class no-go certificate used as a budget-constrained decision-support tool.
 All theoretical certificates are model-conditional and are cross-checked by rational primal/dual and
 independent-checker evidence against exact oracle enumeration over 11 synthetic micro-cases and 8
-executed baselines. On a registered real RNA case (the add adenine-riboswitch aptamer, PDB 1Y26), the
+executed baselines; on a heterogeneous multi-pair instance the certified integer design is strictly
+cheaper than the greedy Test-Cover baseline (Remark~\ref{rem:greedy}). On a registered real RNA case
+(the add adenine-riboswitch aptamer, PDB 1Y26), the
 pipeline converts a previously fail-closed retrospective record into a registered observation-model
 instance and emits an exact separation certificate together with certified finite-sample and
 costed-design bounds, including a near-tight sample-complexity certificate and a no-go at unit budget;
@@ -433,6 +435,20 @@ values above make the ``LP-feasible but not integer-feasible'' gap concrete (gap
 fractional cases).
 \end{remark}
 
+\begin{remark}[Certified integer design beats greedy Test-Cover]\label{rem:greedy}
+On a heterogeneous multi-action, multi-pair instance the certified integer design (T2d) is strictly
+cheaper than the greedy Test-Cover heuristic. Concretely, with actions $a_0,a_1,a_2$, pairs
+$p_0$ (threshold $2$) and $p_1$ (threshold $1$), unit cost, and certified per-pair information
+$I(a_0)=(2/3,1)$, $I(a_1)=(1,2/3)$, $I(a_2)=(1,1/3)$, the optimal integer design is $a_1+a_2$
+(cost $2$), covering $p_0$: $1+1=2$ and $p_1$: $2/3+1/3=1$. Greedy Test-Cover (repeatedly add one
+repeat of the action with the largest marginal information per cost toward the unsatisfied pairs)
+over-invests in $a_0$ and returns cost $3$; both designs are feasible w.r.t.\ the certified lower
+bounds (\texttt{greedy\_test\_cover\_design} in \texttt{costed.py}). The gap is not an artifact of
+the single-pair measured cases: there, with one pair and unit cost, the best probe dominates any mix
+and greedy equals the optimum. It is precisely the heterogeneous coverage across multiple pairs where
+the integer optimization pays off.
+\end{remark}
+
 \begin{figure}[ht]
 \centering
 \includesvg[width=0.85\textwidth]{figures/fig3_costed_design}
@@ -646,8 +662,21 @@ Given any two candidate conformations and a registered catalog of constructs, Fi
 then runs unchanged: certify separation, derive the finite-sample read budget, and return a costed
 design or a no-go. For the add case above every step is executed and re-checked; for a hypothetical
 second assay the registration is a template whose slots are filled from the published method, and the
-same executable (Section~\ref{sec:real}) emits the certificate. We do \emph{not} claim an executed
-certificate for a second assay without its registered data.
+same executable (Section~\ref{sec:real}) emits the certificate.
+
+Transferability is a \emph{fact}, not a narrative, because we execute a second measured certificate on a
+different published assay. We register the RMDB accessions \texttt{BSUGLY\_DMS\_0013} (apo, $0$~mM) and
+\texttt{BSUGLY\_DMS\_0014} ($1$~mM glycine) of the \emph{Bacillus subtilis} gcvT glycine riboswitch
+($\Delta$P0 variant, co-transcriptionally folded, TECprobe-VL, DMS reactivity; the same contract slots,
+one action per position, readout floor $1\%$). This differs from the add case in chemistry (DMS vs.\ 1M7
+SHAPE), ligand (glycine vs.\ adenine), and construct ($265$~nt vs.\ $71$~nt), yet the same executable
+(Section~\ref{sec:real}) emits an \texttt{iff} separation certificate with $\gamma>0$ over the eight
+strongest measured separators, and the strongest separator (position $221$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=15$ repeats; the achievable integer design again reads a
+certified \texttt{NO\_GO} at budget $B=1$ and a feasible design at larger $B$. Two independent
+chemistries, two ligands, and two constructs thus register the identical certificate workflow, so the
+measured upgrade is not an add-riboswitch artifact. The full per-position profiles and per-probe bounds
+are in the supplementary (Section~\ref{sec:supp-measured}).
 
 \section{Synthetic evaluation and baselines}\label{sec:eval}
 Eleven micro-cases and eight baselines are executed as model-conditional synthetic evaluation.

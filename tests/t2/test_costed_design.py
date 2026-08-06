@@ -16,6 +16,7 @@ import pytest
 from d2t_rna.t2.costed import (
     CostedDesign,
     achievable_integer_design,
+    greedy_test_cover_design,
     integrality_gap,
     lp_relax_exact,
     no_go_lower_bound,
@@ -254,3 +255,77 @@ def test_invalid_inputs_rejected():
             info_lower=((Fraction(1),),),
             info_upper=((Fraction(1),),),
         )
+
+
+# ---------------------------------------------------------------------------
+# Greedy Test-Cover baseline (contract 5.4 comparison, item 3)
+# ---------------------------------------------------------------------------
+
+# Single-pair, unit-cost: greedy and the optimal integer design coincide,
+# because the single best probe dominates any mix.
+SINGLE_PAIR = CostedDesign(
+    action_ids=("a0", "a1"),
+    costs=(Fraction(1), Fraction(1)),
+    pair_ids=("p0",),
+    thresholds=(Fraction(3),),
+    info_lower=((Fraction(1),), (Fraction(2),)),
+    info_upper=((Fraction(1),), (Fraction(2),)),
+)
+
+
+def test_greedy_single_pair_matches_optimal():
+    opt_cost, opt_n = achievable_integer_design(SINGLE_PAIR)
+    gr_cost, gr_n = greedy_test_cover_design(SINGLE_PAIR)
+    # optimal: a1 (info 2) requires 2 repeats -> cost 2; greedy also 2.
+    assert opt_cost == Fraction(2)
+    assert gr_cost == Fraction(2)
+    assert sum(n for n in gr_n) == 2
+
+
+# Heterogeneous multi-action, multi-pair case where the certified integer
+# design strictly beats greedy Test-Cover (item 3: "certificate integer design
+# < greedy Test-Cover cost").
+#   actions a0,a1,a2 ; pairs p0 (tau 2), p1 (tau 1) ; unit cost.
+#   info (per pair):  a0=(2/3, 1), a1=(1, 2/3), a2=(1, 1/3)
+#   optimal design:   a1 + a2  -> p0: 1+1=2, p1: 2/3+1/3=1, cost 2
+#   greedy Test-Cover: a0 (best marginal) then a0 then a1 -> cost 3
+HETERO_A = (
+    (Fraction(2, 3), Fraction(1)),
+    (Fraction(1), Fraction(2, 3)),
+    (Fraction(1), Fraction(1, 3)),
+)
+HETERO = CostedDesign(
+    action_ids=("a0", "a1", "a2"),
+    costs=(Fraction(1), Fraction(1), Fraction(1)),
+    pair_ids=("p0", "p1"),
+    thresholds=(Fraction(2), Fraction(1)),
+    info_lower=HETERO_A,
+    info_upper=HETERO_A,
+)
+
+
+def test_hetero_integer_design_beats_greedy():
+    opt_cost, opt_n = achievable_integer_design(HETERO)
+    gr_cost, gr_n = greedy_test_cover_design(HETERO)
+    # certified integer design is strictly cheaper than greedy Test-Cover.
+    assert opt_cost == Fraction(2)
+    assert tuple(opt_n) == (0, 1, 1)  # a1 + a2
+    assert gr_cost == Fraction(3)
+    assert gr_cost > opt_cost
+    # both designs are feasible w.r.t. the certified lower info bounds.
+    assert check_integer_design_feasible(HETERO, HETERO.info_lower, opt_n)
+    assert check_integer_design_feasible(HETERO, HETERO.info_lower, gr_n)
+
+
+def test_greedy_fails_closed_on_unreachable_pair():
+    # A pair with positive threshold but no action provides info -> infeasible.
+    bad = CostedDesign(
+        action_ids=("a0", "a1"),
+        costs=(Fraction(1), Fraction(1)),
+        pair_ids=("p0", "p1"),
+        thresholds=(Fraction(1), Fraction(1)),
+        info_lower=((Fraction(1), Fraction(0)), (Fraction(1), Fraction(0))),
+        info_upper=((Fraction(1), Fraction(0)), (Fraction(1), Fraction(0))),
+    )
+    gr_cost, gr_n = greedy_test_cover_design(bad)
+    assert gr_cost is None and gr_n is None

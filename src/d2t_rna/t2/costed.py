@@ -244,6 +244,71 @@ def achievable_integer_design(
     return best_cost, best_n
 
 
+def greedy_test_cover_design(
+    cd: CostedDesign,
+) -> tuple[Fraction | None, tuple[int, ...] | None]:
+    """Greedy Test-Cover design cost (baseline for the certificate integer design).
+
+    A widely used heuristic for assay/experiment design is a *greedy Test-Cover*:
+    repeatedly add one repeat of the action that yields the largest marginal
+    information-per-cost toward the still-unsatisfied pairs, using the certified
+    *lower* info bounds (so any greedy design it returns is guaranteed feasible
+    w.r.t. the true information, exactly like
+    :func:`achievable_integer_design`).  The loop stops when every active pair
+    threshold is met.
+
+    ``greedy_cost`` is the total cost ``sum_u c_u n_u`` of that greedy design.
+    Comparing ``greedy_cost`` against the optimal integer cost returned by
+    :func:`achievable_integer_design` quantifies how much a *certified integer
+    design* (T2d) beats the greedy Test-Cover baseline on a heterogeneous
+    multi-action, multi-pair instance.  On a single-pair, unit-cost instance the
+    two coincide (the best probe dominates any mix); strictly positive
+    ``greedy_cost - optimal_cost`` requires heterogeneous pairwise coverage.
+
+    Returns ``(greedy_cost, n)`` or ``(None, None)`` if infeasible (some active
+    pair has threshold > 0 but no action provides positive info toward it).
+    """
+    U = len(cd.costs)
+    W = len(cd.thresholds)
+    info = cd.info_lower
+    active = [w for w in range(W) if cd.thresholds[w] > 0]
+    if not active:
+        return Fraction(0), tuple(0 for _ in range(U))
+
+    # Fail closed if any active pair is unreachable by every action.
+    for w in active:
+        if all(info[u][w] <= 0 for u in range(U)):
+            return None, None
+
+    n = [0] * U
+    coverage = [Fraction(0) for _ in range(W)]
+    guard = 1_000_000
+    while any(coverage[w] < cd.thresholds[w] for w in active):
+        guard -= 1
+        if guard <= 0:
+            raise RuntimeError("greedy Test-Cover did not terminate")
+        best_u = None
+        best_marginal = Fraction(-1)
+        for u in range(U):
+            # Marginal certified info-per-cost toward the still-unsatisfied pairs.
+            marginal = Fraction(0)
+            for w in active:
+                remaining = cd.thresholds[w] - coverage[w]
+                if remaining > 0 and info[u][w] > 0:
+                    marginal += min(info[u][w], remaining)
+            v = marginal / cd.costs[u]
+            if v > best_marginal:
+                best_marginal = v
+                best_u = u
+        if best_u is None:
+            return None, None
+        n[best_u] += 1
+        for w in range(W):
+            coverage[w] += info[best_u][w]
+    cost = sum(cd.costs[u] * n[u] for u in range(U))
+    return cost, tuple(n)
+
+
 def integrality_gap(cd: CostedDesign) -> tuple[Fraction | None, Fraction | None]:
     """Return ``(upper_cost, gap)`` where ``gap = (upper - lower)/lower``.
 

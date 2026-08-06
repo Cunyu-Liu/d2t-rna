@@ -5,6 +5,7 @@
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{booktabs}
 \usepackage{graphicx}
+\usepackage{seqsplit}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
@@ -266,6 +267,39 @@ The certificate remains \emph{model-conditional} in the strict sense --- the lat
 and the binarization rule are registered --- but the observation channel is now \emph{measured} in-vitro
 reactivity, so the certificate is separable with respect to real measurements rather than a synthetic
 coupling.
+
+\paragraph{Second real case: gcvT glycine riboswitch (DMS).}
+To establish transferability we execute the identical workflow on a second, chemically different
+published assay. Dataset (registered, RMDB accessions
+\texttt{\seqsplit{BSUGLY\_DMS\_0013}} / \texttt{\seqsplit{BSUGLY\_DMS\_0014}}):
+the \emph{Bacillus subtilis} gcvT glycine riboswitch $\Delta$P0 variant, co-transcriptionally folded,
+TECprobe-VL, DMS reactivity (DMS methylates solvent-exposed A/C), analyzed with ShapeMapper2
+(Busan \& Weeks, \emph{RNA} 2017, doi:\texttt{\seqsplit{10.1261/rna.061945.117}}) and normalized per
+Low \& Weeks (\emph{Methods} 2010, doi:\texttt{\seqsplit{10.1016/j.ymeth.2010.06.007}}). The two
+conditions are $0$~mM glycine (apo,
+\texttt{\seqsplit{BSUGLY\_DMS\_0013}}) and $1$~mM glycine (bound,
+\texttt{\seqsplit{BSUGLY\_DMS\_0014}}); the full-length
+$265$-nt transcript is used. The binarization rule
+$p_{\mathrm{reactive}}=\max\!\bigl(1/100,\allowbreak \min(99/100,r)\bigr)$
+and the registration slots are identical to the add case; only the chemistry, ligand, and construct
+differ.
+
+\paragraph{Results (second case).}
+Of the $265$ positions, $206$ are measured-separating. The T2b certificate over the eight strongest
+measured separators is exact (\texttt{iff}) with $\gamma>0$ (rational LP and enumeration checker agree,
+strong duality passes). For T2c, the strongest measured separator (position $221$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=15$ repeats, and all $206$ separating positions carry a
+certified finite sufficiency bound. For T2d, the achievable integer design is again a certified
+\texttt{NO\_GO} at budget $B=1$ and feasible at larger $B$. Two chemistries, two ligands, and two
+constructs therefore obey the identical certificate workflow, so the measured upgrade is a transferable
+mechanism rather than an add-riboswitch artifact. Emitted by
+\texttt{scripts/real\_glycine\_measured\_run.py} over
+\texttt{\seqsplit{src/d2t\_rna/data/measured\_glycine.py}}
+(RDAT parsed from \texttt{\seqsplit{src/d2t\_rna/data/raw/BSUGLY\_DMS\_0013.rdat}} and
+\texttt{\seqsplit{src/d2t\_rna/data/raw/BSUGLY\_DMS\_0014.rdat}});
+\texttt{\seqsplit{tests/data/test\_measured\_glycine.py}} locks the RDAT parse,
+the stochastic channel, measured separation, the finite-sample bound, and the transferability
+difference from the add case.
 
 \section{Complete baseline table (88 rows)}\label{sec:supp88}
 \input{tables/supp88.tex}
