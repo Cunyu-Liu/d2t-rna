@@ -533,6 +533,7 @@ def test_external_file_rejects_path_and_hash_substitution(
     assert registered_sha != "f" * 64
 
 
+@pytest.mark.slow
 def test_fixture_replays_every_embedded_artifact_and_claim_boundary(
     tmp_path: Path,
 ) -> None:
@@ -554,6 +555,7 @@ def test_fixture_replays_every_embedded_artifact_and_claim_boundary(
     assert verified["replay"]["risk_certificate_issued"] is False
 
 
+@pytest.mark.slow
 def test_fixture_rejects_nested_artifact_tamper_even_if_manifest_rehashed(
     tmp_path: Path,
 ) -> None:

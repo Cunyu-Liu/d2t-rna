@@ -28,5 +28,9 @@ dev = [
 where = ["src"]
 
 [tool.pytest.ini_options]
-addopts = "-ra"
+addopts = "-ra -m 'not slow'"
 testpaths = ["tests"]
+timeout = 240
+markers = [
+  "slow: extremely heavy acceptance-fixture rebuild tests (>1h each); run separately with -m slow and a large timeout",
+]

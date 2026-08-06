@@ -383,6 +383,7 @@ def test_common_binding_embeds_and_cross_checks_every_common_input() -> None:
         )
 
 
+@pytest.mark.slow
 def test_formal_task4_cfa_binds_the_same_risk_probability_space() -> None:
     binding = _common_binding(tag="e", formal_task4=True)
     assessment = binding.coverage_feasibility_assessment
@@ -839,6 +840,7 @@ def test_method_builder_rejects_invalid_registered_id(
         )
 
 
+@pytest.mark.slow
 def test_comparison_edges_are_fail_closed() -> None:
     unresolved = _summary(
         COMMON_BINDING,
@@ -878,6 +880,7 @@ def test_comparison_edges_are_fail_closed() -> None:
     )
 
 
+@pytest.mark.slow
 def test_comparison_records_sources_and_direct_forgery_fails_replay() -> None:
     summary = _summary(COMMON_BINDING, "random")
     comparison = compare_method_to_baselines(

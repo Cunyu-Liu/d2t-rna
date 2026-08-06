@@ -118,6 +118,14 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "scripts/task6_r1_rorc_run.py",
             "scripts/task6_r2_run.py",
             "scripts/task6_r2_samiii_diagnostic_run.py",
+            "src/d2t_rna/data/measured_add.py",
+            "src/d2t_rna/data/measured_glycine.py",
+            "src/d2t_rna/data/measured_mattr.py",
+            "src/d2t_rna/data/measured_negative.py",
+            "tests/data/test_measured_add.py",
+            "tests/data/test_measured_glycine.py",
+            "tests/data/test_measured_mattr.py",
+            "tests/data/test_measured_negative.py",
         }
     )
     registered_t2_descendants = frozenset(
@@ -146,6 +154,14 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/t2/test_theorem_t2b.py",
             "tests/t2/test_theorem_t2c.py",
             "tests/t2/test_witness_engine.py",
+            "src/d2t_rna/t2/real_add.py",
+            "tests/t2/test_real_add.py",
+            "scripts/real_add_run.py",
+            "scripts/real_add_measured_run.py",
+            "scripts/real_glycine_measured_run.py",
+            "scripts/real_mattr_measured_run.py",
+            "scripts/real_negative_control_run.py",
+            "scripts/search_greedy_gap.py",
             "scripts/t9_matrix_run.py",
             "scripts/t10_validation_run.py",
         }
@@ -158,6 +174,7 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "scripts/s14_delivery_bundle.py",
             "tests/scripts/test_s14_delivery_bundle.py",
             "scripts/m0_activate_v7.py",
+            "scripts/paper_readiness_gate.py",
         }
     )
     assert historical_task4.isdisjoint(registered_task5_descendants)
@@ -1779,6 +1796,7 @@ def test_python_process_isolation_requires_exact_sys_path(
         _verify_python_process_isolation(project_root, artifact_root)
 
 
+@pytest.mark.slow
 def test_fixture_requires_live_byte_identical_rebuild(
     tmp_path: Path,
 ) -> None:
