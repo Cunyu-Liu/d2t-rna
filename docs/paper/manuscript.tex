@@ -885,6 +885,31 @@ finite observation model with an explicit measurement-noise coupling, not measur
 Without a new library or prospective experiment, no population-level, independent-validation, or
 third-state-discovery claim can be made.
 
+\paragraph{Scope table: what the certificate guarantees and what it does not.}
+To make this boundary precise and auditable rather than defensive, Table~\ref{tab:scope} states, for
+each claim a reader might reasonably infer from the word ``certificate,'' exactly what the workflow
+guarantees, what it does not guarantee, and what would be required to establish the stronger reading.
+The honesty of the boundary is itself a feature: every entry is a fact about the registered finite
+model, not a rhetorical hedge.
+
+\begin{table}[ht]
+\centering
+\caption{Scope of the D2T-RNA certificate: guaranteed vs.\ not guaranteed vs.\ upgrade path.}
+\label{tab:scope}
+\small
+\begin{tabular}{@{}p{3.0cm}p{4.6cm}p{4.6cm}@{}}
+\toprule
+\textbf{Potential reading} & \textbf{What the workflow certifies} & \textbf{What is \emph{not} guaranteed / upgrade path} \\
+\midrule
+``The two conformations are separable'' & Exact (\texttt{iff}) collision-or-separation over the complete cross-class difference set $D$ within the registered finite model (T2b), with rational LP + enumeration checker evidence. & Not in-vitro reactivity separation per se. \emph{Upgrade:} register the measured channel as the model's laws (done for add/glycine/miniTTR), or run a prospective assay on the certified design. \\
+``This design reaches the target'' & Fixed-horizon finite-sample decision bound: $\mathbb{P}(\mathrm{correct})\ge\kappa$ under the registered product law and abstention rule (T2c); the certified $n$ is conservative against the exact minimax oracle. & Not guarantee of the oracle-optimal design; not guaranteed if the model's laws are mis-specified. \emph{Upgrade:} re-certify with a mis-specification audit or a larger registered catalog. \\
+``The design is affordable'' & Costed integer design with certified cost, or a design-class no-go under the LP dual bound (T2d). & Not a claim about wet-lab cost or future savings. \emph{Upgrade:} substitute real per-read marginal costs for the unit-cost assumption. \\
+``The method is fail-closed'' & Executed real-data negative control certifies collision ($\gamma=0$) rather than force-fitting separation (Section~\ref{sec:real-negative}). & Not a guarantee against every possible force-fit; the checker is exact on the registered model. \emph{Upgrade:} register more passing-collision catalogs. \\
+``The method transfers'' & Three executed measured cases across chemistry (SHAPE/DMS), biology (riboswitch/designed switch), and provenance (natural/designed) (Sections~\ref{sec:real-measured}--\ref{sec:real-mattr}). & Not a claim of universal RNA identifiability or population generalization. \emph{Upgrade:} register additional assay families (e.g.\ mutate-and-map). \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section*{Supplementary material}
 Full proofs of Theorems~\ref{thm:t2b}--\ref{thm:t2d}, the exact micro-cases, and the complete 88-row
 baseline table are provided in the supplementary document.

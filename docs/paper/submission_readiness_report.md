@@ -7,31 +7,31 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = 6dc05af4c49393812804c5498634bf3ccfdcf14f
-origin/main    = 6dc05af4c49393812804c5498634bf3ccfdcf14f
+current HEAD   = 67c4543ee492b7629d5a6902b3e45ba5acdae058
+origin/main    = 67c4543ee492b7629d5a6902b3e45ba5acdae058
 worktree state = DIRTY
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+67c4543 feat(paper): third real-data case - miniTTR designed metal-ion switch (DMS)
 6dc05af feat(paper): fail-closed negative control on measured add data (A3)
 d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70
 ab47f70 feat(paper): add self-contained web demo of the add measured certificate
 42726ee chore(paper): re-bind readiness report + manifest to HEAD 75e5457
 75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison
-5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81
 ```
 
-The readiness report is re-generated from the current HEAD (6dc05af4c49393812804c5498634bf3ccfdcf14f), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> 6dc05af.
+The readiness report is re-generated from the current HEAD (67c4543ee492b7629d5a6902b3e45ba5acdae058), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 67c4543.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
 See `manifests/paper/paper_submission_readiness.json` for the full set. Key files:
 
 ```text
-manuscript.tex      = ac0c12a12e03f713e32f682809536639e30b55bffeb397179d92374da9a8f4ad
+manuscript.tex      = 20feaa2c1852dd5019e42b5500f68fdad1a7b1b8e3d05d5900fbe24e7e7046a2
 supplementary.tex   = 6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317
 references.bib      = 957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18
 retro_table.tex     = 499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD 6dc05af (this file).
+- P0 readiness report synced to HEAD 67c4543 (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on 6dc05af with provenance (see build_provenance).
+- P1 full build on 67c4543 with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 

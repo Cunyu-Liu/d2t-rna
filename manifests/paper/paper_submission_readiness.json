@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "6dc05af4c49393812804c5498634bf3ccfdcf14f",
-  "origin_main": "6dc05af4c49393812804c5498634bf3ccfdcf14f",
+  "head": "67c4543ee492b7629d5a6902b3e45ba5acdae058",
+  "origin_main": "67c4543ee492b7629d5a6902b3e45ba5acdae058",
   "worktree_clean": false,
   "lineage": [
+    "67c4543 feat(paper): third real-data case - miniTTR designed metal-ion switch (DMS)",
     "6dc05af feat(paper): fail-closed negative control on measured add data (A3)",
     "d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70",
     "ab47f70 feat(paper): add self-contained web demo of the add measured certificate",
     "42726ee chore(paper): re-bind readiness report + manifest to HEAD 75e5457",
-    "75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison",
-    "5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81"
+    "75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,7 +33,7 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "ac0c12a12e03f713e32f682809536639e30b55bffeb397179d92374da9a8f4ad",
+    "manuscript": "20feaa2c1852dd5019e42b5500f68fdad1a7b1b8e3d05d5900fbe24e7e7046a2",
     "supplementary": "6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317",
     "references": "957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
@@ -99,5 +99,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785989350.4853787
+  "run_finished": 1785989446.0013566
 }
