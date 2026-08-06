@@ -23,8 +23,6 @@
 \author{D2T-RNA Project}
 \date{}
 
-% SVG support: compile with --shell-escape for \includesvg, or pre-convert SVG to PDF.
-\usepackage{svg}
 
 \begin{document}
 \maketitle
@@ -287,7 +285,7 @@ principles (\texttt{verify.py} and \texttt{lp.py}).
 
 \begin{figure}[ht]
 \centering
-\includesvg[width=0.85\textwidth]{figures/fig1_geometry}
+\includegraphics[width=0.85\textwidth]{figures/fig1_geometry.pdf}
 \caption{Exact geometry (T2b). \textbf{Question:} does the induced law map separate the complete
 difference set $D$? \textbf{Result:} oracle minimax decision error per synthetic microcase
 (model-conditional); colliding pairs reach error $1/2$, separated pairs reach error $0$.
@@ -371,7 +369,7 @@ composite-continuous covering or real-data calibration guarantee is made.
 
 \begin{figure}[ht]
 \centering
-\includesvg[width=0.85\textwidth]{figures/fig2_finiteness}
+\includegraphics[width=0.85\textwidth]{figures/fig2_finiteness.pdf}
 \caption{Finite-sample consequence (T2c). \textbf{Question:} how does the certified decision bound
 compare with exact oracle enumeration? \textbf{Result:} baseline minimax decision error by exact oracle
 enumeration for a representative separated case (model-conditional). \textbf{Interpretation:} the
@@ -455,7 +453,7 @@ the integer optimization pays off.
 
 \begin{figure}[ht]
 \centering
-\includesvg[width=0.85\textwidth]{figures/fig3_costed_design}
+\includegraphics[width=0.85\textwidth]{figures/fig3_costed_design.pdf}
 \caption{Costed design (T2d). \textbf{Question:} when is a costed design feasible, and when is it a
 design-class no-go? \textbf{Result:} log-scale LP dual lower bound per microcase, with achieved integer
 upper cost where feasible; infeasible cases are marked no-go. \textbf{Interpretation:} supports the
@@ -833,7 +831,7 @@ RORC & exposed misspecification stress &
 
 \begin{figure}[ht]
 \centering
-\includesvg[width=0.9\textwidth]{figures/fig4_retro}
+\includegraphics[width=0.9\textwidth]{figures/fig4_retro.pdf}
 \caption{Retrospective evidence qualification (Task6-R). \textbf{Question:} how do the three
 registered datasets close? \textbf{Result:} each closes fail-closed with a distinct terminal outcome
 (observation-model, action-space, applicability). \textbf{Interpretation:} data serve only as a
@@ -848,7 +846,7 @@ This is a theory boundary and credibility evidence, not real-data validation.
 
 \begin{figure}[ht]
 \centering
-\includesvg[width=0.85\textwidth]{figures/fig5_misspec}
+\includegraphics[width=0.85\textwidth]{figures/fig5_misspec.pdf}
 \caption{Misspecification boundary and abstention. \textbf{Question:} when does the certificate
 proceed versus abstain? \textbf{Result:} valid registered assumptions yield PROCEED; any of the six
 violation profiles yields abstain/NOT\_ESTABLISHED. \textbf{Interpretation:} no input condition is
@@ -877,6 +875,38 @@ add-riboswitch case exhibits both branches of the workflow: an achievable certif
 $\varepsilon=1/10$ for $\kappa=0.99$) and a no-go at budget $1$. This reframes no-go from a negative
 artifact into a principled input to assay design and experiment planning.
 
+\subsection{How to read a \textsc{D2T} no-go}\label{sec:read-nogo}
+The no-go is best read through a concrete decision rule rather than a slogan. \textsc{D2T}-RNA takes two
+inputs --- a user budget $B$ (total permitted reads) and a correctness floor $\kappa$ --- and emits
+exactly one of three verdicts over the registered design class:
+\begin{enumerate}
+  \item \emph{Feasible design:} an achievable integer design with certified cost $c\le B$ (probe the
+        certified position(s) at the stated $n$);
+  \item \emph{No-go by cost:} the LP dual lower bound exceeds $B$, so \emph{no} allocation within $B$
+        reaches the floor $\kappa$ (T2d);
+  \item \emph{No-go by information:} the certified Hellinger information is strictly below the floor's
+        threshold, so no allocation can meet $\kappa$ at any budget (T2c~(ii)).
+\end{enumerate}
+Only the first is a ``go.'' On either no-go branch the returns are the same three operational
+instructions, and each is a fact about the registered finite model, not a guess:
+\begin{description}
+  \item[Refine the model.] Increase the per-action Hellinger information of the registered channel
+        (targeted probing, finer binarization, a lower readout floor). The add case already certifies
+        $\kappa=0.99$ at $n=3$ on its strongest separator; a channel carrying half that information
+        would require roughly twice the reads.
+  \item[Relax the floor.] The certified information threshold is
+        $-\tfrac12\log\!\bigl(1-(2\kappa-1)^2\bigr)$, so lowering $\kappa$ from $0.99$ to $0.95$
+        reduces it from $\approx1.61$ to $\approx0.83$, nearly halving the required reads. This is the
+        cheapest knob to turn.
+  \item[Raise the budget.] The certified $n$ is fixed, so a no-go at $B=1$ becomes feasible the moment
+        $B\ge$ the certified cost of the strongest separator.
+\end{description}
+The template is reusable verbatim: substitute the registered case's certified $n$ and achievable cost
+for the add/glycine/miniTTR values ($3$ repeats at position $10$, $15$ at position $221$, and $3$ at
+position $23$, each $\kappa=0.99$, each a certified \texttt{NO\_GO} at $B=1$). The verdict is always
+about the registered finite model and its catalog: it certifies what a read budget can buy \emph{within
+that model}, and it says nothing about wet-lab cost or in-vitro reactivity beyond the registered
+channel.
 \paragraph{Scope and honesty.}
 The RNA-feasible composite formulation makes the identifiability/design question decision-theoretic and
 auditable; the finite-sample consequence ties that decision to a quantified read budget. The real-data
