@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "b8e3d81cc1902c9af4a988519dd0811c7fba5eac",
-  "origin_main": "b8e3d81cc1902c9af4a988519dd0811c7fba5eac",
-  "worktree_clean": false,
+  "head": "75e545772d4fe85bfca208259690d8af5e766dc6",
+  "origin_main": "5a33c9f76963fd1b8d358b41f3bfb8f79e0a7d8f",
+  "worktree_clean": true,
   "lineage": [
+    "75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison",
+    "5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81",
     "b8e3d81 feat(paper): measured 1M7 SHAPE observation channel for add riboswitch",
     "cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4",
     "ed27de4 chore(paper): add self-contained Docker reproducibility artifact",
-    "69db410 chore(paper): commit build provenance bound to 731e604",
-    "731e604 chore(paper): re-bind readiness report + manifest to final HEAD 457dc11",
-    "457dc11 feat(t2): register add riboswitch as real observation-model case and thread it through the paper"
+    "69db410 chore(paper): commit build provenance bound to 731e604"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,8 +33,8 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "c24120f101a6e320d01d9662a6038568012b7406a99ca62199ac9da234e95e7d",
-    "supplementary": "cbe6e3895b3af2933b66ee4f345aade672a40bc8c77e69dff1216d95d1f0fafa",
+    "manuscript": "0391f99f7a7fc04c7f88a0877110ba56aa9e4db310f00166bb92eda34f4e97d9",
+    "supplementary": "991957d8e105fd90099af3c72d41bd23e7bf3c79379740f3edd173da1bfd7d57",
     "references": "b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
     "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
@@ -98,5 +98,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785953819.9385953
+  "run_finished": 1785979002.163139
 }
