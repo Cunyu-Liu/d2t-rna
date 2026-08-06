@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "67c4543ee492b7629d5a6902b3e45ba5acdae058",
-  "origin_main": "67c4543ee492b7629d5a6902b3e45ba5acdae058",
+  "head": "ebdb7f61afb78b27098db9625543bcc48ec349fd",
+  "origin_main": "eb2ac0a599d4f8bc2f1f6023364ac702acde9d5c",
   "worktree_clean": false,
   "lineage": [
+    "ebdb7f6 feat(paper): close test suite (B1) - frozen index registration + isolate >1h acceptance tests",
+    "6d1a913 feat(paper): add 'How to read a D2T no-go' decision manual (B2) + self-contained figure refs",
+    "eb2ac0a feat(paper): add scope table to Discussion (certified vs not guaranteed vs upgrade)",
     "67c4543 feat(paper): third real-data case - miniTTR designed metal-ion switch (DMS)",
     "6dc05af feat(paper): fail-closed negative control on measured add data (A3)",
-    "d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70",
-    "ab47f70 feat(paper): add self-contained web demo of the add measured certificate",
-    "42726ee chore(paper): re-bind readiness report + manifest to HEAD 75e5457",
-    "75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison"
+    "d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,7 +33,7 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "20feaa2c1852dd5019e42b5500f68fdad1a7b1b8e3d05d5900fbe24e7e7046a2",
+    "manuscript": "d36ceaffc9139f75b699ec196792bab5f1d2046c8bdb3bfb0da2768be8d1c2ad",
     "supplementary": "6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317",
     "references": "957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
@@ -99,5 +99,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785989446.0013566
+  "run_finished": 1786010084.0651324
 }
