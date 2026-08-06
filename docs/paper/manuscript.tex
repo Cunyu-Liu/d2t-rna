@@ -149,6 +149,33 @@ experimental data. Unregistered continuous channels are excluded from all catego
 RNA data are confined to a fail-closed retrospective audit except where a legitimate registered binary
 channel is constructed (Section~\ref{sec:real}).
 
+
+\subsection{Where \textsc{D2T}-RNA sits in the design-testing lineage}\label{sec:lineage}
+Table~\ref{tab:lineage} makes the four contrast dimensions explicit so the key
+difference is a checkable fact rather than a narrative.
+\begin{table}[t]
+\centering
+\small
+\caption{How \textsc{D2T}-RNA differs from the design-testing lineage it builds on.
+The four columns are the dimensions a reader might conflate; only the last row is
+this paper's object.}
+\label{tab:lineage}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& Bayesian experimental design & Active learning & Sequential testing & \textsc{D2T}-RNA\\
+\midrule
+Adaptivity & adaptive & adaptive & adaptive & \emph{non-adaptive (fixed panel)}\\
+Horizon & sequential & one-at-a-time & stopping time $T$ & \emph{fixed finite $h$}\\
+Certificate & acquisition value & next point & accept/reject + $n$ & \emph{collision-or-separation + finite-sample bound + cost/no-go over all of $D$}\\
+Output & a design & a point/policy & a decision & \emph{a replayable decision/budget certificate}\\
+\bottomrule
+\end{tabular}
+\end{table}
+The fixed, non-adaptive panel is deliberate: it is what lets the certificate hold over
+the \emph{complete} cross-class difference set $D$ (Definition~\ref{def:D}) rather than
+along one adaptive path, and what makes the certificate checkable by replay against a
+registered catalog (Section~\ref{sec:real}).
+
 \section{Registered finite RNA model}\label{sec:model}
 \begin{definition}[Finite registered RNA model]\label{def:model}
 A \emph{finite registered RNA state/action/observation model} is a tuple
@@ -767,20 +794,45 @@ integrality gap. Full 88-row table is in the supplementary.
 
 \begin{table}[ht]
 \centering
-\caption{Abbreviated baseline summary (cost, oracle minimax error) for representative key cases.
-The complete 88-row table is in the supplementary.}
+\caption{Certified integer design vs.\ executed baselines on representative key cases.
+	extbf{Question:} does the certified T2 integer+LP design reach oracle-optimal separation at
+lower cost than the decided baselines it competes with? 	extbf{Result:} on the separating cases, the
+certified integer design attains the same oracle minimax error (err $=0$) at cost $1$, while the
+EIG, Chernoff, and LM2R heuristics each spend the full budget ($8$); on the colliding cases all
+methods agree. 	extbf{Boundary:} cost is measured in identical registered action units; the comparison
+is over the registered action/cost space only.}
 \label{tab:abbrev}
 \begin{tabular}{llccccc}
 \toprule
 case & method & cost & err & tv & abstain & correct \\
 \midrule
-exact\_collision & t2\_integer\_lp & 8 & 1/2 & 0 & 0 & 1/2 \\
+strict\_positive\_separation & t2\_integer\_lp & \textbf{1} & 0 & 1 & 0 & 1 \\
+strict\_positive\_separation & eig & 8 & 0 & 1 & 0 & 1 \\
+strict\_positive\_separation & chernoff & 8 & 0 & 1 & 0 & 1 \\
+strict\_positive\_separation & lm2r\_heuristic & 8 & 0 & 1 & 0 & 1 \\
+no\_cycle & t2\_integer\_lp & \textbf{1} & 0 & 1 & 0 & 1 \\
+no\_cycle & eig & 8 & 0 & 1 & 0 & 1 \\
+no\_cycle & chernoff & 8 & 0 & 1 & 0 & 1 \\
+no\_cycle & lm2r\_heuristic & 8 & 0 & 1 & 0 & 1 \\
 boundary & t2\_integer\_lp & 1 & 1/4 & 1/2 & 0 & 3/4 \\
-strict\_positive\_separation & t2\_integer\_lp & 1 & 0 & 1 & 0 & 1 \\
-no\_cycle & t2\_integer\_lp & 1 & 0 & 1 & 0 & 1 \\
+exact\_collision & t2\_integer\_lp & 8 & 1/2 & 0 & 0 & 1/2 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+Though the comparison is model-conditional and all baselines share the same registered
+action/cost space, the executed baselines are not vacuous: each realizes a different allocation
+heuristic over identical actions. Table~\ref{tab:abbrev} isolates the representative cases where the
+decided baselines differ from the certified design. On the two separating micro-cases
+($\texttt{strict\_positive\_separation}$, $\texttt{no\_cycle}$) the certified T2 integer+LP design
+reaches perfect separation (oracle minimax error $0$) at cost $1$, whereas the EIG, Chernoff, and LM2R
+heuristics each spend the full budget of $8$ to reach the same oracle-optimal error. In other words, the
+certified integer design certificates the same achievable error with a $8\times$ smaller read budget.
+On colliding cases the methods agree, so the certified design never reports a lower error than the
+heuristics; it only reports separation when it is present. This is the budget-side consequence of the
+cost/no-go certificate (T2d): the gap is not an artifact of the comparison variables but of the
+allocation being decided by exact integer programming over the full difference set rather than by a
+greedy per-action score.
 
 \section{Retrospective evidence qualification (Task6-R)}\label{sec:retro}
 This section is \emph{evidence qualification}, not validation. The three registered datasets close
