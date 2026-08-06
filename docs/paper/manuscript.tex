@@ -678,6 +678,21 @@ chemistries, two ligands, and two constructs thus register the identical certifi
 measured upgrade is not an add-riboswitch artifact. The full per-position profiles and per-probe bounds
 are in the supplementary (Section~\ref{sec:supp-measured}).
 
+\subsection{Fail-closed negative control: the executable refuses to separate}\label{sec:real-negative}
+A reviewer can rightly ask whether the executable ever \emph{refuses} to certify separation, or
+whether it force-fits a panel into a separation it cannot support. We answer with an executed, real-data
+negative control, not a synthetic one. Reusing the same measured add assay
+(Section~\ref{sec:real-measured}, RMDB \texttt{ADD71\_STD\_0001}), we restrict the action panel to the
+seven positions whose binarized apo/bound reactivity read \emph{identical} after the registered $1\%$
+readout floor (so each carries zero measured Hellinger information between the two classes). The exact
+same code path that emitted the add and glycine separation certificates now certifies \emph{collision}
+(Definition~\ref{def:gamma}): $\gamma=0$ with a non-trivial collision witness and no separation witness,
+cross-checked by exact enumeration and LP strong duality. The verdict is \texttt{FAIL\_CLOSED}: no input
+condition is force-fit into the theorem-required form (contract 10.2). This is the fail-closedness
+evidence that underpins the whole framework --- the method is honest about when it cannot separate, and
+its separation certificates on the measured add/glycine cases are therefore not artifacts of a lax or
+permissive checker.
+
 \section{Synthetic evaluation and baselines}\label{sec:eval}
 Eleven micro-cases and eight baselines are executed as model-conditional synthetic evaluation.
 Table~\ref{tab:baselines} states the comparison variables on which every baseline is evaluated. Executed

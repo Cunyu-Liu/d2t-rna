@@ -301,6 +301,23 @@ mechanism rather than an add-riboswitch artifact. Emitted by
 the stochastic channel, measured separation, the finite-sample bound, and the transferability
 difference from the add case.
 
+\subsection{Fail-closed negative control on measured data}\label{sec:supp-measured-negative}
+To show the executable is \emph{honest} (fail-closed, contract 8.4 / 10.2), we run a negative control on
+the same measured add assay (RMDB \texttt{ADD71\_STD\_0001}, Section~\ref{sec:supp-measured}). The action
+panel is restricted to the seven positions whose binarized apo/bound reactivity read identical after the
+registered $1\%$ readout floor, so each carries zero measured Hellinger information between the two
+classes. The \emph{same} code path that emitted the add and glycine separation certificates now certifies
+\emph{collision} (Definition~\ref{def:gamma}): $\gamma=0$ with a non-trivial collision witness and no
+separation witness, cross-checked by exact enumeration and LP strong duality. The verdict is
+\texttt{FAIL\_CLOSED}. This is not a synthetic counterexample: the observation channels are the measured
+1M7 SHAPE reactivities of the published assay, and only the panel differs. It confirms that the
+separation certificates on the positive cases are not artifacts of a permissive checker. Emitted by
+\texttt{scripts/real\_negative\_control\_run.py} over
+\texttt{\seqsplit{src/d2t\_rna/data/measured\_negative.py}};
+\texttt{\seqsplit{tests/data/test\_measured\_negative.py}} locks the collision verdict, the shared-panel
+zero-information property, the LP/enumeration cross-check, and the non-contamination of the positive
+separation certificate.
+
 \section{Complete baseline table (88 rows)}\label{sec:supp88}
 \input{tables/supp88.tex}
 
