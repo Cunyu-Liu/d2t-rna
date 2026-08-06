@@ -50,7 +50,11 @@ cheaper than the greedy Test-Cover baseline (Remark~\ref{rem:greedy}). On a regi
 pipeline converts a previously fail-closed retrospective record into a registered observation-model
 instance and emits an exact separation certificate together with certified finite-sample and
 costed-design bounds, including a near-tight sample-complexity certificate and a no-go at unit budget;
-the remaining retrospective records (SAM-III, RORC) stay fail-closed. The contribution is a certified
+the remaining retrospective records (SAM-III, RORC) stay fail-closed. The measured certificate is
+reproduced across three real-data cases --- the add riboswitch (1M7 SHAPE), the gcvT glycine riboswitch
+(DMS), and the miniTTR designed RNA switch (Mg$^{2+}$-dependent DMS) --- so the registered channel is
+not riboswitch- or ligand-specific, and a real-data negative control confirms the executable is
+fail-closed. The contribution is a certified
 design method whose scope is bounded by the registered finite model.
 \end{abstract}
 
@@ -677,6 +681,30 @@ certified \texttt{NO\_GO} at budget $B=1$ and a feasible design at larger $B$. T
 chemistries, two ligands, and two constructs thus register the identical certificate workflow, so the
 measured upgrade is not an add-riboswitch artifact. The full per-position profiles and per-probe bounds
 are in the supplementary (Section~\ref{sec:supp-measured}).
+
+\subsection{Transferability beyond riboswitches: a designed metal-ion switch}\label{sec:real-mattr}
+A reviewer can reasonably object that two certificates on two \emph{natural, ligand-induced
+riboswitches} still instantiate the same biological mode. To break that mode, we register a third
+measured case that differs along \emph{two} axes at once: it is a \emph{designed} RNA (not a natural
+aptamer) and its discriminator is \emph{metal-ion} concentration (not ligand occupancy). We register
+the RMDB accession \texttt{MTTR1\_MGTI\_0001} \citep{yesselman2019computational}: the miniTTR c1
+computational-design construct ($81$~nt) with DMS
+reactivity measured over a $32$-point MgCl$_{2}$ titration. Two conditions are used: $0$~mM (RDAT
+\underline{ANNOTATION\_DATA}:1, metal-ion depleted) and $50$~mM (RDAT \underline{ANNOTATION\_DATA}:32,
+metal-ion saturated). The same contract slots apply verbatim: two states (LOW/HIGH), marginal
+$M=(1,1)$, one action per position, $1\%$ readout floor, binarized measured channel.
+
+The certificate is immediate and strong. Of the $81$ positions, $76$ are \emph{measured-separating}
+(0\,mM vs.\ 50\,mM binarized reactivity differ). A panel of the eight strongest measured separators
+certifies exact (\texttt{iff}) separation with $\gamma=49/25$, with the enumeration checker and LP
+strong duality agreeing. The strongest measured separator (position $23$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $76$ separating positions have a
+certified finite sufficiency bound. The achievable integer design reads a certified cost of $3$, and at
+a user budget of $B=1$ the design is a certified \texttt{NO\_GO}. Three measured cases --- a natural
+SHAPE riboswitch, a natural DMS riboswitch, and a \emph{designed} DMS metal-ion switch --- therefore all
+register the identical certificate workflow, so the measured upgrade transfers across chemistry,
+biology, and design provenance. The full per-position profiles and per-probe bounds are in the
+supplementary (Section~\ref{sec:supp-measured}).
 
 \subsection{Fail-closed negative control: the executable refuses to separate}\label{sec:real-negative}
 A reviewer can rightly ask whether the executable ever \emph{refuses} to certify separation, or

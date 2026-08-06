@@ -7,33 +7,33 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = ab47f70540ba3807c9726991b8078cd078c72e96
-origin/main    = 42726ee9bc2634d13407706369d31321375661e3
-worktree state = clean
+current HEAD   = 6dc05af4c49393812804c5498634bf3ccfdcf14f
+origin/main    = 6dc05af4c49393812804c5498634bf3ccfdcf14f
+worktree state = DIRTY
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+6dc05af feat(paper): fail-closed negative control on measured add data (A3)
+d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70
 ab47f70 feat(paper): add self-contained web demo of the add measured certificate
 42726ee chore(paper): re-bind readiness report + manifest to HEAD 75e5457
 75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison
 5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81
-b8e3d81 feat(paper): measured 1M7 SHAPE observation channel for add riboswitch
-cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4
 ```
 
-The readiness report is re-generated from the current HEAD (ab47f70540ba3807c9726991b8078cd078c72e96), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> ab47f70.
+The readiness report is re-generated from the current HEAD (6dc05af4c49393812804c5498634bf3ccfdcf14f), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 6dc05af.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
 See `manifests/paper/paper_submission_readiness.json` for the full set. Key files:
 
 ```text
-manuscript.tex      = 0391f99f7a7fc04c7f88a0877110ba56aa9e4db310f00166bb92eda34f4e97d9
-supplementary.tex   = 991957d8e105fd90099af3c72d41bd23e7bf3c79379740f3edd173da1bfd7d57
-references.bib      = b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d
+manuscript.tex      = ac0c12a12e03f713e32f682809536639e30b55bffeb397179d92374da9a8f4ad
+supplementary.tex   = 6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317
+references.bib      = 957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18
 retro_table.tex     = 499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596
 supp88.tex          = 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58
 evidence_lock.json  = f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2
@@ -43,8 +43,8 @@ evidence_lock.json  = f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f4
 
 PAPER-EVIDENCE-LOCK-GATE / PAPER-AUTHORITY-PRECEDENCE-GATE / PAPER-CONTRIBUTION-GATE / PAPER-PRIOR-ART-NOVELTY-GATE / PAPER-RESULTS-VALIDATION-GATE / PAPER-CLAIM-BOUNDARY-GATE / PAPER-REVIEWER-AUDIT-GATE / PAPER-REPRODUCIBILITY-GATE.
 
-Abstract: 6 sentences, prohibited hits=none.
-Citations: 19 bib entries, 0 uncited (none).
+Abstract: 7 sentences, prohibited hits=none.
+Citations: 20 bib entries, 0 uncited (none).
 Novelty verdict: METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED).
 
 ## 5. Novelty verdict (revised 2026-08-05)
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD ab47f70 (this file).
+- P0 readiness report synced to HEAD 6dc05af (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on ab47f70 with provenance (see build_provenance).
+- P1 full build on 6dc05af with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 

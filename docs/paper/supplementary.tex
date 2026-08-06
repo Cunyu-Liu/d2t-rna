@@ -301,6 +301,36 @@ mechanism rather than an add-riboswitch artifact. Emitted by
 the stochastic channel, measured separation, the finite-sample bound, and the transferability
 difference from the add case.
 
+\paragraph{Third real case: miniTTR designed metal-ion switch (DMS).}
+To break the remaining \emph{riboswitch-} and \emph{ligand-specificity} concern, we register a third
+measured case that is neither a natural aptamer nor ligand-gated. Dataset (registered, RMDB accession
+\texttt{\seqsplit{MTTR1\_MGTI\_0001}}): Yesselman JD et al., ``Computational design of three-dimensional
+RNA structure and function,'' \emph{Nature Nanotechnology} (2019), doi:\texttt{\seqsplit{10.1038/s41565-019-0517-8}},
+PMID 31427748. Construct: miniTTR c1, a small \emph{designed} RNA ($81$~nt). Reagent: DMS reactivity
+measured over a $32$-point MgCl$_{2}$ titration. The two conditions used are the depleted and saturated
+endpoints: $0$~mM MgCl$_{2}$ (RDAT \texttt{ANNOTATION\_DATA}:1) and $50$~mM MgCl$_{2}$ (RDAT
+\texttt{ANNOTATION\_DATA}:32). The binarization rule
+$p_{\mathrm{reactive}}=\max\!\bigl(1/100,\allowbreak \min(99/100,r)\bigr)$
+and the registration slots are identical to the add/glycine cases; the discriminator is a
+\emph{metal-ion}-driven conformational switch, not a ligand-occupancy switch.
+
+\paragraph{Results (third case).}
+Of the $81$ positions, $76$ are measured-separating. The T2b certificate over the eight strongest
+measured separators is exact (\texttt{iff}) with $\gamma=49/25$ (rational LP and enumeration checker
+agree, strong duality passes). For T2c, the strongest measured separator (position $23$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $76$ separating positions carry
+a certified finite sufficiency bound. For T2d, the achievable integer design reads a certified cost of
+$3$, and is a certified \texttt{NO\_GO} at budget $B=1$. Three measured cases --- a natural SHAPE
+riboswitch, a natural DMS riboswitch, and a \emph{designed} DMS metal-ion switch --- therefore all obey
+the identical certificate workflow, so the measured upgrade is transferable across chemistry, biology,
+and design provenance rather than an artifact of any single assay type. Emitted by
+\texttt{scripts/real\_mattr\_measured\_run.py} over
+\texttt{\seqsplit{src/d2t\_rna/data/measured\_mattr.py}}
+(RDAT parsed from \texttt{\seqsplit{src/d2t\_rna/data/raw/MTTR1\_MGTI\_0001.rdat}});
+\texttt{\seqsplit{tests/data/test\_measured\_mattr.py}} locks the RDAT parse, the two titration endpoints,
+the stochastic channel, measured separation, the finite-sample bound, and the transferability
+differences from both prior cases.
+
 \subsection{Fail-closed negative control on measured data}\label{sec:supp-measured-negative}
 To show the executable is \emph{honest} (fail-closed, contract 8.4 / 10.2), we run a negative control on
 the same measured add assay (RMDB \texttt{ADD71\_STD\_0001}, Section~\ref{sec:supp-measured}). The action

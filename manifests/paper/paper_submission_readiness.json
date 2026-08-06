@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "ab47f70540ba3807c9726991b8078cd078c72e96",
-  "origin_main": "42726ee9bc2634d13407706369d31321375661e3",
-  "worktree_clean": true,
+  "head": "6dc05af4c49393812804c5498634bf3ccfdcf14f",
+  "origin_main": "6dc05af4c49393812804c5498634bf3ccfdcf14f",
+  "worktree_clean": false,
   "lineage": [
+    "6dc05af feat(paper): fail-closed negative control on measured add data (A3)",
+    "d79f6a9 chore(paper): re-bind readiness report + manifest to HEAD ab47f70",
     "ab47f70 feat(paper): add self-contained web demo of the add measured certificate",
     "42726ee chore(paper): re-bind readiness report + manifest to HEAD 75e5457",
     "75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison",
-    "5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81",
-    "b8e3d81 feat(paper): measured 1M7 SHAPE observation channel for add riboswitch",
-    "cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4"
+    "5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,9 +33,9 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "0391f99f7a7fc04c7f88a0877110ba56aa9e4db310f00166bb92eda34f4e97d9",
-    "supplementary": "991957d8e105fd90099af3c72d41bd23e7bf3c79379740f3edd173da1bfd7d57",
-    "references": "b95b755753513afea61d8079e15db3e9e0214ff3a6e27dc00cac34b09852bf2d",
+    "manuscript": "ac0c12a12e03f713e32f682809536639e30b55bffeb397179d92374da9a8f4ad",
+    "supplementary": "6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317",
+    "references": "957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18",
     "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
     "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
     "contribution": "e8d70db27ec16c7a48a14b64b04f5eb7fb41049b009ec8f2052e3ec389bc73a4",
@@ -50,7 +50,7 @@
     "retro_table": "499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596"
   },
   "abstract_check": {
-    "abstract_sentence_count": 6,
+    "abstract_sentence_count": 7,
     "abstract_prohibited_hits": [],
     "abstract_required_phrases_present": [
       "model-conditional",
@@ -61,7 +61,7 @@
     "abstract_ok": true
   },
   "citation_check": {
-    "bib_entry_count": 19,
+    "bib_entry_count": 20,
     "cited_keys": [
       "chaloner1995bayesian",
       "cheng2015consistent",
@@ -81,7 +81,8 @@
       "pukelsheim2006optimal",
       "sloma2016exact",
       "wald1945sequential",
-      "weeks2010advances"
+      "weeks2010advances",
+      "yesselman2019computational"
     ],
     "uncited_keys": [],
     "all_cited": true
@@ -98,5 +99,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785982255.4007483
+  "run_finished": 1785989350.4853787
 }
