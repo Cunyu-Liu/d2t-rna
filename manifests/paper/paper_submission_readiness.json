@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "75e545772d4fe85bfca208259690d8af5e766dc6",
-  "origin_main": "5a33c9f76963fd1b8d358b41f3bfb8f79e0a7d8f",
+  "head": "ab47f70540ba3807c9726991b8078cd078c72e96",
+  "origin_main": "42726ee9bc2634d13407706369d31321375661e3",
   "worktree_clean": true,
   "lineage": [
+    "ab47f70 feat(paper): add self-contained web demo of the add measured certificate",
+    "42726ee chore(paper): re-bind readiness report + manifest to HEAD 75e5457",
     "75e5457 feat(paper): measured DMS second real case + greedy Test-Cover baseline comparison",
     "5a33c9f chore(paper): re-bind readiness report + manifest to HEAD b8e3d81",
     "b8e3d81 feat(paper): measured 1M7 SHAPE observation channel for add riboswitch",
-    "cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4",
-    "ed27de4 chore(paper): add self-contained Docker reproducibility artifact",
-    "69db410 chore(paper): commit build provenance bound to 731e604"
+    "cbddae4 chore(paper): re-bind readiness report + manifest to HEAD ed27de4"
   ],
   "file_exists": {
     "manuscript": true,
@@ -98,5 +98,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1785979002.163139
+  "run_finished": 1785982255.4007483
 }
