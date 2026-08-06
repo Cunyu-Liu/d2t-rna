@@ -154,6 +154,7 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/t2/test_theorem_t2b.py",
             "tests/t2/test_theorem_t2c.py",
             "tests/t2/test_witness_engine.py",
+            "tests/t2/test_paper_demo.py",
             "src/d2t_rna/t2/real_add.py",
             "tests/t2/test_real_add.py",
             "scripts/real_add_run.py",
@@ -175,6 +176,7 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/scripts/test_s14_delivery_bundle.py",
             "scripts/m0_activate_v7.py",
             "scripts/paper_readiness_gate.py",
+            "scripts/build_paper_demo_data.py",
         }
     )
     assert historical_task4.isdisjoint(registered_task5_descendants)
