@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "188879819a03bc2fdff0a5c22c1220c720c4d338",
-  "origin_main": "188879819a03bc2fdff0a5c22c1220c720c4d338",
+  "head": "b8444ce40f77a8062e607c81fbecfef580598ef5",
+  "origin_main": "b8444ce40f77a8062e607c81fbecfef580598ef5",
   "worktree_clean": true,
   "lineage": [
+    "b8444ce fix(test): register demo build script + demo test in frozen execution closure index",
+    "b9a2bdb chore(paper): re-bind readiness gate to HEAD 1888798 (ALL PASS, uncited=[])",
     "1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD",
     "73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)",
     "74e66ff chore(paper): re-bind readiness report + manifest to HEAD 171b794",
-    "171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6",
-    "ebdb7f6 feat(paper): close test suite (B1) - frozen index registration + isolate >1h acceptance tests",
-    "6d1a913 feat(paper): add 'How to read a D2T no-go' decision manual (B2) + self-contained figure refs"
+    "171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6"
   ],
   "file_exists": {
     "manuscript": true,
@@ -99,5 +99,5 @@
   },
   "gates_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786012047.8356655
+  "run_finished": 1786019228.6906283
 }

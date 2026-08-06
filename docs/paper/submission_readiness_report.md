@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = 188879819a03bc2fdff0a5c22c1220c720c4d338
-origin/main    = 188879819a03bc2fdff0a5c22c1220c720c4d338
+current HEAD   = b8444ce40f77a8062e607c81fbecfef580598ef5
+origin/main    = b8444ce40f77a8062e607c81fbecfef580598ef5
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+b8444ce fix(test): register demo build script + demo test in frozen execution closure index
+b9a2bdb chore(paper): re-bind readiness gate to HEAD 1888798 (ALL PASS, uncited=[])
 1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD
 73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)
 74e66ff chore(paper): re-bind readiness report + manifest to HEAD 171b794
 171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6
-ebdb7f6 feat(paper): close test suite (B1) - frozen index registration + isolate >1h acceptance tests
-6d1a913 feat(paper): add 'How to read a D2T no-go' decision manual (B2) + self-contained figure refs
 ```
 
-The readiness report is re-generated from the current HEAD (188879819a03bc2fdff0a5c22c1220c720c4d338), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> 1888798.
+The readiness report is re-generated from the current HEAD (b8444ce40f77a8062e607c81fbecfef580598ef5), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> b8444ce.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -66,7 +66,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD 1888798 (this file).
+- P0 readiness report synced to HEAD b8444ce (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +76,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on 1888798 with provenance (see build_provenance).
+- P1 full build on b8444ce with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
