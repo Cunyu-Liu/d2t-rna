@@ -1,0 +1,45 @@
+{
+  "schema": "d2t_rna.claim_retraction_ledger.v1",
+  "phase": "P0-1",
+  "created_at": "2026-08-07T18:00:00+08:00",
+  "purpose": "Record every strong claim that the v7 audit withdraws or downgrades, and the disposition after P0-3..6 corrections.",
+  "claims": [
+    {
+      "claim": "gamma(S)=49/25 panel product-law TV separation",
+      "previous_status": "reported in manuscript/supplementary",
+      "reason_withdrawn": "TV must lie in [0,1]; 49/25=1.96 is impossible",
+      "disposition": "CORRECTED to TV-normalized (49/50); TV in [0,1] enforced; semantic-lint tv_in_unit_interval"
+    },
+    {
+      "claim": "exact_minimax_error gives per-hypothesis minimax guarantees",
+      "previous_status": "named exact_minimax_error",
+      "reason_withdrawn": "actually equal-prior Bayes average error 1/2 sum min(P0,P1)",
+      "disposition": "RENAMED exact_bayes_average_error; added exact_randomized_minimax_error + ConditionalDecision (alpha,beta,kappa,rho)"
+    },
+    {
+      "claim": "FEASIBLE (design achievable) on necessary-threshold crossing",
+      "previous_status": "bounds.py",
+      "reason_withdrawn": "necessary information threshold crossing not proof of achievability",
+      "disposition": "FEASIBLE only via explicit correct-declaration rule; else AMBIGUOUS"
+    },
+    {
+      "claim": "per_position_error_used=True (SE enters likelihood)",
+      "previous_status": "provenance of measured runners",
+      "reason_withdrawn": "SE parsed but unused in likelihood/selection/information/n",
+      "disposition": "set false; glycine BLOCKED_PENDING_ARCHIVE_QUALIFICATION"
+    },
+    {
+      "claim": "product_bhattacharyya = BC_0^{sum n_u}",
+      "previous_status": "evaluation/matrix.py",
+      "reason_withdrawn": "heterogeneous actions require prod_u BC_u^{n_u}",
+      "disposition": "CORRECTED to prod_u BC_u^{n_u}; reference tests added"
+    },
+    {
+      "claim": "T2d interval conservative direction (no-go/achievability)",
+      "previous_status": "supplementary proof",
+      "reason_withdrawn": "direction reversed in paper (upper/lower bounds)",
+      "disposition": "no-go uses upper info bound; constructive achievability uses lower; paper aligned"
+    }
+  ],
+  "overall_disposition": "SOTA/submission strong claims remain NOT_ESTABLISHED; P0 phase only grants engineering lineage PASS_FOR_TASK5_ONLY and fail-closed correctness restoration. Scientific conclusion authorization remains false."
+}
