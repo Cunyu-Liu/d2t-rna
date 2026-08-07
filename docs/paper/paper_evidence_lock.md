@@ -5,17 +5,19 @@
 > 本项目进入 **PAPER-0 (evidence lock)** 与 **PAPER-1 (manuscript build)** 阶段。
 > 本文档是 paper-only 文件，不修改、不覆盖任何历史 acceptance manifest。
 
-## 1. Repository state (preflight, read-only)
+## 1. Repository state (P0-7 rebind)
 
 ```text
 repo            = /home/cunyuliu/d2t-rna
-required_head   = f50e2510b473a4dcb9981790e7e060b2919dd1e6
-required_origin = f50e2510b473a4dcb9981790e7e060b2919dd1e6
-current_head    = f50e2510b473a4dcb9981790e7e060b2919dd1e6
-origin_main     = f50e2510b473a4dcb9981790e7e060b2919dd1e6
+required_head   = 5772eca00d5323e908183a9cbac61cdbd92a669f
+required_origin = 5772eca00d5323e908183a9cbac61cdbd92a669f
+current_head    = 5772eca00d5323e908183a9cbac61cdbd92a669f
+origin_main     = 5772eca00d5323e908183a9cbac61cdbd92a669f
 worktree        = clean
 ```
-preflight 通过：HEAD == origin/main == required，工作树干净，无未提交修改。
+P0-7 rebind：原文锁绑定于 `f50e2510`；本行更新为 `5772eca`（P0-3..6 修正后的
+semantic kernel / measured-claim honesty / matched benchmark HEAD），论文在此 HEAD 下重建。
+证据输入（§2 封存 manifest 哈希）不变；锁仅反映 corrected HEAD 下的论文重建。
 
 ## 2. 封存输入（immutable evidence）
 

@@ -13,7 +13,7 @@
   },
   "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
   "contract_version": "v7.0.0",
-  "current_head": "f50e2510b473a4dcb9981790e7e060b2919dd1e6",
+  "current_head": "5772eca00d5323e908183a9cbac61cdbd92a669f",
   "delivery_bundle": "manifests/s14/s14_delivery_bundle_acceptance.json",
   "historical_records": {
     "docs/audit/t9_4_paper_scientific_units.md": {
@@ -45,14 +45,14 @@
     "manifests/task6r/task6r_r1_acceptance.json": "5e1b0ab895330780c9b70d8ac4bba204b142b02a1d6a0a01e3bcd7d248b40d36",
     "manifests/task6r/task6r_r2_acceptance.json": "6928e7ca10666e0d8b29faf892b6f1f35532cd23b3a382252dad4c7631d94109"
   },
-  "origin_main": "f50e2510b473a4dcb9981790e7e060b2919dd1e6",
+  "origin_main": "5772eca00d5323e908183a9cbac61cdbd92a669f",
   "r2_terminal_outcomes": {
     "add": "NOT_COMPARABLE_BY_REGISTERED_OBSERVATION_MODEL",
     "rorc": "NOT_APPLICABLE",
     "sam-iii": "NOT_COMPARABLE_BY_REGISTERED_ACTION_SPACE"
   },
   "run_dir": "/mnt/cunyuliu/d2t-rna/artifacts/runs/paper-evidence-lock-20260805T190042+0800",
-  "run_finished": 1785927648.4921343,
+  "run_finished": 1786091809.471373,
   "schema": "d2t_rna.paper_evidence_lock.v1",
   "scientific_claim_authorized": false,
   "scientific_interpretation": {
@@ -65,5 +65,6 @@
   },
   "status": "PAPER_EVIDENCE_LOCKED",
   "submission_gate": "manifests/s12/s12_3_submission_gate_acceptance.json",
-  "worktree_clean": true
+  "worktree_clean": true,
+  "rebound_note": "P0-7 rebind: current_head updated from f50e2510 to 5772eca (P0-3..6 corrected semantic kernel + measured-claim honesty + matched benchmark). Evidence inputs unchanged; lock reflects the corrected HEAD under which the paper is rebuilt."
 }

@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "b8444ce40f77a8062e607c81fbecfef580598ef5",
-  "origin_main": "b8444ce40f77a8062e607c81fbecfef580598ef5",
-  "worktree_clean": true,
+  "head": "5772eca00d5323e908183a9cbac61cdbd92a669f",
+  "origin_main": "a31f060c190fd00cb7f34d58a9ae37acafa4b256",
+  "worktree_clean": false,
   "lineage": [
+    "5772eca fix(P0-3..6): semantic kernel rescue, decision semantics, measured-claim honesty, matched benchmark",
+    "a31f060 chore(paper): re-bind readiness gate to HEAD b8444ce after closure-index fix (ALL PASS, uncited=[])",
     "b8444ce fix(test): register demo build script + demo test in frozen execution closure index",
     "b9a2bdb chore(paper): re-bind readiness gate to HEAD 1888798 (ALL PASS, uncited=[])",
     "1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD",
-    "73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)",
-    "74e66ff chore(paper): re-bind readiness report + manifest to HEAD 171b794",
-    "171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6"
+    "73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)"
   ],
   "file_exists": {
     "manuscript": true,
@@ -33,11 +33,11 @@
     "retro_table": true
   },
   "file_hashes": {
-    "manuscript": "48edfead47f657d3b5f9d8a0818dfacdf44e270ee8fb37335b0fd807f65b3e84",
-    "supplementary": "6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317",
+    "manuscript": "8bf3b5155030f87b794e2a32efd7c47b53fe94f9c2b1725faf49b15c75843f87",
+    "supplementary": "8811ba6d8726955b17542dc900dcd772a9a95cf629f4381211013d5b3e5980e5",
     "references": "957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18",
-    "evidence_lock": "84d5667cbdf045ba78006f670d328ab4920427a9fbae8d4cfe82abe820df6c35",
-    "evidence_lock_json": "f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2",
+    "evidence_lock": "475cc4958e138776a216c344881316a20ee889616f50b1dd6c2fc58d1c1be427",
+    "evidence_lock_json": "f89b75bb807656c4457619ce918c8dc4b0608b64343944063f3ce384abccb50f",
     "contribution": "e8d70db27ec16c7a48a14b64b04f5eb7fb41049b009ec8f2052e3ec389bc73a4",
     "prior_art": "82b74158c86d5ed2c3abfa113732bb74bfdcb7c2a3b844b2bf501295b0e771e2",
     "results_validation": "934bd310f61ef971fe28e9392439be7c673a5c401d634c5a7131113333e91af0",
@@ -95,9 +95,21 @@
     "PAPER-RESULTS-VALIDATION-GATE": true,
     "PAPER-CLAIM-BOUNDARY-GATE": true,
     "PAPER-REVIEWER-AUDIT-GATE": true,
-    "PAPER-REPRODUCIBILITY-GATE": true
+    "PAPER-REPRODUCIBILITY-GATE": true,
+    "PAPER-SEMANTIC-KILL-GATE": true,
+    "PAPER-SEMANTIC-ERROR-UNUSED-GATE": true,
+    "PAPER-SEMANTIC-DEFINITION-GATE": true
   },
   "gates_all_pass": true,
+  "semantic_lint": {
+    "tv_in_unit_interval": true,
+    "forged_witness_fail_closed": true,
+    "error_unused_honest": true,
+    "definition_drift_clean": true,
+    "kill_tests_pass": true,
+    "kill_tests_note": "................................                                         [100%]\n32 passed in 0.53s\n"
+  },
+  "semantic_lint_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786019228.6906283
+  "run_finished": 1786128306.2628062
 }

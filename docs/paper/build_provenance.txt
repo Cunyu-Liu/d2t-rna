@@ -41,3 +41,45 @@ note: Skipped writing 1 intermediate files (use --keep-intermediates to keep the
 == PDF checksums (SHA-256) ==
 a02c029f263de04f3f4d7d6bcf1aa6442bfc14b73963c2696ab7b2db1e10ee42  manuscript_verify.pdf
 a2a8a38dc2ee003ea533c2ea5e7913d8133ec1edffc4c1c5a7e526a0c3691985  supplementary_verify.pdf
+
+==========================================================================
+P0-7 fresh evidence replay build (2026-08-07, Asia/Shanghai)
+==========================================================================
+captured_at        : 2026-08-07T08:35:00Z (~16:35 CST)
+source_commit      : 5772eca00d5323e908183a9cbac61cdbd92a669f
+tectonic_version   : Tectonic 0.15.0
+build_mode         : direct `tectonic manuscript.tex` / `tectonic supplementary.tex`
+                     (figures already present as PDF; no rsvg-convert needed this round)
+
+== source file checksums (SHA-256) ==
+8bf3b5155030f87b794e2a32efd7c47b53fe94f9c2b1725faf49b15c75843f87  manuscript.tex
+8811ba6d8726955b17542dc900dcd772a9a95cf629f4381211013d5b3e5980e5  supplementary.tex
+957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18  references.bib
+206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58  tables/supp88.tex
+
+== figure PDF checksums (SHA-256, reused from prior conversion) ==
+41901f9ace13f1b533e4ebc53beefd8dd3c87696d39b2283ac884d19d5eb0a70  figures/fig1_geometry.pdf
+46de45f1b29cb09b206102fa7d773afb24403e5298bb2f86532fde2d2dace7f3  figures/fig2_finiteness.pdf
+d2ca2fdd9bb794a477423790b469e8c9f88c5153c1e1bb0d3137d9609bf42262  figures/fig3_costed_design.pdf
+3ca1cdef6f183302d54744946657a36502a2ed28938601f42532612844327445  figures/fig4_retro.pdf
+990a71ff878891e2e4de0ab7030acd773bf647bb3a3374347f24875e18bd399c  figures/fig5_misspec.pdf
+
+== tectonic build (main manuscript) ==
+$ tectonic manuscript.tex
+exit=0
+note: Writing `manuscript.pdf` (252.53 KiB)
+
+== tectonic build (supplementary) ==
+$ tectonic supplementary.tex
+exit=0
+note: Writing `supplementary.pdf` (94.45 KiB)
+
+== PDF checksums (SHA-256) ==
+3ddc730b7ecff96515f1d1948ade9230279ae7af7952db9c972001c40a4cd89d  manuscript.pdf
+ef38df48b29375c13d6051f647d7de137a6e8d8e1e53f840402d53d29b64164a  supplementary.pdf
+
+== note ==
+This P0-7 replay rebuilds the manuscript/supplementary PDFs with the TV-normalized
+gamma values (49/50, 9/10, ...) and corrected minimax/Bayes terminology from the
+P0-3..6 commit 5772eca. The prior build provenance block above (bound to 731e604)
+is preserved unmodified for history.

@@ -7,41 +7,46 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = b8444ce40f77a8062e607c81fbecfef580598ef5
-origin/main    = b8444ce40f77a8062e607c81fbecfef580598ef5
-worktree state = clean
+current HEAD   = 5772eca00d5323e908183a9cbac61cdbd92a669f
+origin/main    = a31f060c190fd00cb7f34d58a9ae37acafa4b256
+worktree state = DIRTY
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+5772eca fix(P0-3..6): semantic kernel rescue, decision semantics, measured-claim honesty, matched benchmark
+a31f060 chore(paper): re-bind readiness gate to HEAD b8444ce after closure-index fix (ALL PASS, uncited=[])
 b8444ce fix(test): register demo build script + demo test in frozen execution closure index
 b9a2bdb chore(paper): re-bind readiness gate to HEAD 1888798 (ALL PASS, uncited=[])
 1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD
 73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)
-74e66ff chore(paper): re-bind readiness report + manifest to HEAD 171b794
-171b794 chore(paper): re-bind readiness report + manifest to HEAD ebdb7f6
 ```
 
-The readiness report is re-generated from the current HEAD (b8444ce40f77a8062e607c81fbecfef580598ef5), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> b8444ce.
+The readiness report is re-generated from the current HEAD (5772eca00d5323e908183a9cbac61cdbd92a669f), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 5772eca.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
 See `manifests/paper/paper_submission_readiness.json` for the full set. Key files:
 
 ```text
-manuscript.tex      = 48edfead47f657d3b5f9d8a0818dfacdf44e270ee8fb37335b0fd807f65b3e84
-supplementary.tex   = 6fa59ca3cf4bce368b3bbd8546abe797ff5bec56fdbfc171eb8a5fa38aa8d317
+manuscript.tex      = 8bf3b5155030f87b794e2a32efd7c47b53fe94f9c2b1725faf49b15c75843f87
+supplementary.tex   = 8811ba6d8726955b17542dc900dcd772a9a95cf629f4381211013d5b3e5980e5
 references.bib      = 957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18
 retro_table.tex     = 499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596
 supp88.tex          = 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58
-evidence_lock.json  = f8c2d4deca3dc969c2f8fd7115a0b5b586b2f5fe46e76c565283ba56f41119d2
+evidence_lock.json  = f89b75bb807656c4457619ce918c8dc4b0608b64343944063f3ce384abccb50f
 ```
 
 ## 4. Paper gates (ALL PASS)
 
-PAPER-EVIDENCE-LOCK-GATE / PAPER-AUTHORITY-PRECEDENCE-GATE / PAPER-CONTRIBUTION-GATE / PAPER-PRIOR-ART-NOVELTY-GATE / PAPER-RESULTS-VALIDATION-GATE / PAPER-CLAIM-BOUNDARY-GATE / PAPER-REVIEWER-AUDIT-GATE / PAPER-REPRODUCIBILITY-GATE.
+PAPER-EVIDENCE-LOCK-GATE / PAPER-AUTHORITY-PRECEDENCE-GATE / PAPER-CONTRIBUTION-GATE / PAPER-PRIOR-ART-NOVELTY-GATE / PAPER-RESULTS-VALIDATION-GATE / PAPER-CLAIM-BOUNDARY-GATE / PAPER-REVIEWER-AUDIT-GATE / PAPER-REPRODUCIBILITY-GATE / PAPER-SEMANTIC-KILL-GATE / PAPER-SEMANTIC-ERROR-UNUSED-GATE / PAPER-SEMANTIC-DEFINITION-GATE.
+
+Semantic lint (P0-7): TV-in-[0,1]=ALL PASS,
+forged-witness/kill-tests=ALL PASS,
+error-unused-honest=ALL PASS,
+definition-drift=ALL PASS.
 
 Abstract: 7 sentences, prohibited hits=none.
 Citations: 20 bib entries, 0 uncited (none).
@@ -66,7 +71,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD b8444ce (this file).
+- P0 readiness report synced to HEAD 5772eca (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -76,7 +81,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on b8444ce with provenance (see build_provenance).
+- P1 full build on 5772eca with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
