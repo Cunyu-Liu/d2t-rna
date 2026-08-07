@@ -5,8 +5,8 @@ Two simple hypotheses ``H0``/``H1`` with complete categorical observation laws
 The T2c theorem gives *non-asymptotic* bounds driven by the total product-law
 Bhattacharyya coefficient ``BC = exp(-I_total)``:
 
-Upper bound (achievability).  The minimax error probability of the best
-(possibly randomised) test satisfies
+Upper bound (achievability).  The error probability of the best (possibly
+randomised) test satisfies
 
     P_err <= (1/2) BC = (1/2) exp(-I_total).
 
@@ -25,6 +25,13 @@ If the certified total information is strictly below that threshold, no rule in
 the registered design class (fixed-horizon, possible abstention) can reach the
 target: a structural no-go / budget lower bound.
 
+**Feasibility semantics.**  The information threshold above is a *necessary*
+condition only.  Crossing it does **not** certify feasibility.  ``FEASIBLE`` is
+issued (**P0-4**) only when an explicit decision rule is certified to meet the
+target, namely when the certified correct-declaration lower bound
+:func:`correct_decl_lower_interval` reaches ``kappa``.  Otherwise the status is
+``AMBIGUOUS`` (not ``FEASIBLE``).
+
 All bounds are returned as certified ``Interval`` objects (see
 :mod:`d2t_rna.t2.info`); the true value is guaranteed to lie inside the
 returned interval.  No floating tolerance or caller hash is treated as proof.
@@ -35,7 +42,7 @@ from __future__ import annotations
 from decimal import Decimal, localcontext
 from fractions import Fraction
 
-from .info import Interval, ln_interval, exp_interval
+from .info import Interval, ln_interval, exp_interval, scale_info_interval
 
 _HALF = Decimal("0.5")
 
@@ -117,7 +124,7 @@ def budget_lower_bound_info(
 
 
 class T2cNoGoStatus:
-    """Outcome of the no-go comparison (contract 5.3 lower-bound direction)."""
+    """Outcome of the no-go / feasibility decision (contract 5.3 lower-bound)."""
 
     NO_GO = "NO_GO"
     FEASIBLE = "FEASIBLE"
@@ -129,19 +136,30 @@ def no_go_status(
     kappa: Fraction,
     prec: int = 60,
 ) -> tuple[str, Interval]:
-    """Determine whether target ``kappa`` is structurally infeasible.
+    """Determine whether target ``kappa`` is structurally infeasible or is
+    certified feasible by an explicit rule.
 
-    Returns ``(status, required_info_interval)`` with status one of
-    ``NO_GO`` (``total_info.hi`` strictly below the required lower bound),
-    ``FEASIBLE`` (``total_info.lo`` strictly above the required upper bound),
-    or ``AMBIGUOUS`` (certified intervals overlap).
+    Returns ``(status, required_info_interval)`` with status one of:
+
+    * ``NO_GO`` -- ``total_info.hi`` is strictly below the *necessary* lower
+      bound ``I_req``; no rule in the registered design class can reach
+      ``kappa``.  (No-go uses the certified *upper* information bound.)
+    * ``FEASIBLE`` -- an **explicit** decision rule is certified to reach
+      ``kappa``: the correct-declaration lower bound
+      :func:`correct_decl_lower_interval` is at least ``kappa``.  (P0-4:
+      feasibility is only ever issued by an explicit rule, never merely by
+      crossing the necessary information threshold.)
+    * ``AMBIGUOUS`` -- the certified intervals leave the target undecided.
     """
     req = budget_lower_bound_info(kappa, prec)
     if req.lo.is_infinite():
         return T2cNoGoStatus.NO_GO, req
     if total_info.hi < req.lo:
         return T2cNoGoStatus.NO_GO, req
-    if total_info.lo > req.hi:
+    # FEASIBLE only via an explicit achievability rule (not threshold crossing).
+    cd = correct_decl_lower_interval(total_info, prec)
+    kappa_dec = Decimal(kappa.numerator) / Decimal(kappa.denominator)
+    if cd.lo >= kappa_dec:
         return T2cNoGoStatus.FEASIBLE, req
     return T2cNoGoStatus.AMBIGUOUS, req
 
@@ -156,19 +174,22 @@ def required_repeats(
     certified to be zero).
 
     Returns ``(n, status)`` where status is ``FEASIBLE`` if a finite ``n``
-    suffices and the certified ``n * I`` upper bound clears the required lower
-    bound, or ``NO_GO`` if even ``n = 1`` cannot be certified to suffice.
+    suffices and the certified ``n * I`` reaches the target via the explicit
+    achievability rule, or ``NO_GO`` if even ``n = 1`` cannot be certified to
+    suffice.
     """
     req = budget_lower_bound_info(kappa, prec)
     if req.lo.is_infinite():
         return 0, T2cNoGoStatus.NO_GO
     if per_repeat_info.hi == 0:
         return 0, T2cNoGoStatus.NO_GO
-    # smallest n with n * per_repeat_info.lo > req.hi to be certified FEASIBLE
+    # smallest n with the explicit correct-declaration lower bound >= kappa
     n = 1
     while True:
-        nu = n * Decimal(per_repeat_info.lo)
-        if nu > req.hi:
+        info_n = scale_info_interval(per_repeat_info, n, prec)
+        cd = correct_decl_lower_interval(info_n, prec)
+        kappa_dec = Decimal(kappa.numerator) / Decimal(kappa.denominator)
+        if cd.lo >= kappa_dec:
             return n, T2cNoGoStatus.FEASIBLE
         n += 1
         if n > 1_000_000:

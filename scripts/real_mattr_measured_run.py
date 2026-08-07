@@ -50,7 +50,7 @@ from d2t_rna.t2.costed import (
     integrality_gap,
     no_go_status,
 )
-from d2t_rna.t2.decision import exact_minimax_error, exact_product_law_tv
+from d2t_rna.t2.decision import exact_bayes_average_error, exact_product_law_tv
 from d2t_rna.t2.info import hellinger_info_interval, scale_info_interval
 from d2t_rna.t2.theorem import collision_or_separation
 
@@ -115,7 +115,7 @@ def main() -> int:
             "low_condition": "0 mM MgCl2 (RDAT ANNOTATION_DATA:1)",
             "high_condition": "50 mM MgCl2 (RDAT ANNOTATION_DATA:32)",
             "readout_floor": 0.01,
-            "per_position_error_used": True,
+            "per_position_error_used": False,
         },
         "sequence": seq,
         "length": L,
@@ -177,10 +177,10 @@ def main() -> int:
                 raise RuntimeError("no finite sufficient n")
         total_info = scale_info_interval(info, n_suff)
         if n_suff <= 200:
-            exact_minimax = str(exact_minimax_error(law_high, law_low, n_suff))
+            exact_bayes = str(exact_bayes_average_error(law_high, law_low, n_suff))
             exact_tv = str(exact_product_law_tv(law_high, law_low, n_suff))
         else:
-            exact_minimax = None
+            exact_bayes = None
             exact_tv = None
         t2c.append({
             "probe": i,
@@ -196,7 +196,7 @@ def main() -> int:
             "n_sufficient_for_correct_0.99": n_suff,
             "correct_decl_lower_lo": str(correct_decl_lower_interval(total_info).lo),
             "wrong_prob_upper_hi": str(wrong_prob_upper_interval(total_info).hi),
-            "exact_minimax_error_n": exact_minimax,
+            "exact_bayes_average_error_n": exact_bayes,
             "exact_product_tv_n": exact_tv,
         })
     out["t2c_per_probe"] = t2c

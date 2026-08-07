@@ -371,15 +371,16 @@ separated by the largest achievable TV; relating the required separation to the 
 and rearranging the floor condition $\mathbb{P}(\mathrm{correct})\ge\kappa$ yields the stated
 information threshold. The arithmetic uses exact rationals (\texttt{fractions.Fraction}) and
 directed-rounding decimal intervals (\texttt{Decimal}) for the transcendental terms; the upper bound is
-cross-checked against exact minimax enumeration (\texttt{decision.py exact\_minimax\_error}). The full
+cross-checked against exact equal-prior Bayes-average enumeration
+(\texttt{decision.py exact\_bayes\_average\_error}). The full
 proof is in the supplementary.
 \end{proof}
 
 \begin{remark}[Tightness microcase]\label{rem:tight}
 For alphabet size 2, $P_0=(1/4,3/4)$, $P_1=(1,0)$: the Bhattacharyya coefficient is $1/2$, the
-information is $\ln2$, the exact minimax error is $\tfrac12(1/4)^n$, and the certified upper bound
+information is $\ln2$, the exact equal-prior Bayes-average error is $\tfrac12(1/4)^n$, and the certified upper bound
 $\tfrac12\exp(-nI)$ brackets the Bhattacharyya-ideal $\tfrac12(1/2)^n$, i.e.\ the finite-sample bound
-dominates the exact minimax error and is conservative by the intended margin.
+dominates the exact equal-prior Bayes-average error and is conservative by the intended margin.
 \end{remark}
 
 \begin{remark}[Budget and sample complexity]\label{rem:budget}
@@ -518,7 +519,7 @@ cost / no-go & alternating\_rectangle\_2x2 & 8 & 0 & 1/2 & 1/2 & no integer uppe
 \end{table}
 
 \paragraph{Finite-sample bound vs exact oracle.}
-For the T2c tightness microcase ($P_0=(1/4,3/4)$, $P_1=(1,0)$, alphabet 2), the exact minimax error is
+For the T2c tightness microcase ($P_0=(1/4,3/4)$, $P_1=(1,0)$, alphabet 2), the exact equal-prior Bayes-average error is
 $\tfrac12(1/4)^n$ while the certified upper bound brackets $\tfrac12(1/2)^n$
 (Remark~\ref{rem:tight}); the certified bound dominates the exact oracle error for every $n\ge1$.
 
@@ -598,9 +599,9 @@ scaffold.
 
 \subsection{T2b: exact separation certificate}
 The passive panel $S=\emptyset$ gives $\gamma=0$ (collision witness). Any panel containing a separating
-position gives an exact separation certificate with $\gamma(S)=2|1-2\varepsilon|$ in
-observation-probability norm (Remark~\ref{rem:certificate}): $\gamma=9/5$ at $\varepsilon=1/20$,
-$\gamma=8/5$ at $\varepsilon=1/10$, and $\gamma=6/5$ at $\varepsilon=1/5$. The certificate status is
+position gives an exact separation certificate with $\gamma(S)=|1-2\varepsilon|$ in
+observation-probability total-variation norm (Remark~\ref{rem:certificate}): $\gamma=9/10$ at $\varepsilon=1/20$,
+$\gamma=4/5$ at $\varepsilon=1/10$, and $\gamma=3/5$ at $\varepsilon=1/5$. The certificate status is
 \emph{iff} in every case, the independent checker and the rational LP primal/dual strong-duality check
 both pass on the full $71$-action panel. The noise sweep makes the certificate's dependence on the
 registered nuisance coupling explicit and auditable.
@@ -633,7 +634,7 @@ not a verdict on the RNA assay.
 \centering
 \caption{add riboswitch (PDB 1Y26) through the full pipeline. \textbf{Question:} do T2b/T2c/T2d
 compose on a real registered case? \textbf{Result:} passive collision, exact separation certificate
-($\gamma=2|1-2\varepsilon|$), near-tight certified finite-sample budget, and achievable integer design
+($\gamma=|1-2\varepsilon|$), near-tight certified finite-sample budget, and achievable integer design
 with no-go at budget $1$. \textbf{Interpretation:} one decision process from contract to design/no-go.
 \textbf{Boundary:} model-conditional; certifies within the registered finite observation model, not
 in-vitro reactivity.}
@@ -667,7 +668,7 @@ action per position are unchanged.
 
 The measured certificate is stronger and immediate. Of the $71$ positions, $64$ are
 \emph{measured-separating} (apo/bound binarized reactivity differ). A panel of the eight strongest
-measured separators certifies exact (\texttt{iff}) separation with $\gamma=49/25$
+measured separators certifies exact (\texttt{iff}) separation with $\gamma=49/50$
 (Definition~\ref{def:gamma}); the rational LP and the enumeration checker agree and strong duality
 holds. For T2c the strongest measured separator (position $10$) certifies
 $\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $64$ separating positions have a
@@ -721,7 +722,7 @@ $M=(1,1)$, one action per position, $1\%$ readout floor, binarized measured chan
 
 The certificate is immediate and strong. Of the $81$ positions, $76$ are \emph{measured-separating}
 (0\,mM vs.\ 50\,mM binarized reactivity differ). A panel of the eight strongest measured separators
-certifies exact (\texttt{iff}) separation with $\gamma=49/25$, with the enumeration checker and LP
+certifies exact (\texttt{iff}) separation with $\gamma=49/50$, with the enumeration checker and LP
 strong duality agreeing. The strongest measured separator (position $23$) certifies
 $\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $76$ separating positions have a
 certified finite sufficiency bound. The achievable integer design reads a certified cost of $3$, and at

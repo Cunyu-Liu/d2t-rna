@@ -35,7 +35,7 @@ from d2t_rna.t2.costed import (
     no_go_lower_bound,
     no_go_status,
 )
-from d2t_rna.t2.decision import exact_minimax_error, exact_product_law_tv
+from d2t_rna.t2.decision import exact_bayes_average_error, exact_product_law_tv
 from d2t_rna.t2.info import hellinger_info_interval, scale_info_interval
 from d2t_rna.t2.real_add import (
     APT_SEQ,
@@ -174,7 +174,7 @@ def run_eps(eps: Fraction) -> dict:
             "total_info_n": str(total_info.hi),
             "correct_decl_lower_lo": str(correct_decl_lower_interval(total_info).lo),
             "wrong_prob_upper_hi": str(wrong_prob_upper_interval(total_info).hi),
-            "exact_minimax_error_n": str(exact_minimax_error(law_on, law_off, n_suff)),
+            "exact_bayes_average_error_n": str(exact_bayes_average_error(law_on, law_off, n_suff)),
             "exact_product_tv_n": str(exact_product_law_tv(law_on, law_off, n_suff)),
         })
     out["t2c_per_probe"] = t2c

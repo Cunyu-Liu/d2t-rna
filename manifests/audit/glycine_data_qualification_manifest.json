@@ -1,0 +1,67 @@
+{
+  "manifest_id": "P0-5-GLYCINE-DATA-QUALIFICATION",
+  "description": "Glycine post-selection replicate kill test: candidate archive qualification manifest (P0-5).",
+  "audit_snapshot": "a31f060c190fd00cb7f34d58a9ae37acafa4b256",
+  "date": "2026-08-07",
+  "measured_cases": ["add/miniTTR", "glycine", "SAM-III"],
+  "measured_sample_size_claims_present": {
+    "add/miniTTR": "n=3",
+    "glycine": "n=15",
+    "SAM-III": "n=3"
+  },
+  "candidate_archive_inventory": {
+    "src/d2t_rna/data/raw/ADD71_STD_0001.rdat": {
+      "sha256": "5842d5b6fffe4b4a7180eabea3bc6f0dce56b3a02ec2f5d539654c337b366a92",
+      "bytes": 10120,
+      "case": "add/miniTTR",
+      "content": "1M7 SHAPE normalized reactivity + per-position REACTIVITY_ERROR (no per-replicate counts)"
+    },
+    "src/d2t_rna/data/raw/BSUGLY_DMS_0013.rdat": {
+      "sha256": "f069e5b26de9b52758d1bae976cff9fbcdfc3dbf9314b4f240a9d0534fe60205",
+      "bytes": 373975,
+      "case": "glycine",
+      "content": "DMS normalized reactivity (merged 2 replicates), apo 0 mM; 246 DATA blocks"
+    },
+    "src/d2t_rna/data/raw/BSUGLY_DMS_0014.rdat": {
+      "sha256": "46ef5deab2ec5821573b5009975cfe45b4d0bafc0015a0975ee746cb56f89f3c",
+      "bytes": 377086,
+      "case": "glycine",
+      "content": "DMS normalized reactivity (merged 2 replicates), bound 1 mM; 246 DATA blocks"
+    },
+    "src/d2t_rna/data/raw/MTTR1_MGTI_0001.rdat": {
+      "sha256": "f786e36233bd3ef172137fee4fd57351a05526b11c4ece7837dff21a7cfd0d73",
+      "bytes": 55169,
+      "case": "SAM-III",
+      "content": "reactivity profile (no per-replicate counts)"
+    }
+  },
+  "replicate_crosswalk": {
+    "glycine": {
+      "declared": "two independent replicates, analyzed separately then merged and normalized (RDAT COMMENT line 16)",
+      "raw_count_per_replicate_available": false,
+      "merge_point": "upstream ShapeMapper2; per-replicate counts not stored in archive",
+      "both_replicates_historical_exposure": true,
+      "rationale": "the single merged normalized reactivity profile was used both to select strong probes (probe selection) and to determine n (post-selection); no replicate is a cold held-out replicate"
+    },
+    "add/miniTTR": {
+      "declared": "single RDAT with per-position REACTIVITY_ERROR:1/2 (standard errors)",
+      "raw_count_per_replicate_available": false,
+      "notes": "per-position standard error is parsed and output but NOT used in the clamp likelihood; provenance per_position_error_used=True is a false claim"
+    },
+    "SAM-III": {
+      "declared": "reactivity profile in MTTR1_MGTI_0001.rdat",
+      "raw_count_per_replicate_available": false
+    }
+  },
+  "raw_count_replay": {
+    "status": "RAW_COUNT_REPLAY_UNAVAILABLE",
+    "detail": "No RDAT field (MUTATION/COUNTS/REPLICATE/READS/COVERAGE) carries per-replicate raw counts; only merged normalized reactivity is present. Raw-count replay cannot be executed for any of the three measured cases."
+  },
+  "qualification_verdict": {
+    "glycine_post_selection_cross_replicate_diagnostic": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+    "reason": "the candidate archive does not contain per-replicate raw counts, so the replicate crosswalk and raw-count replay prerequisites cannot be satisfied; the kill test cannot be run against real replicate counts",
+    "non_rejection_is_not_validation": true,
+    "measured_claims_downgrade": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+    "downgrade_detail": "add/miniTTR n=3, glycine n=15, SAM-III n=3 are demoted from experimental sample-size conclusions to arbitrary-clamp model output (provenance per_position_error_used=False); a future upgrade requires an unexposed multi-unit sealed confirmation set per audit §9.4 and §13.1 P0-5 success criteria"
+  }
+}

@@ -17,7 +17,7 @@ Dataset (registered, CC0, RMDB accession ADD71_STD_0001)
       REACTIVITY:1  apo  (no ligand)
       REACTIVITY:2  bound (5 mM adenine)
   * per-position reactivity AND per-position measurement standard error
-    (REACTIVITY_ERROR:1 / :2) are both parsed and used.
+    (REACTIVITY_ERROR:1 / :2) are parsed but NOT used in the clamp likelihood (P0-5).
 
 Observation channel (binarized measured reactivity)
   For each probed position ``u`` and conformation ``s`` the readout is binary

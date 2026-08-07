@@ -95,7 +95,7 @@ the likelihood ratio between $\theta_0$ and $\theta_1$ has the standard Chernoff
 concentration. For a decision rule that is the likelihood-ratio test (or any rule with minimax error at
 least as good as the trivial guess), the probability of declaring the wrong class satisfies
 \[
-\mathbb{P}(\mathrm{wrong})\le \frac{\rho_u^{n_u}}{1+\rho_u^{n_u}}\le \frac12\rho_u^{n_u}
+\mathbb{P}(\mathrm{wrong})\le \frac12\,\rho_u^{n_u}
 =\frac12 e^{-n_u I_u}.
 \]
 Independence across actions in the product law gives
@@ -121,9 +121,9 @@ the proof.
 
 \paragraph{Tightness microcase.}
 For alphabet size $2$, $P_0=(1/4,3/4)$, $P_1=(1,0)$: $\rho_u=\sqrt{1/4\cdot1}+\sqrt{3/4\cdot0}=1/2$,
-$I_u=\ln2$. The exact minimax error for this pair (computed by exhaustive enumeration) is
+$I_u=\ln2$. The exact equal-prior Bayes average error for this pair (computed by exhaustive enumeration) is
 $\tfrac12(1/4)^n$, and the certified upper bound $\tfrac12 e^{-nI_u}=\tfrac12(1/2)^n$ brackets the
-Bhattacharyya ideal. Hence the certified bound dominates the exact oracle error for every $n\ge 1$.
+Bhattacharyya ideal. Hence the certified bound dominates the exact equal-prior oracle error for every $n\ge 1$.
 
 \section{Proof of Theorem 3 (T2d: costed design and no-go)}\label{sec:proof-t2d}
 
@@ -143,19 +143,23 @@ for the primal. Its cost $c^Tn^\star$ is therefore an achievable upper bound. Fe
 from first principles (\texttt{check\_integer\_design\_feasible}).
 
 \emph{(ii)} Consider the LP relaxation with $n_u\ge0$ real. Its dual is
-$\max_{y\ge0}\tau^Ty$ subject to $I_{uw}^{\mathrm{lo}}$-based constraints; using interval information so
-that the relaxation constrains the feasible set of the true problem (taking the interval lower bound
-keeps the LP a relaxation), weak duality gives, for every feasible integer $n$ and every dual-feasible
-$y$,
+$\max_{y\ge0}\tau^Ty$ subject to $I_{uw}^{\mathrm{up}}$-based constraints; using the certified
+\emph{upper} information bounds $I_{uw}^{\mathrm{up}}\ge I_{uw}$ keeps each dual constraint valid for the
+true problem (for the true information $I_{uw}\le I_{uw}^{\mathrm{up}}$, the constraint
+$\sum_w y_w I_{uw}^{\mathrm{up}}\le c_u$ implies $\sum_w y_w I_{uw}\le c_u$), so the relaxation is a
+valid underestimate. By weak duality, for every feasible integer $n$ and every dual-feasible $y$,
 \[
 \sum_u c_u n_u \ge \sum_w \tau_w y_w.
 \]
 If $\tau^Ty>\mathrm{budget}$, then every feasible design has cost strictly above the budget, so no
-feasible design within budget exists: a design-class no-go certificate.
+feasible design within budget exists: a design-class no-go certificate.  (Necessity/no-go therefore uses
+the \emph{upper} information bound.)
 
 \emph{(iii)} The integrality gap quantifies the gap between the achievable integer upper cost and the
-dual lower bound; with certified interval information it is computed conservatively (using the lower
-bound for no-go and the upper bound for achievability). This completes the proof.
+dual lower bound; with certified interval information it is computed conservatively -- using the
+\emph{upper} information bound for the no-go/lower direction and the \emph{lower} information bound for
+the constructive achievability/upper direction (an integer $n$ with $\sum_u n_u I_{uw}^{\mathrm{lo}}
+\ge\tau_w$ is guaranteed feasible since $I_{uw}\ge I_{uw}^{\mathrm{lo}}$). This completes the proof.
 \end{proof}
 
 \paragraph{Exact costed microcases.}
@@ -178,8 +182,8 @@ is finite. Of the 71 positions, 21 are separating (bare pairing differs between 
 
 \subsection{T2b certificate}
 For the passive panel $S=\emptyset$, $\gamma=0$ (collision witness). For any panel containing a
-separating position, $\gamma(S)=2|1-2\varepsilon|$ in observation-probability norm: $\gamma=9/5$ at
-$\varepsilon=1/20$, $8/5$ at $\varepsilon=1/10$, $6/5$ at $\varepsilon=1/5$. Every certificate is exact
+separating position, $\gamma(S)=|1-2\varepsilon|$ in observation-probability total-variation norm: $\gamma=9/10$ at
+$\varepsilon=1/20$, $4/5$ at $\varepsilon=1/10$, $3/5$ at $\varepsilon=1/5$. Every certificate is exact
 (iff), the independent checker and the rational LP primal/dual strong-duality check both pass on the
 full 71-action panel.
 
@@ -246,14 +250,14 @@ The $1\%$ floor encodes the repeats/resolution of the measurement (the reported 
 errors show the class call is not sub-$1\%$ precise) and keeps the Hellinger information per separating
 position finite, so the finite-sample bound is genuine rather than a degenerate $n=1$ certainty.
 Position $u$ is \emph{measured-separating} iff $q(\mathrm{apo},u)\neq q(\mathrm{bound},u)$; the
-separation coefficient for a single probe is $\gamma=2\left|q(\mathrm{bound},u)-q(\mathrm{apo},u)\right|$.
+separation coefficient for a single probe is $\gamma=\left|q(\mathrm{bound},u)-q(\mathrm{apo},u)\right|$.
 
 \paragraph{Results.}
 Of the $71$ positions, $64$ are measured-separating. The registration mirrors contract 8.5
 (role \texttt{REGISTERED\_OBSERVATION\_MODEL}): states = two conformations
 $\theta_0=e_{\mathrm{OFF}}=(1,0)$, $\theta_1=e_{\mathrm{ON}}=(0,1)$; passive marginal $M=(1,1)$ so
 $M\theta_0=M\theta_1=1$ (collision); one measured channel action per position. The T2b certificate over a
-panel of the eight strongest measured separators is exact (\texttt{iff}) with $\gamma=49/25$; the
+panel of the eight strongest measured separators is exact (\texttt{iff}) with $\gamma=49/50$; the
 rational LP and the enumeration checker agree and strong duality passes. For T2c, the strongest
 measured separator (position $10$) certifies $\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=3$ repeats;
 all $64$ separating positions carry a certified finite sufficiency bound. For T2d, the achievable
@@ -316,7 +320,7 @@ and the registration slots are identical to the add/glycine cases; the discrimin
 
 \paragraph{Results (third case).}
 Of the $81$ positions, $76$ are measured-separating. The T2b certificate over the eight strongest
-measured separators is exact (\texttt{iff}) with $\gamma=49/25$ (rational LP and enumeration checker
+measured separators is exact (\texttt{iff}) with $\gamma=49/50$ (rational LP and enumeration checker
 agree, strong duality passes). For T2c, the strongest measured separator (position $23$) certifies
 $\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $76$ separating positions carry
 a certified finite sufficiency bound. For T2d, the achievable integer design reads a certified cost of

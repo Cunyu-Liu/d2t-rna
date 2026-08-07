@@ -13,7 +13,7 @@ from fractions import Fraction as F
 import pytest
 
 from d2t_rna.t2.model import Action, T2FiniteModel
-from d2t_rna.t2.decision import exact_minimax_error
+from d2t_rna.t2.decision import exact_bayes_average_error
 from d2t_rna.t2.theorem import collision_or_separation
 from d2t_rna.evaluation.matrix import (
     ExperimentSpec,
@@ -21,8 +21,10 @@ from d2t_rna.evaluation.matrix import (
     MultiActionOracle,
     action_law,
     build_matrix_report,
+    chernoff_information,
     cross_validate_single_pair,
     microcase_fixtures,
+    per_action_tv,
     run_baselines,
 )
 
@@ -83,7 +85,7 @@ def test_oracle_matches_theory_minimax_single_action() -> None:
     q1 = action_law(model, model.actions[0], p1)
     oracle = MultiActionOracle((q0,), (q1,), (F(1),), (3,)).evaluate()
     assert q0 == p0 and q1 == p1
-    assert oracle.minimax_error == exact_minimax_error(p0, p1, 3)
+    assert oracle.minimax_error == exact_bayes_average_error(p0, p1, 3)
     assert oracle.minimax_error == F(1, 128)
     assert oracle.product_tv == F(1) - F(2) * F(1, 128)
 
@@ -234,3 +236,149 @@ def test_alternating_rectangle_has_nonzero_fiber() -> None:
     cert = collision_or_separation(m, panel)
     # collision (uniform catalogs share marginals) -> gamma 0 is expected
     assert cert.gamma == 0
+
+
+# ---------------------------------------------------------------------------
+# P0-6 benchmark-authenticity reference tests (v7 audit blockers 4 & 6)
+# ---------------------------------------------------------------------------
+
+def test_product_bhattacharyya_is_product_over_actions() -> None:
+    # Action "a" has BC=1/2, action "b" is information-free (BC=1).  The
+    # correct multi-action product bound is prod_u BC_u^{n_u}.  The v7 audit
+    # blocker T9-multi-action used only the first action and BC_0^{sum n_u}.
+    m = microcase_fixtures()["heterogeneous_bc"]
+    p0 = m.theta_0[0]
+    p1 = m.theta_1[0]
+    q0a = action_law(m, m.actions[0], p0)
+    q1a = action_law(m, m.actions[0], p1)
+    q0b = action_law(m, m.actions[1], p0)
+    q1b = action_law(m, m.actions[1], p1)
+    res = MultiActionOracle((q0a, q0b), (q1a, q1b), (F(1), F(1)), (2, 1)).evaluate()
+    bc_a = F(1, 2)
+    bc_b = F(1)
+    assert res.product_bhattacharyya == (bc_a ** 2) * (bc_b ** 1)
+    # the old buggy form BC_0 ** sum(n) must be excluded
+    assert res.product_bhattacharyya != bc_a ** (2 + 1)
+
+
+def test_single_action_bc_is_unchanged() -> None:
+    # With one action, product_bhattacharyya stays BC^n (BC=1/2, n=3).
+    p0 = (F(1, 4), F(3, 4))
+    p1 = (F(1), F(0))
+    res = MultiActionOracle((p0,), (p1,), (F(1),), (3,)).evaluate()
+    assert res.product_bhattacharyya == (F(1, 2) ** 3)
+
+
+def test_oracle_is_cap_free_single_action() -> None:
+    # A single action with budget 8 whose laws overlap (P0=(1/4,3/4),
+    # P1=(1,0)): minimax error is (1/2)(1/4)^n, decreasing with n but never
+    # reaching 0, so the complete cap-free oracle allocates all 8 repeats
+    # (the old hard cap of 6 is removed).
+    p0 = (F(1, 4), F(3, 4))
+    p1 = (F(1), F(0))
+    m = T2FiniteModel(
+        name="t2c_cap_free",
+        n_states=2,
+        theta_0=(p0,),
+        theta_1=(p1,),
+        marginal_map=((F(1), F(0)), (F(0), F(1))),
+        actions=(Action("a", ((F(1), F(0)), (F(0), F(1)))),),
+    )
+    spec = ExperimentSpec(
+        model_name=m.name, p0=p0, p1=p1, costs=(F(1),), budget=F(8)
+    )
+    results = run_baselines(m, spec)
+    oracle_run = results["exhaustive_oracle"]
+    assert oracle_run.allocation == (8,)
+    assert oracle_run.cost == F(8)
+
+
+def test_oracle_is_global_minimizer_across_feasible_allocations() -> None:
+    # The complete cap-free oracle must be a global minimizer of the minimax
+    # error over every within-budget allocation (independent brute-force check).
+    m = microcase_fixtures()["repeated_action"]
+    p0 = m.theta_0[0]
+    p1 = m.theta_1[0]
+    costs = (F(1), F(1))
+    budget = F(5)
+    spec = ExperimentSpec(model_name=m.name, p0=p0, p1=p1, costs=costs, budget=budget)
+    results = run_baselines(m, spec)
+    oracle_res = results["exhaustive_oracle"].oracle
+    p0_laws = tuple(action_law(m, a, p0) for a in m.actions)
+    p1_laws = tuple(action_law(m, a, p1) for a in m.actions)
+    best = None
+    for n0 in range(int(budget // costs[0]) + 1):
+        for n1 in range(int(budget // costs[1]) + 1):
+            if n0 + n1 > int(budget):
+                continue
+            cand = MultiActionOracle(p0_laws, p1_laws, costs, (n0, n1)).evaluate()
+            if best is None or cand.minimax_error < best:
+                best = cand.minimax_error
+    assert best is not None
+    assert oracle_res.minimax_error == best
+
+
+def test_true_chernoff_matches_reference() -> None:
+    # P0=(1/4,3/4), P1=(1,0): tilde(s)=(1/4)^s for s in (0,1), so the true
+    # Chernoff information is -log(1/4)=ln 4.  The old baseline returned the
+    # bogus "1 - sum min(q0,q1) = 3/4".
+    import math
+    p0 = (F(1, 4), F(3, 4))
+    p1 = (F(1), F(0))
+    c = chernoff_information(p0, p1)
+    assert abs(c - math.log(4)) < 1e-3
+
+
+def test_per_action_tv_in_unit_interval() -> None:
+    # TV separation must lie in [0,1] (contradicting the v7 TV>1 blocker).
+    p0 = (F(1, 4), F(3, 4))
+    p1 = (F(1), F(0))
+    tv = per_action_tv(p0, p1)
+    assert tv >= 0 and tv <= 1
+    assert tv == F(3, 4)
+
+
+def test_baseline_scores_are_distinct() -> None:
+    # EIG (Hellinger information) and Test-Cover (TV) rank the two actions in
+    # opposite order here, so their greedy allocations must differ (the v7
+    # audit blocker 4: greedy / EIG / LM2R were all the same score).
+    p0 = (F(1), F(0))
+    p1 = (F(0), F(1))
+    m = T2FiniteModel(
+        name="opposite_separation_rankings",
+        n_states=2,
+        theta_0=(p0,),
+        theta_1=(p1,),
+        marginal_map=((F(1), F(0)), (F(0), F(1))),
+        actions=(
+            Action(
+                "a",
+                (
+                    (F(9, 10), F(1, 10)),
+                    (F(1, 20), F(9, 20)),
+                    (F(1, 20), F(9, 20)),
+                ),
+            ),
+            Action(
+                "b",
+                (
+                    (F(1, 2), F(0)),
+                    (F(1, 2), F(1, 2)),
+                    (F(0), F(1, 2)),
+                ),
+            ),
+        ),
+    )
+    spec = ExperimentSpec(
+        model_name=m.name, p0=p0, p1=p1, costs=(F(1), F(1)), budget=F(5)
+    )
+    results = run_baselines(m, spec)
+    alloc_greedy = results["greedy_test_cover"].allocation
+    alloc_eig = results["eig"].allocation
+    alloc_chernoff = results["chernoff"].allocation
+    alloc_lm2r = results["lm2r_heuristic"].allocation
+    # greedy uses TV (ranks action a higher), EIG uses Hellinger info (action b)
+    assert alloc_greedy != alloc_eig
+    # at least two distinct allocations among the four labelled methods
+    distinct = {alloc_greedy, alloc_eig, alloc_chernoff, alloc_lm2r}
+    assert len(distinct) >= 2

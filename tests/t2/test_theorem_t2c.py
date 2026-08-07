@@ -29,7 +29,7 @@ from d2t_rna.t2.bounds import (
     correct_decl_lower_interval,
 )
 from d2t_rna.t2.decision import (
-    exact_minimax_error,
+    exact_bayes_average_error,
     exact_product_bhattacharyya,
     exact_product_law_tv,
 )
@@ -58,11 +58,11 @@ def test_bhattacharyya_interval_contains_half():
     assert bc.lo <= Decimal("0.5") <= bc.hi
 
 
-def test_upper_bound_honors_exact_minimax_error():
+def test_upper_bound_honors_exact_bayes_average_error():
     # For n = 1..5 the certified upper bound (1/2) exp(-n I) must dominate the
     # exact minimax error (1/2)(1/4)^n.
     for n in range(1, 6):
-        exact = exact_minimax_error(P0, P1, n)
+        exact = exact_bayes_average_error(P0, P1, n)
         info_n = scale_info_interval(hellinger_info_interval(P0, P1), n)
         ub = wrong_prob_upper_interval(info_n)
         assert exact <= ub.hi, (n, exact, ub)
@@ -73,7 +73,7 @@ def test_upper_bound_honors_exact_minimax_error():
 
 def test_exact_error_double_checks_tv():
     for n in range(1, 5):
-        err = exact_minimax_error(P0, P1, n)
+        err = exact_bayes_average_error(P0, P1, n)
         t = exact_product_law_tv(P0, P1, n)
         assert err == (Fraction(1, 2) * (1 - t))
         assert err == Fraction(1, 2) * (Fraction(1, 4) ** n)

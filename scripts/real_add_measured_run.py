@@ -48,7 +48,7 @@ from d2t_rna.t2.costed import (
     integrality_gap,
     no_go_status,
 )
-from d2t_rna.t2.decision import exact_minimax_error, exact_product_law_tv
+from d2t_rna.t2.decision import exact_bayes_average_error, exact_product_law_tv
 from d2t_rna.t2.info import hellinger_info_interval, scale_info_interval
 from d2t_rna.t2.theorem import collision_or_separation
 
@@ -114,7 +114,7 @@ def main() -> int:
             "bound_condition": "5 mM adenine (RDAT REACTIVITY:2)",
             "normalization": "reactive loop residues normalized to mean 1.0",
             "readout_floor": 0.01,
-            "per_position_error_used": True,
+            "per_position_error_used": False,
         },
         "sequence": seq,
         "length": L,
@@ -189,10 +189,10 @@ def main() -> int:
         # vectors (O(n) distinct outcomes) and is only practical for tiny n;
         # for larger n the certified T2c interval is the rigorous claim.
         if n_suff <= 200:
-            exact_minimax = str(exact_minimax_error(law_on, law_off, n_suff))
+            exact_bayes = str(exact_bayes_average_error(law_on, law_off, n_suff))
             exact_tv = str(exact_product_law_tv(law_on, law_off, n_suff))
         else:
-            exact_minimax = None
+            exact_bayes = None
             exact_tv = None
         t2c.append({
             "probe": i,
@@ -208,7 +208,7 @@ def main() -> int:
             "n_sufficient_for_correct_0.99": n_suff,
             "correct_decl_lower_lo": str(correct_decl_lower_interval(total_info).lo),
             "wrong_prob_upper_hi": str(wrong_prob_upper_interval(total_info).hi),
-            "exact_minimax_error_n": exact_minimax,
+            "exact_bayes_average_error_n": exact_bayes,
             "exact_product_tv_n": exact_tv,
         })
     out["t2c_per_probe"] = t2c

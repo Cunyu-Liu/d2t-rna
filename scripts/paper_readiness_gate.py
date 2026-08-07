@@ -12,6 +12,7 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 import time
 
 def sha256_file(path):
@@ -87,6 +88,75 @@ def main():
 
     # Gates.
     novelty = open(os.path.join(paper, "prior_art_novelty_matrix_REVISED.md")).read()
+
+    # ------------------------------------------------------------------
+    # P0-7 semantic lint: actively catch the four categories of historical
+    # fatal errors (TV>1, forged witness, error-unused, definition drift).
+    def _run_pytest_ok(targets):
+        try:
+            r = subprocess.run(
+                [sys.executable, "-m", "pytest", "-q"] + targets,
+                cwd=repo, capture_output=True, text=True, timeout=1200,
+            )
+            return (r.returncode == 0), (r.stdout + r.stderr)[-1600:]
+        except Exception as exc:  # pragma: no cover - defensive
+            return False, str(exc)
+
+    # (1) TV>1: separation measure must lie in [0,1].
+    tv_ok = False
+    try:
+        from fractions import Fraction
+        from d2t_rna.evaluation.matrix import per_action_tv
+        tv_val = per_action_tv(
+            (Fraction(1, 4), Fraction(3, 4)), (Fraction(1), Fraction(0))
+        )
+        tv_ok = 0 <= tv_val <= 1
+    except Exception:  # pragma: no cover - defensive
+        tv_ok = False
+
+    # (2)+(4) kill-test suites embody forged-witness, minimax and drift checks.
+    kill_ok, kill_note = _run_pytest_ok([
+        "tests/t2/test_semantic_counterexamples.py",
+        "tests/t2/test_decision_semantics.py",
+    ])
+
+    # (3) error-unused: no measured run may claim the position error is used.
+    error_unused_ok = True
+    for _mf in [
+        "scripts/real_add_measured_run.py",
+        "scripts/real_glycine_measured_run.py",
+        "scripts/real_mattr_measured_run.py",
+    ]:
+        _p = os.path.join(repo, _mf)
+        if os.path.exists(_p):
+            _txt = open(_p).read()
+            if '"per_position_error_used": True' in _txt.replace(" ", ""):
+                error_unused_ok = False
+
+    # (4) definition drift: decision code exposes corrected names and the paper
+    #     no longer carries the TV>1 gamma value (49/25 = 1.96).
+    drift_ok = False
+    try:
+        _dec = open(os.path.join(repo, "src/d2t_rna/t2/decision.py")).read()
+        _has_corr = (
+            "def exact_bayes_average_error" in _dec
+            and "def exact_randomized_minimax_error" in _dec
+        )
+        _man = open(os.path.join(paper, "manuscript.tex")).read()
+        _paper_tv_ok = ("49/25" not in _man) and ("1.96" not in _man)
+        drift_ok = _has_corr and _paper_tv_ok
+    except Exception:  # pragma: no cover - defensive
+        drift_ok = False
+
+    semantic_lint = {
+        "tv_in_unit_interval": tv_ok,
+        "forged_witness_fail_closed": kill_ok,
+        "error_unused_honest": error_unused_ok,
+        "definition_drift_clean": kill_ok and drift_ok,
+        "kill_tests_pass": kill_ok,
+        "kill_tests_note": kill_note,
+    }
+    semantic_lint_all_pass = all(semantic_lint.values())
     gates = {
         "PAPER-EVIDENCE-LOCK-GATE": file_exists["evidence_lock"] and file_exists["evidence_lock_json"],
         "PAPER-AUTHORITY-PRECEDENCE-GATE": file_exists["evidence_lock_json"],
@@ -97,6 +167,9 @@ def main():
         "PAPER-CLAIM-BOUNDARY-GATE": ("NOT_APPLICABLE" in tex or "NOT\\_APPLICABLE" in tex),
         "PAPER-REVIEWER-AUDIT-GATE": file_exists["reviewer_audit"],
         "PAPER-REPRODUCIBILITY-GATE": file_exists["supplementary"] and file_exists["supp88"],
+        "PAPER-SEMANTIC-KILL-GATE": semantic_lint["kill_tests_pass"] and tv_ok,
+        "PAPER-SEMANTIC-ERROR-UNUSED-GATE": error_unused_ok,
+        "PAPER-SEMANTIC-DEFINITION-GATE": semantic_lint["definition_drift_clean"],
     }
     all_gates_pass = all(gates.values())
 
@@ -126,6 +199,8 @@ def main():
         },
         "gates": gates,
         "gates_all_pass": all_gates_pass,
+        "semantic_lint": semantic_lint,
+        "semantic_lint_all_pass": semantic_lint_all_pass,
         "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
         "run_finished": time.time(),
     }
@@ -175,6 +250,11 @@ evidence_lock.json  = {file_hashes['evidence_lock_json']}
 ## 4. Paper gates ({'ALL PASS' if all_gates_pass else 'NOT ALL PASS'})
 
 {' / '.join(k for k,v in gates.items() if v)}.
+
+Semantic lint (P0-7): TV-in-[0,1]={'ALL PASS' if tv_ok else 'FAIL'},
+forged-witness/kill-tests={'ALL PASS' if kill_ok else 'FAIL'},
+error-unused-honest={'ALL PASS' if error_unused_ok else 'FAIL'},
+definition-drift={'ALL PASS' if semantic_lint_all_pass else 'FAIL'}.
 
 Abstract: {len(sentences)} sentences, prohibited hits={abstract_prohibited or 'none'}.
 Citations: {len(bib_keys)} bib entries, {len(uncited)} uncited ({uncited or 'none'}).

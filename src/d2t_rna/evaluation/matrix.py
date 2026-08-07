@@ -302,6 +302,29 @@ def microcase_fixtures() -> dict[str, T2FiniteModel]:
         ),
     )
 
+    # --- heterogeneous Bhattacharyya coefficients ----------------------------
+    # Two actions whose induced (candidate,rival) laws have different exact
+    # Bhattacharyya coefficients: action "a" has BC=1/2 while action "b" is
+    # information-free (BC=1).  Used to pin the product-bound microcase
+    # ``prod_u BC_u^{n_u}`` (the v7 audit blocker T9-multi-action).
+    heterogeneous_bc = T2FiniteModel(
+        name="heterogeneous_bc",
+        n_states=2,
+        theta_0=((_F(1, 4), _F(3, 4)),),
+        theta_1=((_F(1), _F(0)),),
+        marginal_map=((_F(1), _F(0)), (_F(0), _F(1))),
+        actions=(
+            Action(
+                action_id="a",
+                channel=_channel(((_F(1), _F(0)), (_F(0), _F(1)))),
+            ),
+            Action(
+                action_id="b",
+                channel=_channel(((_F(1, 2), _F(1, 2)), (_F(1, 2), _F(1, 2)))),
+            ),
+        ),
+    )
+
     # --- boundary -------------------------------------------------------------
     # An action with a 3-outcome alphabet so the images are just separable.
     boundary = T2FiniteModel(
@@ -331,6 +354,7 @@ def microcase_fixtures() -> dict[str, T2FiniteModel]:
         "exact_collision": exact_collision,
         "near_collision": near_collision,
         "strict_positive_separation": strict_sep,
+        "heterogeneous_bc": heterogeneous_bc,
         "boundary": boundary,
     }
 
@@ -443,9 +467,19 @@ class MultiActionOracle:
         correct = _F(0)
         wrong = _F(0)
         abstain = _F(0)
-        bhat_exact = _F(1)
-        bhat_representable = True
         support_rows = []
+        # per-action Bhattacharyya coefficients BC_u = sum_y sqrt(q0_u[y] q1_u[y])
+        per_action_bc = []
+        bhat_representable = True
+        for _q0, _q1 in zip(self.p0_laws, self.p1_laws):
+            bc_u = _F(0)
+            for y in range(len(_q0)):
+                root = _rational_sqrt(_q0[y] * _q1[y])
+                if root is None:
+                    bhat_representable = False
+                else:
+                    bc_u += root
+            per_action_bc.append(bc_u)
         for joint in self._canonical_support():
             p0 = _F(1)
             p1 = _F(1)
@@ -466,11 +500,6 @@ class MultiActionOracle:
                 abstain += p0
                 abstain += p1
             support_rows.append((joint, p0, p1))
-            # exact product Bhattacharyya when all square roots are exact
-            for y in range(len(self.p0_laws[0])):
-                prod = self.p0_laws[0][y] * self.p1_laws[0][y]
-                if _rational_sqrt(prod) is None:
-                    bhat_representable = False
         total = (total0 + total1)
         if total != 2:
             raise AssertionError(f"oracle probability normalization failed: {total}")
@@ -482,12 +511,9 @@ class MultiActionOracle:
         minimax_error = min_sum / _F(2)
         bhat = None
         if bhat_representable:
-            bc = _F(0)
-            for y in range(len(self.p0_laws[0])):
-                root = _rational_sqrt(self.p0_laws[0][y] * self.p1_laws[0][y])
-                assert root is not None
-                bc += root
-            bhat = bc ** sum(self.n)
+            bhat = _F(1)
+            for bc_u, n_u in zip(per_action_bc, self.n):
+                bhat *= bc_u ** n_u
         return OracleResult(
             n=self.n,
             cost=cost,
@@ -650,15 +676,58 @@ def _per_action_info_law(q0: Vec, q1: Vec) -> Fraction:
     return Fraction(iv.lo + iv.hi) / Fraction(2)
 
 
-def _per_action_chernoff(q0: Vec, q1: Vec) -> Fraction:
-    """Chernoff-syle score ``-log sum_y min(q0,q1)`` (non-negative)."""
-    s = sum(min(a, b) for a, b in zip(q0, q1))
-    if s <= 0:
-        return _F(0)
-    return _F(1) - s  # 1 - overlap; higher is more separating
+def per_action_tv(q0: Vec, q1: Vec) -> Fraction:
+    """Total-variation separation ``sum_y |q0-q1| / 2`` between two laws.
+
+    Used as the Test-Cover separation score (Moret & Shapiro 1991): a test
+    (action) separates the candidate/rival pair to the degree its two induced
+    laws are TV-distant.  Values lie in ``[0, 1]``.
+    """
+    return sum(abs(a - b) for a, b in zip(q0, q1)) / _F(2)
 
 
-def _allocate_budget(score: Sequence[Fraction], costs: Sequence[Fraction], budget: Fraction) -> tuple[int, ...]:
+def chernoff_information(q0: Vec, q1: Vec) -> float:
+    """True Chernoff information ``C=-log min_{0<=s<=1} sum_y q0^s q1^(1-s)``.
+
+    This is the standard Chernoff exponent of a pair of categorical laws
+    (Chernoff 1952; Kailath 1967).  It is computed numerically: a coarse grid
+    over ``s`` in ``[0,1]`` brackets the minimizer, then golden-section
+    refinement tightens it.  The returned value is a non-negative float; ``0``
+    is returned only when the supports are compatible enough that no
+    exponential one-shot separation can be certified.
+    """
+    import math
+
+    def tilde(s: float) -> float:
+        return sum(
+            (abs(float(a)) ** s) * (abs(float(b)) ** (1.0 - s))
+            for a, b in zip(q0, q1)
+        )
+
+    best = tilde(0.5)
+    best_s = 0.5
+    for i in range(0, 101):
+        s = i / 100.0
+        v = tilde(s)
+        if v < best:
+            best = v
+            best_s = s
+    lo = max(0.0, best_s - 0.01)
+    hi = min(1.0, best_s + 0.01)
+    for _ in range(60):
+        m1 = lo + (hi - lo) / 3.0
+        m2 = hi - (hi - lo) / 3.0
+        if tilde(m1) < tilde(m2):
+            hi = m2
+        else:
+            lo = m1
+    best = min(best, tilde((lo + hi) / 2.0))
+    if best <= 0.0:
+        return 0.0
+    return float(-math.log(best))
+
+
+def _allocate_budget(score: Sequence[float], costs: Sequence[Fraction], budget: Fraction) -> tuple[int, ...]:
     """Greedy cost-weighted allocation of ``budget`` repeats.
 
     Repeatedly adds one repeat to the action maximizing ``score_u / cost_u``
@@ -796,10 +865,16 @@ def run_baselines(model: T2FiniteModel, spec: ExperimentSpec) -> dict[str, Basel
     results: dict[str, BaselineRun] = {}
 
     # per-action scores
-    eig_score = tuple(_per_action_info_law(q0, q1) for q0, q1 in zip(p0_laws, p1_laws))
-    chernoff_score = tuple(_per_action_chernoff(q0, q1) for q0, q1 in zip(p0_laws, p1_laws))
-    # LM2R-style: combine separation and moderate cost pressure
-    lm2r_score = tuple(eig_score[u] for u in range(U))
+    # per-action scores: each baseline uses an independent, referenced
+    # separation measure (Test-Cover TV, EIG Hellinger information, true
+    # Chernoff information, and a project-defined LM2R-style combined score).
+    eig_score = tuple(float(_per_action_info_law(q0, q1)) for q0, q1 in zip(p0_laws, p1_laws))
+    tv_score = tuple(float(per_action_tv(q0, q1)) for q0, q1 in zip(p0_laws, p1_laws))
+    chernoff_score = tuple(chernoff_information(q0, q1) for q0, q1 in zip(p0_laws, p1_laws))
+    lm2r_score = tuple(
+        float(per_action_tv(q0, q1) * _per_action_info_law(q0, q1))
+        for q0, q1 in zip(p0_laws, p1_laws)
+    )
 
     # ---- exhaustive oracle: search smallest-cost allocation by minimax error
     import tracemalloc
@@ -809,9 +884,15 @@ def run_baselines(model: T2FiniteModel, spec: ExperimentSpec) -> dict[str, Basel
     oracle_err = None
     tracemalloc.start()
     try:
-        # enumerate allocations up to a per-action cap so the exact oracle is cheap
-        cap = 6
-        for joint in product(range(cap + 1), repeat=U):
+        # cap-free complete oracle: enumerate every within-budget allocation.
+        # max affordable repeats of action u is floor(budget / cost_u), so the
+        # per-action axes are exact and there is no arbitrary hard cap.
+        max_n = []
+        for c in spec.costs:
+            if c <= 0:
+                raise ValueError("oracle requires strictly positive action costs")
+            max_n.append(int(spec.budget // c))
+        for joint in product(*(range(m + 1) for m in max_n)):
             cand_n = tuple(joint)
             cand_cost = sum(c * nu for c, nu in zip(spec.costs, cand_n))
             if cand_cost > spec.budget:
@@ -886,7 +967,7 @@ def run_baselines(model: T2FiniteModel, spec: ExperimentSpec) -> dict[str, Basel
     )
 
     # ---- greedy / Test-Cover and EIG (both greedy; different score)
-    for method, score in (("greedy_test_cover", eig_score), ("eig", eig_score)):
+    for method, score in (("greedy_test_cover", tv_score), ("eig", eig_score)):
         g_start = time.time()
         n_g = _allocate_budget(score, spec.costs, spec.budget)
         g_res, g_peak = _eval_with_memory(model, spec, n_g)
