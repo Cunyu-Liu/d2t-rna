@@ -1,0 +1,63 @@
+{
+  "schema": "d2t_rna.semantic_discrepancy_ledger.v1",
+  "phase": "P0-2",
+  "created_at": "2026-08-07T18:00:00+08:00",
+  "decision": "DISCRETE_CATALOG (registered finite control library) chosen for the corrected TheoremSpec; convex hull is a derived feasibility relaxation, never the certified semantics.",
+  "symbols": [
+    {
+      "symbol": "gamma(S)",
+      "owner": "t2/theorem.py collision_or_separation",
+      "domain": "observation-probability total-variation (TV = L1/2) per separating panel",
+      "unit": "dimensionless, must lie in [0,1]",
+      "algorithm": "action-level L1 separation over the separating probe, divided by 2 for TV; min over passive-collision fiber",
+      "checker": "independent witness membership + normalization + v=p1-p0 check",
+      "resolution": "paper corrected 49/25->49/50, 9/5->9/10, 8/5->4/5, 6/5->3/5; TV in [0,1] enforced"
+    },
+    {
+      "symbol": "exact_minimax_error",
+      "owner": "t2/decision.py",
+      "domain": "equal-prior Bayes average error = 1/2 sum min(P0,P1)",
+      "unit": "probability in [0,1]",
+      "algorithm": "renamed exact_bayes_average_error; added exact_randomized_minimax_error and per-hypothesis ConditionalDecision (alpha,beta,kappa_0,kappa_1,rho_0,rho_1)",
+      "checker": "NP/selective rule enumeration + exact randomized minimax LP",
+      "resolution": "minimax terminology removed from paper; per-hypothesis quantities computed separately"
+    },
+    {
+      "symbol": "FEASIBLE",
+      "owner": "t2/bounds.py",
+      "domain": "achievability of a design under registered cost/action model",
+      "unit": "boolean",
+      "algorithm": "emitted only by explicit correct-declaration rule (constructive achievability uses information lower bound); otherwise AMBIGUOUS",
+      "checker": "necessary/sufficient threshold micro-tests",
+      "resolution": "no-go uses information upper bound; FEASIBLE no longer issued on mere necessary-threshold crossing"
+    },
+    {
+      "symbol": "product_bhattacharyya",
+      "owner": "evaluation/matrix.py",
+      "domain": "heterogeneous multi-action likelihood separation",
+      "unit": "dimensionless in (0,1]",
+      "algorithm": "prod_u BC_u^{n_u} over actions",
+      "checker": "reference tests test_evaluation/test_matrix.py",
+      "resolution": "corrected from BC_0^{sum n_u} to prod_u BC_u^{n_u}"
+    },
+    {
+      "symbol": "per_position_error_used",
+      "owner": "scripts/*_measured_run.py provenance",
+      "domain": "whether measurement SE enters likelihood/information/n",
+      "unit": "boolean",
+      "algorithm": "false when SE parsed but unused",
+      "checker": "semantic-lint error_unused_honest in paper_readiness_gate.py",
+      "resolution": "set false in all measured runners; glycine marked BLOCKED_PENDING_ARCHIVE_QUALIFICATION"
+    }
+  ],
+  "quantifier_audit": {
+    "minimax_vs_bayes": "RESOLVED (renamed, per-hypothesis)",
+    "gamma_tv_in_unit_interval": "RESOLVED",
+    "interval_conservative_direction": "RESOLVED (no-go upper, achievability lower)",
+    "bhattacharyya_heterogeneous_product": "RESOLVED"
+  },
+  "type_audit": {
+    "discrete_vs_convex": "DISCRETE_CATALOG certified; CONVEX_HULL relaxation only",
+    "action_l1_vs_action_tv": "TheoremSpec declares ACTION_L1 vs ACTION_TV explicitly"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "d2t_rna.v7_audit_snapshot.v1",
+  "phase": "P0-1",
+  "created_at": "2026-08-07T18:00:00+08:00",
+  "snapshot_kind": "FREEZE_AUTHORITY_AND_PAUSE_STRONG_CLAIMS",
+  "head": "5772eca00d5323e908183a9cbac61cdbd92a669f",
+  "origin_main": "5772eca00d5323e908183a9cbac61cdbd92a669f",
+  "git_ancestry_present": true,
+  "v7_contract": {
+    "path": "提示词/归档/d2t-rna v7 理论方法合同.md",
+    "full_file_sha256": "1ab5e56e70b00e0aec6a21f99a8bd63b15df75981f424894d8d85ea8abc27f9e",
+    "activation_status": "ACTIVE_SUCCESSOR_FOR_FUTURE_TASKS",
+    "scientific_claim_authorized": false,
+    "activation_manifest": "manifests/m0/m0_v7_activation.json",
+    "activation_manifest_sha256": "eae4ba941577515083926f5248b26d927c14592467be6532686524d6f330922f"
+  },
+  "task5_closure": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/runs/task5-final-20260803T071200+0800/closure.json",
+    "sha256": "d0feaa628dc796a1f5925948117b870985e7bc952001d454acd7b0809af79d07",
+    "status": "CLOSED_ACCEPTED_PUSHED_PUBLIC",
+    "claim_boundary": "TASK5_SYNTHETIC_SOFTWARE_EVALUATION_ONLY",
+    "scientific_conclusion_authorized": false
+  },
+  "paper_artifacts": {
+    "manuscript_pdf_sha256": "3ddc730b7ecff96515f1d1948ade9230279ae7af7952db9c972001c40a4cd89d",
+    "supplementary_pdf_sha256": "ef38df48b29375c13d6051f647d7de137a6e8d8e1e53f840402d53d29b64164a",
+    "manuscript_tex_sha256": "8bf3b5155030f87b794e2a32efd7c47b53fe94f9c2b1725faf49b15c75843f87",
+    "supplementary_tex_sha256": "8811ba6d8726955b17542dc900dcd772a9a95cf629f4381211013d5b3e5980e5",
+    "evidence_lock_status": "PAPER_EVIDENCE_LOCKED"
+  },
+  "state": "BLOCKED_WITH_EVIDENCE"
+}
