@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "5772eca00d5323e908183a9cbac61cdbd92a669f",
+  "head": "3198de4ddd2f6b120a00137dff8fd4b51ef21462",
   "origin_main": "a31f060c190fd00cb7f34d58a9ae37acafa4b256",
-  "worktree_clean": false,
+  "worktree_clean": true,
   "lineage": [
+    "3198de4 chore(paper): P0-7 fresh evidence rebind to HEAD 5772eca (TV-normalized gamma + corrected semantics)",
     "5772eca fix(P0-3..6): semantic kernel rescue, decision semantics, measured-claim honesty, matched benchmark",
     "a31f060 chore(paper): re-bind readiness gate to HEAD b8444ce after closure-index fix (ALL PASS, uncited=[])",
     "b8444ce fix(test): register demo build script + demo test in frozen execution closure index",
     "b9a2bdb chore(paper): re-bind readiness gate to HEAD 1888798 (ALL PASS, uncited=[])",
-    "1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD",
-    "73d8fa3 feat(paper): interactive demo (glycine switch + budget slider, C3) + baseline cost comparison (C1)"
+    "1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD"
   ],
   "file_exists": {
     "manuscript": true,
@@ -107,9 +107,9 @@
     "error_unused_honest": true,
     "definition_drift_clean": true,
     "kill_tests_pass": true,
-    "kill_tests_note": "................................                                         [100%]\n32 passed in 0.53s\n"
+    "kill_tests_note": "................................                                         [100%]\n32 passed in 0.39s\n"
   },
   "semantic_lint_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786128306.2628062
+  "run_finished": 1786128350.739572
 }
