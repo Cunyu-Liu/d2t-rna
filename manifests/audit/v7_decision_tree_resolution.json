@@ -48,6 +48,28 @@
       "verdict": "STOP_METHOD_ROUTE",
       "estimand_status_primary": "UNIDENTIFIABLE",
       "phase2_status": "STILL_NOT_ESTABLISHED"
+    },
+    "p2_v4_epoch16_20260808": {
+      "authority_epoch": 16,
+      "endpoint": "endpoint_v4 (Route A, MACRO_OVER_NON_DEGENERATE_PUBLICATIONS)",
+      "metric_semantics": "MACRO_OVER_NON_DEGENERATE_PUBLICATIONS",
+      "excluded_constant_label_publications": [
+        "pmid_25883046",
+        "pmid_35982307"
+      ],
+      "n_non_degenerate_publications": 8,
+      "estimand_status": "IDENTIFIABLE",
+      "best_model": "p2_mlp",
+      "baseline_trivial_macro_mean": 0.6517,
+      "best_delta_over_trivial_mean": 0.0298,
+      "best_paired_bootstrap_delta_ci": {
+        "ci_low": -0.0833,
+        "ci_high": 0.5,
+        "point": 0.2181
+      },
+      "permutation_status": "DEGENERATE_NO_POWER",
+      "verdict": "STOP",
+      "summary": "Under endpoint_v4 the estimand (publication-block macro over the 8 non-degenerate publications) is now IDENTIFIABLE, but the best learned model (p2_mlp) incremental delta over the trivial baseline is +0.0298 with paired publication-block bootstrap delta CI lower bound -0.0833 (does NOT exclude 0) and the publication-block permutation is degenerate (unique block sizes, zero power). Incremental cross-publication learnability on the primary binary-changer estimand is NOT established. Verdict STOP (fail-closed); Phase 3 architecture iteration remains BLOCKED."
     }
   },
   "upgrade_path": {
