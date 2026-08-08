@@ -24,10 +24,13 @@ document (contract §13.3 requires explicit user approval for that).
 ## Resolution status
 
 - **Recorded**: yes (this diff + `v7_science_blocker_20260807.md` §2.1).
-- **Modified**: no — per contract §13.3, authority-pointer changes require explicit
-  user approval and are deferred to a P0-7-final authority step.
+- **Approved**: user-approved 2026-08-08 (§13.3 authority alignment).
+- **Modified**: **DONE** — `AGENTS.md` and `README.md` authority pointers aligned to the
+  activated v7 contract (`D2T-RNA-v7-THEORETICAL-RNA-METHODS`, id in
+  `manifests/m0/m0_v7_activation.json`) and the approved amendment
+  `V7_AMEND_12_3_6_20260805`. v6.1 (`contracts/D2T-RNA-v6.1-frozen-plan.md`) is
+  marked **retained as legacy** (historical tasks 1-5), not deleted.
 
-## Recommendation
+## Status
 
-On user approval, align AGENTS.md/README.md authority pointers to the activated v7
-contract and the approved amendment, and mark v6.1 as legacy/retained (not deleted).
+RESOLVED (aligned to v7 on 2026-08-08, commit ca8c05f).
