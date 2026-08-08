@@ -1,0 +1,62 @@
+{
+  "schema": "d2t_rna.v7_phase5_acceptance.v1",
+  "phase": "5",
+  "created_at": "2026-08-08T21:00:00+08:00",
+  "head": "caccd5c",
+  "status": "PHASE5_ACCEPTED_SYNTHETIC_SCOPE",
+  "dependency": "Phase 4 frozen result (scale_grid.json); mechanism analysis does not change the primary endpoint",
+  "acceptance_criteria": {
+    "worst_case_pair_witness_analysis": {
+      "result": "PASS",
+      "detail": "grid cells ranked by oracle minimax error (hardest = budget-4 cells, err 5/32; budget-8 reduces to 289/4096) and by best-baseline over-cost vs the cheapest allocation reaching the oracle error",
+      "test": "test_worst_case_ordering_sorts_by_oracle_error",
+      "test_status": "passed"
+    },
+    "action_contribution_stability": {
+      "result": "PASS",
+      "detail": "cost-sensitivity quantified: on all 8 2-action cells uniform costs favor action id_b (cheapest alloc [0,3]/[0,7]) while heterogeneous costs shift to id_a (alloc [3,0]/[7,0]); identical channel, cost changes the cheapest allocation",
+      "test": "test_action_contribution_detects_cost_sensitivity",
+      "test_status": "passed"
+    },
+    "necessary_sufficient_gap": {
+      "result": "PASS",
+      "detail": "certified integer-vs-LP cost gap (sufficient achievable cost vs necessary LP lower bound) measured on all 16 cells, non-negative everywhere",
+      "test": "test_necessary_sufficient_gap_is_non_negative",
+      "test_status": "passed"
+    },
+    "abstention_error_decomposition": {
+      "result": "PASS",
+      "detail": "correct + wrong + abstain = 1 holds exactly on all 128 executed in-budget baseline records (partition_violations=0); wrong recovered as 1 - correct - abstain",
+      "test": "test_error_decomposition_is_partition",
+      "test_status": "passed"
+    },
+    "claim_evidence_map": {
+      "result": "PASS",
+      "detail": "ledger maps each headline mechanism claim to a unique evidence bundle (cell + baseline + field); no known public mechanism claimed as new (known_public_mechanism=false throughout)",
+      "test": "test_claim_evidence_map_links_each_claim_to_evidence",
+      "test_status": "passed"
+    }
+  },
+  "evidence": {
+    "phase5_mechanism_tests": "5 passed (tests/evaluation/test_phase5_mechanism.py)",
+    "frozen_closure_registration": "test_dynamic_python_execution_closure_matches_frozen_index passed (registered tests/evaluation/test_phase5_mechanism.py + scripts/t2_mechanism_run.py)",
+    "mechanism_artifact": {
+      "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase5/mechanism.json",
+      "sha256": "80b764c8d6d19895fe33973ff7cdd6e60279d4df9998cff13669105b3816da27",
+      "source_artifact_sha256": "1bb51878d9b2482f461e992716164c9c20b07224416f9cec478f786fcc39a338 (scale_grid.json)",
+      "cells_analyzed": 16,
+      "cost_sensitive_2action_cells": 8,
+      "necessary_sufficient_gap_records": 16,
+      "gap_non_negative": true,
+      "abstention_decomposition_records": 128,
+      "partition_violations": 0,
+      "oracle_never_beaten": true
+    },
+    "real_data_mechanism_not_executed": {
+      "assay_structure_interpretation": "GATED_BY_PHASE2",
+      "biological_discovery_claim": "GATED_BY_PHASE2"
+    },
+    "scientific_claim_authorized": false
+  },
+  "boundary_note": "model-conditional synthetic mechanism analysis over the frozen Phase 4 grid only; describes software behaviour of the corrected kernel, not a biological mechanism; assay/structure interpretation by domain experts and any biological-discovery claim are gated by Phase 2 BLOCKED_PENDING_ARCHIVE_QUALIFICATION; no known public mechanism presented as new"
+}
