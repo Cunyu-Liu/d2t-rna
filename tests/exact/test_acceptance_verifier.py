@@ -172,6 +172,8 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "scripts/t10_validation_run.py",
             "tests/t2/test_phase3_kernel.py",
             "scripts/t2_complexity_benchmark.py",
+            "tests/evaluation/test_phase4_scale_grid.py",
+            "scripts/t2_scale_grid_run.py",
         }
     )
     registered_delivery_descendants = frozenset(
