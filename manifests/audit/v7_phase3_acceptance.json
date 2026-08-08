@@ -1,0 +1,68 @@
+{
+  "schema": "d2t_rna.v7_phase3_acceptance.v1",
+  "phase": "3",
+  "created_at": "2026-08-08T18:30:00+08:00",
+  "head": "c17007a",
+  "status": "PHASE3_ACCEPTED",
+  "dependency": "Phase 0 spec frozen (DISCRETE_CATALOG), T2c decision semantics frozen; Phase 1 benchmark protocol; Phase 2 observation semantics (blocked-pending-archive-qualification noted)",
+  "acceptance_criteria": {
+    "exhaustive_small_universes_false_certificate_zero": {
+      "result": "PASS",
+      "detail": "independent brute-force oracle (raw Fraction primitives, no production helpers) agrees with the engine on every instance in the exhaustive small universe",
+      "test": "test_exhaustive_small_universe_no_false_certificate",
+      "test_status": "passed"
+    },
+    "exhaustive_small_universes_false_no_go_zero": {
+      "result": "PASS",
+      "detail": "no model certified as a real discrete separation/collision is downgraded to COUNTEREXAMPLE when the two engines agree; COUNTEREXAMPLE only on genuine enumeration-vs-LP mismatch",
+      "test": "test_exhaustive_small_universe_no_false_no_go",
+      "test_status": "passed"
+    },
+    "checker_does_not_reuse_solver_internals": {
+      "result": "PASS",
+      "detail": "independent verifier imports no production solver/witness/model helpers and rejects forged catalog-outside, non-normalized, inconsistent witnesses",
+      "tests": [
+        "test_checker_does_not_reuse_solver_internals",
+        "test_checker_rejects_forged_catalog_outside_witness"
+      ],
+      "test_status": "passed"
+    },
+    "tv_range_correct": {
+      "result": "PASS",
+      "detail": "all finite gamma values map to TV in [0,1] across the exhaustive small universe and the complexity benchmark (0 violations)",
+      "test": "test_exhaustive_small_universe_no_false_certificate (TV range hard gate) + complexity_benchmark summary.tv_range_violations=0"
+    },
+    "conditional_endpoints_match_oracle": {
+      "result": "PASS",
+      "detail": "per-hypothesis alpha,beta,kappa_0,kappa_1,rho_0,rho_1 of the explicit likelihood-ratio rule match an independent brute-force multinomial oracle",
+      "test": "test_conditional_endpoints_match_independent_oracle",
+      "test_status": "3 parametrized cases passed"
+    },
+    "mature_solver_crosscheck_consistent": {
+      "result": "PASS",
+      "detail": "exact rational two-phase simplex agrees with scipy HiGHS linprog on all hand-built fixtures and the exhaustive small universe",
+      "tests": [
+        "test_mature_solver_crosscheck_all_fixtures",
+        "test_mature_solver_crosscheck_small_universe"
+      ],
+      "test_status": "passed"
+    }
+  },
+  "evidence": {
+    "phase3_kernel_tests": "9 passed (tests/t2/test_phase3_kernel.py)",
+    "full_t2_suite": "117 passed (tests/t2, excluding slow)",
+    "frozen_closure_registration": "test_dynamic_python_execution_closure_matches_frozen_index passed",
+    "complexity_benchmark": {
+      "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase3/complexity_benchmark.json",
+      "sha256": "34971b48438fe2c99f78af82cbfd159f30640614ee16ce6981a7dd63dbb7f9d1",
+      "instances": 28,
+      "status_counts": {"IFF": 28},
+      "engines_agree": 28,
+      "tv_range_violations": 0,
+      "total_elapsed_s": 0.85582
+    },
+    "migration_manifest": "manifests/audit/v7_phase3_migration_manifest.json",
+    "scientific_claim_authorized": false
+  },
+  "boundary_note": "model-conditional synthetic evaluation only over the corrected DISCRETE_CATALOG semantic kernel; no prospective/blinded/held-out validation; no real-data or SOTA claim; Phase 2 remains BLOCKED_PENDING_ARCHIVE_QUALIFICATION and does not gate Phase 3 kernel correctness"
+}

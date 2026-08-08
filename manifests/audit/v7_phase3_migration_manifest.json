@@ -1,0 +1,36 @@
+{
+  "schema": "d2t_rna.v7_phase3_migration_manifest.v1",
+  "phase": "3",
+  "created_at": "2026-08-08T18:30:00+08:00",
+  "head": "c17007a",
+  "parent_head": "2d0c05a",
+  "migration_summary": "Phase 3 semantic-kernel hard gates operating on the P0-3/P0-4 corrected kernel (DISCRETE_CATALOG certified semantics). Adds exhaustive small-universe oracle gates, mature solver crosscheck, conditional-endpoints oracle, checker independence, and a complexity benchmark.",
+  "new_files": [
+    {
+      "path": "tests/t2/test_phase3_kernel.py",
+      "sha256": "61f09f46c3824cfb08fa5b0a5a72d1825aaa41f7a3e6fde6a23731792c1ab789",
+      "role": "semantic-kernel hard gates (exhaustive oracle, solver crosscheck, conditional endpoints, checker independence)"
+    },
+    {
+      "path": "scripts/t2_complexity_benchmark.py",
+      "sha256": "8495b7f2e81edbe8b84686b478d39fefcd285a9ecaea5e8da03cc134ad625183",
+      "role": "pre-registered small scale grid complexity benchmark (synthetic, model-conditional)"
+    }
+  ],
+  "modified_files": [
+    {
+      "path": "tests/exact/test_acceptance_verifier.py",
+      "sha256": "b965900aca1bc01c44f0ceaf33adfbc818340dc12115ce08d545afdf8af928ee",
+      "role": "register new Phase 3 descendants (test + benchmark script) into frozen execution closure index"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase3/complexity_benchmark.json",
+      "sha256": "34971b48438fe2c99f78af82cbfd159f30640614ee16ce6981a7dd63dbb7f9d1",
+      "role": "complexity benchmark result (28 instances)"
+    }
+  ],
+  "no_reused_solver_internals_checker": true,
+  "scale_note": "synthetic model-conditional scaling record; not SOTA; no prospective/held-out claim"
+}
