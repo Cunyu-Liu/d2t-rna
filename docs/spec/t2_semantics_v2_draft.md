@@ -1,6 +1,8 @@
 # T2 Semantics v2 Draft Spec — P0-2
 
-Status: DRAFT (supersedes ambiguous v1 semantics; P0-3/4 implemented a matching TheoremSpec).
+Status: APPROVED (author-approved 2026-08-08; supersedes ambiguous v1 semantics; P0-3/4 implemented a matching TheoremSpec).
+
+> Author approval (2026-08-08): **DISCRETE_CATALOG** is the certified uncertainty kind; `CONVEX_HULL` is a derived feasibility relaxation only.
 
 ## 1. Single TheoremSpec
 

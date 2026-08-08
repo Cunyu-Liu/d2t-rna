@@ -57,7 +57,13 @@
     "bhattacharyya_heterogeneous_product": "RESOLVED"
   },
   "type_audit": {
-    "discrete_vs_convex": "DISCRETE_CATALOG certified; CONVEX_HULL relaxation only",
+    "discrete_vs_convex": "DISCRETE_CATALOG certified (author-approved 2026-08-08); CONVEX_HULL relaxation only",
     "action_l1_vs_action_tv": "TheoremSpec declares ACTION_L1 vs ACTION_TV explicitly"
+  },
+  "decision_approval": {
+    "approved_by": "liucunyu",
+    "approved_at": "2026-08-08T11:25:00+08:00",
+    "decision": "DISCRETE_CATALOG certified; CONVEX_HULL relaxation only",
+    "status": "APPROVED"
   }
 }
