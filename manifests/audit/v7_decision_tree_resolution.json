@@ -1,8 +1,8 @@
 {
   "schema": "d2t_rna.v7_decision_tree_resolution.v1",
   "contract": "D2T-RNA_v7_严格科研与工程审计_2026-08-07.md",
-  "created_at": "2026-08-08T22:30:00+08:00",
-  "head": "8b4d34d",
+  "created_at": "2026-08-08T23:15:00+08:00",
+  "head": "21a3ce6976d6deb88e808b54a327874ae0b81f58",
   "decision_tree": "section 14.5",
   "resolution": [
     {
