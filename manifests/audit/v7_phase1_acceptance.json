@@ -1,0 +1,40 @@
+{
+  "schema": "d2t_rna.v7_phase1_acceptance.v1",
+  "phase": "1",
+  "created_at": "2026-08-08T11:40:00+08:00",
+  "head": "06ec1bf",
+  "status": "PHASE1_ACCEPTED",
+  "dependency": "Phase 0 spec frozen (DISCRETE_CATALOG), T2c decision semantics frozen",
+  "acceptance_criteria": {
+    "same_budget_oracle_not_beaten_by_feasible_baseline": {
+      "result": "PASS",
+      "violations": 0,
+      "microcases": 12
+    },
+    "each_label_distinct_passes_reference_vector": {
+      "result": "PASS",
+      "tests": [
+        "test_baseline_scores_are_distinct",
+        "test_true_chernoff_matches_reference",
+        "test_per_action_tv_in_unit_interval"
+      ],
+      "test_status": "4 passed"
+    },
+    "no_mixed_stopping_headline_ratio": {
+      "result": "PASS",
+      "note": "all baselines run under one common ExperimentSpec (fixed non-adaptive horizon)"
+    },
+    "all_not_run_explicit": {
+      "result": "PASS",
+      "not_run_baselines": []
+    }
+  },
+  "evidence": {
+    "matrix_report": "/mnt/cunyuliu/d2t-rna/artifacts/phase1/t9_matrix_phase1_report.json",
+    "matrix_report_sha256": "219aa163967ab4fbbd4709fa456e01f9272cdcfc5018dca528512bf3d49183fc",
+    "microcase_count": 12,
+    "run_elapsed_s": 26.119681,
+    "scientific_claim_authorized": false
+  },
+  "boundary_note": "model-conditional synthetic evaluation only; no prospective/blinded/held-out validation; no real-data claim"
+}

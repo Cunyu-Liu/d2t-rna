@@ -1,0 +1,56 @@
+{
+  "schema": "d2t_rna.v7_phase2_acceptance.v1",
+  "phase": "2",
+  "created_at": "2026-08-08T11:45:00+08:00",
+  "head": "06ec1bf",
+  "status": "PHASE2_BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+  "dependency": "Phase 0 spec frozen (DISCRETE_CATALOG); archive qualification prerequisites",
+  "acceptance_criteria": {
+    "archive_inventory_hash_crosswalk_replay_first": {
+      "result": "NOT_PASS",
+      "detail": "inventory+hash exist (4 raw .rdat files), but raw per-replicate counts are unavailable; raw-count replay cannot execute",
+      "raw_count_replay_status": "RAW_COUNT_REPLAY_UNAVAILABLE"
+    },
+    "non_rejection_means_no_obvious_mismatch_only": {
+      "result": "CONFIRMED",
+      "detail": "any non-rejection in exposed replicates is no obvious mismatch only, not authorization of calibration/coverage",
+      "non_rejection_is_not_validation": true
+    },
+    "failures_falsify_immediately": {
+      "result": "READY",
+      "note": "DirectClampModel vs WithinReplicateCountModel kill test is implemented and tested (9 passed) and would falsify on real counts once available"
+    },
+    "upgrade_requires_sealed_multi_unit_confirmation_set": {
+      "result": "CONFIRMED",
+      "detail": "single new unit insufficient; upgrade requires precision/power-designed multi-unit sealed confirmation set"
+    },
+    "action_cost_confirmable_by_experimenter": {
+      "result": "NOT_ESTABLISHED",
+      "note": "no independently executable and priced assay action; nucleotide is full-profile outcome coordinate only"
+    },
+    "low_quality_ranges_handled_per_plan": {
+      "result": "DOCUMENTED",
+      "detail": "quality caveats and floor handling documented in glycine qualification manifest and measured runners"
+    }
+  },
+  "measured_claims_disposition": {
+    "add_miniTTR_n3": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+    "glycine_n15": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+    "sam_iii_n3": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+    "per_position_error_used": false,
+    "future_upgrade_path": "unexposed multi-unit sealed confirmation set per audit \u00a79.4 / \u00a713.1 P0-5 success criteria"
+  },
+  "evidence": {
+    "qualification_manifest": "manifests/audit/glycine_data_qualification_manifest.json",
+    "qualification_manifest_sha256": "1295523f517e3ddd775c4948182499001c0a33758177111010d8f651d43bb36d",
+    "observation_model": "src/d2t_rna/data/observation_model.py",
+    "observation_model_sha256": "dd5ba93394e5e7b3c6da97b23d03f18487efc2d186614fcab28798b4e282c083",
+    "replicate_likelihood_tests": "9 passed (tests/data/test_replicate_likelihood.py)",
+    "scientific_claim_authorized": false
+  },
+  "section14_2_termination_triggered": {
+    "triggered": true,
+    "trigger": "unable to obtain raw counts / independent library / dependency graph; nucleotide only full-profile outcome coordinate",
+    "consequence": "measured profiles downgraded to descriptive ranking/visual demo; no absolute probability, repeat count, wet-lab saving, or cross-system claim"
+  }
+}
