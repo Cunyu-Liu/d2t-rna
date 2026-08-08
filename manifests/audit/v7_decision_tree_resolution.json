@@ -39,12 +39,23 @@
     "no_wet_lab_saving_claim": true,
     "no_cross_system_transferability_claim": true,
     "no_sota_superiority_claim": true,
-    "scientific_claim_authorized": false
+    "scientific_claim_authorized": false,
+    "p2_v3_fix_executed_20260808": {
+      "authority_epoch": 15,
+      "caller": "caller_v3 (empirical-scatter noise recalibration)",
+      "endpoint": "endpoint_v3",
+      "run": "p2_v3_learnability_20260808b",
+      "verdict": "STOP_METHOD_ROUTE",
+      "estimand_status_primary": "UNIDENTIFIABLE",
+      "phase2_status": "STILL_NOT_ESTABLISHED"
+    }
   },
   "upgrade_path": {
-    "phase2_unblock": "requires raw per-replicate counts archive to rerun DirectClamp vs WithinReplicateCount kill test (implemented, 9 passed, would falsify on real counts), OR author-approved per-study normalization + error recalibration (caller_v3/endpoint_v3, PROPOSED_NOT_ACTIVE) to re-run P2 learnability gate",
-    "then": "sealed multi-unit confirmation set per audit §9.4 / §13.1 P0-5 success criteria before any real-data claim",
-    "then": "full RNA methods paper + Phase 6 submission only after claim freeze and owner/legal approval"
+    "phase2_unblock": "requires raw per-replicate counts archive to rerun DirectClamp vs WithinReplicateCount kill test (implemented, 9 passed, would falsify on real counts). The author-approved per-study normalization + empirical-scatter error recalibration (caller_v3/endpoint_v3, epoch 15) WAS EXECUTED (run p2_v3_learnability_20260808b, 10 eligible held-out pubs, 5 seeds) but the publication-macro AUPRC remained UNIDENTIFIABLE (2/10 pubs pmid_25883046, pmid_35982307 constant-label; degenerate_policies.constant_label fails the macro closed) -> P2_LEARNABILITY_GO = STOP_METHOD_ROUTE. Phase 2 remains NOT established.",
+    "then": [
+      "sealed multi-unit confirmation set per audit §9.4 / §13.1 P0-5 success criteria before any real-data claim",
+      "full RNA methods paper + Phase 6 submission only after claim freeze and owner/legal approval"
+    ]
   },
-  "boundary_note": "Executed and accepted within authorized scope: P0 all DONE, Phases 1/3/4/5/6 accepted, Phase 2 documented as BLOCKED_PENDING_ARCHIVE_QUALIFICATION with §14.2 termination triggered. Real-data claims and submission remain gated on Phase 2 unblocking, claim freeze, and owner/legal approval, none of which are within the current (non-expanded) authorization."
+  "boundary_note": "Executed and accepted within authorized scope: P0 all DONE, Phases 1/3/4/5/6 accepted, Phase 2 documented as NOT_ESTABLISHED. The caller_v3/endpoint_v3 (epoch 15) fix was executed and re-adjudicated STOP (estimand still UNIDENTIFIABLE). Real-data claims and submission remain gated on a further Phase 2 unblock (e.g. a defined subset estimand under a new endpoint/epoch requires explicit user authorization), claim freeze, and owner/legal approval, none of which are within the current (non-expanded) authorization."
 }
