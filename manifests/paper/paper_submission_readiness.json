@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "5dca3dbb4f9bd07e8d72d38d1519e7cef7878979",
-  "origin_main": "a31f060c190fd00cb7f34d58a9ae37acafa4b256",
+  "head": "d377c2d8f573caa9adaf9b045634c34a5f980972",
+  "origin_main": "d377c2d8f573caa9adaf9b045634c34a5f980972",
   "worktree_clean": true,
   "lineage": [
-    "5dca3db fix(test): give pre-existing heavy baseline/planner tests explicit timeout(900) so default suite is deterministically green",
-    "24627d2 docs(P0-0): add v6/v7/README/paper authority diff and claim retraction ledger",
-    "6ebf8b4 docs(P0-1/P0-2): freeze v7 snapshot/strong-claim blocker ledger and T2 semantics v2 spec",
-    "b1e0285 chore(paper): re-bind readiness gate to HEAD 3198de4 after P0-7 evidence rebind (ALL PASS, clean worktree)",
-    "3198de4 chore(paper): P0-7 fresh evidence rebind to HEAD 5772eca (TV-normalized gamma + corrected semantics)",
-    "5772eca fix(P0-3..6): semantic kernel rescue, decision semantics, measured-claim honesty, matched benchmark"
+    "d377c2d docs(Phase1/2): record v7 Phase 1 acceptance (oracle never beaten, distinct baselines) and Phase 2 blocked-pending-archive-qualification",
+    "06ec1bf docs(P0-2): record author approval of DISCRETE_CATALOG certified semantics (2026-08-08)",
+    "ca8c05f docs(authority): align AGENTS.md/README.md authority pointers to activated v7 contract (user-approved); v6.1 retained as legacy",
+    "b7ebb02 docs(P0): record v7 P0 terminal acceptance manifest (8 tasks DONE, comparison eligible, no science claim)",
+    "1e5358e chore(paper): re-bind readiness gate to HEAD 5dca3db after timeout fix (ALL PASS, clean worktree)",
+    "5dca3db fix(test): give pre-existing heavy baseline/planner tests explicit timeout(900) so default suite is deterministically green"
   ],
   "file_exists": {
     "manuscript": true,
@@ -107,9 +107,9 @@
     "error_unused_honest": true,
     "definition_drift_clean": true,
     "kill_tests_pass": true,
-    "kill_tests_note": "................................                                         [100%]\n32 passed in 0.37s\n"
+    "kill_tests_note": "................................                                         [100%]\n32 passed in 0.63s\n"
   },
   "semantic_lint_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786149111.457933
+  "run_finished": 1786155485.043963
 }

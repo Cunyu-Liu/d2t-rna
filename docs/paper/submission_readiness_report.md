@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = 5dca3dbb4f9bd07e8d72d38d1519e7cef7878979
-origin/main    = a31f060c190fd00cb7f34d58a9ae37acafa4b256
+current HEAD   = d377c2d8f573caa9adaf9b045634c34a5f980972
+origin/main    = d377c2d8f573caa9adaf9b045634c34a5f980972
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
+d377c2d docs(Phase1/2): record v7 Phase 1 acceptance (oracle never beaten, distinct baselines) and Phase 2 blocked-pending-archive-qualification
+06ec1bf docs(P0-2): record author approval of DISCRETE_CATALOG certified semantics (2026-08-08)
+ca8c05f docs(authority): align AGENTS.md/README.md authority pointers to activated v7 contract (user-approved); v6.1 retained as legacy
+b7ebb02 docs(P0): record v7 P0 terminal acceptance manifest (8 tasks DONE, comparison eligible, no science claim)
+1e5358e chore(paper): re-bind readiness gate to HEAD 5dca3db after timeout fix (ALL PASS, clean worktree)
 5dca3db fix(test): give pre-existing heavy baseline/planner tests explicit timeout(900) so default suite is deterministically green
-24627d2 docs(P0-0): add v6/v7/README/paper authority diff and claim retraction ledger
-6ebf8b4 docs(P0-1/P0-2): freeze v7 snapshot/strong-claim blocker ledger and T2 semantics v2 spec
-b1e0285 chore(paper): re-bind readiness gate to HEAD 3198de4 after P0-7 evidence rebind (ALL PASS, clean worktree)
-3198de4 chore(paper): P0-7 fresh evidence rebind to HEAD 5772eca (TV-normalized gamma + corrected semantics)
-5772eca fix(P0-3..6): semantic kernel rescue, decision semantics, measured-claim honesty, matched benchmark
 ```
 
-The readiness report is re-generated from the current HEAD (5dca3dbb4f9bd07e8d72d38d1519e7cef7878979), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> 5dca3db.
+The readiness report is re-generated from the current HEAD (d377c2d8f573caa9adaf9b045634c34a5f980972), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> d377c2d.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -71,7 +71,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD 5dca3db (this file).
+- P0 readiness report synced to HEAD d377c2d (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -81,7 +81,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on 5dca3db with provenance (see build_provenance).
+- P1 full build on d377c2d with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 
