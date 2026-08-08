@@ -2,13 +2,26 @@
 
 ## Authority
 
-`contracts/D2T-RNA-v6.1-frozen-plan.md` is the only active scientific and engineering contract. Its SHA-256 is:
+The active scientific and engineering contract is the **D2T-RNA v7** contract
+(`ACTIVE_SUCCESSOR_FOR_FUTURE_TASKS`, id `D2T-RNA-v7-THEORETICAL-RNA-METHODS`),
+as activated in `manifests/m0/m0_v7_activation.json` and amended by
+`docs/contracts/amendments/v7_amend_12_3_6_20260805.md` (`V7_AMEND_12_3_6_20260805`,
+`APPROVED_BY_USER`).
 
-```text
-87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d
-```
+The approved semantic decision for the corrected TheoremSpec is
+**DISCRETE_CATALOG** (registered finite control library is the certified semantics;
+`CONVEX_HULL` is only a derived feasibility relaxation). See
+`docs/spec/t2_semantics_v2_draft.md` and `manifests/audit/semantic_diff.json`.
 
-Do not alter the center question, gates, estimands, probability scopes, failure semantics, or claim boundaries without an explicit replacement contract from the user.
+The previous contract, `contracts/D2T-RNA-v6.1-frozen-plan.md` (SHA-256
+`87ccadd245a02133d1da0dfc41537c90b56e68a22592ad026b53449259dd455d`), is **retained as
+legacy** for historical task 1-5 interpretation and is **not** deleted.
+
+`scientific_claim_authorized=false` remains in force: no prospective coverage,
+new-library risk, native T4 validity, or RNA population-level guarantee is authorized.
+
+Do not alter the center question, gates, estimands, probability scopes, failure
+semantics, or claim boundaries without an explicit replacement contract from the user.
 
 ## Paths
 
