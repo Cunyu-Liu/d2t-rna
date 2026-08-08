@@ -7,24 +7,24 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = d377c2d8f573caa9adaf9b045634c34a5f980972
-origin/main    = d377c2d8f573caa9adaf9b045634c34a5f980972
+current HEAD   = b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6
+origin/main    = b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6
 worktree state = clean
 ```
 
 ## 2. Lineage (bound)
 
 ```text
-d377c2d docs(Phase1/2): record v7 Phase 1 acceptance (oracle never beaten, distinct baselines) and Phase 2 blocked-pending-archive-qualification
-06ec1bf docs(P0-2): record author approval of DISCRETE_CATALOG certified semantics (2026-08-08)
-ca8c05f docs(authority): align AGENTS.md/README.md authority pointers to activated v7 contract (user-approved); v6.1 retained as legacy
-b7ebb02 docs(P0): record v7 P0 terminal acceptance manifest (8 tasks DONE, comparison eligible, no science claim)
-1e5358e chore(paper): re-bind readiness gate to HEAD 5dca3db after timeout fix (ALL PASS, clean worktree)
-5dca3db fix(test): give pre-existing heavy baseline/planner tests explicit timeout(900) so default suite is deterministically green
+b04a7ad feat(Phase5): mechanism analysis over frozen Phase 4 grid (worst-case, action contribution, necessary/sufficient gap, abstention decomposition, claim-evidence map) + acceptance manifest
+caccd5c docs(Phase4): record v7 Phase 4 acceptance manifest (synthetic scale grid, matched benchmark, oracle never beaten, cost ablation, runtime/memory)
+6de574b feat(Phase4): synthetic scale grid + matched benchmark + cost ablation
+2531cda docs(Phase3): record migration manifest + Phase 3 acceptance
+c17007a feat(Phase3): semantic-kernel hard gates + complexity benchmark
+2d0c05a docs(P0-0): update authority diff resolution to RESOLVED (alignment to v7 done, user-approved)
 ```
 
-The readiness report is re-generated from the current HEAD (d377c2d8f573caa9adaf9b045634c34a5f980972), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> d377c2d.
+The readiness report is re-generated from the current HEAD (b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> b04a7ad.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -71,7 +71,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD d377c2d (this file).
+- P0 readiness report synced to HEAD b04a7ad (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -81,7 +81,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on d377c2d with provenance (see build_provenance).
+- P1 full build on b04a7ad with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 

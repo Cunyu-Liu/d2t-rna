@@ -4,16 +4,16 @@
   "contract_version": "v7.0.0",
   "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
   "scientific_claim_authorized": false,
-  "head": "d377c2d8f573caa9adaf9b045634c34a5f980972",
-  "origin_main": "d377c2d8f573caa9adaf9b045634c34a5f980972",
+  "head": "b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6",
+  "origin_main": "b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6",
   "worktree_clean": true,
   "lineage": [
-    "d377c2d docs(Phase1/2): record v7 Phase 1 acceptance (oracle never beaten, distinct baselines) and Phase 2 blocked-pending-archive-qualification",
-    "06ec1bf docs(P0-2): record author approval of DISCRETE_CATALOG certified semantics (2026-08-08)",
-    "ca8c05f docs(authority): align AGENTS.md/README.md authority pointers to activated v7 contract (user-approved); v6.1 retained as legacy",
-    "b7ebb02 docs(P0): record v7 P0 terminal acceptance manifest (8 tasks DONE, comparison eligible, no science claim)",
-    "1e5358e chore(paper): re-bind readiness gate to HEAD 5dca3db after timeout fix (ALL PASS, clean worktree)",
-    "5dca3db fix(test): give pre-existing heavy baseline/planner tests explicit timeout(900) so default suite is deterministically green"
+    "b04a7ad feat(Phase5): mechanism analysis over frozen Phase 4 grid (worst-case, action contribution, necessary/sufficient gap, abstention decomposition, claim-evidence map) + acceptance manifest",
+    "caccd5c docs(Phase4): record v7 Phase 4 acceptance manifest (synthetic scale grid, matched benchmark, oracle never beaten, cost ablation, runtime/memory)",
+    "6de574b feat(Phase4): synthetic scale grid + matched benchmark + cost ablation",
+    "2531cda docs(Phase3): record migration manifest + Phase 3 acceptance",
+    "c17007a feat(Phase3): semantic-kernel hard gates + complexity benchmark",
+    "2d0c05a docs(P0-0): update authority diff resolution to RESOLVED (alignment to v7 done, user-approved)"
   ],
   "file_exists": {
     "manuscript": true,
@@ -107,9 +107,9 @@
     "error_unused_honest": true,
     "definition_drift_clean": true,
     "kill_tests_pass": true,
-    "kill_tests_note": "................................                                         [100%]\n32 passed in 0.63s\n"
+    "kill_tests_note": "................................                                         [100%]\n32 passed in 1.01s\n"
   },
   "semantic_lint_all_pass": true,
   "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)",
-  "run_finished": 1786155485.043963
+  "run_finished": 1786162338.056274
 }
