@@ -7,7 +7,7 @@
 ## 1. Repository state
 
 ```text
-current HEAD   = 3198de4ddd2f6b120a00137dff8fd4b51ef21462
+current HEAD   = 24627d2315b7f2e53d63a812986f651273a305e6
 origin/main    = a31f060c190fd00cb7f34d58a9ae37acafa4b256
 worktree state = clean
 ```
@@ -15,16 +15,16 @@ worktree state = clean
 ## 2. Lineage (bound)
 
 ```text
+24627d2 docs(P0-0): add v6/v7/README/paper authority diff and claim retraction ledger
+6ebf8b4 docs(P0-1/P0-2): freeze v7 snapshot/strong-claim blocker ledger and T2 semantics v2 spec
+b1e0285 chore(paper): re-bind readiness gate to HEAD 3198de4 after P0-7 evidence rebind (ALL PASS, clean worktree)
 3198de4 chore(paper): P0-7 fresh evidence rebind to HEAD 5772eca (TV-normalized gamma + corrected semantics)
 5772eca fix(P0-3..6): semantic kernel rescue, decision semantics, measured-claim honesty, matched benchmark
 a31f060 chore(paper): re-bind readiness gate to HEAD b8444ce after closure-index fix (ALL PASS, uncited=[])
-b8444ce fix(test): register demo build script + demo test in frozen execution closure index
-b9a2bdb chore(paper): re-bind readiness gate to HEAD 1888798 (ALL PASS, uncited=[])
-1888798 chore(paper): re-bind readiness report + manifest + supplementary to HEAD
 ```
 
-The readiness report is re-generated from the current HEAD (3198de4ddd2f6b120a00137dff8fd4b51ef21462), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> 3198de4.
+The readiness report is re-generated from the current HEAD (24627d2315b7f2e53d63a812986f651273a305e6), which is a descendant of
+051f30f in the lineage af601ac -> 051f30f -> 24627d2.
 
 ## 3. Paper artifact hashes (recomputed at gate time)
 
@@ -71,7 +71,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
 
 ## 7. Pre-submission P0/P1 item status
 
-- P0 readiness report synced to HEAD 3198de4 (this file).
+- P0 readiness report synced to HEAD 24627d2 (this file).
 - P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
   iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
   observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
@@ -81,7 +81,7 @@ Publishable as a **methods/experimental-design** contribution at a methods venue
   (supp88.tex); every figure caption gives question/result/interpretation/boundary.
 - P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
   finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on 3198de4 with provenance (see build_provenance).
+- P1 full build on 24627d2 with provenance (see build_provenance).
 
 ## 8. Failed or deferred items
 

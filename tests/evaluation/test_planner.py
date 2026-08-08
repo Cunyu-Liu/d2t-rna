@@ -649,6 +649,7 @@ def test_coverage_assessment_rejects_scenario_conditioning_mismatch() -> None:
         )
 
 
+@pytest.mark.timeout(900)
 def test_formal_coverage_assessment_rejects_different_probability_space() -> None:
     model = _model()
     risk_bundle = _valid_risk_bundle()

@@ -725,6 +725,7 @@ def test_summary_direct_forgery_cannot_create_false_dominance() -> None:
         replay_random_baseline_summary(forged)
 
 
+@pytest.mark.timeout(900)
 def test_comparison_rejects_missing_required_rival() -> None:
     binding = _common_binding(
         (
@@ -754,6 +755,7 @@ def test_comparison_rejects_missing_required_rival() -> None:
     assert comparison.reference_baseline_id == "b-feasible"
 
 
+@pytest.mark.timeout(900)
 def test_all_required_rivals_infeasible_is_dominance_without_ratio() -> None:
     binding = _common_binding(
         (
