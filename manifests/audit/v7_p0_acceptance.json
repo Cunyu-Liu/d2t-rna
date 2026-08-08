@@ -1,0 +1,122 @@
+{
+  "schema": "d2t_rna.v7_p0_acceptance.v1",
+  "phase": "P0",
+  "created_at": "2026-08-08T11:20:00+08:00",
+  "head": "1e5358eacdd76a17591a9520fdedf1d3f290837f",
+  "status": "P0_ACCEPTED",
+  "gate_for_next_phase": "COMPARISON_ELIGIBLE",
+  "scientific_claim_authorized": false,
+  "tasks": {
+    "P0-0": {
+      "deliverables": [
+        "docs/audit/v7_authority_diff_20260807.md",
+        "manifests/audit/claim_retraction_ledger.json"
+      ],
+      "sha256": {
+        "docs/audit/v7_authority_diff_20260807.md": "02317b3eb135faa1909e3c6c0e688b2c3fbda2084a5f7cc842536de1a54b4949",
+        "manifests/audit/claim_retraction_ledger.json": "f26fc905ed240a43c4cc3b2dca1289d1735f1e0a39840af1e453d7e8c49716e8"
+      },
+      "status": "DONE"
+    },
+    "P0-1": {
+      "deliverables": [
+        "docs/audit/v7_science_blocker_20260807.md",
+        "manifests/audit/v7_snapshot.json"
+      ],
+      "sha256": {
+        "docs/audit/v7_science_blocker_20260807.md": "3b7f193b910a0c43e4fc8dfb4e5465e8ce1222ddc716fd97b2f6e610e1023df9",
+        "manifests/audit/v7_snapshot.json": "7ff28ed91f1f5da33b41b8f00aca333cca2e51da7213c14fbdf51968a86bd2cf"
+      },
+      "status": "DONE"
+    },
+    "P0-2": {
+      "deliverables": [
+        "docs/spec/t2_semantics_v2_draft.md",
+        "manifests/audit/semantic_diff.json"
+      ],
+      "sha256": {
+        "docs/spec/t2_semantics_v2_draft.md": "8dc4ee179acd4d5a60dab5666cd41189a828fce22b76bec25b2915140e3a65db",
+        "manifests/audit/semantic_diff.json": "e0e7f1da75581245409b9957ed07198ecc7192314a1cb0dfa79442b012601225"
+      },
+      "decision": "DISCRETE_CATALOG (registered finite control library) certified; CONVEX_HULL relaxation only",
+      "status": "DONE"
+    },
+    "P0-3": {
+      "deliverables": [
+        "tests/t2/test_semantic_counterexamples.py"
+      ],
+      "sha256": {
+        "tests/t2/test_semantic_counterexamples.py": "f9bc3ea9896c520bb90fa077dfdaebbc4e95116a997823829c2c1150781aab89"
+      },
+      "known_counterexamples": [
+        "T2b convexification",
+        "identical distributions",
+        "TV>1",
+        "forged checker",
+        "fallback witness"
+      ],
+      "verification": "kill tests pass; enumeration_matches_lp=False forbids formal certificate; TV in [0,1]",
+      "status": "DONE"
+    },
+    "P0-4": {
+      "deliverables": [
+        "tests/t2/test_decision_semantics.py"
+      ],
+      "sha256": {
+        "tests/t2/test_decision_semantics.py": "a2490397dae5ee9079a7fc60bf7a0d831bcefc4154e5c5f07bd821e56043e824"
+      },
+      "verification": "per-hypothesis conditional quantities; FEASIBLE only via explicit rule; false inequality removed; no-go upper / achievability lower",
+      "status": "DONE"
+    },
+    "P0-5": {
+      "deliverables": [
+        "src/d2t_rna/data/observation_model.py",
+        "tests/data/test_replicate_likelihood.py",
+        "manifests/audit/glycine_data_qualification_manifest.json"
+      ],
+      "sha256": {
+        "src/d2t_rna/data/observation_model.py": "dd5ba93394e5e7b3c6da97b23d03f18487efc2d186614fcab28798b4e282c083",
+        "tests/data/test_replicate_likelihood.py": "ea5f6af97437c7f150ae8f973805850dbb8941e5bac23aa0a73cf530432a44ec",
+        "manifests/audit/glycine_data_qualification_manifest.json": "1295523f517e3ddd775c4948182499001c0a33758177111010d8f651d43bb36d"
+      },
+      "verification": "measured claims isolated; per_position_error_used=false; glycine BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+      "status": "DONE"
+    },
+    "P0-6": {
+      "deliverables": [
+        "docs/benchmark_protocol_v1.md"
+      ],
+      "sha256": {
+        "docs/benchmark_protocol_v1.md": "ea1db3c3841cc461f22f365e64a01e912df000f6cea5d495e52fa3815b0bf854"
+      },
+      "verification": "cap-free complete oracle; true Chernoff; heterogeneous product_bhattacharyya=prod_u BC_u^n_u; independent baselines; matched endpoint",
+      "status": "DONE"
+    },
+    "P0-7": {
+      "deliverables": [
+        "scripts/paper_readiness_gate.py"
+      ],
+      "sha256": {
+        "scripts/paper_readiness_gate.py": "cd626da7c094df76b4129533495a84bed73db020bd028ff20a6100fdfd6b849f"
+      },
+      "verification": {
+        "readiness_gate": "ALL PASS on HEAD 1e5358e, semantic lint 4 categories ALL PASS",
+        "full_suite": "781 passed + 3 heavy pre-existing tests fixed with timeout(900) -> deterministically green; 6 slow deselected",
+        "semantic_lint": {
+          "tv_in_unit_interval": true,
+          "forged_witness_fail_closed": true,
+          "error_unused_honest": true,
+          "definition_drift_clean": true
+        }
+      },
+      "status": "DONE"
+    }
+  },
+  "phase0_acceptance_criteria": {
+    "unique_owner_definition_unit_per_symbol": "satisfied (semantic_diff.json)",
+    "all_known_counterexamples_one_click_reproducible": "satisfied (kill tests)",
+    "fact_inference_unknown_experimental_need_layers": "satisfied (v7_science_blocker_20260807.md evidence tags)",
+    "no_test_PASS_as_science_PASS": "satisfied (scientific_claim_authorized=false everywhere)"
+  },
+  "pushed_to_origin_main": true
+}
