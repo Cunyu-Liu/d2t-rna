@@ -1,0 +1,76 @@
+{
+  "schema": "d2t_rna.v7_phase4_acceptance.v1",
+  "phase": "4",
+  "created_at": "2026-08-08T20:10:00+08:00",
+  "head": "6de574b",
+  "status": "PHASE4_ACCEPTED_SYNTHETIC_SCOPE",
+  "dependency": "Phase 0 spec frozen (DISCRETE_CATALOG); Phase 1 matched benchmark protocol; Phase 3 semantic kernel; Phase 2 observation semantics (blocked-pending-archive-qualification)",
+  "acceptance_criteria": {
+    "synthetic_scale_grid": {
+      "result": "PASS",
+      "detail": "deterministic grid of 16 matched cells varying n_states {2,3} x catalog {2x2,3x2} x panel (2 actions) x budget {4,8} x cost mode {uniform,hetero}",
+      "test": "tests/evaluation/test_phase4_scale_grid.py (build_scale_grid)",
+      "test_status": "passed"
+    },
+    "matched_fixed_budget_benchmark": {
+      "result": "PASS",
+      "detail": "all 8 Phase 1 baselines run under one matched ExperimentSpec per cell (common endpoint/action/cost/budget/decision rule/stopping); oracle_beaten_count=0, oracle_never_beaten=true",
+      "test": "test_oracle_never_beaten_on_every_grid_cell",
+      "test_status": "passed"
+    },
+    "cap_free_complete_oracle": {
+      "result": "PASS",
+      "detail": "cap-free exhaustive oracle (no arbitrary per-action cap) finds global-min minimax error and is never beaten by any feasible baseline; serves as correctness reference",
+      "test": "test_oracle_never_beaten_on_every_grid_cell",
+      "test_status": "passed"
+    },
+    "nonadaptive_price": {
+      "result": "PASS",
+      "detail": "cheapest-allocation cost reference reaches oracle global-min error; baseline over-cost reported per cell (all_baselines_overpay_vs_min_cost_cells=4); nonadaptive-adaptive price explicitly NOT claimed (no faithful adaptive comparator)",
+      "test": "tests/evaluation/test_phase4_scale_grid.py (min-cost reference)",
+      "test_status": "passed"
+    },
+    "action_cost_ablation": {
+      "result": "PASS",
+      "detail": "uniform vs heterogeneous action costs produce different min-cost oracle allocations (e.g. s2_2x2 uniform [3,0] vs hetero [0,3]), demonstrating cost-sensitivity of allocation",
+      "test": "test_action_cost_ablation_changes_oracle_allocation",
+      "test_status": "passed"
+    },
+    "runtime_memory_recording": {
+      "result": "PASS",
+      "detail": "per-method wall time and traced peak memory recorded for every cell; total_elapsed_s=4.847, max_cell_elapsed_s=0.947",
+      "test": "scripts/t2_scale_grid_run.py (rows[*].baselines[*].runtime_s / memory_peak_bytes)",
+      "test_status": "passed"
+    }
+  },
+  "evidence": {
+    "phase4_scale_grid_tests": "6 passed (tests/evaluation/test_phase4_scale_grid.py)",
+    "frozen_closure_registration": "test_dynamic_python_execution_closure_matches_frozen_index passed (registered tests/evaluation/test_phase4_scale_grid.py + scripts/t2_scale_grid_run.py)",
+    "scale_grid_artifact": {
+      "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4/scale_grid.json",
+      "sha256": "1bb51878d9b2482f461e992716164c9c20b07224416f9cec478f786fcc39a338",
+      "instances": 16,
+      "matched_cells_with_baselines": 16,
+      "oracle_beaten_count": 0,
+      "oracle_never_beaten": true,
+      "all_baselines_overpay_vs_min_cost_cells": 4,
+      "total_elapsed_s": 4.847144,
+      "max_cell_elapsed_s": 0.94749
+    },
+    "comparators_not_comparable": [
+      "adaptive_oracle",
+      "gjn",
+      "t_optimal",
+      "robust_t",
+      "kl_optimal",
+      "test_cover_family_reduction"
+    ],
+    "real_data_gates_not_executed": {
+      "independent_libraries": "GATED_BY_PHASE2",
+      "sealed_construct_validation": "GATED_BY_PHASE2",
+      "prospective_pilot": "GATED_BY_PHASE2"
+    },
+    "scientific_claim_authorized": false
+  },
+  "boundary_note": "model-conditional synthetic scale grid only over the corrected DISCRETE_CATALOG semantic kernel; matched fixed-budget comparison within the synthetic universe; no real-data, no SOTA, no superiority claim; nonadaptive-adaptive price and reduction/adaptive comparators explicitly NOT_COMPARABLE pending task-reduction diagnostic (contract §11/§14.3); real-data gates gated by Phase 2 BLOCKED_PENDING_ARCHIVE_QUALIFICATION"
+}
