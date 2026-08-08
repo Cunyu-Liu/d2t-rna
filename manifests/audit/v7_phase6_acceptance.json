@@ -1,0 +1,64 @@
+{
+  "schema": "d2t_rna.v7_phase6_acceptance.v1",
+  "phase": "6",
+  "created_at": "2026-08-08T22:10:00+08:00",
+  "head": "2e90c42",
+  "status": "PHASE6_ENGINEERING_REPRODUCIBILITY_READY_SUBMISSION_GATED_BY_PHASE2",
+  "dependency": "Phase 4 + Phase 5 frozen/committed; final claim freeze and owner/legal approval required for submission",
+  "acceptance_criteria": {
+    "readiness_gate_all_pass": {
+      "result": "PASS",
+      "detail": "scripts/paper_readiness_gate.py reports ALL PASS on clean committed HEAD (kill-tests 32 passed, semantic lint all pass, uncited=[]); status PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
+      "test": "scripts/paper_readiness_gate.py",
+      "test_status": "passed"
+    },
+    "evidence_bound_to_committed_head": {
+      "result": "PASS",
+      "detail": "paper_submission_readiness.json and submission_readiness_report.md re-bound to HEAD b04a7ad (then committed as 2e90c42); lineage lists Phase 0-5 commits",
+      "test": "git show 2e90c42",
+      "test_status": "passed"
+    },
+    "phase4_phase5_via_frozen_closure": {
+      "result": "PASS",
+      "detail": "Phase 4 (6 passed) and Phase 5 (5 passed) tests pass; frozen execution closure registration matches discovery (test_acceptance_verifier.dart_closure passes)",
+      "test": "tests/evaluation/test_phase4_scale_grid.py + tests/evaluation/test_phase5_mechanism.py + tests/exact/test_acceptance_verifier.py",
+      "test_status": "11 passed + closure passed"
+    },
+    "full_suite_reestablish_baseline": {
+      "result": "PARTIAL_ENVIRONMENT_ONLY",
+      "detail": "fresh full non-slow suite: 801 passed, 3 failed, 6 deselected in 1:55:39. The 3 failures are pre-existing heavy dependency-introspection tests (test_scenario.py / confidence.py, last modified by old commits aef31f1/4793026, untouched by Phase 4/5) that exceed the global 240s pytest-timeout under load (machine load avg ~196, 57 users, heavy gmx/reactflow jobs). Not a regression from Phase 4/5.",
+      "test": "pytest tests/ -m 'not slow'",
+      "test_status": "3 pre-existing timeouts (env) / 801 pass",
+      "pre_existing_evidence": "memory log: recent full suite already showed 7 fail/731 pass; failing files not modified between Phase3 (2531cda) and Phase5 (b04a7ad) HEAD"
+    }
+  },
+  "evidence": {
+    "readiness_gate": {
+      "path": "manifests/paper/paper_submission_readiness.json",
+      "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
+      "scientific_claim_authorized": false,
+      "novelty_verdict": "METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED)"
+    },
+    "phase4_mechanism_artifacts": {
+      "scale_grid": "/mnt/cunyuliu/d2t-rna/artifacts/phase4/scale_grid.json",
+      "mechanism": "/mnt/cunyuliu/d2t-rna/artifacts/phase5/mechanism.json"
+    },
+    "full_suite_baseline": {
+      "passed": 801,
+      "failed": 3,
+      "deselected_slow": 6,
+      "failures_are_pre_existing_env_timeouts": true
+    },
+    "worktree_clean": true,
+    "origin_main_synced": true,
+    "scientific_claim_authorized": false
+  },
+  "submission_gate_not_met": {
+    "real_data_claims": "GATED_BY_PHASE2 (BLOCKED_PENDING_ARCHIVE_QUALIFICATION)",
+    "final_claim_freeze": "not authorized (scientific_claim_authorized=false)",
+    "owner_legal_approval": "not granted",
+    "external_red_team_review": "not performed",
+    "full_slow_suite_clean": "blocked by env; 3 pre-existing timeouts pending low-load re-run"
+  },
+  "boundary_note": "Phase 6 engineering reproducibility is ready (readiness gate ALL PASS, evidence bound to committed HEAD, Phase 4/5 green, worktree clean, origin/main synced). Submission itself remains gated: real-data claims blocked by Phase 2, scientific_claim_authorized=false, claim freeze and legal/owner approval not granted. The 3 full-suite failures are pre-existing environment timeouts unrelated to Phase 4/5 and should be re-run under low load to confirm clean full-slow PASS before submission."
+}
