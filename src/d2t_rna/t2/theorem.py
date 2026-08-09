@@ -42,7 +42,12 @@ from typing import Sequence
 
 from .lp import LpResult, solve_lp
 from .model import Action, T2FiniteModel, marginal_apply
-from .spec import TheoremSpec, tv_from_l1
+from .spec import (
+    MEASURE_PRODUCT_TV,
+    UNCERTAINTY_CONVEX,
+    TheoremSpec,
+    tv_from_l1,
+)
 from .witness import collision_witness, iter_differences, norm_l1
 
 _Status = str  # "IFF" | "NECESSARY_ONLY" | "SUFFICIENT_ONLY" | "COUNTEREXAMPLE"
@@ -262,6 +267,37 @@ def collision_or_separation(
         raise ValueError("panel refers to an unknown or duplicate action")
     if spec is None:
         spec = TheoremSpec()
+    # P0-3b fail-closed dispatch (plan Batch 2.2/2.4): only the combinations
+    # that are formally supported may run.  CONVEX_HULL uncertainty and
+    # PRODUCT_TV separation are NOT currently certified; requesting them
+    # returns UNSUPPORTED_SPEC instead of silently running the discrete /
+    # action-level engine and mislabelling the result (the exact drift the
+    # audit flags).  ACTION_L1 and ACTION_TV over a discrete catalog are the
+    # supported, certified objects.
+    if spec.uncertainty_kind == UNCERTAINTY_CONVEX:
+        return T2bCertificate(
+            panel=tuple(panel),
+            status="UNSUPPORTED_SPEC",
+            gamma=None,
+            spec=spec,
+            notes=(
+                "CONVEX_HULL uncertainty is not a currently supported, "
+                "certified object; no formal certificate is issued.",
+            ),
+        )
+    if spec.separation_measure == MEASURE_PRODUCT_TV:
+        return T2bCertificate(
+            panel=tuple(panel),
+            status="UNSUPPORTED_SPEC",
+            gamma=None,
+            spec=spec,
+            notes=(
+                "PRODUCT_TV requires a registered allocation/repeats and an "
+                "exact product-law computation; not supported here.  The "
+                "action-level L1/TV separation is never relabelled as product TV.",
+            ),
+        )
+
 
     # Enumeration results (exact, DISCRETE_CATALOG engine).
     enum_collision = collision_witness(model, panel)

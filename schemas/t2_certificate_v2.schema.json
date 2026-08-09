@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "d2t_rna.t2_certificate_v2",
+  "title": "T2 Self-Contained Certificate v2",
+  "description": "Self-contained T2 certificate schema (plan Batch 2.8). A v2 certificate binds every input identity and result so a verifier needs only the certificate and the registered model to independently replay the result. Timestamps never enter the canonical payload hash. Fraction values use canonical {numerator, denominator} representation.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "model_hash",
+    "spec_hash",
+    "catalog_hash",
+    "action_panel_hash",
+    "allocation_hash",
+    "separation_measure",
+    "gamma_l1",
+    "gamma_tv",
+    "status",
+    "p0",
+    "p1",
+    "difference_witness",
+    "primal_receipt",
+    "dual_receipt",
+    "generator_commit",
+    "input_hashes",
+    "verifier_version"
+  ],
+  "properties": {
+    "schema_version": { "const": "t2_certificate_v2" },
+    "model_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "spec_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "catalog_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "action_panel_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "allocation_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "separation_measure": {
+      "enum": ["ACTION_L1", "ACTION_TV", "PRODUCT_TV"]
+    },
+    "gamma_l1": { "$ref": "#/definitions/fraction" },
+    "gamma_tv": { "$ref": "#/definitions/fraction" },
+    "status": {
+      "enum": [
+        "IFF",
+        "NECESSARY_ONLY",
+        "SUFFICIENT_ONLY",
+        "COUNTEREXAMPLE",
+        "NO_GO",
+        "BOUND_ONLY",
+        "BOUND_NOT_DECISIVE",
+        "NOT_ESTABLISHED",
+        "CONSTRUCTIVELY_FEASIBLE",
+        "UNSUPPORTED_SPEC"
+      ]
+    },
+    "p0": { "$ref": "#/definitions/fraction_vector" },
+    "p1": { "$ref": "#/definitions/fraction_vector" },
+    "difference_witness": { "$ref": "#/definitions/fraction_vector" },
+    "convex_weights_if_applicable": {
+      "type": ["object", "null"],
+      "description": "Convex mixture weights (one per catalog distribution) when uncertainty_kind=CONVEX_HULL. Present only if convex certificates are formally supported.",
+      "properties": {
+        "lambda0": { "type": "array", "items": { "$ref": "#/definitions/fraction" } },
+        "lambda1": { "type": "array", "items": { "$ref": "#/definitions/fraction" } }
+      }
+    },
+    "primal_receipt": { "type": "object" },
+    "dual_receipt": { "type": "object" },
+    "generator_commit": { "type": "string" },
+    "input_hashes": { "type": "object", "additionalProperties": { "type": "string" } },
+    "verifier_version": { "type": "string" },
+    "uncertainty_kind": {
+      "enum": ["DISCRETE_CATALOG", "CONVEX_HULL"]
+    },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  },
+  "definitions": {
+    "fraction": {
+      "type": "object",
+      "required": ["numerator", "denominator"],
+      "properties": {
+        "numerator": { "type": "integer" },
+        "denominator": { "type": "integer", "exclusiveMinimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "fraction_vector": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/fraction" }
+    }
+  }
+}

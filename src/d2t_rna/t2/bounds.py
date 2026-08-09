@@ -194,3 +194,134 @@ def required_repeats(
         n += 1
         if n > 1_000_000:
             return 0, T2cNoGoStatus.AMBIGUOUS
+# ---------------------------------------------------------------------------
+# K8 (plan Batch 2.7): an information bound is NOT constructive feasibility.
+#
+# A T2c information bound (total_info / kappa) is only ever a *necessary*
+# condition.  Crossing it does not certify feasibility.  We therefore expose a
+# distinct, explicit constructive-feasibility gate whose only positive status
+# is CONSTRUCTIVELY_FEASIBLE, returned only when ALL of the following are
+# registered and independently verified:
+#
+#   * complete registered product laws;
+#   * allocation;
+#   * decision/abstention rule;
+#   * per-hypothesis exact risk (alpha / beta);
+#   * independent verification of alpha / beta;
+#   * all budget and cost constraints verified.
+#
+# When only an information bound is available (no rule, or a rule whose risk is
+# not certified), the returned status is one of BOUND_ONLY / BOUND_NOT_DECISIVE /
+# NOT_ESTABLISHED -- never a generic FEASIBLE.  The marker constant
+# K8_T2C_BOUND_IS_NOT_CONSTRUCTIVE_FEASIBILITY is attached to every result to
+# make the distinction explicit and machine-checkable.
+# ---------------------------------------------------------------------------
+
+from dataclasses import dataclass
+
+K8_T2C_BOUND_IS_NOT_CONSTRUCTIVE_FEASIBILITY = (
+    "K8_T2C_BOUND_IS_NOT_CONSTRUCTIVE_FEASIBILITY"
+)
+
+
+class T2cConstructiveStatus:
+    NO_GO = "NO_GO"
+    BOUND_ONLY = "BOUND_ONLY"
+    BOUND_NOT_DECISIVE = "BOUND_NOT_DECISIVE"
+    NOT_ESTABLISHED = "NOT_ESTABLISHED"
+    CONSTRUCTIVELY_FEASIBLE = "CONSTRUCTIVELY_FEASIBLE"
+
+
+@dataclass(frozen=True)
+class ConstructiveFeasibility:
+    """K8 outcome: whether a registered design is *constructively* feasible."""
+
+    status: str
+    marker: str = K8_T2C_BOUND_IS_NOT_CONSTRUCTIVE_FEASIBILITY
+    reasons: tuple[str, ...] = ()
+    alpha: Fraction | None = None
+    beta: Fraction | None = None
+    alpha_max: Fraction | None = None
+    beta_max: Fraction | None = None
+
+
+def constructive_feasibility_status(
+    *,
+    product_laws_registered: bool,
+    allocation_registered: bool,
+    decision_rule_registered: bool,
+    budget_cost_verified: bool,
+    alpha: Fraction | None = None,
+    beta: Fraction | None = None,
+    alpha_max: Fraction | None = None,
+    beta_max: Fraction | None = None,
+) -> ConstructiveFeasibility:
+    """K8 constructive-feasibility gate (never conflates a bound with a design).
+
+    Returns a :class:`ConstructiveFeasibility`.  The only positive status is
+    ``CONSTRUCTIVELY_FEASIBLE``; every other status is a bound-only / not-decisive /
+    not-established outcome and carries the K8 marker constant.
+    """
+    reasons: list[str] = []
+
+    if not product_laws_registered or not allocation_registered:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.NOT_ESTABLISHED,
+            reasons=(
+                "no complete registered product laws / allocation; "
+                "observation model not established",
+            ),
+        )
+
+    if not decision_rule_registered:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_ONLY,
+            reasons=(
+                "information bound present but no explicit decision/abstention "
+                "rule registered; bound is not constructive feasibility",
+            ),
+        )
+
+    if alpha is None or beta is None:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_NOT_DECISIVE,
+            reasons=(
+                "a candidate rule exists but its per-hypothesis risk "
+                "(alpha/beta) is not certified",
+            ),
+        )
+
+    if alpha_max is not None and alpha > alpha_max:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_NOT_DECISIVE,
+            reasons=(f"candidate rule alpha={alpha} exceeds alpha_max={alpha_max}",),
+            alpha=alpha,
+            alpha_max=alpha_max,
+        )
+
+    if beta_max is not None and beta > beta_max:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_NOT_DECISIVE,
+            reasons=(f"candidate rule beta={beta} exceeds beta_max={beta_max}",),
+            beta=beta,
+            beta_max=beta_max,
+        )
+
+    if not budget_cost_verified:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.NO_GO,
+            reasons=(
+                "candidate rule meets risk targets but budget/cost constraints "
+                "are not verified; cannot certify constructive feasibility",
+            ),
+        )
+
+    return ConstructiveFeasibility(
+        status=T2cConstructiveStatus.CONSTRUCTIVELY_FEASIBLE,
+        reasons=(
+            "complete rule with certified per-hypothesis risk and verified "
+            "budget/cost constraints",
+        ),
+        alpha=alpha,
+        beta=beta,
+    )
