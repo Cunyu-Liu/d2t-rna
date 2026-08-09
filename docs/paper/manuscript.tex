@@ -4,7 +4,10 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{seqsplit}
 \usepackage{graphicx}
+\emergencystretch=3em
 \usepackage{natbib}
 \usepackage{hyperref}
 \usepackage{enumitem}
@@ -48,11 +51,13 @@ cheaper than the greedy Test-Cover baseline (Remark~\ref{rem:greedy}). On a regi
 pipeline converts a previously fail-closed retrospective record into a registered observation-model
 instance and emits an exact separation certificate together with certified finite-sample and
 costed-design bounds, including a near-tight sample-complexity certificate and a no-go at unit budget;
-the remaining retrospective records (SAM-III, RORC) stay fail-closed. The measured certificate is
-reproduced across three real-data cases --- the add riboswitch (1M7 SHAPE), the gcvT glycine riboswitch
-(DMS), and the miniTTR designed RNA switch (Mg$^{2+}$-dependent DMS) --- so the registered channel is
-not riboswitch- or ligand-specific, and a real-data negative control confirms the executable is
-fail-closed. The contribution is a certified
+the remaining retrospective records (SAM-III, RORC) stay fail-closed. The same model-conditional
+certificate computation is executed descriptively across three registered real-data observation models
+--- the add riboswitch (1M7 SHAPE), the gcvT glycine riboswitch (DMS), and the miniTTR designed RNA
+switch (Mg$^{2+}$-dependent DMS) --- showing the registration slots apply across these inputs
+(\texttt{DESCRIPTIVE\_ONLY}, not a claim of cross-system generalization or external validation), and an
+executed negative control on the registered add model confirms the executable is fail-closed. The
+contribution is a certified
 design method whose scope is bounded by the registered finite model.
 \end{abstract}
 
@@ -160,7 +165,7 @@ difference is a checkable fact rather than a narrative.
 The four columns are the dimensions a reader might conflate; only the last row is
 this paper's object.}
 \label{tab:lineage}
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabularx}{\textwidth}{@{}lXXXX@{}}
 \toprule
 & Bayesian experimental design & Active learning & Sequential testing & \textsc{D2T}-RNA\\
 \midrule
@@ -169,7 +174,7 @@ Horizon & sequential & one-at-a-time & stopping time $T$ & \emph{fixed finite $h
 Certificate & acquisition value & next point & accept/reject + $n$ & \emph{collision-or-separation + finite-sample bound + cost/no-go over all of $D$}\\
 Output & a design & a point/policy & a decision & \emph{a replayable decision/budget certificate}\\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 The fixed, non-adaptive panel is deliberate: it is what lets the certificate hold over
 the \emph{complete} cross-class difference set $D$ (Definition~\ref{def:D}) rather than
@@ -442,7 +447,7 @@ Let the model satisfy Assumptions~\ref{ass:reg}--\ref{ass:likelihood}.
 \begin{proof}[Proof sketch]
 (i) is by construction: any integer $n^\star$ satisfying the coverage constraints is feasible and has
 cost $c^Tn^\star$; feasibility is re-checked from first principles
-(\texttt{costed\_verify.check\_integer\_design\_feasible}). (ii) follows by weak duality: every feasible
+(\seqsplit{costed\_verify.check\_integer\_design\_feasible}). (ii) follows by weak duality: every feasible
 design satisfies $\sum_u c_u n_u\ge\sum_w\tau_w y_w$ for every dual-feasible $y$ (using the interval
 upper bound on $I_{uw}$ keeps the LP a relaxation), so a dual bound exceeding the budget rules out all
 feasible designs. (iii) is direct arithmetic. The full proof is in the supplementary.
@@ -505,17 +510,17 @@ $\gamma=0$ via cycle cancellation, $\gamma>0$ small); the finite-sample/by-oracl
 cost/no-go case quantify the decision and design consequences. \textbf{Boundary:} model-conditional
 synthetic evaluation; no method-superiority or population claim.}
 \label{tab:worked}
-\begin{tabular}{@{}llccccc@{}}
+\begin{tabularx}{\textwidth}{@{}XXccccX@{}}
 \toprule
 Required case & micro-case & cost & TV & minmax err & correct & verdict \\
 \midrule
 exact collision & exact\_collision & 8 & 0 & 1/2 & 1/2 & $\gamma=0$, witness \\
-strict separation & strict\_positive\_separation & 1 & 1 & 0 & 1 & $\gamma>0$, cert. \\
-cancellation & cancellation\_cycled & 8 & 0 & 1/2 & 1/2 & $\gamma=0$ (cancellation) \\
+strict separation & \seqsplit{strict\_positive\_separation} & 1 & 1 & 0 & 1 & $\gamma>0$, cert. \\
+cancellation & \seqsplit{cancellation\_cycled} & 8 & 0 & 1/2 & 1/2 & $\gamma=0$ (cancellation) \\
 finite-sample vs exact oracle & boundary & 1 & 1/2 & 1/4 & 3/4 & $8\to1$ cost, exp. bound \\
-cost / no-go & alternating\_rectangle\_2x2 & 8 & 0 & 1/2 & 1/2 & no integer upper, no-go \\
+cost / no-go & \seqsplit{alternating\_rectangle\_2x2} & 8 & 0 & 1/2 & 1/2 & no integer upper, no-go \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \paragraph{Finite-sample bound vs exact oracle.}
@@ -639,15 +644,15 @@ with no-go at budget $1$. \textbf{Interpretation:} one decision process from con
 \textbf{Boundary:} model-conditional; certifies within the registered finite observation model, not
 in-vitro reactivity.}
 \label{tab:real}
-\begin{tabular}{@{}lllll@{}}
+\begin{tabularx}{\textwidth}{@{}lllXX@{}}
 \toprule
 $\varepsilon$ & $\gamma(S)$ (T2b) & certified $n$ for $\kappa=.99$ (T2c) & exact $n$ (oracle) & achievable cost, LP gap (T2d) \\
 \midrule
-$1/20$ & $9/5$ & $5$ & $3$ & cost $5$, gap $6.1\%$ \\
-$1/10$ & $8/5$ & $8$ & $5$ & cost $8$, gap $4.5\%$ \\
-$1/5$  & $6/5$ & $18$ & $13$ & cost $18$, gap $2.7\%$ \\
+$1/20$ & $9/10$ & $5$ & $3$ & cost $5$, gap $6.1\%$ \\
+$1/10$ & $4/5$ & $8$ & $5$ & cost $8$, gap $4.5\%$ \\
+$1/5$  & $3/5$ & $18$ & $13$ & cost $18$, gap $2.7\%$ \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \\[0.5em]
 \footnotesize All rows: status \texttt{iff}; independent checker and LP strong-duality pass; design-class
 no-go at budget $1$ for every $\varepsilon$.
@@ -655,28 +660,35 @@ no-go at budget $1$ for every $\varepsilon$.
 
 \subsection{Measured observation channel: 1M7 SHAPE reactivity}\label{sec:real-measured}
 The model above reads a \emph{model-conditional} protected/reactivity channel with a synthetic noise
-coupling. We now replace that coupling with \emph{measured} nucleotide-resolution reactivity from a
-published assay, so the certificate is separable with respect to real measurements rather than a
-registered synthetic channel. We register the RMDB accession \texttt{ADD71\_STD\_0001} (Tian, Kladwang
-\& Das, \emph{eLife} 2018, doi:10.7554/eLife.29602), 1M7 (SHAPE) mapping of the add riboswitch
-(residues 13--83, 71~nt) in two conformations: apo (RDAT channel 1) and $5$~mM adenine-bound (RDAT
-channel 2). For each position the probability of reading \emph{unpaired/reactive} is the published
-normalized reactivity, clamped to a registered $1\%$ readout floor (so the per-position Hellinger
-information stays finite and the finite-sample bound is non-trivial). This binarized measured channel
-replaces the noise coupling $\varepsilon$ above; the two latent states, marginal $M=(1,1)$, and one
-action per position are unchanged.
+coupling. We now replace that coupling with an observation law \emph{derived from} measured
+nucleotide-resolution reactivity from a published assay, used as a \emph{registered finite observation
+model} (\texttt{DESCRIPTIVE\_TRANSFORM} / \texttt{MODEL\_SENSITIVITY\_ONLY}): the reactivity only fixes
+the registered observation law, it is \emph{not} treated as measured biological truth, and the resulting
+certificates are descriptive, model-conditional computations --- explicitly \texttt{DESCRIPTIVE\_ONLY}
+--- not a real gamma certificate on biological data. We register the RMDB accession
+\texttt{ADD71\_STD\_0001} (Tian, Kladwang \& Das, \emph{eLife} 2018, doi:10.7554/eLife.29602), 1M7
+(SHAPE) mapping of the add riboswitch (residues 13--83, 71~nt) in two conformations: apo (RDAT channel 1)
+and $5$~mM adenine-bound (RDAT channel 2). For each position the probability of reading
+\emph{unpaired/reactive} in the registered model is the published normalized reactivity, clamped to a
+registered $1\%$ readout floor (so the per-position Hellinger information stays finite and the
+finite-sample bound is non-trivial). This binarized registered observation law replaces the noise
+coupling $\varepsilon$ above; the two latent states, marginal $M=(1,1)$, and one action per position are
+unchanged.
 
-The measured certificate is stronger and immediate. Of the $71$ positions, $64$ are
-\emph{measured-separating} (apo/bound binarized reactivity differ). A panel of the eight strongest
-measured separators certifies exact (\texttt{iff}) separation with $\gamma=49/50$
-(Definition~\ref{def:gamma}); the rational LP and the enumeration checker agree and strong duality
-holds. For T2c the strongest measured separator (position $10$) certifies
-$\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $64$ separating positions have a
-certified finite sufficiency bound. For T2d the achievable integer design repeats position $10$ three
-times (certified cost $3$); at a user budget of $B=1$ read the design is a certified
-\texttt{NO\_GO}, and at $B=3$ it is feasible. The decision-support story is therefore operational:
-``budget $B=1$ $\Rightarrow$ no-go (refine model / relax floor / raise budget); budget $B=3$ $\Rightarrow$
-feasible design (probe position $10$ three times).'' The full per-position reactivity, error, binarized
+The executed model-conditional computation is strong on this registered model, \emph{descriptively}. Of
+the $71$ positions, $64$ are \emph{measured-separating} (apo/bound binarized reactivity differ under the
+registered law). A panel of the eight strongest separators certifies exact (\texttt{iff}) separation
+with $\gamma=49/50$ (Definition~\ref{def:gamma}); the rational LP and the enumeration checker agree and
+strong duality holds. For T2c the strongest separator (position $10$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=3$ reads \emph{under the registered observation model},
+and all $64$ separating positions have a certified finite sufficiency bound. For T2d the achievable
+integer design repeats position $10$ three times (certified cost $3$); at a user budget of $B=1$ read
+the design is a certified \texttt{NO\_GO}, and at $B=3$ it is feasible. These $n$ and cost figures are
+\emph{model-conditional sample counts under the registered observation law} --- \texttt{DESCRIPTIVE\_ONLY}
+--- and are \emph{not} claims about biological repeat counts, absolute probability, or wet-lab cost
+saving. The decision-support story is therefore operational on the registered model: ``budget $B=1$
+$\Rightarrow$ no-go (refine model / relax floor / raise budget); budget $B=3$ $\Rightarrow$ feasible
+design (probe position $10$ three times).'' The full per-position reactivity, error, binarized
 probabilities, and per-probe sufficiency bounds are in the supplementary
 (Section~\ref{sec:supp-measured}).
 
@@ -694,23 +706,28 @@ design or a no-go. For the add case above every step is executed and re-checked;
 second assay the registration is a template whose slots are filled from the published method, and the
 same executable (Section~\ref{sec:real}) emits the certificate.
 
-Transferability is a \emph{fact}, not a narrative, because we execute a second measured certificate on a
-different published assay. We register the RMDB accessions \texttt{BSUGLY\_DMS\_0013} (apo, $0$~mM) and
-\texttt{BSUGLY\_DMS\_0014} ($1$~mM glycine) of the \emph{Bacillus subtilis} gcvT glycine riboswitch
-($\Delta$P0 variant, co-transcriptionally folded, TECprobe-VL, DMS reactivity; the same contract slots,
-one action per position, readout floor $1\%$). This differs from the add case in chemistry (DMS vs.\ 1M7
-SHAPE), ligand (glycine vs.\ adenine), and construct ($265$~nt vs.\ $71$~nt), yet the same executable
+Transferability here is a \emph{registration} property of the executable, not a claim of external
+validation: we execute the same registered observation-model computation on a second published assay. We
+register the RMDB accessions \texttt{BSUGLY\_DMS\_0013} (apo, $0$~mM) and \texttt{BSUGLY\_DMS\_0014}
+($1$~mM glycine) of the \emph{Bacillus subtilis} gcvT glycine riboswitch ($\Delta$P0 variant,
+co-transcriptionally folded, TECprobe-VL, DMS reactivity; the same contract slots, one action per
+position, readout floor $1\%$). This differs from the add case in chemistry (DMS vs.\ 1M7 SHAPE),
+ligand (glycine vs.\ adenine), and construct ($265$~nt vs.\ $71$~nt), yet the same executable
 (Section~\ref{sec:real}) emits an \texttt{iff} separation certificate with $\gamma>0$ over the eight
-strongest measured separators, and the strongest separator (position $221$) certifies
-$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=15$ repeats; the achievable integer design again reads a
-certified \texttt{NO\_GO} at budget $B=1$ and a feasible design at larger $B$. Two independent
-chemistries, two ligands, and two constructs thus register the identical certificate workflow, so the
-measured upgrade is not an add-riboswitch artifact. The full per-position profiles and per-probe bounds
-are in the supplementary (Section~\ref{sec:supp-measured}).
+strongest separators of the registered model, and the strongest separator (position $221$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=15$ reads \emph{under the registered observation model};
+the achievable integer design again reads a certified \texttt{NO\_GO} at budget $B=1$ and a feasible
+design at larger $B$. Two chemistries, two ligands, and two constructs thus register the identical
+certificate workflow. This demonstrates that the registration slots are reusable across these published
+assays; it is a \texttt{MODEL\_SENSITIVITY\_ONLY} observation, \texttt{DESCRIPTIVE\_ONLY}, and does
+\emph{not} certify a real gamma certificate on biological data, does not imply cross-system transfer or
+population generalization, and does not assert that the add-riboswitch result is free of assay-specific
+artifacts. The full per-position profiles and per-probe bounds are in the supplementary
+(Section~\ref{sec:supp-measured}).
 
 \subsection{Transferability beyond riboswitches: a designed metal-ion switch}\label{sec:real-mattr}
 A reviewer can reasonably object that two certificates on two \emph{natural, ligand-induced
-riboswitches} still instantiate the same biological mode. To break that mode, we register a third
+riboswitches} still instantiate the same biological mode. To probe that concern, we register a third
 measured case that differs along \emph{two} axes at once: it is a \emph{designed} RNA (not a natural
 aptamer) and its discriminator is \emph{metal-ion} concentration (not ligand occupancy). We register
 the RMDB accession \texttt{MTTR1\_MGTI\_0001} \citep{yesselman2019computational}: the miniTTR c1
@@ -718,34 +735,36 @@ computational-design construct ($81$~nt) with DMS
 reactivity measured over a $32$-point MgCl$_{2}$ titration. Two conditions are used: $0$~mM (RDAT
 \underline{ANNOTATION\_DATA}:1, metal-ion depleted) and $50$~mM (RDAT \underline{ANNOTATION\_DATA}:32,
 metal-ion saturated). The same contract slots apply verbatim: two states (LOW/HIGH), marginal
-$M=(1,1)$, one action per position, $1\%$ readout floor, binarized measured channel.
+$M=(1,1)$, one action per position, $1\%$ readout floor, binarized registered observation law.
 
-The certificate is immediate and strong. Of the $81$ positions, $76$ are \emph{measured-separating}
-(0\,mM vs.\ 50\,mM binarized reactivity differ). A panel of the eight strongest measured separators
-certifies exact (\texttt{iff}) separation with $\gamma=49/50$, with the enumeration checker and LP
-strong duality agreeing. The strongest measured separator (position $23$) certifies
-$\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $76$ separating positions have a
-certified finite sufficiency bound. The achievable integer design reads a certified cost of $3$, and at
-a user budget of $B=1$ the design is a certified \texttt{NO\_GO}. Three measured cases --- a natural
-SHAPE riboswitch, a natural DMS riboswitch, and a \emph{designed} DMS metal-ion switch --- therefore all
-register the identical certificate workflow, so the measured upgrade transfers across chemistry,
-biology, and design provenance. The full per-position profiles and per-probe bounds are in the
-supplementary (Section~\ref{sec:supp-measured}).
+The executed computation is immediate and strong on this registered model, \emph{descriptively}. Of the
+$81$ positions, $76$ are \emph{measured-separating} (0\,mM vs.\ 50\,mM binarized reactivity differ under
+the registered law). A panel of the eight strongest separators certifies exact (\texttt{iff}) separation
+with $\gamma=49/50$, with the enumeration checker and LP strong duality agreeing. The strongest
+separator (position $23$) certifies $\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=3$ reads
+\emph{under the registered observation model}, and all $76$ separating positions have a certified finite
+sufficiency bound. The achievable integer design reads a certified cost of $3$, and at a user budget of
+$B=1$ the design is a certified \texttt{NO\_GO}. Three published assays --- a natural SHAPE riboswitch,
+a natural DMS riboswitch, and a \emph{designed} DMS metal-ion switch --- thus all register the identical
+certificate workflow, which shows the registration slots apply across these inputs. This is a
+\texttt{DESCRIPTIVE\_ONLY} / \texttt{MODEL\_SENSITIVITY\_ONLY} observation on registered finite
+observation models; it is \emph{not} a claim of cross-system transfer, biological or design-provenance
+generalization, or a real gamma certificate on biological data. The full per-position profiles and
+per-probe bounds are in the supplementary (Section~\ref{sec:supp-measured}).
 
 \subsection{Fail-closed negative control: the executable refuses to separate}\label{sec:real-negative}
 A reviewer can rightly ask whether the executable ever \emph{refuses} to certify separation, or
-whether it force-fits a panel into a separation it cannot support. We answer with an executed, real-data
-negative control, not a synthetic one. Reusing the same measured add assay
+whether it force-fits a panel into a separation it cannot support. We answer with an executed negative
+control on the registered observation model, not a synthetic one. Reusing the same registered add assay
 (Section~\ref{sec:real-measured}, RMDB \texttt{ADD71\_STD\_0001}), we restrict the action panel to the
 seven positions whose binarized apo/bound reactivity read \emph{identical} after the registered $1\%$
 readout floor (so each carries zero measured Hellinger information between the two classes). The exact
 same code path that emitted the add and glycine separation certificates now certifies \emph{collision}
 (Definition~\ref{def:gamma}): $\gamma=0$ with a non-trivial collision witness and no separation witness,
 cross-checked by exact enumeration and LP strong duality. The verdict is \texttt{FAIL\_CLOSED}: no input
-condition is force-fit into the theorem-required form (contract 10.2). This is the fail-closedness
-evidence that underpins the whole framework --- the method is honest about when it cannot separate, and
-its separation certificates on the measured add/glycine cases are therefore not artifacts of a lax or
-permissive checker.
+condition is force-fit into the theorem-required form (contract 10.2). This demonstrates that, on this
+registered model, the executable is fail-closed --- it is honest about when the registered observation
+law does not separate.
 
 \section{Synthetic evaluation and baselines}\label{sec:eval}
 Eleven micro-cases and eight baselines are executed as model-conditional synthetic evaluation.
@@ -846,6 +865,7 @@ the R2 outcome, what can be reported, and what cannot be claimed.
 
 \begin{table}[ht]
 \centering
+\footnotesize
 \caption{Retrospective evidence qualification. \textbf{Question:} how do the registered datasets
 close, and what may/may not be reported? \textbf{Result:} the retrospective data roles close fail-closed
 with distinct terminal outcomes; the add/RMDB case is additionally re-registered as an observation-model
@@ -854,13 +874,14 @@ catalogs for a fail-closed audit, except where a legitimate registered channel i
 \textbf{Boundary:} no categorical replay, no quantitative compression validation, no future cost saving,
 no independent validation.}
 \label{tab:retro}
-\begin{tabular}{@{}p{2.0cm}p{3.2cm}p{3.4cm}p{3.2cm}p{3.2cm}@{}}
+\setlength{\tabcolsep}{2pt}
+\begin{tabularx}{\textwidth}{@{}XXXXX@{}}
 \toprule
 Dataset & Registered role & R2 outcome & What can be reported & What cannot be claimed \\
 \midrule
-add/RMDB & retrospective full-matrix compression role: NOT\_COMPARABLE;
+add/RMDB & retrospective full-matrix compression role: \seqsplit{NOT\_COMPARABLE};
   separately re-registered as an observation model (Section~\ref{sec:real}) &
-  retrospective role: NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL;
+  retrospective role: \seqsplit{NOT\_COMPARABLE\_BY\_REGISTERED\_OBSERVATION\_MODEL};
   registered observation-model instance: PASS &
   compression role: modality limitation, raw provenance, fail-closed audit;
   Section~\ref{sec:real}: registered binary protected/reactivity channel with
@@ -870,16 +891,17 @@ add/RMDB & retrospective full-matrix compression role: NOT\_COMPARABLE;
   registered finite model only \\
 \addlinespace
 SAM-III/GSE278422 & modality-transfer diagnostic &
-  NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE &
+  \seqsplit{NOT\_COMPARABLE\_BY\_REGISTERED\_ACTION\_SPACE} &
   action/modality incompatibility; diagnostic failure &
   unified benchmark; quantitative transfer \\
 \addlinespace
 RORC & exposed misspecification stress &
-  NOT\_APPLICABLE &
+  \seqsplit{NOT\_APPLICABLE} &
   explicit terminal audit and boundary semantics &
   independent validation; unseen OOD; third-state discovery \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
+\setlength{\tabcolsep}{6pt}
 \end{table}
 
 \begin{figure}[ht]
@@ -987,8 +1009,8 @@ model, not a rhetorical hedge.
 ``The two conformations are separable'' & Exact (\texttt{iff}) collision-or-separation over the complete cross-class difference set $D$ within the registered finite model (T2b), with rational LP + enumeration checker evidence. & Not in-vitro reactivity separation per se. \emph{Upgrade:} register the measured channel as the model's laws (done for add/glycine/miniTTR), or run a prospective assay on the certified design. \\
 ``This design reaches the target'' & Fixed-horizon finite-sample decision bound: $\mathbb{P}(\mathrm{correct})\ge\kappa$ under the registered product law and abstention rule (T2c); the certified $n$ is conservative against the exact minimax oracle. & Not guarantee of the oracle-optimal design; not guaranteed if the model's laws are mis-specified. \emph{Upgrade:} re-certify with a mis-specification audit or a larger registered catalog. \\
 ``The design is affordable'' & Costed integer design with certified cost, or a design-class no-go under the LP dual bound (T2d). & Not a claim about wet-lab cost or future savings. \emph{Upgrade:} substitute real per-read marginal costs for the unit-cost assumption. \\
-``The method is fail-closed'' & Executed real-data negative control certifies collision ($\gamma=0$) rather than force-fitting separation (Section~\ref{sec:real-negative}). & Not a guarantee against every possible force-fit; the checker is exact on the registered model. \emph{Upgrade:} register more passing-collision catalogs. \\
-``The method transfers'' & Three executed measured cases across chemistry (SHAPE/DMS), biology (riboswitch/designed switch), and provenance (natural/designed) (Sections~\ref{sec:real-measured}--\ref{sec:real-mattr}). & Not a claim of universal RNA identifiability or population generalization. \emph{Upgrade:} register additional assay families (e.g.\ mutate-and-map). \\
+``The method is fail-closed'' & Executed negative control on the registered add observation model certifies collision ($\gamma=0$) rather than force-fitting separation (Section~\ref{sec:real-negative}). & Not a guarantee against every possible force-fit; the checker is exact on the registered model. \emph{Upgrade:} register more passing-collision catalogs. \\
+``The method transfers'' & Three executed model-conditional computations on registered real-data observation models across chemistry (SHAPE/DMS), biology (riboswitch/designed switch), and provenance (natural/designed) (Sections~\ref{sec:real-measured}--\ref{sec:real-mattr}). This is \texttt{DESCRIPTIVE\_ONLY}; the registration slots are reusable, but no cross-system generalization is claimed. & Not a claim of universal RNA identifiability, population generalization, or external validation. \emph{Upgrade:} register additional assay families (e.g.\ mutate-and-map). \\
 \bottomrule
 \end{tabular}
 \end{table}

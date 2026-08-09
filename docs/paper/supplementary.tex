@@ -4,8 +4,10 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amssymb,amsmath,amsthm}
 \usepackage{booktabs}
+\usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{seqsplit}
+\emergencystretch=3em
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
@@ -221,7 +223,7 @@ The certificates are emitted by \texttt{scripts/real\_add\_run.py} over the regi
 \texttt{src/d2t\_rna/t2/real\_add.py}; \texttt{tests/t2/test\_real\_add.py} locks the model
 construction, the noise channel, the finiteness/positivity of the Hellinger information, and the
 sufficiency bound. The certificate JSON is written to the artifacts run directory (path
-env-configurable via \texttt{D2T\_RNA\_ARTIFACTS\_ROOT}). A self-contained reproducibility image is
+env-configurable via \texttt{\seqsplit{D2T\_RNA\_ARTIFACTS\_ROOT}}). A self-contained reproducibility image is
 provided by \texttt{Dockerfile} (\texttt{docker build -t d2t-rna/paper-artifact .}); its build step
 installs the package from a clean copy, emits the real-data certificate, and runs the locked T2 suite,
 so the artifact is reproducible without any server-local state. The decision-theoretic certificate
@@ -229,8 +231,12 @@ path is pure-Python stdlib; \texttt{pyproject.toml} additionally declares \textt
 \texttt{pydantic} for other package modules.
 
 \subsection{Measured observation channel: 1M7 SHAPE reactivity}\label{sec:supp-measured}
-The model-conditional case above uses a synthetic bit-flip coupling. We now register a \emph{measured}
-observation channel from a published assay. Dataset (registered, CC0, RMDB accession
+The model-conditional case above uses a synthetic bit-flip coupling. We now register an observation law
+\emph{derived from} measured reactivity from a published assay, used as a \emph{registered finite
+observation model} (\texttt{DESCRIPTIVE\_TRANSFORM} / \texttt{MODEL\_SENSITIVITY\_ONLY}). The reactivity
+only fixes the registered observation law; it is \emph{not} treated as measured biological truth, and the
+certificates below are descriptive, model-conditional computations (\texttt{DESCRIPTIVE\_ONLY}), not a
+real gamma certificate on biological data. Dataset (registered, CC0, RMDB accession
 \texttt{ADD71\_STD\_0001}): Tian S, Kladwang W, Das R, ``Allosteric mechanism of the \emph{V.}
 \emph{vulnificus} adenine riboswitch resolved by four-dimensional chemical mapping,'' \emph{eLife}
 (2018) 7:e29602, doi:10.7554/eLife.29602, PMID 29446752. Construct: add riboswitch residues 13--83
@@ -243,8 +249,10 @@ $\{\text{paired/protected},\,\text{unpaired/reactive}\}$. The probability of rea
 \emph{unpaired/reactive} is the measured normalized reactivity $r[s,u]$, clamped to a registered
 measurement floor $1/100$,
 \[
-p_{\mathrm{reactive}}(s,u)=\max\bigl(1/100,\;\min(99/100,\;r[s,u])\bigr),
-\qquad q(s,u)=1-p_{\mathrm{reactive}}(s,u).
+\begin{aligned}
+p_{\mathrm{reactive}}(s,u)&=\max\bigl(1/100,\;\min(99/100,\;r[s,u])\bigr),\\
+q(s,u)&=1-p_{\mathrm{reactive}}(s,u).
+\end{aligned}
 \]
 The $1\%$ floor encodes the repeats/resolution of the measurement (the reported per-position standard
 errors show the class call is not sub-$1\%$ precise) and keeps the Hellinger information per separating
@@ -253,24 +261,27 @@ Position $u$ is \emph{measured-separating} iff $q(\mathrm{apo},u)\neq q(\mathrm{
 separation coefficient for a single probe is $\gamma=\left|q(\mathrm{bound},u)-q(\mathrm{apo},u)\right|$.
 
 \paragraph{Results.}
-Of the $71$ positions, $64$ are measured-separating. The registration mirrors contract 8.5
-(role \texttt{REGISTERED\_OBSERVATION\_MODEL}): states = two conformations
+Of the $71$ positions, $64$ are measured-separating under the registered law. The registration mirrors
+contract 8.5 (role \texttt{REGISTERED\_OBSERVATION\_MODEL}): states = two conformations
 $\theta_0=e_{\mathrm{OFF}}=(1,0)$, $\theta_1=e_{\mathrm{ON}}=(0,1)$; passive marginal $M=(1,1)$ so
-$M\theta_0=M\theta_1=1$ (collision); one measured channel action per position. The T2b certificate over a
-panel of the eight strongest measured separators is exact (\texttt{iff}) with $\gamma=49/50$; the
-rational LP and the enumeration checker agree and strong duality passes. For T2c, the strongest
-measured separator (position $10$) certifies $\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=3$ repeats;
-all $64$ separating positions carry a certified finite sufficiency bound. For T2d, the achievable
-integer design repeats position $10$ three times (certified cost $3$); at budget $B=1$ the design is a
-certified \texttt{NO\_GO}, at $B=3$ feasible. The full per-position reactivity, error, binarized
-probabilities, and per-probe sufficiency bounds are emitted by
+$M\theta_0=M\theta_1=1$ (collision); one registered observation-model action per position. The T2b
+certificate over a panel of the eight strongest separators is exact (\texttt{iff}) with $\gamma=49/50$;
+the rational LP and the enumeration checker agree and strong duality passes. For T2c, the strongest
+separator (position $10$) certifies $\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=3$ reads
+\emph{under the registered observation model}; all $64$ separating positions carry a certified finite
+sufficiency bound. For T2d, the achievable integer design repeats position $10$ three times (certified
+cost $3$); at budget $B=1$ the design is a certified \texttt{NO\_GO}, at $B=3$ feasible. These $n$ and
+cost figures are \emph{model-conditional sample counts} (\texttt{DESCRIPTIVE\_ONLY}) and are \emph{not}
+claims about biological repeat counts, absolute probability, or wet-lab cost saving. The full
+per-position reactivity, error, binarized probabilities, and per-probe sufficiency bounds are emitted by
 \texttt{scripts/real\_add\_measured\_run.py} over \texttt{src/d2t\_rna/data/measured\_add.py} (RDAT
 parsed from \texttt{src/d2t\_rna/data/raw/ADD71\_STD\_0001.rdat}); \texttt{tests/data/test\_measured\_add.py}
 locks the RDAT parse, the stochastic channel, measured separation, and the finite-sample bound.
-The certificate remains \emph{model-conditional} in the strict sense --- the latent OFF/ON hypotheses
-and the binarization rule are registered --- but the observation channel is now \emph{measured} in-vitro
-reactivity, so the certificate is separable with respect to real measurements rather than a synthetic
-coupling.
+The certificate is \emph{model-conditional} throughout: the latent OFF/ON hypotheses and the binarization
+rule are registered, and the observation law is derived from measured in-vitro reactivity. The result is
+therefore a descriptive, model-conditional computation on a registered finite observation model
+(\texttt{DESCRIPTIVE\_ONLY} / \texttt{MODEL\_SENSITIVITY\_ONLY}) --- \emph{not} a real gamma certificate
+on biological data, and the reactivity is not treated as measured biological truth.
 
 \paragraph{Second real case: gcvT glycine riboswitch (DMS).}
 To establish transferability we execute the identical workflow on a second, chemically different
@@ -289,14 +300,17 @@ and the registration slots are identical to the add case; only the chemistry, li
 differ.
 
 \paragraph{Results (second case).}
-Of the $265$ positions, $206$ are measured-separating. The T2b certificate over the eight strongest
-measured separators is exact (\texttt{iff}) with $\gamma>0$ (rational LP and enumeration checker agree,
-strong duality passes). For T2c, the strongest measured separator (position $221$) certifies
-$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=15$ repeats, and all $206$ separating positions carry a
-certified finite sufficiency bound. For T2d, the achievable integer design is again a certified
-\texttt{NO\_GO} at budget $B=1$ and feasible at larger $B$. Two chemistries, two ligands, and two
-constructs therefore obey the identical certificate workflow, so the measured upgrade is a transferable
-mechanism rather than an add-riboswitch artifact. Emitted by
+Of the $265$ positions, $206$ are measured-separating under the registered law. The T2b certificate over
+the eight strongest separators is exact (\texttt{iff}) with $\gamma>0$ (rational LP and enumeration
+checker agree, strong duality passes). For T2c, the strongest separator (position $221$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=15$ reads \emph{under the registered observation model},
+and all $206$ separating positions carry a certified finite sufficiency bound. For T2d, the achievable
+integer design is again a certified \texttt{NO\_GO} at budget $B=1$ and feasible at larger $B$. Two
+chemistries, two ligands, and two constructs therefore register the identical certificate workflow. This
+demonstrates that the registration slots are reusable across these published assays; it is a
+\texttt{DESCRIPTIVE\_ONLY} / \texttt{MODEL\_SENSITIVITY\_ONLY} observation, \emph{not} a claim of
+cross-system transfer or external validation, and does not assert that the add-riboswitch result is free
+of assay-specific artifacts. Emitted by
 \texttt{scripts/real\_glycine\_measured\_run.py} over
 \texttt{\seqsplit{src/d2t\_rna/data/measured\_glycine.py}}
 (RDAT parsed from \texttt{\seqsplit{src/d2t\_rna/data/raw/BSUGLY\_DMS\_0013.rdat}} and
@@ -306,7 +320,7 @@ the stochastic channel, measured separation, the finite-sample bound, and the tr
 difference from the add case.
 
 \paragraph{Third real case: miniTTR designed metal-ion switch (DMS).}
-To break the remaining \emph{riboswitch-} and \emph{ligand-specificity} concern, we register a third
+To probe the remaining \emph{riboswitch-} and \emph{ligand-specificity} concern, we register a third
 measured case that is neither a natural aptamer nor ligand-gated. Dataset (registered, RMDB accession
 \texttt{\seqsplit{MTTR1\_MGTI\_0001}}): Yesselman JD et al., ``Computational design of three-dimensional
 RNA structure and function,'' \emph{Nature Nanotechnology} (2019), doi:\texttt{\seqsplit{10.1038/s41565-019-0517-8}},
@@ -319,15 +333,18 @@ and the registration slots are identical to the add/glycine cases; the discrimin
 \emph{metal-ion}-driven conformational switch, not a ligand-occupancy switch.
 
 \paragraph{Results (third case).}
-Of the $81$ positions, $76$ are measured-separating. The T2b certificate over the eight strongest
-measured separators is exact (\texttt{iff}) with $\gamma=49/50$ (rational LP and enumeration checker
-agree, strong duality passes). For T2c, the strongest measured separator (position $23$) certifies
-$\mathbb{P}(\mathrm{correct})\ge0.99$ with only $n=3$ repeats, and all $76$ separating positions carry
-a certified finite sufficiency bound. For T2d, the achievable integer design reads a certified cost of
-$3$, and is a certified \texttt{NO\_GO} at budget $B=1$. Three measured cases --- a natural SHAPE
-riboswitch, a natural DMS riboswitch, and a \emph{designed} DMS metal-ion switch --- therefore all obey
-the identical certificate workflow, so the measured upgrade is transferable across chemistry, biology,
-and design provenance rather than an artifact of any single assay type. Emitted by
+Of the $81$ positions, $76$ are measured-separating under the registered law. The T2b certificate over
+the eight strongest separators is exact (\texttt{iff}) with $\gamma=49/50$ (rational LP and enumeration
+checker agree, strong duality passes). For T2c, the strongest separator (position $23$) certifies
+$\mathbb{P}(\mathrm{correct})\ge0.99$ with $n=3$ reads \emph{under the registered observation model},
+and all $76$ separating positions carry a certified finite sufficiency bound. For T2d, the achievable
+integer design reads a certified cost of $3$, and is a certified \texttt{NO\_GO} at budget $B=1$. Three
+published assays --- a natural SHAPE riboswitch, a natural DMS riboswitch, and a \emph{designed} DMS
+metal-ion switch --- therefore all register the identical certificate workflow, which shows the
+registration slots apply across these inputs. This is a \texttt{DESCRIPTIVE\_ONLY} /
+\texttt{MODEL\_SENSITIVITY\_ONLY} observation on registered finite observation models; it is \emph{not} a
+claim of cross-system transfer, biological or design-provenance generalization, or a real gamma
+certificate on biological data. Emitted by
 \texttt{scripts/real\_mattr\_measured\_run.py} over
 \texttt{\seqsplit{src/d2t\_rna/data/measured\_mattr.py}}
 (RDAT parsed from \texttt{\seqsplit{src/d2t\_rna/data/raw/MTTR1\_MGTI\_0001.rdat}});
@@ -337,15 +354,17 @@ differences from both prior cases.
 
 \subsection{Fail-closed negative control on measured data}\label{sec:supp-measured-negative}
 To show the executable is \emph{honest} (fail-closed, contract 8.4 / 10.2), we run a negative control on
-the same measured add assay (RMDB \texttt{ADD71\_STD\_0001}, Section~\ref{sec:supp-measured}). The action
-panel is restricted to the seven positions whose binarized apo/bound reactivity read identical after the
-registered $1\%$ readout floor, so each carries zero measured Hellinger information between the two
-classes. The \emph{same} code path that emitted the add and glycine separation certificates now certifies
-\emph{collision} (Definition~\ref{def:gamma}): $\gamma=0$ with a non-trivial collision witness and no
-separation witness, cross-checked by exact enumeration and LP strong duality. The verdict is
-\texttt{FAIL\_CLOSED}. This is not a synthetic counterexample: the observation channels are the measured
-1M7 SHAPE reactivities of the published assay, and only the panel differs. It confirms that the
-separation certificates on the positive cases are not artifacts of a permissive checker. Emitted by
+the same registered add observation model (RMDB \texttt{ADD71\_STD\_0001},
+Section~\ref{sec:supp-measured}). The action panel is restricted to the seven positions whose binarized
+apo/bound reactivity read identical after the registered $1\%$ readout floor, so each carries zero
+measured Hellinger information between the two classes. The \emph{same} code path that emitted the add
+and glycine separation certificates now certifies \emph{collision} (Definition~\ref{def:gamma}):
+$\gamma=0$ with a non-trivial collision witness and no separation witness, cross-checked by exact
+enumeration and LP strong duality. The verdict is \texttt{FAIL\_CLOSED}. This is not a synthetic
+counterexample: the observation law is derived from the measured 1M7 SHAPE reactivities of the published
+assay, and only the panel differs. It demonstrates that, on this registered model, the code path is
+fail-closed --- it refuses to certify separation when the registered observation law does not support it.
+Emitted by
 \texttt{scripts/real\_negative\_control\_run.py} over
 \texttt{\seqsplit{src/d2t\_rna/data/measured\_negative.py}};
 \texttt{\seqsplit{tests/data/test\_measured\_negative.py}} locks the collision verdict, the shared-panel

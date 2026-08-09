@@ -1,0 +1,24 @@
+{
+  "schema": "d2t_rna.baseline_comparability_registry.v1",
+  "schema_version": "1.0",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "purpose": "P0 comparability adjudication (Batch 4.1): record which prior-art / baseline candidates are reduced to a same-task executable comparison and which are NOT_COMPARABLE with a concrete reason. No candidate is dropped merely because it is hard to implement.",
+  "status": "SOTA_NOT_ADJUDICATED",
+  "decision_rule": "Only when a candidate has a completed same-task reduction under the frozen metric/schema is SOTA adjudication permitted; otherwise SOTA_NOT_ADJUDICATED is enforced.",
+  "candidates": [
+    {"id": "exhaustive_oracle", "task": "exact two-class minimax decision error over registered product law", "reduction_status": "REDUCED_EXECUTED", "same_metric": true, "note": "internal exact oracle used as reference; not an external SOTA"},
+    {"id": "greedy_test_cover", "task": "costed test-subset selection (Moret-Shapiro style)", "reduction_status": "REDUCED_EXECUTED", "same_metric": true, "note": "executed as a baseline on the frozen grid"},
+    {"id": "eig_design", "task": "expected-information-gain design", "reduction_status": "REDUCED_EXECUTED", "same_metric": true, "note": "executed as a baseline"},
+    {"id": "chernoff_design", "task": "fixed-horizon KL/Chernoff test allocation", "reduction_status": "REDUCED_EXECUTED", "same_metric": true, "note": "executed as a baseline"},
+    {"id": "lm2r_heuristic", "task": "RNA mutate-and-map rational-design heuristic", "reduction_status": "REDUCED_EXECUTED", "same_metric": true, "note": "executed as a baseline; heuristic registration only"},
+    {"id": "controlled_sensing", "task": "Controlled Sensing for Multihypothesis Testing", "reduction_status": "NOT_COMPARABLE", "reason": "adaptive/sequential active hypothesis testing without a complete registered finite difference set and without a replayable exact separation certificate; full metadata/full text not re-verified (ACCESS_LIMITATION)"},
+    {"id": "active_sequential_hypothesis_testing", "task": "ASHT", "reduction_status": "NOT_COMPARABLE", "reason": "no complete registered D, no replayable certificate; ACCESS_LIMITATION on full text"},
+    {"id": "m2_seq_m2r", "task": "Mutate-and-Map read out through NGS / restricted", "reduction_status": "NOT_COMPARABLE", "reason": "RNA structure inference method, not a decision-theoretic experiment-selection certificate over a complete difference set; different observation law and estimand; full text not re-verified (ACCESS_LIMITATION)"},
+    {"id": "markov_basis_fiber", "task": "fiber identifiability via Markov bases", "reduction_status": "NOT_COMPARABLE", "reason": "fiber connectivity criterion only; no decision/budget/no-go consequence; different estimand"},
+    {"id": "bayesian_t_optimal", "task": "Bayesian/T-optimal experimental design", "reduction_status": "NOT_COMPARABLE", "reason": "EIG/optimality designs without exact collision-or-separation certificate over complete registered D and without RNA action geometry; ACCESS_LIMITATION on some full texts"}
+  ],
+  "unresolved": [
+    "Controlled Sensing / ASHT / M2 / M2R full metadata and original texts were not re-verified in this session; they are ACCESS_LIMITATION / UNKNOWN_NOT_ASSERTED and do NOT count as adjudicated SOTA.",
+    "A fair same-task reduction of an external SOTA to the frozen 80-cell benchmark is not yet completed; therefore no SOTA superiority claim may be made."
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "schema": "d2t_rna.citation_verification_manifest.v1",
+  "schema_version": "1.0",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "purpose": "Batch 4.2: record the verification/fix status of every required citation and the claim-support check. ACCESS_LIMITATION = full text could not be obtained; not asserted as verified.",
+  "verification_date": "2026-08-09",
+  "entries": {
+    "moret1991test": {
+      "status": "FIXED",
+      "author": "Moret, Bernard M. E. and Shapiro, Henry D.",
+      "title": "On Minimizing a Set of Tests",
+      "venue": "SIAM Journal on Scientific and Statistical Computing",
+      "volume_pages": "6(4):983-1003",
+      "year": "1985 (was 1991)",
+      "doi": "10.1137/0906067",
+      "source": "SIAM ePubs DOI lookup",
+      "notes": "year/vol/pages corrected; doi added"
+    },
+    "chernoff1959sequential": {
+      "status": "FIXED",
+      "author": "Chernoff, Herman",
+      "title": "Sequential Analysis and Optimal Design",
+      "venue": "CBMS-NSF Regional Conference Series in Applied Mathematics, SIAM",
+      "volume_pages": "Series 8, pp. 1-120",
+      "year": "1972 (was 1959)",
+      "doi": "10.1137/1.9781611970593",
+      "source": "SIAM ePubs DOI lookup",
+      "notes": "year corrected to 1972; series + doi added"
+    },
+    "cordero2012importance": {
+      "status": "FIXED",
+      "author": "Cordero, Pablo and Kladwang, Wipapat and VanLang, Christopher C. and Das, Rhiju",
+      "title": "Quantitative Dimethyl Sulfate Mapping for Automated RNA Secondary Structure Inference",
+      "venue": "Biochemistry",
+      "volume_pages": "51(36):7037-7039",
+      "year": "2012",
+      "doi": "10.1021/bi3008802",
+      "source": "ACS (pubs.acs.org/doi/10.1021/bi3008802) and PubMed 22913637",
+      "notes": "title/journal/vol/pages corrected (previous entry mis-titled as a DMS-MaPseq paper); doi added"
+    },
+    "cheng2015consistent": {
+      "status": "VERIFIED_METADATA",
+      "venue": "Nature Methods 12:671-672, 2015",
+      "doi": null,
+      "source": "metadata consistent; full text not re-verified",
+      "notes": "ACCESS_LIMITATION on full-text claim support"
+    },
+    "sloma2016exact": {
+      "status": "VERIFIED_METADATA",
+      "venue": "BMC Bioinformatics 17:59, 2016",
+      "doi": null,
+      "source": "metadata consistent; full text not re-verified",
+      "notes": "ACCESS_LIMITATION on full-text claim support"
+    },
+    "leamy2016in-vivo": {
+      "status": "VERIFIED_METADATA",
+      "venue": "RNA 22(3):333-344, 2016",
+      "doi": null,
+      "source": "metadata consistent; full text not re-verified",
+      "notes": "ACCESS_LIMITATION on full-text claim support"
+    },
+    "pukelsheim2006optimal": {
+      "status": "VERIFIED_METADATA",
+      "venue": "Optimal Design of Experiments, 2nd ed., SIAM, 2006",
+      "doi": null,
+      "source": "metadata consistent; full text not re-verified",
+      "notes": "ACCESS_LIMITATION on full-text claim support"
+    },
+    "kladwang2011mutate": {
+      "status": "VERIFIED_METADATA",
+      "venue": "Biochemistry 50(37):8049-8056, 2011",
+      "doi": null,
+      "source": "metadata consistent; full text not re-verified",
+      "notes": "ACCESS_LIMITATION on full-text claim support"
+    },
+    "yesselman2019computational": {
+      "status": "VERIFIED",
+      "venue": "Nature Nanotechnology 14(9):866-873, 2019",
+      "doi": "10.1038/s41565-019-0517-8",
+      "source": "DOI present in bib and consistent with record",
+      "notes": "miniTTR source"
+    }
+  },
+  "claim_support_rule": "Every novelty/quantitative/causal/method-critical claim must trace back to a supporting passage in the cited original. Where the full text was not obtained, the claim is marked ACCESS_LIMITATION / UNKNOWN_NOT_ASSERTED and is not asserted as verified.",
+  "policy": "Do not pretend a citation is verified when only metadata was checked. Metadata-only entries are VERIFIED_METADATA, not VERIFIED."
+}

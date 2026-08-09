@@ -1,0 +1,106 @@
+{
+  "schema": "d2t_rna.claim_evidence_graph.v1",
+  "schema_version": "1.0",
+  "contract_id": "D2T-RNA-v7-THEORETICAL-RNA-METHODS",
+  "purpose": "Batch 4.3: bidirectional claim-evidence graph binding each quantitative/strong claim to a unique evidence ID, allowed strength, estimand+unit, artifact, generator/evaluator, input hashes, commit and limitation.",
+  "reactflow_evidence_count": 0,
+  "scientific_claim_authorized": false,
+  "edges": [
+    {
+      "claim_id": "C1",
+      "allowed_strength": "exact certificate within registered finite model",
+      "manuscript_loci": ["sec:real-t2b", "sec:real"],
+      "estimand": "collision-or-separation over complete registered difference set D",
+      "unit": "registered finite catalog pair",
+      "artifact": "manifests/t2/t2_2_acceptance.json",
+      "generator": "d2t_rna.t2.theorem:collision_or_separation",
+      "input_hash": "certificate v2 schema + input_hashes (Bound in Batch 2)",
+      "commit": "HEAD-bound via v7 evidence lock",
+      "limitation": "within registered finite model only; not in-vitro reactivity separation",
+      "evidence_id": "E-C1-T2B"
+    },
+    {
+      "claim_id": "C2",
+      "allowed_strength": "finite registered pair catalog, fixed non-adaptive horizon",
+      "manuscript_loci": ["sec:real-t2c"],
+      "estimand": "finite-sample decision/budget bound; P(correct)>=kappa under registered product law",
+      "unit": "registered pair catalog, fixed horizon",
+      "artifact": "manifests/t2/t2_3_acceptance.json",
+      "generator": "d2t_rna.t2.decision exact_bayes/randomized_minimax",
+      "input_hash": "certificate v2 input_hashes",
+      "commit": "HEAD-bound",
+      "limitation": "finite registered pair catalog; not population/wet-lab",
+      "evidence_id": "E-C2-T2C"
+    },
+    {
+      "claim_id": "C3",
+      "allowed_strength": "design-class level, not universal",
+      "manuscript_loci": ["sec:real-t2d"],
+      "estimand": "costed integer design; design-class no-go via LP dual + integrality gap",
+      "unit": "registered action/cost cell",
+      "artifact": "manifests/t2/t2_4_acceptance.json",
+      "generator": "d2t_rna.t2.bounds + LP dual",
+      "input_hash": "certificate v2 input_hashes",
+      "commit": "HEAD-bound",
+      "limitation": "design-class level; unit-cost assumption; no wet-lab cost claim",
+      "evidence_id": "E-C3-T2D"
+    },
+    {
+      "claim_id": "C4",
+      "allowed_strength": "executed model-conditional synthetic; no superiority",
+      "manuscript_loci": ["sec:eval"],
+      "estimand": "exact minimax error / separation over frozen grid",
+      "unit": "registered action/cost cell (not independent N)",
+      "artifact": "manifests/t9/t9_matrix_acceptance.json",
+      "generator": "scripts/t2_scale_grid_run.py + evaluation.matrix",
+      "input_hash": "frozen grid + corrected metric/schema",
+      "commit": "HEAD-bound",
+      "limitation": "model-conditional synthetic; no population generalization",
+      "evidence_id": "E-C4-T9"
+    },
+    {
+      "claim_id": "C5",
+      "allowed_strength": "complete fail-closed retrospective audit; no quantitative instance",
+      "manuscript_loci": ["sec:real-measured", "sec:real-transfer", "sec:real-mattr", "sec:real-negative"],
+      "estimand": "n/a (descriptive audit only)",
+      "unit": "registered observation model (DESCRIPTIVE_ONLY)",
+      "artifact": "manifests/task6r/task6r_r2_acceptance.json; data qualification manifests (v2)",
+      "generator": "d2t_rna.data.qualification (fail-closed)",
+      "input_hash": "data qualification v2 hashes",
+      "commit": "HEAD-bound",
+      "limitation": "real-data route BLOCKED_PENDING_ARCHIVE_QUALIFICATION; n=3/15/3 are model-conditional reads, not biological repeats",
+      "evidence_id": "E-C5-TASK6R"
+    },
+    {
+      "claim_id": "C6",
+      "allowed_strength": "theory boundary, not real-data validation",
+      "manuscript_loci": ["sec:abstain-boundary"],
+      "estimand": "assumption violation -> NOT_ESTABLISHED/abstain under registered coupling",
+      "unit": "registered coupling",
+      "artifact": "manifests/t10/t10_validation_acceptance.json",
+      "generator": "d2t_rna.t2.verify fail-closed",
+      "input_hash": "certificate v2",
+      "commit": "HEAD-bound",
+      "limitation": "theory boundary",
+      "evidence_id": "E-C6-T10"
+    }
+  ],
+  "prohibited_claims_no_evidence": [
+    "real measured certificate on biological data",
+    "n=3/15/3 as real biological repeat counts",
+    "real wet-lab cost saving",
+    "cross-system transfer / independent validation",
+    "population generalization",
+    "strictly cheaper (unfair comparison)"
+  ],
+  "numeric_consistency": {
+    "main_table_gamma": {"1/20": "9/10", "1/10": "4/5", "1/5": "3/5"},
+    "supplement_gamma": "9/10, 4/5, 3/5 (identical to main)",
+    "check": "FIXED: main table TV values corrected from L1 (9/5,8/5,6/5) to TV (9/10,4/5,3/5) to match text and supplement; all in [0,1]"
+  },
+  "notes": [
+    "Every quantitative/strong claim carries a unique evidence ID bound to artifact + generator + input hash + commit.",
+    "ReactFlow evidence count = 0 (no external evidence nodes).",
+    "No READY submission status exists while scientific_claim_authorized=false."
+  ]
+}
