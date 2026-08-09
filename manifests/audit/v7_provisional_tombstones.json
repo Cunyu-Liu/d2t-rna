@@ -1,0 +1,53 @@
+{
+  "schema": "d2t_rna.v7_provisional_tombstones.v1",
+  "authority_role": "PROVISIONAL_TERMINALIZATION",
+  "generator": "D2T-RNA v7 evidence-repair plan (Batch 1)",
+  "generator_commit": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+  "receipt": {
+    "created_at": "2026-08-09T00:00:00+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "Provisional statuses take effect immediately; final classification deferred to Batch 5 terminalization. Old bytes are NOT deleted - only tombstoned."
+  },
+  "payload": {
+    "head": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+    "principle": "Old artifacts keep bytes for audit; lose current scientific authority via tombstone/authority index.",
+    "tombstones": [
+      {
+        "artifact_family": "Phase4_minimax_catalog_robustness_comparative_mechanism",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "status": "INVALID_PENDING_SEMANTIC_REPAIR",
+        "reason": "Minimax/catalog-robustness/mechanism/superiority scientific interpretation not supported by current typed semantics."
+      },
+      {
+        "artifact_family": "Phase5_mechanism_artifacts",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "status": "INVALID_SUPERSEDED",
+        "reason": "Phase5 mechanism artifacts depend on uncorrected Phase4/5 metric identity and are not current evidence."
+      },
+      {
+        "artifact_family": "measured_certificates_real_ADD_glycine_miniTTR",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "status": "DESCRIPTIVE_ONLY",
+        "reason": "Bare gamma potentially interpreted as TV; n=3/15/3 not experiment-calibrated; normalized clamp not calibrated probability."
+      },
+      {
+        "artifact_family": "real_cost_no_go_wet_lab_saving_transfer",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "status": "DESCRIPTIVE_ONLY",
+        "reason": "Real cost/no-go/wet-lab saving/transfer claims not supported."
+      },
+      {
+        "artifact_family": "submission_readiness_json_report",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "status": "INVALID_PENDING_SEMANTIC_REPAIR",
+        "reason": "Old readiness JSON/report predates readiness gate rewrite; not current evidence."
+      }
+    ],
+    "note": "Consumer referencing a provisional-invalid artifact must fail; paper evidence graph must not resolve to old Phase5; ReactFlow artifacts count must be 0 in D2T evidence graph."
+  }
+}

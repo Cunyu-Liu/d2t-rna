@@ -1,0 +1,52 @@
+{
+  "schema": "d2t_rna.v7_claim_freeze.v1",
+  "authority_role": "CLAIM_FREEZE",
+  "generator": "D2T-RNA v7 evidence-repair plan (Batch 1)",
+  "generator_commit": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+  "receipt": {
+    "created_at": "2026-08-09T00:00:00+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "Non-deterministic metadata."
+  },
+  "payload": {
+    "head": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+    "scientific_claim_authorized": false,
+    "current_stage": "A",
+    "submission_status": "SCIENTIFIC_SUBMISSION_BLOCKED",
+    "sota_status": "SOTA_NOT_ADJUDICATED",
+    "terminal_routing": "ONLY_MODEL_CONDITIONAL_THEORY_SOFTWARE_AND_DESCRIPTIVE_REAL_CASES",
+    "allowed_claim_labels": [
+      "CONFIRMED_FACT",
+      "REASONED_INFERENCE",
+      "UNKNOWN_NOT_ASSERTED",
+      "NEW_EVIDENCE_REQUIRED"
+    ],
+    "allowed_artifact_status": [
+      "CURRENT_VALID",
+      "LEGACY_VALID",
+      "LEGACY_INVALID",
+      "EXTERNAL_ONLY",
+      "UNKNOWN_NOT_REPLAYED"
+    ],
+    "prohibited_claims_until_gate": [
+      "measured_sample_size",
+      "absolute_probability",
+      "repeat_count",
+      "wet_lab_saving",
+      "cross_system_transferability",
+      "sota_superiority",
+      "real_measured_certificate_with_bare_gamma_as_TV"
+    ],
+    "downgraded_measured_claims": {
+      "add_miniTTR_n3": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+      "glycine_n15": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+      "sam_iii_n3": "PERMANENT_DESCRIPTIVE_DOWNGRADE"
+    },
+    "evidence_lock_source": "manifests/paper/paper_evidence_lock.json",
+    "claim_register_source": "docs/paper/claim_register.md",
+    "limitation_register_source": "docs/paper/limitation_register.md",
+    "confirmed_contribution_source": "docs/paper/confirmed_contribution.md",
+    "reactflow_evidence_count_allowed": 0,
+    "note": "No READY submission status may exist while scientific_claim_authorized=false."
+  }
+}

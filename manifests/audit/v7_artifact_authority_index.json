@@ -1,0 +1,53 @@
+{
+  "schema": "d2t_rna.v7_artifact_authority_index.v1",
+  "authority_role": "ARTIFACT_AUTHORITY_INDEX",
+  "generator": "D2T-RNA v7 evidence-repair plan (Batch 1)",
+  "generator_commit": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+  "receipt": {
+    "created_at": "2026-08-09T00:00:00+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "Non-deterministic metadata. Role-sensitive classification; an artifact may hold different authority across roles."
+  },
+  "payload": {
+    "head": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+    "authority_principle": "Role-sensitive; one artifact can be LEGACY_VALID for file integrity and LEGACY_INVALID for scientific interpretation.",
+    "index": [
+      {
+        "artifact": "manifests/audit/v7_p0_acceptance.json",
+        "role": "acceptance_self_report",
+        "status": "UNKNOWN_NOT_REPLAYED",
+        "note": "Self-reported ACCEPTED does not auto-grant evidence eligibility."
+      },
+      {
+        "artifact": "manifests/audit/v7_phase4_acceptance.json",
+        "role": "acceptance_self_report",
+        "status": "LEGACY_VALID",
+        "note": "File integrity valid; scientific minimax/mechanism interpretation LEGACY_INVALID (role-sensitive)."
+      },
+      {
+        "artifact": "manifests/audit/v7_phase5_acceptance.json",
+        "role": "acceptance_self_report",
+        "status": "LEGACY_VALID",
+        "note": "File integrity valid; mechanism interpretation LEGACY_INVALID."
+      },
+      {
+        "artifact": "manifests/paper/paper_evidence_lock.json",
+        "role": "paper_evidence_lock",
+        "status": "LEGACY_INVALID",
+        "note": "Depends on uncorrected claims/artifacts; must be rebuilt after semantic repair."
+      },
+      {
+        "artifact": "manifests/paper/paper_submission_readiness.json",
+        "role": "submission_readiness",
+        "status": "LEGACY_INVALID",
+        "note": "No READY status may exist while scientific_claim_authorized=false."
+      },
+      {
+        "artifact": "manifests/paper/paper_claim_register.json",
+        "role": "claim_register",
+        "status": "LEGACY_INVALID",
+        "note": "Contains claims to be downgraded/removed per claim freeze."
+      }
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "d2t_rna.v7_p0_repair_snapshot.v1",
+  "authority_role": "P0_REPAIR_SNAPSHOT",
+  "generator": "D2T-RNA v7 evidence-repair plan (Batch 1)",
+  "generator_commit": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+  "receipt": {
+    "created_at": "2026-08-09T00:00:00+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "Non-deterministic metadata. Canonical payload is in 'payload'."
+  },
+  "payload": {
+    "head": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+    "branch": "main",
+    "origin_main": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+    "worktree_clean": true,
+    "python": {
+      "interpreter": "/home/cunyuliu/d2t-rna/.venv/bin/python3.11",
+      "version": "3.11.15",
+      "note": "Project requires >=3.11,<3.12"
+    },
+    "packages": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pydantic": "2.13.4",
+      "pytest": "9.1.1",
+      "hypothesis": "6.163.0"
+    },
+    "import_origin": "/home/cunyuliu/d2t-rna/src/d2t_rna/__init__.py",
+    "audit_baseline": "D2T-RNA_v7_严格科研与工程审计_2026-08-07.md",
+    "deviation": "Referenced 2026-08-09 audit not found; 2026-08-07 audit + handover + frozen code used as baseline.",
+    "existing_manifests": {
+      "v7_p0_acceptance": "manifests/audit/v7_p0_acceptance.json",
+      "v7_phase1_acceptance": "manifests/audit/v7_phase1_acceptance.json",
+      "v7_phase2_acceptance": "manifests/audit/v7_phase2_acceptance.json",
+      "v7_phase3_acceptance": "manifests/audit/v7_phase3_acceptance.json",
+      "v7_phase4_acceptance": "manifests/audit/v7_phase4_acceptance.json",
+      "v7_phase5_acceptance": "manifests/audit/v7_phase5_acceptance.json",
+      "v7_phase6_acceptance": "manifests/audit/v7_phase6_acceptance.json",
+      "v7_decision_tree_resolution": "manifests/audit/v7_decision_tree_resolution.json"
+    },
+    "paper_artifacts_sha256": {
+      "manuscript_tex": "8bf3b5155030f87b794e2a32efd7c47b53fe94f9c2b1725faf49b15c75843f87",
+      "supplementary_tex": "8811ba6d8726955b17542dc900dcd772a9a95cf629f4381211013d5b3e5980e5"
+    },
+    "current_stage": "A",
+    "scientific_submission_blocked": true,
+    "sota_not_adjudicated": true,
+    "scientific_claim_authorized": false,
+    "terminal_routing": "ONLY_MODEL_CONDITIONAL_THEORY_SOFTWARE_AND_DESCRIPTIVE_REAL_CASES"
+  }
+}
