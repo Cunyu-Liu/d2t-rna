@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "d2t_rna.data_qualification_v2",
+  "title": "Real-Data Qualification Record v2",
+  "description": "Fail-closed qualification record for a measured RNA data domain (plan Batch 3). A domain is QUALIFIED only when every Batch 3.7 real-route requirement (raw per-unit counts, independent-unit crosswalk, calibrated likelihood, executable action, real marginal cost) is met AND per_position_error_used is machine-derived (not hand-written). Verdict is one of QUALIFIED / BLOCKED_PENDING_ARCHIVE_QUALIFICATION / DESCRIPTIVE_ONLY / INELIGIBLE.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "dataset_id",
+    "accessions",
+    "verdict",
+    "raw_per_replicate_counts_available",
+    "independent_unit_crosswalk",
+    "calibrated_likelihood",
+    "executable_action",
+    "real_marginal_cost",
+    "per_position_error_used",
+    "exposure_role",
+    "reasons",
+    "forbidden_claims",
+    "sources"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": { "const": "d2t_rna.data_qualification_v2" },
+    "schema_version": { "pattern": "^[0-9]+(\\.[0-9]+){1,2}$" },
+    "dataset_id": { "type": "string" },
+    "accessions": { "type": "array", "items": { "type": "string" } },
+    "verdict": {
+      "enum": [
+        "QUALIFIED",
+        "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+        "DESCRIPTIVE_ONLY",
+        "INELIGIBLE"
+      ]
+    },
+    "raw_per_replicate_counts_available": { "type": "boolean" },
+    "independent_unit_crosswalk": { "type": "boolean" },
+    "calibrated_likelihood": { "type": "boolean" },
+    "executable_action": { "type": "boolean" },
+    "real_marginal_cost": { "type": "boolean" },
+    "per_position_error_used": { "type": "boolean" },
+    "exposure_role": {
+      "enum": [
+        "development",
+        "selection_exposed",
+        "post_selection_diagnostic",
+        "sealed_confirmation"
+      ]
+    },
+    "reasons": { "type": "array", "items": { "type": "string" } },
+    "forbidden_claims": { "type": "array", "items": { "type": "string" } },
+    "sources": { "type": "array", "items": { "type": "string" } }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "schema_id": "d2t_rna.data_qualification_v2",
+  "schema_version": "2.0",
+  "dataset_id": "glycine",
+  "accessions": ["BSUGLY_DMS_0013", "BSUGLY_DMS_0014"],
+  "verdict": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+  "raw_per_replicate_counts_available": false,
+  "independent_unit_crosswalk": false,
+  "calibrated_likelihood": false,
+  "executable_action": false,
+  "real_marginal_cost": false,
+  "per_position_error_used": false,
+  "exposure_role": "selection_exposed",
+  "reasons": [
+    "BSUGLY_DMS_0013/0014 are DMS reactivity archives whose COMMENT states two independent replicates were analyzed separately then merged and normalized; per-replicate raw counts are not stored in the archive",
+    "loader only reads the last DATA block (Length265); upstream replicate merge/normalization is not reconstructible from the archive",
+    "both merged replicates were historically exposed: the same outcome profile selected the probe and determined n=15; no replicate is a cold held-out replicate",
+    "observation model is clamp(normalized_reactivity, 0.01, 0.99); not a calibrated count likelihood; per_position_error_used machine-derived to False",
+    "post-selection cross-replicate diagnostic cannot be fit against real replicate counts (kill test prerequisites unsatisfied)",
+    "no independent biological block crosswalk and no real marginal action cost are registered"
+  ],
+  "forbidden_claims": [
+    "held-out",
+    "test",
+    "independent validation",
+    "prospective",
+    "blinded",
+    "real repeat count",
+    "cross-replicate validation",
+    "real gamma certificate",
+    "wet-lab cost saving",
+    "cross-system transfer",
+    "population coverage"
+  ],
+  "sources": [
+    "src/d2t_rna/data/measured_glycine.py",
+    "manifests/audit/glycine_data_qualification_manifest.json"
+  ]
+}

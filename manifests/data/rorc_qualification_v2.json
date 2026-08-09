@@ -1,0 +1,38 @@
+{
+  "schema_id": "d2t_rna.data_qualification_v2",
+  "schema_version": "2.0",
+  "dataset_id": "rorc",
+  "accessions": [],
+  "verdict": "INELIGIBLE",
+  "raw_per_replicate_counts_available": false,
+  "independent_unit_crosswalk": false,
+  "calibrated_likelihood": false,
+  "executable_action": false,
+  "real_marginal_cost": false,
+  "per_position_error_used": false,
+  "exposure_role": "selection_exposed",
+  "reasons": [
+    "no official public accession is resolved for rorc; only source is the internal audit document",
+    "no materialization, counts, coverage, replicate, action, cost or license are available",
+    "status INELIGIBLE_UNRESOLVED_METADATA per manifests/rorc/stress_eligibility_record.json; stress execution not allowed",
+    "R1 materialization is NOT APPLICABLE; observed data materialization is not fabricated (fail-closed)"
+  ],
+  "forbidden_claims": [
+    "third real system",
+    "real gamma certificate",
+    "real repeat count",
+    "held-out",
+    "test",
+    "independent validation",
+    "prospective",
+    "blinded",
+    "wet-lab cost saving",
+    "cross-system transfer",
+    "population coverage"
+  ],
+  "sources": [
+    "manifests/rorc/stress_eligibility_record.json",
+    "manifests/rorc/public_planning_stub.json",
+    "manifests/task6r/task6r_r1_rorc_decision.json"
+  ]
+}

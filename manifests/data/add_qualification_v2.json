@@ -1,0 +1,40 @@
+{
+  "schema_id": "d2t_rna.data_qualification_v2",
+  "schema_version": "2.0",
+  "dataset_id": "add",
+  "accessions": ["ADD71_STD_0001", "ADDAPO_DCP_0000", "ADDRSW_SHP_0003"],
+  "verdict": "DESCRIPTIVE_ONLY",
+  "raw_per_replicate_counts_available": false,
+  "independent_unit_crosswalk": false,
+  "calibrated_likelihood": false,
+  "executable_action": false,
+  "real_marginal_cost": false,
+  "per_position_error_used": false,
+  "exposure_role": "selection_exposed",
+  "reasons": [
+    "ADD71_STD_0001 is a single normalized 1M7 SHAPE reactivity profile with per-position REACTIVITY_ERROR; no per-replicate raw counts are stored",
+    "ADDAPO_DCP_0000 is a planning-only metadata stub (no outcome payload)",
+    "ADDRSW_SHP_0003 is the Task6 72x101 materialized SHAPE matrix; no per-replicate raw counts",
+    "observation model is clamp(normalized_reactivity, 0.01, 0.99) treated as a Bernoulli parameter; not a calibrated count likelihood",
+    "per-position error is parsed but never consumed by the clamp likelihood; per_position_error_used machine-derived to False",
+    "no independent biological construct-library-assay block crosswalk and no real marginal action cost are registered"
+  ],
+  "forbidden_claims": [
+    "held-out",
+    "test",
+    "independent validation",
+    "prospective",
+    "blinded",
+    "real absolute probability",
+    "real gamma certificate",
+    "real repeat count",
+    "wet-lab cost saving",
+    "cross-system transfer",
+    "population coverage"
+  ],
+  "sources": [
+    "src/d2t_rna/data/measured_add.py",
+    "manifests/add/public_planning_stub.json",
+    "manifests/task6r/task6r_r1_acceptance.json"
+  ]
+}

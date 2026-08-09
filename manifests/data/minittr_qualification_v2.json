@@ -1,0 +1,39 @@
+{
+  "schema_id": "d2t_rna.data_qualification_v2",
+  "schema_version": "2.0",
+  "dataset_id": "minittr",
+  "accessions": ["MTTR1_MGTI_0001"],
+  "verdict": "DESCRIPTIVE_ONLY",
+  "raw_per_replicate_counts_available": false,
+  "independent_unit_crosswalk": false,
+  "calibrated_likelihood": false,
+  "executable_action": false,
+  "real_marginal_cost": false,
+  "per_position_error_used": false,
+  "exposure_role": "selection_exposed",
+  "reasons": [
+    "MTTR1_MGTI_0001 is a single normalized reactivity profile for miniTTR c1 with two MgCl2 conditions (0 mM / 50 mM, channels 1/32); no per-replicate raw counts are stored",
+    "accession must be labelled miniTTR Mg2+ titration, not SAM-III",
+    "only the 0 mM and 50 mM endpoints of the 32-point titration are used; the intermediate channels are not registered as actions",
+    "docstring claims error is used, but the actual _p_reactive only clamps; per_position_error_used machine-derived to False",
+    "observation model is clamp(normalized_reactivity, 0.01, 0.99); not a calibrated count likelihood",
+    "no independent biological block crosswalk and no real marginal action cost are registered"
+  ],
+  "forbidden_claims": [
+    "held-out",
+    "test",
+    "independent validation",
+    "prospective",
+    "blinded",
+    "real absolute probability",
+    "real gamma certificate",
+    "real repeat count",
+    "wet-lab cost saving",
+    "cross-system transfer",
+    "population coverage"
+  ],
+  "sources": [
+    "src/d2t_rna/data/measured_mattr.py",
+    "manifests/add/public_planning_stub.json"
+  ]
+}

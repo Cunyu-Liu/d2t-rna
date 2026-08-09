@@ -1,0 +1,45 @@
+{
+  "schema_id": "d2t_rna.data_role_and_exposure_ledger",
+  "schema_version": "2.0",
+  "description": "Data role and historical-exposure ledger for all measured data domains (plan Batch 3.5). A profile is assigned at most one role. selection_exposed profiles may not be renamed held-out/test/independent validation/prospective/blinded.",
+  "entries": [
+    {
+      "dataset_id": "add",
+      "accessions": ["ADD71_STD_0001", "ADDRSW_SHP_0003"],
+      "role": "selection_exposed",
+      "rationale": "the measured reactivity profile selected the probe and determined n; no cold held-out replicate"
+    },
+    {
+      "dataset_id": "add",
+      "accessions": ["ADDAPO_DCP_0000"],
+      "role": "development",
+      "rationale": "planning-only metadata stub; no outcome payload"
+    },
+    {
+      "dataset_id": "glycine",
+      "accessions": ["BSUGLY_DMS_0013", "BSUGLY_DMS_0014"],
+      "role": "selection_exposed",
+      "rationale": "both merged replicates were historically exposed to probe selection and n determination"
+    },
+    {
+      "dataset_id": "minittr",
+      "accessions": ["MTTR1_MGTI_0001"],
+      "role": "selection_exposed",
+      "rationale": "the reactivity profile selected the probe and determined n"
+    },
+    {
+      "dataset_id": "samiii",
+      "accessions": ["GSE278422", "6C27", "RF01767"],
+      "role": "selection_exposed",
+      "rationale": "retrospective diagnostic; same profile selected and evaluated (post-selection)"
+    },
+    {
+      "dataset_id": "rorc",
+      "accessions": [],
+      "role": "development",
+      "rationale": "no official accession; planning metadata only"
+    }
+  ],
+  "no_profile_is_sealed_confirmation": true,
+  "sealed_confirmation_requires_new_unexposed_multi_unit_set": true
+}

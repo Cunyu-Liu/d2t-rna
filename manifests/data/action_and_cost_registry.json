@@ -1,0 +1,54 @@
+{
+  "schema_id": "d2t_rna.action_and_cost_registry",
+  "schema_version": "2.0",
+  "description": "Executable action and real marginal cost registry for measured data domains (plan Batch 3). No domain currently registers a real executable action with a real marginal cost; all are model-conditional readout channels with arbitrary clamp likelihood.",
+  "actions": [
+    {
+      "dataset_id": "add",
+      "accession": "ADD71_STD_0001",
+      "action_id": "probe{u}",
+      "action_semantics": "one binarized measured 1M7 SHAPE readout position",
+      "real_marginal_cost": null,
+      "real_cost_registered": false,
+      "eligible_claims": ["MODEL_SENSITIVITY_ONLY", "DESCRIPTIVE_TRANSFORM"]
+    },
+    {
+      "dataset_id": "glycine",
+      "accession": "BSUGLY_DMS_0013/0014",
+      "action_id": "probe{u}",
+      "action_semantics": "one binarized measured DMS readout position",
+      "real_marginal_cost": null,
+      "real_cost_registered": false,
+      "eligible_claims": ["MODEL_SENSITIVITY_ONLY", "DESCRIPTIVE_TRANSFORM"]
+    },
+    {
+      "dataset_id": "minittr",
+      "accession": "MTTR1_MGTI_0001",
+      "action_id": "probe{u}",
+      "action_semantics": "one binarized measured DMS readout position (0 mM / 50 mM MgCl2 endpoints)",
+      "real_marginal_cost": null,
+      "real_cost_registered": false,
+      "eligible_claims": ["MODEL_SENSITIVITY_ONLY", "DESCRIPTIVE_TRANSFORM"]
+    },
+    {
+      "dataset_id": "samiii",
+      "accession": "GSE278422",
+      "action_id": "n/a",
+      "action_semantics": "continuous per-nucleotide DMS reactivity; not a registered categorical observation channel over latent states",
+      "real_marginal_cost": null,
+      "real_cost_registered": false,
+      "eligible_claims": ["MODEL_SENSITIVITY_ONLY", "RETROSPECTIVE_DIAGNOSTIC_ONLY"]
+    },
+    {
+      "dataset_id": "rorc",
+      "accession": null,
+      "action_id": "n/a",
+      "action_semantics": "no registered action",
+      "real_marginal_cost": null,
+      "real_cost_registered": false,
+      "eligible_claims": []
+    }
+  ],
+  "no_real_marginal_cost_registered": true,
+  "no_quantitative_real_claim_eligible": true
+}

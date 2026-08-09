@@ -1,0 +1,40 @@
+{
+  "schema_id": "d2t_rna.data_qualification_v2",
+  "schema_version": "2.0",
+  "dataset_id": "samiii",
+  "accessions": ["GSE278422", "6C27", "RF01767"],
+  "verdict": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+  "raw_per_replicate_counts_available": false,
+  "independent_unit_crosswalk": false,
+  "calibrated_likelihood": false,
+  "executable_action": false,
+  "real_marginal_cost": false,
+  "per_position_error_used": false,
+  "exposure_role": "selection_exposed",
+  "reasons": [
+    "GSE278422 provides 5 constructs x +/- SAM (10 conditions) but only retrospective summary/reactivity; raw FASTQ per-replicate counts are not qualified in the archive",
+    "component counts, depth, stderr, and coverage are not available as per-replicate raw counts",
+    "dependency unit (construct/condition/nucleotide) is registered but no independent biological block crosswalk with replicates is established",
+    "DMS reactivity is continuous per-nucleotide and not a registered categorical observation channel over latent states; action semantics are not comparable by the registered action space (R2 modality-transfer diagnostic)",
+    "only retrospective summary is available -> RETROSPECTIVE_DIAGNOSTIC_ONLY / BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+    "no real marginal action cost is registered"
+  ],
+  "forbidden_claims": [
+    "held-out",
+    "test",
+    "independent validation",
+    "prospective",
+    "blinded",
+    "real repeat count",
+    "real gamma certificate",
+    "wet-lab cost saving",
+    "cross-system transfer",
+    "population coverage",
+    "merged benchmark"
+  ],
+  "sources": [
+    "manifests/sam_iii/public_planning_stub.json",
+    "manifests/task6r/task6r_r1_samiii_acceptance.json",
+    "manifests/task6r/task6r_r2_samiii_diagnostic_acceptance.json"
+  ]
+}
