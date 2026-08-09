@@ -1,7 +1,7 @@
 {
   "schema": "d2t_rna.v7_decision_tree_resolution.v1",
   "contract": "D2T-RNA_v7_严格科研与工程审计_2026-08-07.md",
-  "created_at": "2026-08-08T23:15:00+08:00",
+  "created_at": "2026-08-09T18:00:00+08:00",
   "head": "21a3ce6976d6deb88e808b54a327874ae0b81f58",
   "decision_tree": "section 14.5",
   "resolution": [
@@ -14,7 +14,7 @@
     {
       "node": "is RNA likelihood/action/cost identifiable by independent data?",
       "answer": "NO (blocked, not established)",
-      "evidence": "Phase 2 BLOCKED_PENDING_ARCHIVE_QUALIFICATION: raw per-replicate counts unavailable, raw-count replay cannot execute; no independently executable and priced assay action; nucleotide is full-profile outcome coordinate only; NO_GO from P2 learnability gate (STOP_METHOD_ROUTE)",
+      "evidence": "Phase 2 BLOCKED_PENDING_ARCHIVE_QUALIFICATION: raw per-replicate counts unavailable; P2 learnability gate failed fail-closed across all three endpoints (v3 UNIDENTIFIABLE; v4 IDENTIFIABLE but low power; v5 position-granularity IDENTIFIABLE but permutation p=1.0, no significant incremental learnability). Full details in consequences_effective.",
       "manifest": "manifests/audit/v7_phase2_acceptance.json"
     },
     {
@@ -70,14 +70,53 @@
       "permutation_status": "DEGENERATE_NO_POWER",
       "verdict": "STOP",
       "summary": "Under endpoint_v4 the estimand (publication-block macro over the 8 non-degenerate publications) is now IDENTIFIABLE, but the best learned model (p2_mlp) incremental delta over the trivial baseline is +0.0298 with paired publication-block bootstrap delta CI lower bound -0.0833 (does NOT exclude 0) and the publication-block permutation is degenerate (unique block sizes, zero power). Incremental cross-publication learnability on the primary binary-changer estimand is NOT established. Verdict STOP (fail-closed); Phase 3 architecture iteration remains BLOCKED."
+    },
+    "p2_epoch17_routeC_position_granularity_20260809": {
+      "authority_epoch": 17,
+      "endpoint": "endpoint_v5 (Route C, position-granularity)",
+      "metric_semantics": "PUBLICATION_MACRO_POSITION_AUPRC",
+      "unit_granularity": "ELIGIBLE_POSITION",
+      "Z_CUT": 2.0,
+      "n_pool_pairs": 6385,
+      "n_distinct_publications": 18,
+      "n_folds_with_eligible_heldout_positions": 10,
+      "run": "p2_position_v5_learnability_20260808",
+      "adapter": "scripts/reactflow_delta/run_p2_position_v5.py",
+      "source_hashes": "scripts/reactflow_delta/run_p2_position_v5.py sha256 d085916dd439a03a1f6e091af47df0dd31d0c5a99b6b8b5cb42ddfba328b3545",
+      "estimand_status": "IDENTIFIABLE",
+      "n_non_degenerate_publications": 10,
+      "best_model": "gbm",
+      "baseline_trivial_macro_position_auprc": 0.3222,
+      "model_delta_over_trivial": {
+        "logistic": 0.0423,
+        "gbm": 0.0447,
+        "p2_mlp": 0.0390
+      },
+      "paired_bootstrap_delta_ci_representative": {
+        "logistic_seed0": {
+          "ci_low": 0.0055,
+          "ci_high": 0.0955
+        },
+        "gbm_seed0": {
+          "ci_low": -0.0000,
+          "ci_high": 0.1120
+        },
+        "p2_mlp_seed0": {
+          "ci_low": 0.0010,
+          "ci_high": 0.0994
+        }
+      },
+      "permutation_p": "1.0 for ALL models and ALL 5 seeds (publication-block permutation)",
+      "verdict": "STOP",
+      "summary": "Even at position granularity (each publication contributes thousands of position units, tightening the paired bootstrap CI so that logistic/MLP delta CI lower > 0), the publication-block permutation test gives p=1.0 for every model and every seed. The positive delta (+0.04 AUPRC over trivial) is NOT distinguishable from the within-publication signal reachable by permuting scores among equal-size publications. Incremental cross-publication learnability on the position-level binary-changer estimand is NOT established. Verdict STOP (fail-closed); Phase 3 architecture iteration remains BLOCKED."
     }
   },
   "upgrade_path": {
-    "phase2_unblock": "requires raw per-replicate counts archive to rerun DirectClamp vs WithinReplicateCount kill test (implemented, 9 passed, would falsify on real counts). The author-approved per-study normalization + empirical-scatter error recalibration (caller_v3/endpoint_v3, epoch 15) WAS EXECUTED (run p2_v3_learnability_20260808b, 10 eligible held-out pubs, 5 seeds) but the publication-macro AUPRC remained UNIDENTIFIABLE (2/10 pubs pmid_25883046, pmid_35982307 constant-label; degenerate_policies.constant_label fails the macro closed) -> P2_LEARNABILITY_GO = STOP_METHOD_ROUTE. Phase 2 remains NOT established.",
+    "phase2_unblock": "Three endpoints (v3 pair-level UNIDENTIFIABLE; v4 pair-level IDENTIFIABLE low-power; v5 position-granularity IDENTIFIABLE but permutation p=1.0) all fail to establish incremental cross-publication learnability of the mutation-induced reactivity response. Phase 2 remains NOT established. Further unblock requires either (a) raw per-replicate counts archive to rerun DirectClamp vs WithinReplicateCount kill test, or (b) a new endpoint/estimand under a new authority epoch with explicit user authorization.",
     "then": [
       "sealed multi-unit confirmation set per audit §9.4 / §13.1 P0-5 success criteria before any real-data claim",
       "full RNA methods paper + Phase 6 submission only after claim freeze and owner/legal approval"
     ]
   },
-  "boundary_note": "Executed and accepted within authorized scope: P0 all DONE, Phases 1/3/4/5/6 accepted, Phase 2 documented as NOT_ESTABLISHED. The caller_v3/endpoint_v3 (epoch 15) fix was executed and re-adjudicated STOP (estimand still UNIDENTIFIABLE). Real-data claims and submission remain gated on a further Phase 2 unblock (e.g. a defined subset estimand under a new endpoint/epoch requires explicit user authorization), claim freeze, and owner/legal approval, none of which are within the current (non-expanded) authorization."
+  "boundary_note": "Executed and accepted within authorized scope: P0 all DONE, Phases 1/3/4/5/6 accepted, Phase 2 documented as NOT_ESTABLISHED. The caller_v3/endpoint_v3 (epoch 15), endpoint_v4 (epoch 16), and endpoint_v5 position-granularity (epoch 17) re-gates were all executed and re-adjudicated STOP. Real-data claims and submission remain gated on a further Phase 2 unblock (raw-count archive or a new endpoint/epoch requiring explicit user authorization), claim freeze, and owner/legal approval, none of which are within the current (non-expanded) authorization."
 }
