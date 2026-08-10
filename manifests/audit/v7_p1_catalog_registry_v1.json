@@ -1,0 +1,410 @@
+{
+  "schema": "d2t_rna.v7_p1_catalog_registry.v1",
+  "phase": "P1_6_2",
+  "authority_role": "CATALOG_REGISTRY_PREREGISTRATION",
+  "receipt": {
+    "created_at": "2026-08-10T13:17:41.969441+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "non-deterministic metadata outside canonical payload"
+  },
+  "payload": {
+    "head": "c78707ebc49974fa64710af1743778a73c0f8641",
+    "catalog_classes": [
+      "CA",
+      "CB",
+      "CC",
+      "CD"
+    ],
+    "n_pairs": 20,
+    "n_cells": 80,
+    "budgets": [
+      4,
+      8
+    ],
+    "cost_modes": [
+      "uniform",
+      "hetero"
+    ],
+    "labels": [
+      "exhaustive_oracle",
+      "full_matrix",
+      "random",
+      "greedy_test_cover",
+      "eig",
+      "chernoff",
+      "lm2r_heuristic",
+      "t2_integer_lp"
+    ],
+    "pairs": [
+      {
+        "pair_id": "CA_p1",
+        "catalog_class": "CA",
+        "n_states": 2,
+        "p0": [
+          "1/4",
+          "3/4"
+        ],
+        "p1": [
+          "0",
+          "1"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CA_p2",
+        "catalog_class": "CA",
+        "n_states": 2,
+        "p0": [
+          "3/4",
+          "1/4"
+        ],
+        "p1": [
+          "0",
+          "1"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CA_p3",
+        "catalog_class": "CA",
+        "n_states": 2,
+        "p0": [
+          "1/4",
+          "3/4"
+        ],
+        "p1": [
+          "1/2",
+          "1/2"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CA_p4",
+        "catalog_class": "CA",
+        "n_states": 2,
+        "p0": [
+          "3/4",
+          "1/4"
+        ],
+        "p1": [
+          "1/2",
+          "1/2"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CA_p5",
+        "catalog_class": "CA",
+        "n_states": 2,
+        "p0": [
+          "3/4",
+          "1/4"
+        ],
+        "p1": [
+          "1",
+          "0"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CB_p1",
+        "catalog_class": "CB",
+        "n_states": 2,
+        "p0": [
+          "0",
+          "1"
+        ],
+        "p1": [
+          "1/4",
+          "3/4"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CB_p2",
+        "catalog_class": "CB",
+        "n_states": 2,
+        "p0": [
+          "1/2",
+          "1/2"
+        ],
+        "p1": [
+          "1/4",
+          "3/4"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CB_p3",
+        "catalog_class": "CB",
+        "n_states": 2,
+        "p0": [
+          "1",
+          "0"
+        ],
+        "p1": [
+          "1/4",
+          "3/4"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CB_p4",
+        "catalog_class": "CB",
+        "n_states": 2,
+        "p0": [
+          "0",
+          "1"
+        ],
+        "p1": [
+          "3/4",
+          "1/4"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CB_p5",
+        "catalog_class": "CB",
+        "n_states": 2,
+        "p0": [
+          "1/2",
+          "1/2"
+        ],
+        "p1": [
+          "3/4",
+          "1/4"
+        ],
+        "panel": [
+          "id_a",
+          "id_b"
+        ]
+      },
+      {
+        "pair_id": "CC_p1",
+        "catalog_class": "CC",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "0",
+          "1"
+        ],
+        "p1": [
+          "1/2",
+          "0",
+          "1/2"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CC_p2",
+        "catalog_class": "CC",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "1/2",
+          "1/2"
+        ],
+        "p1": [
+          "1/2",
+          "0",
+          "1/2"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CC_p3",
+        "catalog_class": "CC",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "1",
+          "0"
+        ],
+        "p1": [
+          "1/2",
+          "0",
+          "1/2"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CC_p4",
+        "catalog_class": "CC",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "0",
+          "1"
+        ],
+        "p1": [
+          "1/2",
+          "1/2",
+          "0"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CC_p5",
+        "catalog_class": "CC",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "1/2",
+          "1/2"
+        ],
+        "p1": [
+          "1/2",
+          "1/2",
+          "0"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CD_p1",
+        "catalog_class": "CD",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "1/2",
+          "1/2"
+        ],
+        "p1": [
+          "0",
+          "0",
+          "1"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CD_p2",
+        "catalog_class": "CD",
+        "n_states": 3,
+        "p0": [
+          "1/2",
+          "0",
+          "1/2"
+        ],
+        "p1": [
+          "0",
+          "0",
+          "1"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CD_p3",
+        "catalog_class": "CD",
+        "n_states": 3,
+        "p0": [
+          "1/2",
+          "1/2",
+          "0"
+        ],
+        "p1": [
+          "0",
+          "0",
+          "1"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CD_p4",
+        "catalog_class": "CD",
+        "n_states": 3,
+        "p0": [
+          "0",
+          "1/2",
+          "1/2"
+        ],
+        "p1": [
+          "0",
+          "1",
+          "0"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      },
+      {
+        "pair_id": "CD_p5",
+        "catalog_class": "CD",
+        "n_states": 3,
+        "p0": [
+          "1/2",
+          "1/2",
+          "0"
+        ],
+        "p1": [
+          "0",
+          "1",
+          "0"
+        ],
+        "panel": [
+          "id",
+          "pair"
+        ]
+      }
+    ],
+    "guarantees": {
+      "explicit_pairs_no_theta0_index0": true,
+      "per_pair_report": true,
+      "catalog_worst_case": true,
+      "cells_are_not_independent_n": true,
+      "statistical_unit_family_block": true,
+      "bound_to_corrected_metric_schema": true,
+      "does_not_overwrite_legacy_phase4": true
+    }
+  }
+}

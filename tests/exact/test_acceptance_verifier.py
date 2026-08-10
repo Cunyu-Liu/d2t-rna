@@ -173,7 +173,9 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/t2/test_phase3_kernel.py",
             "scripts/t2_complexity_benchmark.py",
             "tests/evaluation/test_phase4_scale_grid.py",
+            "tests/evaluation/test_phase4v2_catalog.py",
             "scripts/t2_scale_grid_run.py",
+            "scripts/t2_phase4v2_run.py",
             "tests/evaluation/test_phase5_mechanism.py",
             "scripts/t2_mechanism_run.py",
         }
