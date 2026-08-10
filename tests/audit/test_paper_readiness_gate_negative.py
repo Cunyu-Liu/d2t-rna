@@ -244,6 +244,18 @@ def test_old_head_fails(tmp_path):
     assert _check_status(repo, "head_has_semantic_repair") == "FAIL"
 
 
+def test_batch5_repair_head_passes(tmp_path):
+    """Plan 5.4: a HEAD carrying a Batch 5 repair marker (evidence-repair pipeline
+    extends through Batch 5) must pass the head-repair gate."""
+    def mut(repo):
+        _write(repo, "b5_marker.txt", "x")
+        subprocess.run(["git", "-C", repo, "add", "-A"], check=True)
+        subprocess.run(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t",
+                        "commit", "-qm", "feat(Batch5.4): P0 evidence-repair acceptance"], check=True)
+    repo = _golden(tmp_path, mut)
+    assert _check_status(repo, "head_has_semantic_repair") == "PASS"
+
+
 def test_per_position_error_used_flag_fails(tmp_path):
     """Plan 4.5 #7: a measured run that claims per_position_error_used=True must fail."""
     def mut(repo):

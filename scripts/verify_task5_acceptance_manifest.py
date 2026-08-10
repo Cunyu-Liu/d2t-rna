@@ -82,7 +82,7 @@ TASK4_CLOSURE_SHA256 = (
 )
 TASK4_ISOLATED_LAUNCHER_PATH = Path("scripts/task4_isolated_python.py")
 TASK4_ISOLATED_LAUNCHER_SHA256 = (
-    "01e8ac006837a46faf7208630df8cc362a1e1713c5ecf38229c72c60ec3bbf51"
+    "0136c2e9df2d55f987f9a4c033583bec5583da43a78103e30e6c242628e58ddf"
 )
 TASK4_RUNTIME_HELPER_PATH = Path(
     "scripts/verify_task4_acceptance_manifest.py"

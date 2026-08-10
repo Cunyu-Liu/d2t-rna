@@ -188,6 +188,21 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "scripts/m0_activate_v7.py",
             "scripts/paper_readiness_gate.py",
             "scripts/build_paper_demo_data.py",
+            "scripts/redteam_p0_review.py",
+            "src/d2t_rna/data/qualification.py",
+            "tests/audit/test_certificate_roundtrip.py",
+            "tests/audit/test_decision_metric_identity.py",
+            "tests/audit/test_empty_discrete_convex.py",
+            "tests/audit/test_measure_dispatch.py",
+            "tests/audit/test_paper_readiness_gate_negative.py",
+            "tests/audit/test_phase4_phase5_metric_identity.py",
+            "tests/audit/test_provisional_authority.py",
+            "tests/audit/test_spec_dispatch.py",
+            "tests/audit/test_t2c_constructive_status.py",
+            "tests/data/test_data_qualification_v2.py",
+            "tests/independent_oracles/__init__.py",
+            "tests/independent_oracles/t2_raw_convex_oracle.py",
+            "tests/independent_oracles/t2_raw_discrete_oracle.py",
         }
     )
     assert historical_task4.isdisjoint(registered_task5_descendants)

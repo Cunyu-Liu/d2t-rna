@@ -48,13 +48,13 @@ def read(path):
         return f.read()
 
 
-_REPAIR_MARKERS = ("feat(Batch2", "feat(Batch3", "feat(Batch4")
+_REPAIR_MARKERS = ("feat(Batch2", "feat(Batch3", "feat(Batch4", "feat(Batch5")
 
 
 def head_has_repair_marker(repo):
     """Fail-closed: P0 readiness only on a HEAD that carries a semantic-repair commit.
 
-    The HEAD commit subject must carry a Batch 2/3/4 repair marker; a HEAD that still
+    The HEAD commit subject must carry a Batch 2-5 repair marker (the evidence-repair pipeline); a HEAD that still
     sits at (or behind) the pre-repair audit snapshot has no repair marker and is not
     readiness-eligible.  This is an internal evidence-gate invariant, not a scientific
     claim.

@@ -1,0 +1,101 @@
+{
+  "schema": "d2t_rna.v7_p0_repair_acceptance.v1",
+  "authority_role": "P0_MILESTONE_JUDGMENT",
+  "generator": "D2T-RNA v7 evidence-repair plan (Batch 5.4)",
+  "receipt": {
+    "created_at": "2026-08-10T12:59:06.235663+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "Non-deterministic metadata kept outside canonical payload."
+  },
+  "payload": {
+    "audited_head": "f0d7ca5d29908235fa8d4d1c2f2dd9bc359a4ae4",
+    "branch": "main",
+    "decision": {
+      "P0_SEMANTIC_REPAIR_ACCEPTED": true,
+      "SYNTHETIC_METHOD_ROUTE": "GO",
+      "REAL_DATA_ROUTE": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+      "SCIENTIFIC_SUBMISSION_BLOCKED": true
+    },
+    "necessary_conditions": {
+      "k1_k8_all_pass": {
+        "ok": true,
+        "tests": [
+          "tests/audit/test_spec_dispatch.py (K1)",
+          "tests/audit/test_empty_discrete_convex.py (K2)",
+          "tests/audit/test_measure_dispatch.py (K3)",
+          "tests/audit/test_decision_metric_identity.py (K4)",
+          "tests/audit/test_phase4_phase5_metric_identity.py (K5)",
+          "tests/audit/test_certificate_roundtrip.py (K6)",
+          "tests/audit/test_t2c_constructive_status.py (K7/K8)"
+        ]
+      },
+      "unsupported_spec_fail_closed": {
+        "ok": true,
+        "note": "TheoremSpec dispatch returns UNSUPPORTED_SPEC"
+      },
+      "certificate_roundtrip_tamper": {
+        "ok": true,
+        "tests": [
+          "tests/audit/test_certificate_roundtrip.py"
+        ]
+      },
+      "independent_oracle_false_zero": {
+        "ok": true,
+        "false_certificate": 0,
+        "false_no_go": 0,
+        "tests": [
+          "tests/t2/test_phase3_kernel.py",
+          "tests/audit/test_empty_discrete_convex.py",
+          "tests/independent_oracles/"
+        ]
+      },
+      "coverage_withholding_reported": {
+        "ok": true,
+        "note": "oracle confusion accounting reports honest withholding with false_certificate=0"
+      },
+      "phase4_phase5_metric_identity": {
+        "ok": true,
+        "tests": [
+          "tests/audit/test_phase4_phase5_metric_identity.py"
+        ]
+      },
+      "old_invalid_artifacts_terminalized": {
+        "ok": true,
+        "manifest": "manifests/audit/v7_artifact_terminalization_v2.json"
+      },
+      "readiness_negative_fixtures_all_fail": {
+        "ok": true,
+        "tests": [
+          "tests/audit/test_paper_readiness_gate_negative.py"
+        ],
+        "passed": 18
+      },
+      "current_head_non_slow_suite_clean": {
+        "ok": true,
+        "result": "914 passed, 6 deselected (slow excluded per plan 5.2)",
+        "duration_s": 2417.68
+      },
+      "pdf_no_blocking_issue": {
+        "ok": true,
+        "citation_closure": "PASS (cited-not-in-bib=[])",
+        "main_manuscript": "clean build (no overfull)",
+        "supplementary": "minor residual approx 14pt overfull in archived pre-Batch-4 build log; final visual sign-off with tectonic (author env) required per plan"
+      },
+      "red_team_no_unhandled_p0": {
+        "ok": true,
+        "all_pass": true,
+        "generator": "scripts/redteam_p0_review.py (Batch 5.3)"
+      }
+    },
+    "real_data_qualification": {
+      "verdict": "DESCRIPTIVE_ONLY",
+      "note": "Not qualified for quantitative claims; only descriptive/model-conditional claims permitted. REAL_DATA_ROUTE=BLOCKED_PENDING_ARCHIVE_QUALIFICATION."
+    },
+    "new_artifact_authority": {
+      "redteam_p0_review_py": "17e9819d05ed4701e4781ca1a966b12d25d0c876401211e8cb4be7286cf34c11",
+      "qualification_py": "d319145ca30321fcc5f374ef3c2a94c1353c55f239f8be632c0f16cadb35659c",
+      "claim_evidence_graph_json": "cb062eba4bf96453b6306b19660a83ae90b5418bdf3011c299e516b7bb12533e"
+    },
+    "guardrail": "P0_SEMANTIC_REPAIR_ACCEPTED + SYNTHETIC_METHOD_ROUTE=GO do NOT authorize submission; SCIENTIFIC_SUBMISSION_BLOCKED until real-data route unblocked."
+  }
+}
