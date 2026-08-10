@@ -155,7 +155,7 @@ def main(argv=None) -> int:
     path = pathlib.Path(args.out)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2))
-    print(f'wrote {path}: {data[n_cells]} cells')
+    print(f'wrote {path}: {data["n_cells"]} cells')
     return 0
 
 

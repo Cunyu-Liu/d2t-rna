@@ -319,5 +319,11 @@
       "B_crossing_informativeness": "NON_EQUIVALENT_ACTION_RISK_COST_TRADEOFF",
       "C_3state_identity_pair": "NON_EQUIVALENT_ACTION_CHANNEL_RANK"
     }
+  },
+  "artifact": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/ablation.json",
+    "sha256": "f11d45cd234f45e7329af02dd24b21bf1d3435157c5c953bef7658e47367f570",
+    "n_cells": 12,
+    "oracle_never_beaten": true
   }
 }

@@ -1,0 +1,128 @@
+{
+  "schema": "d2t_rna.v7_phase1_acceptance.v2",
+  "phase": "P1",
+  "created_at": "2026-08-10T16:10:00+08:00",
+  "head": "9ac352bea2210875ae987059cb7c8000f4ba542d",
+  "branch": "main",
+  "status": "SEMANTIC_SOFTWARE_SUCCESS",
+  "gate_for_next_phase": "P1_ACCEPTED",
+  "scientific_claim_authorized": false,
+  "success_states": {
+    "SEMANTIC_SOFTWARE_SUCCESS": "CLAIMED_P1_SYNTHETIC_BENCHMARK",
+    "COMPARATIVE_SYNTHETIC_SUCCESS": "NOT_CLAIMED_SOTA_NOT_ADJUDICATED",
+    "REAL_RNA_CONFIRMATION_SUCCESS": "NOT_CLAIMED_REAL_DATA_ROUTE_PENDING"
+  },
+  "acceptance_criteria": {
+    "6.1_family_split": {
+      "result": "PASS",
+      "evidence": {
+        "manifest": "manifests/audit/v7_p1_family_split_v1.json",
+        "sha256": "4c7298052c26f4bf66e9ceb11ed06a86db726e9c401dec6f5343780faa21cafe",
+        "note": "train/development/sealed-test family split frozen; family/block statistical unit; sealed test disjoint and not inspectable"
+      }
+    },
+    "6.2_full_catalog_pair_benchmark": {
+      "result": "PASS",
+      "evidence": {
+        "registry": "manifests/audit/v7_p1_catalog_registry_v1.json",
+        "registry_sha256": "61822c68a1db29d8783ece2d06964ca700cbbf311895261ae47c61c9b44d2d15",
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/phase4v2.json",
+        "artifact_sha256": "707a41ee149635a2a4cad84ed7147f64f4a6a4453b27f118b806a3d024cab5f2",
+        "n_pairs": 20,
+        "n_cells": 80,
+        "oracle_never_beaten": true,
+        "note": "4 catalog classes x 5 explicit (p0,p1) pairs; 80 pair-cells x budgets x cost modes; cap-free exhaustive oracle as correctness reference; no theta_0[0] shorthand; legacy Phase 4 not overwritten"
+      }
+    },
+    "6.3_non_equivalent_action_ablation": {
+      "result": "PASS",
+      "evidence": {
+        "registry": "manifests/audit/v7_p1_ablation_registry_v1.json",
+        "registry_sha256": "78d921d18f398b939ad652502efe1404ac62917d75fd4b39a1845f3ff914522b",
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/ablation.json",
+        "artifact_sha256": "f11d45cd234f45e7329af02dd24b21bf1d3435157c5c953bef7658e47367f570",
+        "n_cells": 12,
+        "oracle_never_beaten": true,
+        "interpretation_locks": [
+          "A_identical_control=PRICE_SUBSTITUTION_OR_TIE_CONTROL",
+          "B_crossing_informativeness=NON_EQUIVALENT_ACTION_RISK_COST_TRADEOFF",
+          "C_3state_identity_pair=NON_EQUIVALENT_ACTION_CHANNEL_RANK"
+        ],
+        "note": "3 panels x 2 cost modes x 2 budgets = 12 cells; identical-channel only ever interpreted as PRICE_SUBSTITUTION_OR_TIE_CONTROL"
+      }
+    },
+    "6.4_comparable_only_baseline_suite": {
+      "result": "PASS",
+      "evidence": {
+        "manifest": "manifests/audit/v7_p1_baseline_suite_v1.json",
+        "manifest_sha256": "67648047f30d326ef23114b607b96caf8f00d0216045c06175ecc03ad839fd2e",
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/baseline_suite.json",
+        "artifact_sha256": "9d5603a71b325b0992d9f6d4c7c623b742a671e42f8dd0a3a8f951464b1edc0b",
+        "correctness_reference": "exhaustive_oracle",
+        "headline_ranked_cells": 64,
+        "superiority_claim": false,
+        "note": "oracle never ranked as competing baseline; only same-task baselines ranked; NOT_COMPARABLE external candidates listed separately; no fabricated leaderboard"
+      }
+    },
+    "6.5_scalability": {
+      "result": "PASS",
+      "evidence": {
+        "manifest": "manifests/audit/v7_p1_scalability_v1.json",
+        "manifest_sha256": "b6441a41940d5c01674589286cd9a7e1525ae6df9cb4a93ffd7fab84fad1e3a8",
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/scalability.json",
+        "artifact_sha256": "facd3b5b10b2fe512666ac6a9fa571be7190d4dec1fb0b9abbe8ccf7e0659d65",
+        "n_cells": 80,
+        "n_timeouts": 0,
+        "n_failures": 0,
+        "n_withheld_certificates": 16,
+        "exact_oracle_boundary": "cap-free within-budget allocation space <= 81 for all 80 cells",
+        "beyond_exact_scale": "UNKNOWN_NOT_ASSERTED",
+        "note": "per-label runtime/memory/coverage; LP/MIP dims; optimality gap; fail-closed withheld-certificate accounting; beyond-exact-scale not fabricated"
+      }
+    },
+    "6.6_phase5v2_mechanism": {
+      "result": "PASS",
+      "evidence": {
+        "manifest": "manifests/audit/v7_p1_mechanism_v1.json",
+        "manifest_sha256": "c5e17dbb104f4e46d4fbffb7b1efea92182bca6068af933e5fa5b0596320c26d",
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/phase5v2_mechanism.json",
+        "artifact_sha256": "630206a53b3421ba891e0199cc5eb17dda15461ff6646a0902d51b7599757a8c",
+        "source_phase4v2_sha256": "707a41ee149635a2a4cad84ed7147f64f4a6a4453b27f118b806a3d024cab5f2",
+        "n_cells": 80,
+        "oracle_never_beaten": true,
+        "legacy_phase5_status": "INVALID_SUPERSEDED",
+        "note": "primary metric copied verbatim from corrected evaluator; no re-scaling; every claim traced to pair/cell/method/source"
+      }
+    }
+  },
+  "verification": {
+    "phase1_test_suite": {
+      "command": "pytest tests/evaluation/test_phase4v2_catalog.py test_phase4v2_ablation.py test_phase4v2_baseline_suite.py test_phase4v2_scalability.py test_phase4v2_mechanism.py tests/audit/test_p1_family_split.py",
+      "result": "40 passed",
+      "closure": "test_dynamic_python_execution_closure_matches_frozen_index PASS; test_dynamic_execution_discovery_rejects_injection_inputs PASS",
+      "note": "dynamic python-execution closure updated to register scripts/t2_phase4v2_mechanism.py and tests/evaluation/test_phase4v2_mechanism.py"
+    },
+    "software_soundness": "CONFIRMED_FACT",
+    "reproducibility": "CONFIRMED_FACT_deterministic_artifacts_bound_to_sha256",
+    "scalability": "CONFIRMED_FACT_80_cells_timeout0_failure0"
+  },
+  "non_trivial_capability": {
+    "status": "CONFIRMED_AT_SYNTHETIC_SOFTWARE_LEVEL",
+    "features": [
+      "cap-free exhaustive oracle as certificate-verified correctness reference (never beaten over 92 cells)",
+      "multi-action product-Bhattacharyya bound (per-action BC ** allocation; corrected single-action error)",
+      "non-equivalent action ablation with interpretation locks (identical-channel / crossing-informativeness / channel-rank)",
+      "costed design under fixed budget and heterogeneous cost with necessary/sufficient gap (LP lower bound vs integer upper cost)"
+    ],
+    "closest_prior_art_reduction": {
+      "status": "PENDING_SOTA_NOT_ADJUDICATED",
+      "note": "closest_prior_art_search_log.json adjudication_status = P0_COMPARABILITY_PREREGISTERED_SOTA_NOT_ADJUDICATED; reduction of closest prior art to executable same-task comparison is NOT yet completed, so the paper-level non-trivial-capability claim vs existing methods remains PENDING and must not be asserted as fact"
+    }
+  },
+  "boundary_note": "SEMANTIC_SOFTWARE_SUCCESS records that the corrected synthetic benchmark (family split, 80-cell pair benchmark, 12-cell ablation, comparable-only baseline suite, scalability record, Phase5-v2 mechanism) is software-sound, reproducible, scalable, and implements non-trivial synthetic method features. COMPARATIVE_SYNTHETIC_SUCCESS is NOT claimed (SOTA_NOT_ADJUDICATED; no performance superiority established; superiority_claim=false). REAL_RNA_CONFIRMATION_SUCCESS is NOT claimed. scientific_claim_authorized=false; all artifacts model-conditional synthetic evaluation only.",
+  "next_gate": {
+    "for_paper_non_trivial_capability": "complete closest-prior-art reduction to same-task executable comparison before asserting non-trivial capability vs existing methods",
+    "for_comparative_success": "pre-register comparative endpoint and establish superiority with sealed test families before COMPARATIVE_SYNTHETIC_SUCCESS",
+    "for_real_data": "Conditional Phase 2 real-data qualification; REAL_DATA_ROUTE remains pending / possibly TERMINATED_FOR_CURRENT_DATA absent qualified raw counts"
+  }
+}
