@@ -1,0 +1,340 @@
+{
+  "schema": "d2t_rna.v7_p1_family_split.v1",
+  "phase": "P1_6_1",
+  "authority_role": "FAMILY_SPLIT_PREREGISTRATION",
+  "receipt": {
+    "created_at": "2026-08-10T13:06:04.286198+08:00",
+    "hostname": "d2t-rna-remote",
+    "note": "non-deterministic metadata outside canonical payload"
+  },
+  "payload": {
+    "head": "85881af9d7aaefbb079c836b7930a2629b902504",
+    "branch": "main",
+    "purpose": "Freeze synthetic problem families and train/development/sealed-test split BEFORE any tuning; sealed test family must never be inspected for tuning.",
+    "axes": [
+      "n_states",
+      "catalog",
+      "n_actions",
+      "channel_rank",
+      "channel_noise",
+      "collision_margin",
+      "budget",
+      "cost_mode",
+      "abstention",
+      "exact_scale"
+    ],
+    "generation_mechanisms": {
+      "TRAIN": "dgrid_den4_identity_wide       (identity/merge channels, wide margin, clean)",
+      "DEV": "dgrid_den3_identitypair_mixed   (identity/pair channels, mixed margin, clean)",
+      "SEALED": "dgrid_den5_pairmerge_narrow_noisy (pair/merge channels, narrow margin, noisy; distinct denominator+channel family -> genuinely held out)"
+    },
+    "families": [
+      {
+        "family_id": "t_s2_2x2",
+        "split": "train",
+        "generation_mechanism": "TRAIN",
+        "axes": {
+          "n_states": 2,
+          "catalog": "2x2",
+          "n_actions": 2,
+          "channel_rank": "identity",
+          "channel_noise": "clean",
+          "collision_margin": "wide",
+          "budget": 4,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "t_s2_2x2_het",
+        "split": "train",
+        "generation_mechanism": "TRAIN",
+        "axes": {
+          "n_states": 2,
+          "catalog": "2x2",
+          "n_actions": 2,
+          "channel_rank": "identity",
+          "channel_noise": "clean",
+          "collision_margin": "wide",
+          "budget": 4,
+          "cost_mode": "hetero",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "t_s2_3x3",
+        "split": "train",
+        "generation_mechanism": "TRAIN",
+        "axes": {
+          "n_states": 2,
+          "catalog": "3x3",
+          "n_actions": 3,
+          "channel_rank": "low_rank",
+          "channel_noise": "clean",
+          "collision_margin": "wide",
+          "budget": 8,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "t_s3_2x2",
+        "split": "train",
+        "generation_mechanism": "TRAIN",
+        "axes": {
+          "n_states": 3,
+          "catalog": "2x2",
+          "n_actions": 2,
+          "channel_rank": "identity",
+          "channel_noise": "clean",
+          "collision_margin": "wide",
+          "budget": 4,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "t_s3_3x3",
+        "split": "train",
+        "generation_mechanism": "TRAIN",
+        "axes": {
+          "n_states": 3,
+          "catalog": "3x3",
+          "n_actions": 2,
+          "channel_rank": "low_rank",
+          "channel_noise": "clean",
+          "collision_margin": "wide",
+          "budget": 8,
+          "cost_mode": "uniform",
+          "abstention": "on",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "t_s3_2x3_unsolv",
+        "split": "train",
+        "generation_mechanism": "TRAIN",
+        "axes": {
+          "n_states": 3,
+          "catalog": "2x3",
+          "n_actions": 3,
+          "channel_rank": "low_rank",
+          "channel_noise": "clean",
+          "collision_margin": "wide",
+          "budget": 8,
+          "cost_mode": "hetero",
+          "abstention": "off",
+          "exact_scale": "unsolvable"
+        }
+      },
+      {
+        "family_id": "d_s2_2x3",
+        "split": "dev",
+        "generation_mechanism": "DEV",
+        "axes": {
+          "n_states": 2,
+          "catalog": "2x3",
+          "n_actions": 2,
+          "channel_rank": "low_rank",
+          "channel_noise": "clean",
+          "collision_margin": "mixed",
+          "budget": 4,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "d_s3_3x2",
+        "split": "dev",
+        "generation_mechanism": "DEV",
+        "axes": {
+          "n_states": 3,
+          "catalog": "3x2",
+          "n_actions": 2,
+          "channel_rank": "low_rank",
+          "channel_noise": "clean",
+          "collision_margin": "mixed",
+          "budget": 8,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "d_s2_3x3_narrow",
+        "split": "dev",
+        "generation_mechanism": "DEV",
+        "axes": {
+          "n_states": 2,
+          "catalog": "3x3",
+          "n_actions": 3,
+          "channel_rank": "identity",
+          "channel_noise": "clean",
+          "collision_margin": "narrow",
+          "budget": 4,
+          "cost_mode": "hetero",
+          "abstention": "on",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "d_s3_3x3_unsolv",
+        "split": "dev",
+        "generation_mechanism": "DEV",
+        "axes": {
+          "n_states": 3,
+          "catalog": "3x3",
+          "n_actions": 3,
+          "channel_rank": "low_rank",
+          "channel_noise": "clean",
+          "collision_margin": "mixed",
+          "budget": 8,
+          "cost_mode": "hetero",
+          "abstention": "off",
+          "exact_scale": "unsolvable"
+        }
+      },
+      {
+        "family_id": "q_s2_2x2_noisy",
+        "split": "sealed_test",
+        "generation_mechanism": "SEALED",
+        "axes": {
+          "n_states": 2,
+          "catalog": "2x2",
+          "n_actions": 2,
+          "channel_rank": "low_rank",
+          "channel_noise": "noisy",
+          "collision_margin": "narrow",
+          "budget": 4,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "q_s2_3x3_noisy",
+        "split": "sealed_test",
+        "generation_mechanism": "SEALED",
+        "axes": {
+          "n_states": 2,
+          "catalog": "3x3",
+          "n_actions": 3,
+          "channel_rank": "low_rank",
+          "channel_noise": "noisy",
+          "collision_margin": "narrow",
+          "budget": 8,
+          "cost_mode": "uniform",
+          "abstention": "on",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "q_s3_2x2_noisy",
+        "split": "sealed_test",
+        "generation_mechanism": "SEALED",
+        "axes": {
+          "n_states": 3,
+          "catalog": "2x2",
+          "n_actions": 2,
+          "channel_rank": "low_rank",
+          "channel_noise": "noisy",
+          "collision_margin": "narrow",
+          "budget": 4,
+          "cost_mode": "uniform",
+          "abstention": "off",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "q_s3_3x3_noisy",
+        "split": "sealed_test",
+        "generation_mechanism": "SEALED",
+        "axes": {
+          "n_states": 3,
+          "catalog": "3x3",
+          "n_actions": 2,
+          "channel_rank": "low_rank",
+          "channel_noise": "noisy",
+          "collision_margin": "narrow",
+          "budget": 8,
+          "cost_mode": "hetero",
+          "abstention": "on",
+          "exact_scale": "solvable"
+        }
+      },
+      {
+        "family_id": "q_s3_3x2_noisy_unsolv",
+        "split": "sealed_test",
+        "generation_mechanism": "SEALED",
+        "axes": {
+          "n_states": 3,
+          "catalog": "3x2",
+          "n_actions": 3,
+          "channel_rank": "low_rank",
+          "channel_noise": "noisy",
+          "collision_margin": "narrow",
+          "budget": 8,
+          "cost_mode": "hetero",
+          "abstention": "off",
+          "exact_scale": "unsolvable"
+        }
+      }
+    ],
+    "invariants": {
+      "sealed_test_disjoint_from_train_dev": true,
+      "tuning_must_not_inspect_sealed_test": true,
+      "statistical_unit_is_family_or_block_not_cell_seed": true,
+      "grid_rows_budget_cells_cost_cells_seeds_are_not_independent_units": true
+    },
+    "axis_coverage": {
+      "n_states": [
+        2,
+        3
+      ],
+      "catalog": [
+        "2x2",
+        "2x3",
+        "3x2",
+        "3x3"
+      ],
+      "n_actions": [
+        2,
+        3
+      ],
+      "channel_rank": [
+        "identity",
+        "low_rank"
+      ],
+      "channel_noise": [
+        "clean",
+        "noisy"
+      ],
+      "collision_margin": [
+        "mixed",
+        "narrow",
+        "wide"
+      ],
+      "budget": [
+        4,
+        8
+      ],
+      "cost_mode": [
+        "hetero",
+        "uniform"
+      ],
+      "abstention": [
+        "off",
+        "on"
+      ],
+      "exact_scale": [
+        "solvable",
+        "unsolvable"
+      ]
+    }
+  }
+}

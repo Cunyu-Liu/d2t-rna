@@ -197,6 +197,7 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/audit/test_paper_readiness_gate_negative.py",
             "tests/audit/test_phase4_phase5_metric_identity.py",
             "tests/audit/test_provisional_authority.py",
+            "tests/audit/test_p1_family_split.py",
             "tests/audit/test_spec_dispatch.py",
             "tests/audit/test_t2c_constructive_status.py",
             "tests/data/test_data_qualification_v2.py",
