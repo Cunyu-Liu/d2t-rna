@@ -221,6 +221,8 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "tests/audit/test_phase1_acceptance_v2.py",
             "tests/audit/test_phase4_comparative.py",
             "scripts/t4_phase4_comparative.py",
+            "tests/audit/test_phase5_claim_register.py",
+            "scripts/t5_phase5_claim_register.py",
             "tests/audit/test_spec_dispatch.py",
             "tests/audit/test_t2c_constructive_status.py",
             "tests/data/test_data_qualification_v2.py",
