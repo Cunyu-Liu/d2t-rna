@@ -1,0 +1,78 @@
+{
+  "schema": "d2t_rna.v7_phase3_protocol.v1",
+  "phase": "P3",
+  "head": "4891da894902421266b10cef4d005789b36914c9",
+  "state": "BOTTLENECK_IDENTIFIED_PROTOCOL_PRE_REGISTERED",
+  "implementation": "NOT_IMPLEMENTED_AWAITING_PROTOCOL_SELECTION",
+  "bottleneck_identified_from": "v7_p1_scalability_report.v1 + v7_p1_baseline_suite.v1",
+  "bottleneck_facts": {
+    "n_cells": 80,
+    "oracle_coverage": 1.0,
+    "oracle_executed_ok": 80,
+    "integer_lp_coverage": 0.8,
+    "integer_lp_executed_ok": 64,
+    "integer_lp_withheld_certificates": 16,
+    "exact_oracle_max_allocation_space": 81,
+    "exact_oracle_boundary": "cap-free within-budget allocation space <= 81 for all 80 cells",
+    "beyond_exact_scale": "UNKNOWN_NOT_ASSERTED",
+    "lp_max_decision_variables": 2,
+    "lp_max_threshold_constraints": 1
+  },
+  "max_schemes_considered": 3,
+  "schemes": [
+    {
+      "id": "A_TYPED_EXACT_KERNEL_CERTIFICATE",
+      "name": "typed exact kernel / certificate",
+      "bottleneck": "exact engine is exact only within allocation space <= 81 and is not asserted beyond it; correctness depends on hand-built formulation/checks with no sealed independent replay at scale",
+      "why_current_insufficient": "the Phase-1 exact oracle and LP carry 2-variable formulations and do not yet demonstrate a typed, reusable kernel whose certificate replays on larger catalogs without re-deriving A,b,c by hand",
+      "new_capability": "a single typed spec->solver->certificate->independent-checker pipeline (DISCRETE_CATALOG x ACTION_L1/TV) with canonical fraction certificates and machine-derived measures",
+      "basis": "P0 Batch 2 typed-theorem dispatch and certificate-v2 round-trip tests",
+      "minimal_implementation": "extend the existing exact kernel to expose a typed dispatch entry and an independent oracle over raw serialized matrices, covering allocation spaces up to the measured 81-boundary",
+      "risk": "moderate: certificate/checker must stay byte-exact across solver versions",
+      "control": "cap-free exhaustive oracle as correctness reference; independent raw oracle",
+      "ablation": "dispatch on uncertainty_set x separation_measure; convex/product-TV left UNSUPPORTED",
+      "success_threshold": "independent oracle matches production on all 80 cells; certificate tamper-tests pass at allocation space == 81",
+      "failure_rollback": "revert to current exact kernel; no architecture change"
+    },
+    {
+      "id": "B_ROBUST_CATALOG_WORST_PAIR_MIXTURE",
+      "name": "robust catalog worst-pair / mixture objective",
+      "bottleneck": "per-pair benchmarks report worst single pair, but a catalog-level decision is not yet optimized against a worst-pair or mixture objective, so no single allocation is certified across the whole catalog",
+      "why_current_insufficient": "Phase4-v2 ranks comparable baselines per 80 cells independently; there is no catalog-level certificate that one allocation is minimax-valid across all pre-registered pairs",
+      "new_capability": "a robust catalog objective (worst-pair or mixture) producing a single certificate whose risk is valid for every pair in the sealed family",
+      "basis": "P1-6.1 sealed family split + P1-6.2 catalog registry (4 classes x 5 pairs)",
+      "minimal_implementation": "compute the worst-pair and mixture objectives over the 20 pre-registered pairs; bind to the sealed family split",
+      "risk": "medium: worst-pair may be dominated by one adversarial pair; must pre-register mixture weights",
+      "control": "per-pair Phase4-v2 cells as reference; no pair excluded post hoc",
+      "ablation": "worst-pair vs equal-weight mixture vs per-pair-only",
+      "success_threshold": "a single robust allocation is certified for all 20 pairs with provable risk, without lowering any per-pair bound",
+      "failure_rollback": "drop the robust objective; keep per-pair reporting only"
+    },
+    {
+      "id": "C_EXACT_SCALING_BB_CP_CG",
+      "name": "exact scaling (branch-and-bound / cutting-plane / column generation / provable bound)",
+      "bottleneck": "exhaustive oracle is exact only up to allocation space 81 and the integer LP reaches only 80% coverage (16 fail-closed withheld certificates); beyond this scale is UNKNOWN_NOT_ASSERTED",
+      "why_current_insufficient": "the cap-free exhaustive enumeration and the plain integer LP do not provably scale; t2_integer_lp exceeds budget on 20% of cells",
+      "new_capability": "branch-and-bound / cutting-plane / column generation, or a provable-bound approximation, that extends the exact-solvable boundary beyond 81 and brings the integer LP back within budget",
+      "basis": "scalability report: integer_lp coverage 0.8, max_allocation_space 81",
+      "minimal_implementation": "a provable-bound approximation for one catalog class that certifies the cells currently withheld (allocation space > 81)",
+      "risk": "high: bounding must be rigorous; an unproven heuristic is not allowed",
+      "control": "cap-free exhaustive oracle on cells within the 81 boundary",
+      "ablation": "exact vs provable-bound on allocation spaces 41..81 vs >81",
+      "success_threshold": "provable bound reproduces the exact oracle on the 81-boundary and certifies withheld cells without exceeding budget; gap reported",
+      "failure_rollback": "keep exhaustive oracle boundary; mark beyond-scale UNKNOWN_NOT_ASSERTED"
+    }
+  ],
+  "selection": {
+    "selected_scheme": "NONE_YET_PROTOCOL_PRE_REGISTERED",
+    "selection_criteria": [
+      "must close at least one measured bottleneck (coverage or allocation-space boundary)",
+      "must keep fail-closed semantics (no unproven heuristic as fact)",
+      "must bind to a pre-registered sealed family split"
+    ]
+  },
+  "input_artifacts_sha256": {
+    "scalability.json": "facd3b5b10b2fe512666ac6a9fa571be7190d4dec1fb0b9abbe8ccf7e0659d65",
+    "baseline_suite.json": "9d5603a71b325b0992d9f6d4c7c623b742a671e42f8dd0a3a8f951464b1edc0b"
+  }
+}
