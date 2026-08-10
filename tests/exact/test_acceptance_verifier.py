@@ -180,6 +180,8 @@ def test_dynamic_python_execution_closure_matches_frozen_index() -> None:
             "scripts/t2_phase4v2_ablation.py",
             "tests/evaluation/test_phase4v2_baseline_suite.py",
             "scripts/t2_phase4v2_baseline_suite.py",
+            "tests/evaluation/test_phase4v2_scalability.py",
+            "scripts/t2_phase4v2_scalability.py",
             "tests/evaluation/test_phase5_mechanism.py",
             "scripts/t2_mechanism_run.py",
         }
