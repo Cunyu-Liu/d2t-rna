@@ -1,0 +1,281 @@
+{
+  "schema": "d2t_rna.v7_phase2_protocol.v1",
+  "phase": "P2",
+  "head": "21eee8cb520c746789e4a1fb4c949a522eef971e",
+  "real_data_route_for_current_data": "TERMINATED_FOR_CURRENT_DATA",
+  "aggregate_route_from_qualification_layer": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+  "route_detail": "No candidate domain is QUALIFIED; all current archives lack per-replicate raw counts, independent-unit crosswalk, calibrated count likelihood, executable action, and real marginal cost, and all measured profiles are selection-exposed. Per plan §P2 the current-data route is TERMINATED_FOR_CURRENT_DATA; the paper pivots to a synthetic/software methods paper. No normalized-clamp-as-Bernoulli bypass is permitted.",
+  "qualified_domains": [],
+  "blocked_domains": [
+    "add",
+    "glycine",
+    "minittr",
+    "samiii"
+  ],
+  "domains": [
+    {
+      "dataset_id": "add",
+      "verdict": "DESCRIPTIVE_ONLY",
+      "exposure_role": "selection_exposed",
+      "raw_per_replicate_counts_available": false,
+      "independent_unit_crosswalk": false,
+      "calibrated_likelihood": false,
+      "executable_action": false,
+      "real_marginal_cost": false,
+      "real_route_requirements_met": false
+    },
+    {
+      "dataset_id": "glycine",
+      "verdict": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+      "exposure_role": "selection_exposed",
+      "raw_per_replicate_counts_available": false,
+      "independent_unit_crosswalk": false,
+      "calibrated_likelihood": false,
+      "executable_action": false,
+      "real_marginal_cost": false,
+      "real_route_requirements_met": false
+    },
+    {
+      "dataset_id": "minittr",
+      "verdict": "DESCRIPTIVE_ONLY",
+      "exposure_role": "selection_exposed",
+      "raw_per_replicate_counts_available": false,
+      "independent_unit_crosswalk": false,
+      "calibrated_likelihood": false,
+      "executable_action": false,
+      "real_marginal_cost": false,
+      "real_route_requirements_met": false
+    },
+    {
+      "dataset_id": "rorc",
+      "verdict": "INELIGIBLE",
+      "exposure_role": "selection_exposed",
+      "raw_per_replicate_counts_available": false,
+      "independent_unit_crosswalk": false,
+      "calibrated_likelihood": false,
+      "executable_action": false,
+      "real_marginal_cost": false,
+      "real_route_requirements_met": false
+    },
+    {
+      "dataset_id": "samiii",
+      "verdict": "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
+      "exposure_role": "selection_exposed",
+      "raw_per_replicate_counts_available": false,
+      "independent_unit_crosswalk": false,
+      "calibrated_likelihood": false,
+      "executable_action": false,
+      "real_marginal_cost": false,
+      "real_route_requirements_met": false
+    }
+  ],
+  "protocol": {
+    "independent_unit_dag": {
+      "element": "independent_unit_dag",
+      "statistical_unit": "independent biological block (construct-library-assay replicate)",
+      "nodes": [
+        "construct_library",
+        "biological_replicate",
+        "assay_condition",
+        "count_measurement",
+        "action",
+        "cost"
+      ],
+      "edges": [
+        "construct_library -> biological_replicate",
+        "biological_replicate -> assay_condition",
+        "assay_condition -> count_measurement",
+        "count_measurement -> action",
+        "action -> cost"
+      ],
+      "not_independent_units": [
+        "position",
+        "read",
+        "seed",
+        "budget_cell",
+        "cost_cell",
+        "technical_repeat",
+        "action_draw"
+      ],
+      "status": "PRE_REGISTERED_SPEC_NEEDS_QUALIFIED_ARCHIVE"
+    },
+    "count_likelihood": {
+      "element": "count_likelihood",
+      "model": "WithinReplicateCountModel: per-replicate binomial (k,n) reactive reads per position/condition; optional beta-binomial for overdispersion",
+      "requires": [
+        "per_replicate_raw_counts"
+      ],
+      "current_availability": "NO_CANDIDATE_ARCHIVE_STORES_PER_REPLICATE_RAW_COUNTS",
+      "status": "PRE_REGISTERED_SPEC_NOT_FITTABLE_ON_CURRENT_DATA"
+    },
+    "calibration_protocol": {
+      "element": "calibration_protocol",
+      "approach": "per-position, over-replicate calibration of the count likelihood on a cold diagnostic replicate that was NOT used for probe selection or n determination",
+      "requires": [
+        "cold_diagnostic_replicate"
+      ],
+      "current_availability": "NO_COLD_REPLICATE_ALL_MEASURED_PROFILES_ARE_SELECTION_EXPOSED",
+      "status": "PRE_REGISTERED_SPEC_NOT_EXECUTABLE"
+    },
+    "action_registry": {
+      "element": "action_registry",
+      "registered_real_actions": [],
+      "note": "no executable real (wet-lab) action is registered; all current actions are synthetic-catalog objects, model-conditional only",
+      "status": "PRE_REGISTERED_SPEC_EMPTY_UNTIL_QUALIFIED_ARCHIVE"
+    },
+    "cost_receipt": {
+      "element": "cost_receipt",
+      "registered_real_marginal_cost": false,
+      "note": "no real wet-lab marginal cost receipt exists; synthetic costed-design costs are model-conditional only",
+      "status": "PRE_REGISTERED_SPEC_REAL_COST_UNAVAILABLE"
+    },
+    "delta_min": {
+      "element": "delta_min",
+      "definition": "minimum |p1-p0| (between-condition reactive-read probability difference) detectable by the registered count likelihood at target alpha/power",
+      "power_precision": {
+        "element": "power_precision_simulation",
+        "alpha": 0.05,
+        "target_power": 0.8,
+        "reference_p0": 0.5,
+        "method": "two-sample independent-proportion normal approximation, pooled H0 variance, at max-variance p0=0.5 (conservative)",
+        "required_n_by_delta": [
+          {
+            "delta": 0.02,
+            "n_per_condition": 9806
+          },
+          {
+            "delta": 0.05,
+            "n_per_condition": 1565
+          },
+          {
+            "delta": 0.1,
+            "n_per_condition": 388
+          },
+          {
+            "delta": 0.2,
+            "n_per_condition": 93
+          },
+          {
+            "delta": 0.3,
+            "n_per_condition": 39
+          }
+        ],
+        "historical_n_delta_min": [
+          {
+            "case": "add/miniTTR",
+            "n_claimed": 3,
+            "delta_min_at_n": 0.5
+          },
+          {
+            "case": "glycine",
+            "n_claimed": 15,
+            "delta_min_at_n": 0.4412
+          },
+          {
+            "case": "SAM-III",
+            "n_claimed": 3,
+            "delta_min_at_n": 0.5
+          }
+        ],
+        "note": "analytic/deterministic; no Monte-Carlo noise. At the historical claimed sample sizes the resolvable delta_min is very large, consistent with the audit finding that the n=3/15/3 real-repeat claims are unsupported and not independently confirmable.",
+        "status": "DETERMINISTIC_ANALYTIC"
+      }
+    },
+    "power_precision_simulation": {
+      "element": "power_precision_simulation",
+      "alpha": 0.05,
+      "target_power": 0.8,
+      "reference_p0": 0.5,
+      "method": "two-sample independent-proportion normal approximation, pooled H0 variance, at max-variance p0=0.5 (conservative)",
+      "required_n_by_delta": [
+        {
+          "delta": 0.02,
+          "n_per_condition": 9806
+        },
+        {
+          "delta": 0.05,
+          "n_per_condition": 1565
+        },
+        {
+          "delta": 0.1,
+          "n_per_condition": 388
+        },
+        {
+          "delta": 0.2,
+          "n_per_condition": 93
+        },
+        {
+          "delta": 0.3,
+          "n_per_condition": 39
+        }
+      ],
+      "historical_n_delta_min": [
+        {
+          "case": "add/miniTTR",
+          "n_claimed": 3,
+          "delta_min_at_n": 0.5
+        },
+        {
+          "case": "glycine",
+          "n_claimed": 15,
+          "delta_min_at_n": 0.4412
+        },
+        {
+          "case": "SAM-III",
+          "n_claimed": 3,
+          "delta_min_at_n": 0.5
+        }
+      ],
+      "note": "analytic/deterministic; no Monte-Carlo noise. At the historical claimed sample sizes the resolvable delta_min is very large, consistent with the audit finding that the n=3/15/3 real-repeat claims are unsupported and not independently confirmable.",
+      "status": "DETERMINISTIC_ANALYTIC"
+    },
+    "multiplicity_control": {
+      "element": "multiplicity_control",
+      "control": "pre-register the finite probe/rule set; family-wise control over the registered action set; do not cherry-pick post hoc",
+      "sealed_confirmation": "sealed test families pre-registered (see P1-6.1)",
+      "status": "PRE_REGISTERED_SPEC"
+    },
+    "qc_exclusion": {
+      "element": "qc_exclusion",
+      "criteria": "pre-registered read-depth floor per replicate, contamination/QC flags, and exclusion criteria fixed BEFORE sealed confirmation; no post hoc removal of disagreeing replicates",
+      "status": "PRE_REGISTERED_SPEC"
+    },
+    "sealed_confirmation_protocol": {
+      "element": "sealed_confirmation_protocol",
+      "protocol": "acquire fresh biological replicates on a sealed, pre-registered probe/rule set that was never exposed to selection or n determination; frozen likelihood, action, cost, and decision rule; only then fit the count likelihood and confirm",
+      "requires": [
+        "fresh_unexposed_replicates",
+        "sealed_protocol",
+        "separate_authorization"
+      ],
+      "current_availability": "NO_FRESH_DATA_ACQUISITION_AUTHORIZED",
+      "status": "PRE_REGISTERED_SPEC_NOT_EXECUTABLE"
+    }
+  },
+  "acquisition": {
+    "decision": "NO_GO_FOR_CURRENT_DATA",
+    "real_data_route_for_current_data": "TERMINATED_FOR_CURRENT_DATA",
+    "go_conditions": [
+      "a candidate archive carrying per-replicate raw counts arrives",
+      "independent biological-block crosswalk is registered",
+      "calibrated count likelihood is fittable on a cold replicate",
+      "an executable real action and real marginal cost receipt are registered",
+      "separate acquisition authorization is granted (plan rule 11)"
+    ],
+    "authorization_required": true
+  },
+  "pivot": "SYNTHETIC_SOFTWARE_PAPER",
+  "forbidden_practices": [
+    "clamp(normalized_reactivity) treated as an independent Bernoulli parameter",
+    "per_position_error_used=True without the model consuming per-position error",
+    "n=3/15/3 real-repeat or independent-validation claims",
+    "real gamma / wet-lab-cost-saving / cross-system-transfer claims"
+  ],
+  "input_manifests_sha256": {
+    "add_qualification_v2.json": "c7405d2f6ab7b83178def93cd74249b4d024bdcd91ecac68180d87df8c76eec8",
+    "glycine_qualification_v2.json": "8bf1576b2cbce6ffe8c63ddbea52f0237ffff61ea140bd91aa174eb99e09994e",
+    "minittr_qualification_v2.json": "db52450b5def4672a121b6d914f5e8025ee3b805327bf46ff0eb18edea4b6f2f",
+    "rorc_qualification_v2.json": "0af4c9d56206f2ef45a0127b14d2d2db33d81a00998445ea018ea81e659f9840",
+    "samiii_qualification_v2.json": "a2d38100a428dfceac800d71cdd348150301fd7a9e298b2b454488c9b06fc32d"
+  }
+}
