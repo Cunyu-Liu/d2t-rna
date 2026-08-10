@@ -52,15 +52,17 @@ _REPAIR_MARKERS = ("feat(Batch2", "feat(Batch3", "feat(Batch4", "feat(Batch5")
 
 
 def head_has_repair_marker(repo):
-    """Fail-closed: P0 readiness only on a HEAD that carries a semantic-repair commit.
+    """Fail-closed: P0 readiness only on a HEAD at/after a semantic-repair commit.
 
-    The HEAD commit subject must carry a Batch 2-5 repair marker (the evidence-repair pipeline); a HEAD that still
-    sits at (or behind) the pre-repair audit snapshot has no repair marker and is not
+    A HEAD is readiness-eligible iff it sits *at or after* the evidence-repair
+    pipeline (Batch 2-5), i.e. its own subject OR any commit in its ancestry carries
+    a Batch 2-5 repair marker.  A HEAD that still sits at (or behind) the pre-repair
+    audit snapshot has no repair marker anywhere in its history and is not
     readiness-eligible.  This is an internal evidence-gate invariant, not a scientific
     claim.
     """
-    subject = git(repo, "log", "-1", "--format=%s")
-    return any(m in subject for m in _REPAIR_MARKERS)
+    subjects = git(repo, "log", "--format=%s")
+    return any(any(m in line for m in _REPAIR_MARKERS) for line in subjects.splitlines())
 
 
 def import_origin_ok(repo):

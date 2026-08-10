@@ -234,12 +234,17 @@ def test_write_succeeds_on_pass(tmp_path):
 
 
 def test_old_head_fails(tmp_path):
-    """Plan 4.5 #2: a HEAD without a semantic-repair marker (old/pre-repair) must fail."""
+    """Plan 4.5 #2: a HEAD without any semantic-repair marker in its ancestry
+    (old/pre-repair, sits at/behind the audit snapshot) must fail."""
     def mut(repo):
-        _write(repo, "old_marker.txt", "x")
+        # build a genuinely pre-repair lineage: a fresh orphan root with no
+        # Batch 2-5 repair marker anywhere in its history
+        subprocess.run(["git", "-C", repo, "checkout", "-q", "--orphan", "pre-repair"], check=True)
         subprocess.run(["git", "-C", repo, "add", "-A"], check=True)
         subprocess.run(["git", "-C", repo, "-c", "user.email=t@t", "-c", "user.name=t",
-                        "commit", "-qm", "old unmarked state"], check=True)
+                        "commit", "-qm", "pre-repair audit snapshot (unmarked)"], check=True)
+        # detach so HEAD points at the orphan, not the golden branch tip
+        subprocess.run(["git", "-C", repo, "checkout", "-q", "--detach"], check=True)
     repo = _golden(tmp_path, mut)
     assert _check_status(repo, "head_has_semantic_repair") == "FAIL"
 
