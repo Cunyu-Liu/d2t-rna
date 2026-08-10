@@ -9,16 +9,16 @@
   "sota_status": "SOTA_NOT_ADJUDICATED",
   "comparative_synthetic_status": "COMPARATIVE_SYNTHETIC_RECORD",
   "receipt": {
-    "created_at": "2026-08-10T22:36:16+0800",
+    "created_at": "2026-08-11T01:06:17+0800",
     "hostname": "d2t-rna-remote",
     "note": "non-deterministic metadata outside canonical payload"
   },
-  "canonical_payload_sha256": "bd1e826e135848f430f4da01073a8964bfb63c14c751204c3b6653fdfbdbfd66",
+  "canonical_payload_sha256": "e982c07327d766334a5d443340cbbbe3a9e885dba5fef1da1d5f58befd30b0da",
   "canonical_payload": {
-    "head": "758670988db3797be5a9510ca2aaa5e1b8f405b0",
+    "head": "5f4f79089b3c33cb498e0d7e861b20bf60efcff1",
     "branch": "main",
     "origin_main": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
-    "worktree_clean": true,
+    "worktree_clean": false,
     "python": "3.11",
     "packages": {
       "numpy": "2.4.6",
@@ -46,7 +46,7 @@
       "p5_claim_register_v2": "0e239711d7e97930ff3f68e82001f708302b6d950228f7b36292a39e0ae39a7c"
     },
     "manifests": {
-      "paper_submission_readiness": "a116e88d77f6af1389fe4f24ce7a54ee9cc4ab8a3b435f15460ebcab1778e9bd",
+      "paper_submission_readiness": "02608c32e8ed167b673f165c63181801771230251a7cce831757f4b9fd474ba1",
       "v7_claim_evidence_graph_v2": "5e0ffe5da922f670d1c256087e46ffbc01923ce1a9d9110ba76f38ccd4eb0e92",
       "v7_p4_comparative_v1": "96548c93824fde24045710e89bdf3a3b326bb697ee4f39e4fd7745e566f6e5ed",
       "v7_p5_claim_register_v2": "cada52f415b808a165141ebcb872eebfc504c82209c50e1f5650dbf62e4c7100",
@@ -71,8 +71,8 @@
   },
   "deliverables_checklist": {
     "clean_environment_replay": "PASS (editflow311 py3.11, PYTHONPATH=src; gate semantic-kill tests 32 passed; red team 7/7 all_pass)",
-    "current_head_evidence_rebind": "PASS (readiness manifest + this receipt bound to 758670988db3797be5a9510ca2aaa5e1b8f405b0)",
-    "canonical_receipt_json": "PASS (this file; canonical_payload_sha256=bd1e826e135848f430f4da01073a8964bfb63c14c751204c3b6653fdfbdbfd66)",
+    "current_head_evidence_rebind": "PASS (readiness manifest + this receipt bound to 5f4f79089b3c33cb498e0d7e861b20bf60efcff1)",
+    "canonical_receipt_json": "PASS (this file; canonical_payload_sha256=e982c07327d766334a5d443340cbbbe3a9e885dba5fef1da1d5f58befd30b0da)",
     "citation_verification_100pct": "PASS (cited-subseteq-bib, all-bib-cited)",
     "claim_evidence_bidirectional_graph": "PASS (v7_claim_evidence_graph_v2.json)",
     "manuscript_supp_figures_consistent": "PASS (tectonic build clean; xr-hyper cross-refs resolve)",

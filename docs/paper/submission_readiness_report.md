@@ -2,7 +2,7 @@
 
 > status = `PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW`
 > scientific_claim_authorized = False
-> HEAD = 65785b572c909a74e18bbc033f331f4c87d35e8e
+> HEAD = 5f4f79089b3c33cb498e0d7e861b20bf60efcff1
 
 ## Checks (PASS / FAIL / UNKNOWN)
 
@@ -16,11 +16,11 @@
 - not_applicable_not_abused: **PASS** — prohibited claim still present=none
 - per_position_error_used_honest: **PASS** — no measured run claims per_position_error_used=True
 - contribution_results_nonempty: **PASS** — empty=none
-- head_has_semantic_repair: **PASS** — HEAD subject=feat(P6): submission-prep bundle (canonical receipt, data/code/license availability); authoritative readiness manifest ALL PASS at head
+- head_has_semantic_repair: **PASS** — HEAD subject=revert(P6): drop generator script (breaks task4 74-path closure index requiring slow fixture rebuild); keep manifest+availability as non-code artifacts
 - import_origin_is_repo_src: **PASS** — d2t_rna resolves under repo/src
-- semantic_kill_tests: **PASS** — ................................                                         [100%] =============================== warnings summary =============================== ../miniconda3/envs/editflow311/lib/python3.11/site-packages/_pytest/config/__init__.py:1434   /home/cunyuliu/miniconda3/envs/editflow311/lib/python3.11/site-packages/_pytest/config/__init__.py:1434: PytestConfigWarning: Unknown config option: timeout        self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html 32 passed, 1 warning in 0.92s
+- semantic_kill_tests: **PASS** — ................................                                         [100%] 32 passed in 0.82s
 - decision_tree_not_gate_open: **PASS** — no open STOP
-- pdf_build: **FAIL** — build failed or latex unavailable
+- pdf_build: **UNKNOWN** — build not run (no --with-build; pdflatex not required for --check)
 
 ## Gates
 
