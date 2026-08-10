@@ -1,0 +1,71 @@
+{
+  "schema": "d2t_rna.v7_artifact_terminalization.v2",
+  "authority_role": "FINAL_TERMINALIZATION",
+  "generator": "D2T-RNA v7 evidence-repair plan (Batch 5.1)",
+  "generator_commit": "32b44e298dab26f04b96ea63f0d3553019a72412",
+  "receipt": {
+    "created_at": "2026-08-09T23:49:49.783248+08:00",
+    "hostname": "d2t-rna-remote",
+    "generator_script": "b5_terminalize_gen.py (Batch 5.1)",
+    "note": "Non-deterministic metadata kept outside canonical payload."
+  },
+  "payload": {
+    "head": "32b44e298dab26f04b96ea63f0d3553019a72412",
+    "branch": "main",
+    "origin": "origin/main",
+    "principle": "Old artifacts keep bytes for audit; lose current scientific authority via tombstone/authority index; final classification now confirmed after semantic repair.",
+    "repaired_schemas_bound": {
+      "schemas/t2_certificate_v2.schema.json": "b66c976d6396b0dc9828ec89bf43735dcf75e84bff28c5eed6d920d56d245826",
+      "schemas/data_qualification_v2.schema.json": "430be09a084c56008c781b90dcadd13721732fe679e6600cd5ae0e73b5e1cc18"
+    },
+    "paper_render_resolution": "RENDERER_MUST_REJECT_INVALID_ID",
+    "families": [
+      {
+        "artifact_family": "Phase4_minimax_catalog_robustness_comparative_mechanism",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "LEGACY_INVALID",
+        "engineering_significance": "computational harness reused; scientific interpretation suppressed",
+        "paper_eligible": false,
+        "v2_lineage_slot": "Phase4-v2 (corrected metric identity) not yet generated"
+      },
+      {
+        "artifact_family": "Phase5_mechanism_artifacts",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "INVALID_SUPERSEDED",
+        "engineering_significance": "none for current evidence",
+        "paper_eligible": false,
+        "v2_lineage_slot": "Phase5-v2 gated on corrected Phase4-v2"
+      },
+      {
+        "artifact_family": "measured_certificates_real_ADD_glycine_miniTTR",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "DESCRIPTIVE_ONLY",
+        "engineering_significance": "registered observation-model re-runs retained as descriptive",
+        "paper_eligible": false,
+        "v2_lineage_slot": "v2 registered-observation-model instances (Section real, DESCRIPTIVE_ONLY)"
+      },
+      {
+        "artifact_family": "real_cost_no_go_wet_lab_saving_transfer",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "DESCRIPTIVE_ONLY",
+        "engineering_significance": "none as real quantitative claim",
+        "paper_eligible": false,
+        "v2_lineage_slot": "none (real route BLOCKED_PENDING_ARCHIVE_QUALIFICATION)"
+      },
+      {
+        "artifact_family": "submission_readiness_json_report",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "INVALID_PENDING_SEMANTIC_REPAIR",
+        "engineering_significance": "replaced by rewritten fail-closed gate",
+        "paper_eligible": false,
+        "v2_lineage_slot": "rewritten readiness gate (scripts/paper_readiness_gate.py) with --check/--write"
+      }
+    ],
+    "note": "Paper renderer and evidence graph MUST NOT resolve to any family marked paper_eligible=False. ReactFlow artifact count in D2T claim-evidence graph must remain 0."
+  }
+}

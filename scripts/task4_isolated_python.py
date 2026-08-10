@@ -31,6 +31,7 @@ REGISTERED_ROOT_DIRECTORIES = frozenset(
         "contracts",
         "docs",
         "manifests",
+        "schemas",
         "scripts",
         "src",
         "tests",
