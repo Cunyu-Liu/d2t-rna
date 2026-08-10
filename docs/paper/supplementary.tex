@@ -7,7 +7,10 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{seqsplit}
+\usepackage{hyperref}
 \emergencystretch=3em
+\usepackage{xr-hyper}
+\externaldocument{manuscript}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{corollary}{Corollary}
@@ -373,5 +376,200 @@ separation certificate.
 
 \section{Complete baseline table (88 rows)}\label{sec:supp88}
 \input{tables/supp88.tex}
+
+\section{Phase4-v2 synthetic benchmark tables}\label{sec:supp-benchmark}
+
+This section records the executed Phase4-v2 synthetic benchmark that supports the comparable-only
+headline and the sealed-family comparative in the main text
+(Section~\ref{sec:eval}). All values are model-conditional synthetic results bound to the immutable
+artifacts under \texttt{\seqsplit{/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/}} and the manifest
+\texttt{\seqsplit{manifests/audit/v7\_p4\_comparative\_v1.json}}; no real-data, population, transfer, or
+biological claim is made.
+
+\subsection{80-cell catalog-pair grid}\label{sec:supp-grid}
+Table~\ref{tab:supp-grid} lists every cell of the 80-cell grid (4 catalog classes
+$\texttt{CA}$--$\texttt{CD}$ $\times$ 5 pairs $\times$ 2 budgets $\times$ 2 cost modes). For
+each cell it reports the exhaustive-oracle minimax error (the global minimum), the best same-task
+comparable error, and whether any baseline beat the oracle (none does: \texttt{\seqsplit{oracle\_never\_beaten}}
+on all 80 cells).
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{80-cell catalog-pair grid. \textbf{Oracle} is the exhaustive minimax error (correctness
+reference, never ranked); \textbf{Best comparable} is the lowest minimax error among the executed
+same-task comparable labels; \textbf{Beaten} = any baseline strictly below the oracle.}
+\label{tab:supp-grid}
+\begin{tabular}{@{}lllcccc@{}}
+\toprule
+class & pair & budget & cost & oracle & best comp & beaten \\
+\midrule
+\texttt{CA} & \texttt{CA\_p1} & 4 & hetero & 81/512 & 27/128 & no \\
+\texttt{CA} & \texttt{CA\_p1} & 4 & uniform & 81/512 & 81/512 & no \\
+\texttt{CA} & \texttt{CA\_p1} & 8 & hetero & 6561/131072 & 243/2048 & no \\
+\texttt{CA} & \texttt{CA\_p1} & 8 & uniform & 6561/131072 & 6561/131072 & no \\
+\texttt{CA} & \texttt{CA\_p2} & 4 & hetero & 1/512 & 1/128 & no \\
+\texttt{CA} & \texttt{CA\_p2} & 4 & uniform & 1/512 & 1/512 & no \\
+\texttt{CA} & \texttt{CA\_p2} & 8 & hetero & 1/131072 & 1/131072 & no \\
+\texttt{CA} & \texttt{CA\_p2} & 8 & uniform & 1/131072 & 1/131072 & no \\
+\texttt{CA} & \texttt{CA\_p3} & 4 & hetero & 147/512 & 11/32 & no \\
+\texttt{CA} & \texttt{CA\_p3} & 4 & uniform & 147/512 & 147/512 & no \\
+\texttt{CA} & \texttt{CA\_p3} & 8 & hetero & 30539/131072 & 30539/131072 & no \\
+\texttt{CA} & \texttt{CA\_p3} & 8 & uniform & 30539/131072 & 30539/131072 & no \\
+\texttt{CA} & \texttt{CA\_p4} & 4 & hetero & 147/512 & 11/32 & no \\
+\texttt{CA} & \texttt{CA\_p4} & 4 & uniform & 147/512 & 147/512 & no \\
+\texttt{CA} & \texttt{CA\_p4} & 8 & hetero & 30539/131072 & 30539/131072 & no \\
+\texttt{CA} & \texttt{CA\_p4} & 8 & uniform & 30539/131072 & 30539/131072 & no \\
+\texttt{CA} & \texttt{CA\_p5} & 4 & hetero & 81/512 & 27/128 & no \\
+\texttt{CA} & \texttt{CA\_p5} & 4 & uniform & 81/512 & 81/512 & no \\
+\texttt{CA} & \texttt{CA\_p5} & 8 & hetero & 6561/131072 & 243/2048 & no \\
+\texttt{CA} & \texttt{CA\_p5} & 8 & uniform & 6561/131072 & 6561/131072 & no \\
+\texttt{CB} & \texttt{CB\_p1} & 4 & hetero & 81/512 & 27/128 & no \\
+\texttt{CB} & \texttt{CB\_p1} & 4 & uniform & 81/512 & 81/512 & no \\
+\texttt{CB} & \texttt{CB\_p1} & 8 & hetero & 6561/131072 & 243/2048 & no \\
+\texttt{CB} & \texttt{CB\_p1} & 8 & uniform & 6561/131072 & 6561/131072 & no \\
+\texttt{CB} & \texttt{CB\_p2} & 4 & hetero & 147/512 & 11/32 & no \\
+\texttt{CB} & \texttt{CB\_p2} & 4 & uniform & 147/512 & 147/512 & no \\
+\texttt{CB} & \texttt{CB\_p2} & 8 & hetero & 30539/131072 & 30539/131072 & no \\
+\texttt{CB} & \texttt{CB\_p2} & 8 & uniform & 30539/131072 & 30539/131072 & no \\
+\texttt{CB} & \texttt{CB\_p3} & 4 & hetero & 1/512 & 1/128 & no \\
+\texttt{CB} & \texttt{CB\_p3} & 4 & uniform & 1/512 & 1/512 & no \\
+\texttt{CB} & \texttt{CB\_p3} & 8 & hetero & 1/131072 & 1/131072 & no \\
+\texttt{CB} & \texttt{CB\_p3} & 8 & uniform & 1/131072 & 1/131072 & no \\
+\texttt{CB} & \texttt{CB\_p4} & 4 & hetero & 1/512 & 1/128 & no \\
+\texttt{CB} & \texttt{CB\_p4} & 4 & uniform & 1/512 & 1/512 & no \\
+\texttt{CB} & \texttt{CB\_p4} & 8 & hetero & 1/131072 & 1/131072 & no \\
+\texttt{CB} & \texttt{CB\_p4} & 8 & uniform & 1/131072 & 1/131072 & no \\
+\texttt{CB} & \texttt{CB\_p5} & 4 & hetero & 147/512 & 11/32 & no \\
+\texttt{CB} & \texttt{CB\_p5} & 4 & uniform & 147/512 & 147/512 & no \\
+\texttt{CB} & \texttt{CB\_p5} & 8 & hetero & 30539/131072 & 30539/131072 & no \\
+\texttt{CB} & \texttt{CB\_p5} & 8 & uniform & 30539/131072 & 30539/131072 & no \\
+\texttt{CC} & \texttt{CC\_p1} & 4 & hetero & 1/32 & 1/16 & no \\
+\texttt{CC} & \texttt{CC\_p1} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CC} & \texttt{CC\_p1} & 8 & hetero & 1/512 & 1/512 & no \\
+\texttt{CC} & \texttt{CC\_p1} & 8 & uniform & 1/512 & 1/512 & no \\
+\texttt{CC} & \texttt{CC\_p2} & 4 & hetero & 1/32 & 1/2 & no \\
+\texttt{CC} & \texttt{CC\_p2} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CC} & \texttt{CC\_p2} & 8 & hetero & 1/512 & 1/16 & no \\
+\texttt{CC} & \texttt{CC\_p2} & 8 & uniform & 1/512 & 1/32 & no \\
+\texttt{CC} & \texttt{CC\_p3} & 4 & hetero & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p3} & 4 & uniform & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p3} & 8 & hetero & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p3} & 8 & uniform & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p4} & 4 & hetero & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p4} & 4 & uniform & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p4} & 8 & hetero & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p4} & 8 & uniform & 0 & 0 & no \\
+\texttt{CC} & \texttt{CC\_p5} & 4 & hetero & 1/32 & 1/16 & no \\
+\texttt{CC} & \texttt{CC\_p5} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CC} & \texttt{CC\_p5} & 8 & hetero & 1/512 & 1/4 & no \\
+\texttt{CC} & \texttt{CC\_p5} & 8 & uniform & 1/512 & 1/4 & no \\
+\texttt{CD} & \texttt{CD\_p1} & 4 & hetero & 1/32 & 1/16 & no \\
+\texttt{CD} & \texttt{CD\_p1} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CD} & \texttt{CD\_p1} & 8 & hetero & 1/512 & 1/512 & no \\
+\texttt{CD} & \texttt{CD\_p1} & 8 & uniform & 1/512 & 1/512 & no \\
+\texttt{CD} & \texttt{CD\_p2} & 4 & hetero & 1/32 & 1/16 & no \\
+\texttt{CD} & \texttt{CD\_p2} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CD} & \texttt{CD\_p2} & 8 & hetero & 1/512 & 1/512 & no \\
+\texttt{CD} & \texttt{CD\_p2} & 8 & uniform & 1/512 & 1/512 & no \\
+\texttt{CD} & \texttt{CD\_p3} & 4 & hetero & 0 & 0 & no \\
+\texttt{CD} & \texttt{CD\_p3} & 4 & uniform & 0 & 0 & no \\
+\texttt{CD} & \texttt{CD\_p3} & 8 & hetero & 0 & 0 & no \\
+\texttt{CD} & \texttt{CD\_p3} & 8 & uniform & 0 & 0 & no \\
+\texttt{CD} & \texttt{CD\_p4} & 4 & hetero & 1/32 & 1/16 & no \\
+\texttt{CD} & \texttt{CD\_p4} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CD} & \texttt{CD\_p4} & 8 & hetero & 1/512 & 1/512 & no \\
+\texttt{CD} & \texttt{CD\_p4} & 8 & uniform & 1/512 & 1/512 & no \\
+\texttt{CD} & \texttt{CD\_p5} & 4 & hetero & 1/32 & 1/2 & no \\
+\texttt{CD} & \texttt{CD\_p5} & 4 & uniform & 1/32 & 1/32 & no \\
+\texttt{CD} & \texttt{CD\_p5} & 8 & hetero & 1/512 & 1/16 & no \\
+\texttt{CD} & \texttt{CD\_p5} & 8 & uniform & 1/512 & 1/32 & no \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Non-equivalent-action ablation (12 cells)}\label{sec:supp-ablation}
+Table~\ref{tab:supp-ablation} lists the 12 ablation cells. The identical-channel negative control is
+labeled \texttt{\seqsplit{PRICE\_SUBSTITUTION\_OR\_TIE\_CONTROL}} and is not read as action informativeness;
+on every cell the exact oracle is never beaten.
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{Non-equivalent-action ablation. \textbf{Interpretation} is the pre-registered
+interpretation lock per panel.}
+\label{tab:supp-ablation}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llcllcc@{}}
+\toprule
+cell & panel & budget & cost mode & interpretation & oracle err & beaten \\
+\midrule
+\texttt{\seqsplit{A\_identical\_control\_\_b4\_x\_hetero}} & \texttt{\seqsplit{A\_identical\_control}} & 4 & hetero & \texttt{\seqsplit{PRICE\_SUBSTITUTION\_OR\_TIE\_CONTROL}} & 5/32 & no \\
+\texttt{\seqsplit{A\_identical\_control\_\_b4\_x\_uniform}} & \texttt{\seqsplit{A\_identical\_control}} & 4 & uniform & \texttt{\seqsplit{PRICE\_SUBSTITUTION\_OR\_TIE\_CONTROL}} & 5/32 & no \\
+\texttt{\seqsplit{A\_identical\_control\_\_b8\_x\_hetero}} & \texttt{\seqsplit{A\_identical\_control}} & 8 & hetero & \texttt{\seqsplit{PRICE\_SUBSTITUTION\_OR\_TIE\_CONTROL}} & 289/4096 & no \\
+\texttt{\seqsplit{A\_identical\_control\_\_b8\_x\_uniform}} & \texttt{\seqsplit{A\_identical\_control}} & 8 & uniform & \texttt{\seqsplit{PRICE\_SUBSTITUTION\_OR\_TIE\_CONTROL}} & 289/4096 & no \\
+\texttt{\seqsplit{B\_crossing\_informativeness\_\_b4\_x\_hetero}} & \texttt{\seqsplit{B\_crossing\_informativeness}} & 4 & hetero & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_RISK\_COST\_TRADEOFF}} & 1/10 & no \\
+\texttt{\seqsplit{B\_crossing\_informativeness\_\_b4\_x\_uniform}} & \texttt{\seqsplit{B\_crossing\_informativeness}} & 4 & uniform & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_RISK\_COST\_TRADEOFF}} & 7/250 & no \\
+\texttt{\seqsplit{B\_crossing\_informativeness\_\_b8\_x\_hetero}} & \texttt{\seqsplit{B\_crossing\_informativeness}} & 8 & hetero & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_RISK\_COST\_TRADEOFF}} & 8/125 & no \\
+\texttt{\seqsplit{B\_crossing\_informativeness\_\_b8\_x\_uniform}} & \texttt{\seqsplit{B\_crossing\_informativeness}} & 8 & uniform & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_RISK\_COST\_TRADEOFF}} & 341/125000 & no \\
+\texttt{\seqsplit{C\_3state\_identity\_pair\_\_b4\_x\_hetero}} & \texttt{\seqsplit{C\_3state\_identity\_pair}} & 4 & hetero & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_CHANNEL\_RANK}} & 1/32 & no \\
+\texttt{\seqsplit{C\_3state\_identity\_pair\_\_b4\_x\_uniform}} & \texttt{\seqsplit{C\_3state\_identity\_pair}} & 4 & uniform & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_CHANNEL\_RANK}} & 1/32 & no \\
+\texttt{\seqsplit{C\_3state\_identity\_pair\_\_b8\_x\_hetero}} & \texttt{\seqsplit{C\_3state\_identity\_pair}} & 8 & hetero & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_CHANNEL\_RANK}} & 1/512 & no \\
+\texttt{\seqsplit{C\_3state\_identity\_pair\_\_b8\_x\_uniform}} & \texttt{\seqsplit{C\_3state\_identity\_pair}} & 8 & uniform & \texttt{\seqsplit{NON\_EQUIVALENT\_ACTION\_CHANNEL\_RANK}} & 1/512 & no \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Sealed-family comparative (24 blocks)}\label{sec:supp-sealed}
+Table~\ref{tab:supp-sealed} lists every sealed block. \texttt{D2T} is the exact decision
+framework (oracle-optimal); \texttt{Comparator} is the matched strongest comparable (Chernoff).
+$d_i$ is per-block $L(\mathrm{D2T})-L(\mathrm{Comparator})$; $d_i\le0$ everywhere
+(\texttt{\seqsplit{d2t\_never\_worse\_than\_comparator}}$=\mathrm{true}$). Pooled per-block delta mean
+$\bar d=-0.000229$ with $10^4$-block bootstrap CI
+$[-0.000572,\,0]$ (not strictly below zero). Exact certificates on
+19/24 blocks; 2 strict improvements;
+4 comparator blocks Pareto-dominated; 5
+bound-only (fail-closed); 0 timeouts, 0 failures. This is a \texttt{\seqsplit{COMPARATIVE\_SYNTHETIC\_RECORD}},
+not a population or real-data generalization claim.
+
+\begin{table}[ht]
+\centering\footnotesize
+\caption{Sealed-family comparative. \textbf{Exact} is the per-block exact status (RUN = exact
+certificate, BOUND = bound-only); \textbf{D2T} / \textbf{Cmp} are the D2T and comparator minimax
+errors; $d_i$ is the per-block delta; \textbf{Strict} = strict improvement; \textbf{Dom} =
+comparator Pareto-dominated.}
+\label{tab:supp-sealed}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{@{}llllcccc@{}}
+\toprule
+family & block & exact & D2T err & Cmp err & $d_i$ & Strict & Dom \\
+\midrule
+\texttt{q\_s2\_2x2\_noisy} & \texttt{q\_s2\_2x2\_b1} & RUN & 214517/625000 & 214517/625000 & 0 & no & no \\
+\texttt{q\_s2\_2x2\_noisy} & \texttt{q\_s2\_2x2\_b2} & RUN & 183229/500000 & 183229/500000 & 0 & no & yes \\
+\texttt{q\_s2\_2x2\_noisy} & \texttt{q\_s2\_2x2\_b3} & RUN & 3356401/12500000 & 3356401/12500000 & 0 & no & no \\
+\texttt{q\_s2\_2x2\_noisy} & \texttt{q\_s2\_2x2\_b4} & RUN & 214517/625000 & 214517/625000 & 0 & no & no \\
+\texttt{q\_s2\_3x3\_noisy} & \texttt{q\_s2\_3x3\_b1} & RUN & 143797874333033/625000000000000 & 143797874333033/625000000000000 & 0 & no & no \\
+\texttt{q\_s2\_3x3\_noisy} & \texttt{q\_s2\_3x3\_b2} & RUN & 17727014423477/62500000000000 & 17727014423477/62500000000000 & 0 & no & no \\
+\texttt{q\_s2\_3x3\_noisy} & \texttt{q\_s2\_3x3\_b3} & RUN & 1546903518469/5000000000000 & 1546903518469/5000000000000 & 0 & no & yes \\
+\texttt{q\_s2\_3x3\_noisy} & \texttt{q\_s2\_3x3\_b4} & RUN & 17727014423477/62500000000000 & 17727014423477/62500000000000 & 0 & no & no \\
+\texttt{q\_s2\_3x3\_noisy} & \texttt{q\_s2\_3x3\_b5} & RUN & 143797874333033/625000000000000 & 143797874333033/625000000000000 & 0 & no & no \\
+\texttt{q\_s3\_2x2\_noisy} & \texttt{q\_s3\_2x2\_b1} & RUN & 9558413/37500000 & 9558413/37500000 & 0 & no & no \\
+\texttt{q\_s3\_2x2\_noisy} & \texttt{q\_s3\_2x2\_b2} & RUN & 12085219/37500000 & 12085219/37500000 & 0 & no & no \\
+\texttt{q\_s3\_2x2\_noisy} & \texttt{q\_s3\_2x2\_b3} & RUN & 9558413/37500000 & 9558413/37500000 & 0 & no & no \\
+\texttt{q\_s3\_2x2\_noisy} & \texttt{q\_s3\_2x2\_b4} & RUN & 12085219/37500000 & 12085219/37500000 & 0 & no & no \\
+\texttt{q\_s3\_2x2\_noisy} & \texttt{q\_s3\_2x2\_b5} & RUN & 12443887/37500000 & 12443887/37500000 & 0 & no & no \\
+\texttt{q\_s3\_3x3\_noisy} & \texttt{q\_s3\_3x3\_b1} & RUN & 9558413/37500000 & 9558413/37500000 & 0 & no & no \\
+\texttt{q\_s3\_3x3\_noisy} & \texttt{q\_s3\_3x3\_b2} & RUN & 4321315661/13500000000 & 12085219/37500000 & -29363179/13500000000 & yes & yes \\
+\texttt{q\_s3\_3x3\_noisy} & \texttt{q\_s3\_3x3\_b3} & RUN & 9558413/37500000 & 9558413/37500000 & 0 & no & no \\
+\texttt{q\_s3\_3x3\_noisy} & \texttt{q\_s3\_3x3\_b4} & RUN & 4321315661/13500000000 & 12085219/37500000 & -29363179/13500000000 & yes & yes \\
+\texttt{q\_s3\_3x3\_noisy} & \texttt{q\_s3\_3x3\_b5} & RUN & 12443887/37500000 & 12443887/37500000 & 0 & no & no \\
+\texttt{\seqsplit{q\_s3\_3x2\_noisy\_unsolv}} & \texttt{q\_s3\_3x2\_b1} & BOUND\_ONLY & --- & 9558413/37500000 & --- & no & no \\
+\texttt{\seqsplit{q\_s3\_3x2\_noisy\_unsolv}} & \texttt{q\_s3\_3x2\_b2} & BOUND\_ONLY & --- & 12085219/37500000 & --- & no & no \\
+\texttt{\seqsplit{q\_s3\_3x2\_noisy\_unsolv}} & \texttt{q\_s3\_3x2\_b3} & BOUND\_ONLY & --- & 9558413/37500000 & --- & no & no \\
+\texttt{\seqsplit{q\_s3\_3x2\_noisy\_unsolv}} & \texttt{q\_s3\_3x2\_b4} & BOUND\_ONLY & --- & 12085219/37500000 & --- & no & no \\
+\texttt{\seqsplit{q\_s3\_3x2\_noisy\_unsolv}} & \texttt{q\_s3\_3x2\_b5} & BOUND\_ONLY & --- & 12443887/37500000 & --- & no & no \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}
 
 \end{document}
