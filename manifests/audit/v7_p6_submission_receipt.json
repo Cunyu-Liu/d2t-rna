@@ -9,16 +9,16 @@
   "sota_status": "SOTA_NOT_ADJUDICATED",
   "comparative_synthetic_status": "COMPARATIVE_SYNTHETIC_RECORD",
   "receipt": {
-    "created_at": "2026-08-10T22:36:00+0800",
+    "created_at": "2026-08-10T22:36:16+0800",
     "hostname": "d2t-rna-remote",
     "note": "non-deterministic metadata outside canonical payload"
   },
-  "canonical_payload_sha256": "e6dca44e1bdf210a382c047a62435d819b4a27a61bd530514159dfed0399c363",
+  "canonical_payload_sha256": "bd1e826e135848f430f4da01073a8964bfb63c14c751204c3b6653fdfbdbfd66",
   "canonical_payload": {
-    "head": "65785b572c909a74e18bbc033f331f4c87d35e8e",
+    "head": "758670988db3797be5a9510ca2aaa5e1b8f405b0",
     "branch": "main",
     "origin_main": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
-    "worktree_clean": false,
+    "worktree_clean": true,
     "python": "3.11",
     "packages": {
       "numpy": "2.4.6",
@@ -71,8 +71,8 @@
   },
   "deliverables_checklist": {
     "clean_environment_replay": "PASS (editflow311 py3.11, PYTHONPATH=src; gate semantic-kill tests 32 passed; red team 7/7 all_pass)",
-    "current_head_evidence_rebind": "PASS (readiness manifest + this receipt bound to 65785b572c909a74e18bbc033f331f4c87d35e8e)",
-    "canonical_receipt_json": "PASS (this file; canonical_payload_sha256=e6dca44e1bdf210a382c047a62435d819b4a27a61bd530514159dfed0399c363)",
+    "current_head_evidence_rebind": "PASS (readiness manifest + this receipt bound to 758670988db3797be5a9510ca2aaa5e1b8f405b0)",
+    "canonical_receipt_json": "PASS (this file; canonical_payload_sha256=bd1e826e135848f430f4da01073a8964bfb63c14c751204c3b6653fdfbdbfd66)",
     "citation_verification_100pct": "PASS (cited-subseteq-bib, all-bib-cited)",
     "claim_evidence_bidirectional_graph": "PASS (v7_claim_evidence_graph_v2.json)",
     "manuscript_supp_figures_consistent": "PASS (tectonic build clean; xr-hyper cross-refs resolve)",
