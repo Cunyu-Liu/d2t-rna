@@ -1,0 +1,25 @@
+{
+  "schema": "d2t_rna.v7_p3_schemeC_manifest.v1",
+  "phase": "P3",
+  "head": "8aeb9fbea496ce1f78fd949d4fb33faf3afed6fd",
+  "state": "SCHEME_C_PROVABLE_BOUND_IMPLEMENTED",
+  "selected_scheme": "C_EXACT_SCALING_BB_CP_CG",
+  "summary": {
+    "n_cells": 50,
+    "n_boundary_cells": 20,
+    "n_boundary_reproduced": 20,
+    "n_beyond_cells": 30,
+    "n_beyond_within_budget": 30,
+    "n_beyond_gap_reported": 30
+  },
+  "boundary": {
+    "exact_oracle_max_allocation_space": 81,
+    "schemeC_max_allocation_space": 441,
+    "extended_beyond_81": true
+  },
+  "artifact": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/schemeC_scaling.json",
+    "sha256": "66eac21b18981dc3ccabc7627ceca55257e9b69fd2a17500f030343b0c8c9b79"
+  },
+  "scientific_claim_authorized": false
+}
