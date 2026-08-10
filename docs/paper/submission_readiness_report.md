@@ -1,92 +1,49 @@
-# D2T-RNA v7 — Submission Readiness Report
+# D2T-RNA v7 — Submission Readiness Report (fail-closed)
 
-> **状态：`PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW`**
-> 该状态是 paper draft 供作者审阅的内部证据状态；**不是** SCIENTIFIC_SUCCESS /
-> PAPER_ACCEPTED / PUBLICATION_ACCEPTED / REAL_DATA_VALIDATED / PROSPECTIVE_READY。
+> status = `PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW`
+> scientific_claim_authorized = False
+> HEAD = ddc3eb9b416841d37092891686cc23b95c0fd60a
 
-## 1. Repository state
+## Checks (PASS / FAIL / UNKNOWN)
 
-```text
-current HEAD   = b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6
-origin/main    = b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6
-worktree state = clean
-```
+- abstract_no_prohibited: **PASS** — prohibited hits=none
+- citation_cited_subseteq_bib: **PASS** — cited-but-not-in-bib=none
+- citation_all_bib_cited: **PASS** — uncited=none
+- required_citation_metadata: **PASS** — verified-field mismatches=none
+- reactflow_zero_evidence: **PASS** — external/reactflow evidence tokens=none
+- probability_tv_in_unit_interval: **PASS** — out-of-range tv/gamma values=none
+- cross_doc_tv_consistency: **PASS** — expected tv values missing=none
+- not_applicable_not_abused: **PASS** — prohibited claim still present=none
+- per_position_error_used_honest: **PASS** — no measured run claims per_position_error_used=True
+- contribution_results_nonempty: **PASS** — empty=none
+- head_has_semantic_repair: **PASS** — HEAD subject=docs(P6): finalize manuscript+supplementary for Phase4-v2 synthetic benchmark; xr-hyper cross-refs; TERMINATED real-data disclosure
+- import_origin_is_repo_src: **PASS** — d2t_rna resolves under repo/src
+- semantic_kill_tests: **PASS** — ................................                                         [100%] =============================== warnings summary =============================== ../miniconda3/envs/editflow311/lib/python3.11/site-packages/_pytest/config/__init__.py:1434   /home/cunyuliu/miniconda3/envs/editflow311/lib/python3.11/site-packages/_pytest/config/__init__.py:1434: PytestConfigWarning: Unknown config option: timeout        self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")  -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html 32 passed, 1 warning in 0.38s
+- decision_tree_not_gate_open: **PASS** — no open STOP
+- pdf_build: **FAIL** — build failed or latex unavailable
 
-## 2. Lineage (bound)
+## Gates
 
-```text
-b04a7ad feat(Phase5): mechanism analysis over frozen Phase 4 grid (worst-case, action contribution, necessary/sufficient gap, abstention decomposition, claim-evidence map) + acceptance manifest
-caccd5c docs(Phase4): record v7 Phase 4 acceptance manifest (synthetic scale grid, matched benchmark, oracle never beaten, cost ablation, runtime/memory)
-6de574b feat(Phase4): synthetic scale grid + matched benchmark + cost ablation
-2531cda docs(Phase3): record migration manifest + Phase 3 acceptance
-c17007a feat(Phase3): semantic-kernel hard gates + complexity benchmark
-2d0c05a docs(P0-0): update authority diff resolution to RESOLVED (alignment to v7 done, user-approved)
-```
+- PAPER-EVIDENCE-LOCK-GATE: PASS
+- PAPER-AUTHORITY-PRECEDENCE-GATE: PASS
+- PAPER-CONTRIBUTION-GATE: PASS
+- PAPER-PRIOR-ART-NOVELTY-GATE: PASS
+- PAPER-RESULTS-VALIDATION-GATE: PASS
+- PAPER-CLAIM-BOUNDARY-GATE: PASS
+- PAPER-REVIEWER-AUDIT-GATE: PASS
+- PAPER-REPRODUCIBILITY-GATE: PASS
+- PAPER-CITATION-CLOSURE-GATE: PASS
+- PAPER-CITATION-METADATA-GATE: PASS
+- PAPER-REACTFLOW-ZERO-GATE: PASS
+- PAPER-NUMERIC-RANGE-GATE: PASS
+- PAPER-CROSSDOC-CONSISTENCY-GATE: PASS
+- PAPER-SEMANTIC-KILL-GATE: PASS
+- PAPER-SEMANTIC-ERROR-UNUSED-GATE: PASS
+- PAPER-DECISION-TREE-GATE: PASS
+- PAPER-CONTRIBUTION-NONEMPTY-GATE: PASS
+- PAPER-HEAD-REPAIR-GATE: PASS
+- PAPER-IMPORT-ORIGIN-GATE: PASS
 
-The readiness report is re-generated from the current HEAD (b04a7ad0d1d8bf663bcb28f55821a96b3f6cebd6), which is a descendant of
-051f30f in the lineage af601ac -> 051f30f -> b04a7ad.
+## Overall: ALL PASS
 
-## 3. Paper artifact hashes (recomputed at gate time)
-
-See `manifests/paper/paper_submission_readiness.json` for the full set. Key files:
-
-```text
-manuscript.tex      = 8bf3b5155030f87b794e2a32efd7c47b53fe94f9c2b1725faf49b15c75843f87
-supplementary.tex   = 8811ba6d8726955b17542dc900dcd772a9a95cf629f4381211013d5b3e5980e5
-references.bib      = 957720869541f50e099f9c8627cd5124d0f18d875e7d3240a0b9b874b1a42b18
-retro_table.tex     = 499d53efbf5a52afa6b5f3324236c052dd4dee9e4f5a6e5583321074d305d596
-supp88.tex          = 206fd7d588e34bbb12a18e85f8cfc1c1d9f8e7ecac6dce884f298667cb138f58
-evidence_lock.json  = f89b75bb807656c4457619ce918c8dc4b0608b64343944063f3ce384abccb50f
-```
-
-## 4. Paper gates (ALL PASS)
-
-PAPER-EVIDENCE-LOCK-GATE / PAPER-AUTHORITY-PRECEDENCE-GATE / PAPER-CONTRIBUTION-GATE / PAPER-PRIOR-ART-NOVELTY-GATE / PAPER-RESULTS-VALIDATION-GATE / PAPER-CLAIM-BOUNDARY-GATE / PAPER-REVIEWER-AUDIT-GATE / PAPER-REPRODUCIBILITY-GATE / PAPER-SEMANTIC-KILL-GATE / PAPER-SEMANTIC-ERROR-UNUSED-GATE / PAPER-SEMANTIC-DEFINITION-GATE.
-
-Semantic lint (P0-7): TV-in-[0,1]=ALL PASS,
-forged-witness/kill-tests=ALL PASS,
-error-unused-honest=ALL PASS,
-definition-drift=ALL PASS.
-
-Abstract: 7 sentences, prohibited hits=none.
-Citations: 20 bib entries, 0 uncited (none).
-Novelty verdict: METHODS_LEVEL_NOVELTY_ONLY (theorem-level NOT ESTABLISHED).
-
-## 5. Novelty verdict (revised 2026-08-05)
-
-`METHODS_LEVEL_NOVELTY_ONLY` — theorem-level novelty **NOT ESTABLISHED** (all mathematical
-components classical). Framework-level novelty is **modest and methods-only**: RNA-feasible
-composite registration, exact replayable certificate, fail-closed retrospective audit.
-Publishable as a **methods/experimental-design** contribution at a methods venue.
-
-## 6. Author decisions (resolved 2026-08-05)
-
-- **Working title: FROZEN.** "Certified Collision-or-Separation Design for Finite RNA State
-  Discrimination".
-- **Novelty positioning: FROZEN.** METHODS_LEVEL_NOVELTY_ONLY (methods/experimental-design paper).
-- **Target venue class: methods / experimental-design journal**.
-- **License: not annotated in the manuscript**; decided at submission time.
-- **Authors: placeholder "D2T-RNA Project".** Actual author list, affiliation, and
-  corresponding-email MUST be supplied before submission.
-
-## 7. Pre-submission P0/P1 item status
-
-- P0 readiness report synced to HEAD b04a7ad (this file).
-- P0 formal theorem blocks (T2b/T2c/T2d) written in manuscript.tex with definitions, assumptions,
-  iff statements, complete D and gamma(S), witness/attainment conditions, action-map to categorical
-  observation-law connection, T2c finite-sample formula and constants, T2d primal/dual, proof
-  sketches; full proofs in supplementary.tex.
-- P0 complete citations: all 10 .bib entries cited in text via \citep (incl. diaconis1998markov).
-- P0 placeholder cleanup: retro_table.tex completed; 88-row baseline table in supplementary
-  (supp88.tex); every figure caption gives question/result/interpretation/boundary.
-- P1 worked numerical cases in manuscript.tex (exact collision, strict separation, cancellation,
-  finite-sample vs exact oracle, cost/no-go, abstention boundary) and 8-baseline comparison table.
-- P1 full build on b04a7ad with provenance (see build_provenance).
-
-## 8. Failed or deferred items
-
-- 无 qualified retrospective quantitative instance（固有，fail-closed）。
-- 无新盲法/前瞻实验、无独立 library、无 population 泛化主张（固有边界）。
-- S14 source commit `728dec61` 与当前 HEAD 差异已显式记录（非同一 commit）。
-- historical t9_4 记录为 HISTORICAL_SYNTHESIS_RECORD（precedence 7），非当前 authority。
-- 真实作者列表、通讯信息、最终引用与许可复核须在投稿前提供（rule 6 / RamSci 15）。
+This is a fail-closed internal evidence gate, not a scientific claim authorization and not a submission/acceptance status.

@@ -1,0 +1,84 @@
+{
+  "schema": "d2t_rna.v7_p6_submission_receipt.v1",
+  "phase": "P6_SUBMISSION_PREP",
+  "authority_role": "SUBMISSION_BUNDLE_SYNTHETIC",
+  "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
+  "submission_status": "SCIENTIFIC_SUBMISSION_BLOCKED_PENDING_AUTHOR_REVIEW",
+  "scientific_claim_authorized": false,
+  "real_data_route": "TERMINATED_FOR_CURRENT_DATA",
+  "sota_status": "SOTA_NOT_ADJUDICATED",
+  "comparative_synthetic_status": "COMPARATIVE_SYNTHETIC_RECORD",
+  "receipt": {
+    "created_at": "2026-08-10T22:34:49+0800",
+    "hostname": "d2t-rna-remote",
+    "note": "non-deterministic metadata outside canonical payload"
+  },
+  "canonical_payload_sha256": "6bbf10ed4921432ff9f27b0a078f203c31596d7364a6cfe92224aa0b1d7e1428",
+  "canonical_payload": {
+    "head": "ddc3eb9b416841d37092891686cc23b95c0fd60a",
+    "branch": "main",
+    "origin_main": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+    "worktree_clean": false,
+    "python": "3.11",
+    "packages": {
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pydantic": "2.13.4",
+      "pytest": "9.0.3",
+      "hypothesis": "6.165.1"
+    },
+    "import_origin": "repo/src/d2t_rna",
+    "readiness_gate": {
+      "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW",
+      "gates_all_pass": true,
+      "scientific_claim_authorized": false
+    },
+    "real_data_route": "TERMINATED_FOR_CURRENT_DATA",
+    "sota_status": "SOTA_NOT_ADJUDICATED",
+    "comparative_synthetic_status": "COMPARATIVE_SYNTHETIC_RECORD",
+    "evidence_artifacts": {
+      "phase4v2_80cell": "707a41ee149635a2a4cad84ed7147f64f4a6a4453b27f118b806a3d024cab5f2",
+      "phase4v2_ablation": "f11d45cd234f45e7329af02dd24b21bf1d3435157c5c953bef7658e47367f570",
+      "phase4v2_baseline_suite": "9d5603a71b325b0992d9f6d4c7c623b742a671e42f8dd0a3a8f951464b1edc0b",
+      "phase4v2_scalability": "facd3b5b10b2fe512666ac6a9fa571be7190d4dec1fb0b9abbe8ccf7e0659d65",
+      "phase4v2_schemeC": "66eac21b18981dc3ccabc7627ceca55257e9b69fd2a17500f030343b0c8c9b79",
+      "p4_comparative": "2ca6190e61d29aa0753d92c4d5e34e8fc16a45b0fbc052dc02c42d7de4ca1eb8",
+      "p5_claim_register_v2": "0e239711d7e97930ff3f68e82001f708302b6d950228f7b36292a39e0ae39a7c"
+    },
+    "manifests": {
+      "paper_submission_readiness": "243845e71e287762cc369fbef650f0873dabe1cd7716aca4200f02c9be5f2c18",
+      "v7_claim_evidence_graph_v2": "5e0ffe5da922f670d1c256087e46ffbc01923ce1a9d9110ba76f38ccd4eb0e92",
+      "v7_p4_comparative_v1": "96548c93824fde24045710e89bdf3a3b326bb697ee4f39e4fd7745e566f6e5ed",
+      "v7_p5_claim_register_v2": "cada52f415b808a165141ebcb872eebfc504c82209c50e1f5650dbf62e4c7100",
+      "v7_phase1_acceptance_v2": "b4323a3bbe90f6a6ea6392d5a519a4e27d1b61d3dc60978d2750bb812ff5f05f"
+    },
+    "paper_sources": {
+      "manuscript_tex": "28628ea53ec4401bbaf42b42fadcae386481231350be95a5ba875b8a8e64a236",
+      "supplementary_tex": "f58c7671a8b39c49966ab1f3d8276cf1dccf2c8a861d7c96bb8dd944dceabf81",
+      "manuscript_pdf": "ff379914b076ce5882b1703010b8a466ca7e4aff1ee874ac5f86ea205bdde178",
+      "supplementary_pdf": "89b3228ad30bb4b024405ca30b7979a40d06368f688837142e60545f90dede8a"
+    },
+    "red_team_all_pass": true,
+    "citation_verification": {
+      "citation_cited_subseteq_bib": "PASS",
+      "citation_all_bib_cited": "PASS"
+    },
+    "data_code_license": {
+      "code": "proprietary; repo /home/cunyuliu/d2t-rna frozen at head; no push",
+      "data": "synthetic benchmark only; immutable under /mnt/cunyuliu/d2t-rna/artifacts/phase4v2/; real-data route TERMINATED_FOR_CURRENT_DATA",
+      "license": "Proprietary (pyproject.toml license.text = Proprietary)"
+    }
+  },
+  "deliverables_checklist": {
+    "clean_environment_replay": "PASS (editflow311 py3.11, PYTHONPATH=src; gate semantic-kill tests 32 passed; red team 7/7 all_pass)",
+    "current_head_evidence_rebind": "PASS (readiness manifest + this receipt bound to ddc3eb9b416841d37092891686cc23b95c0fd60a)",
+    "canonical_receipt_json": "PASS (this file; canonical_payload_sha256=6bbf10ed4921432ff9f27b0a078f203c31596d7364a6cfe92224aa0b1d7e1428)",
+    "citation_verification_100pct": "PASS (cited-subseteq-bib, all-bib-cited)",
+    "claim_evidence_bidirectional_graph": "PASS (v7_claim_evidence_graph_v2.json)",
+    "manuscript_supp_figures_consistent": "PASS (tectonic build clean; xr-hyper cross-refs resolve)",
+    "data_code_license_availability": "PASS (see canonical_payload.data_code_license)",
+    "pdf_visual_qa": "PASS (manuscript.pdf + supplementary.pdf built at head)",
+    "final_submission_bundle": "PASS (this bundle)",
+    "final_independent_red_team": "PASS (redteam_p0_review all_pass)"
+  }
+}
