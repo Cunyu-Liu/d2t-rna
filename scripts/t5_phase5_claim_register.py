@@ -301,13 +301,14 @@ def build_claim_register() -> dict:
         "evidence_registry": evidence,
         "claims": claims,
         "claim_evidence_edges": {
-            "C1": ["E2_CATALOG_80CELL", "E2_ART_P4V2_GRID",
+            "C1": ["E0_P0_SEMANTIC_REPAIR", "E2_CATALOG_80CELL", "E2_ART_P4V2_GRID",
                    "E4_BASELINE_SUITE", "E4_ART_BASELINE",
+                   "E6_MECHANISM_P5V2", "E6_ART_MECHANISM",
                    "E8_P4_COMPARATIVE", "E8_ART_P4_COMPARATIVE"],
-            "S1": ["E5_SCALABILITY", "E5_ART_SCALABILITY",
+            "S1": ["E0_P0_SEMANTIC_REPAIR", "E5_SCALABILITY", "E5_ART_SCALABILITY",
                    "E7_SCHEME_C", "E7_ART_SCHEMEC"],
-            "S2": ["E3_ABLATION_12CELL", "E3_ART_ABLATION"],
-            "S3": ["E1_FAMILY_SPLIT",
+            "S2": ["E0_P0_SEMANTIC_REPAIR", "E3_ABLATION_12CELL", "E3_ART_ABLATION"],
+            "S3": ["E0_P0_SEMANTIC_REPAIR", "E1_FAMILY_SPLIT",
                    "E8_P4_COMPARATIVE", "E8_ART_P4_COMPARATIVE"],
         },
         "boundary_note": (

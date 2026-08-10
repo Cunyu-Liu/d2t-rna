@@ -5,13 +5,13 @@
   "status": "CLAIM_REGISTER_V2_SYNTHETIC",
   "scientific_claim_authorized": false,
   "receipt": {
-    "created_at": "2026-08-10T10:43:22.102999+00:00",
+    "created_at": "2026-08-10T10:46:39.138286+00:00",
     "hostname": "d2t-rna-remote",
     "note": "non-deterministic metadata outside canonical payload"
   },
   "payload": {
     "schema": "d2t_rna.v7_p5_claim_register.v1",
-    "head": "bdaf87489baa0a5e4871db9d6ddb72be6db1997b",
+    "head": "3cc17355dab72d6893267f9fdf7ac51aa5c5c677",
     "branch": "main",
     "phase": "P5_CLAIM_REGISTER",
     "authority_role": "CLAIM_EVIDENCE_BINDING_SYNTHETIC",
@@ -206,24 +206,30 @@
     },
     "claim_evidence_edges": {
       "C1": [
+        "E0_P0_SEMANTIC_REPAIR",
         "E2_CATALOG_80CELL",
         "E2_ART_P4V2_GRID",
         "E4_BASELINE_SUITE",
         "E4_ART_BASELINE",
+        "E6_MECHANISM_P5V2",
+        "E6_ART_MECHANISM",
         "E8_P4_COMPARATIVE",
         "E8_ART_P4_COMPARATIVE"
       ],
       "S1": [
+        "E0_P0_SEMANTIC_REPAIR",
         "E5_SCALABILITY",
         "E5_ART_SCALABILITY",
         "E7_SCHEME_C",
         "E7_ART_SCHEMEC"
       ],
       "S2": [
+        "E0_P0_SEMANTIC_REPAIR",
         "E3_ABLATION_12CELL",
         "E3_ART_ABLATION"
       ],
       "S3": [
+        "E0_P0_SEMANTIC_REPAIR",
         "E1_FAMILY_SPLIT",
         "E8_P4_COMPARATIVE",
         "E8_ART_P4_COMPARATIVE"
@@ -231,10 +237,10 @@
     },
     "boundary_note": "Phase 5 claim register v2 binds the frozen synthetic route (Phase 1-4).  Exactly one core claim + three secondary claims; every claim lists required/available/missing evidence and prohibited over-interpretation.  Fail-closed: scientific_claim_authorized=false; no SOTA / no real-data superiority / no biological or population generalization claim; registration only, does not set SCIENTIFIC_SUBMISSION_READY."
   },
-  "canonical_payload_sha256": "9fc2a360ede520f6191f1ed96dce2735a0e70f065819e0b65d038ef9174a4eca",
+  "canonical_payload_sha256": "e381374ecb60cb45dadb72aaa66b2ab744f0c4af8dcacd185eb0f250082c3394",
   "artifact": {
     "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase5/p5_claim_register_v2.json",
-    "sha256": "876f8ecdf69a08dc9ac2bea715d45c2124c5162b922aae48ba2f1d1e25f8b66e"
+    "sha256": "0e239711d7e97930ff3f68e82001f708302b6d950228f7b36292a39e0ae39a7c"
   },
   "boundary_note": "Phase 5 claim register v2 binds the frozen synthetic route (Phase 1-4).  Exactly one core claim + three secondary claims; every claim lists required/available/missing evidence and prohibited over-interpretation.  Fail-closed: scientific_claim_authorized=false; no SOTA / no real-data superiority / no biological or population generalization claim; registration only, does not set SCIENTIFIC_SUBMISSION_READY."
 }

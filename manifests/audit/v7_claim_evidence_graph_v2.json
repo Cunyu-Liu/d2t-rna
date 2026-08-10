@@ -1,0 +1,305 @@
+{
+  "schema": "d2t_rna.v7_claim_evidence_graph_manifest.v2",
+  "phase": "P6_CLAIM_EVIDENCE_GRAPH",
+  "authority_role": "CLAIM_EVIDENCE_BIDIRECTIONAL_BINDING",
+  "status": "CLAIM_EVIDENCE_GRAPH_V2_SYNTHETIC",
+  "scientific_claim_authorized": false,
+  "receipt": {
+    "created_at": "2026-08-10T10:46:39.315665+00:00",
+    "hostname": "d2t-rna-remote",
+    "note": "non-deterministic metadata outside canonical payload"
+  },
+  "payload": {
+    "schema": "d2t_rna.v7_claim_evidence_graph.v2",
+    "head": "3cc17355dab72d6893267f9fdf7ac51aa5c5c677",
+    "branch": "main",
+    "phase": "P6_CLAIM_EVIDENCE_GRAPH",
+    "authority_role": "CLAIM_EVIDENCE_BIDIRECTIONAL_BINDING",
+    "status": "CLAIM_EVIDENCE_GRAPH_V2_SYNTHETIC",
+    "scientific_claim_authorized": false,
+    "source_claim_register": "manifests/audit/v7_p5_claim_register_v2.json",
+    "source_claim_register_sha256": "cada52f415b808a165141ebcb872eebfc504c82209c50e1f5650dbf62e4c7100",
+    "reactflow_evidence_count": 0,
+    "external_only_evidence_count": 0,
+    "n_claim_nodes": 4,
+    "n_evidence_nodes": 16,
+    "n_forward_edges": 21,
+    "n_reverse_edges": 21,
+    "bidirectional_consistent": true,
+    "claims": {
+      "C1": {
+        "claim_type": "CORE",
+        "claim": "On the executed model-conditional synthetic benchmark (Phase4-v2 80-cell grid + 5 sealed families), the D2T exact decision framework returns a minimax error no larger than the matched strongest comparable heuristic on every same-task instance (per-block d_i <= 0, verified by D2T optimality), and strictly smaller on the subset where the heuristic misses the certified optimum (2 strict improvements; 4 comparator Pareto-dominated across sealed families).",
+        "evidence_ids": [
+          "E0_P0_SEMANTIC_REPAIR",
+          "E2_CATALOG_80CELL",
+          "E2_ART_P4V2_GRID",
+          "E4_BASELINE_SUITE",
+          "E4_ART_BASELINE",
+          "E6_MECHANISM_P5V2",
+          "E6_ART_MECHANISM",
+          "E8_P4_COMPARATIVE",
+          "E8_ART_P4_COMPARATIVE"
+        ]
+      },
+      "S1": {
+        "claim_type": "SECONDARY",
+        "claim": "The exact allocation-space solvability boundary of the D2T oracle is reproducibly characterized (<= 81 cells), and the Scheme C provable bound (Bhattacharyya product two-sided) extends certified coverage to larger allocation spaces (up to 441) with rigorous, verified error intervals (lower <= exact <= upper on reproduced cells).",
+        "evidence_ids": [
+          "E0_P0_SEMANTIC_REPAIR",
+          "E5_SCALABILITY",
+          "E5_ART_SCALABILITY",
+          "E7_SCHEME_C",
+          "E7_ART_SCHEMEC"
+        ]
+      },
+      "S2": {
+        "claim_type": "SECONDARY",
+        "claim": "Non-equivalent action panels change the decision-theoretic optimum in a controlled, pre-registered way: the 12-cell ablation includes an identical-channel negative control whose outcome is labeled PRICE_SUBSTITUTION_OR_TIE_CONTROL (no informativeness/superiority read), and the exact oracle is never beaten.",
+        "evidence_ids": [
+          "E0_P0_SEMANTIC_REPAIR",
+          "E3_ABLATION_12CELL",
+          "E3_ART_ABLATION"
+        ]
+      },
+      "S3": {
+        "claim_type": "SECONDARY",
+        "claim": "The synthetic evaluation respects a pre-registered train/development/sealed-test family split: the 5 sealed families use a distinct generation mechanism (dgrid_den5_pairmerge_narrow_noisy) genuinely held out from train/dev, the D2T solver was not tuned on them, and block-level statistical units with family/block bootstrap CI are used (grid cells/seeds are not independent units).",
+        "evidence_ids": [
+          "E0_P0_SEMANTIC_REPAIR",
+          "E1_FAMILY_SPLIT",
+          "E8_P4_COMPARATIVE",
+          "E8_ART_P4_COMPARATIVE"
+        ]
+      }
+    },
+    "evidence": {
+      "E0_P0_SEMANTIC_REPAIR": {
+        "path": "manifests/audit/v7_p0_repair_acceptance.json",
+        "sha256": "42c9c2fa75091b1ed1778b5ee267587516577ee9786a4225d74428da86f9b236",
+        "role": "P0 semantic-kernel/decision/certificate/oracle repair acceptance",
+        "claims": [
+          "C1",
+          "S1",
+          "S2",
+          "S3"
+        ]
+      },
+      "E1_FAMILY_SPLIT": {
+        "path": "manifests/audit/v7_p1_family_split_v1.json",
+        "sha256": "4c7298052c26f4bf66e9ceb11ed06a86db726e9c401dec6f5343780faa21cafe",
+        "role": "pre-registered train/dev/sealed family split (statistical units)",
+        "claims": [
+          "S3"
+        ]
+      },
+      "E2_CATALOG_80CELL": {
+        "path": "manifests/audit/v7_p1_catalog_registry_v1.json",
+        "sha256": "61822c68a1db29d8783ece2d06964ca700cbbf311895261ae47c61c9b44d2d15",
+        "role": "Phase4-v2 80-cell catalog registry (4 classes x 5 pairs x 2 budgets x 2 cost modes)",
+        "claims": [
+          "C1"
+        ]
+      },
+      "E3_ABLATION_12CELL": {
+        "path": "manifests/audit/v7_p1_ablation_registry_v1.json",
+        "sha256": "78d921d18f398b939ad652502efe1404ac62917d75fd4b39a1845f3ff914522b",
+        "role": "non-equivalent action ablation (12 cells; identical-channel control)",
+        "claims": [
+          "S2"
+        ]
+      },
+      "E4_BASELINE_SUITE": {
+        "path": "manifests/audit/v7_p1_baseline_suite_v1.json",
+        "sha256": "67648047f30d326ef23114b607b96caf8f00d0216045c06175ecc03ad839fd2e",
+        "role": "comparable-only headline baseline suite (oracle = reference, never ranked)",
+        "claims": [
+          "C1"
+        ]
+      },
+      "E5_SCALABILITY": {
+        "path": "manifests/audit/v7_p1_scalability_v1.json",
+        "sha256": "b6441a41940d5c01674589286cd9a7e1525ae6df9cb4a93ffd7fab84fad1e3a8",
+        "role": "Phase4-v2 scalability report (runtime/memory/LP dims/gap/coverage)",
+        "claims": [
+          "S1"
+        ]
+      },
+      "E6_MECHANISM_P5V2": {
+        "path": "manifests/audit/v7_p1_mechanism_v1.json",
+        "sha256": "c5e17dbb104f4e46d4fbffb7b1efea92182bca6068af933e5fa5b0596320c26d",
+        "role": "Phase5-v2 mechanism over corrected grid; legacy Phase5 INVALID_SUPERSEDED",
+        "claims": [
+          "C1"
+        ]
+      },
+      "E7_SCHEME_C": {
+        "path": "manifests/audit/v7_p3_schemeC_v1.json",
+        "sha256": "db9779aac99351a7764e2758e79d4b9fd82f9ca6f41c94264519275549c8cbac",
+        "role": "Scheme C provable-bound exact scaling (BC product two-sided; extend boundary)",
+        "claims": [
+          "S1"
+        ]
+      },
+      "E8_P4_COMPARATIVE": {
+        "path": "manifests/audit/v7_p4_comparative_v1.json",
+        "sha256": "96548c93824fde24045710e89bdf3a3b326bb697ee4f39e4fd7745e566f6e5ed",
+        "role": "Phase 4 comparative + sealed confirmation (COMPARATIVE_SYNTHETIC_RECORD)",
+        "claims": [
+          "C1",
+          "S3"
+        ]
+      },
+      "E8_ART_P4_COMPARATIVE": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4/p4_comparative.json",
+        "sha256": "2ca6190e61d29aa0753d92c4d5e34e8fc16a45b0fbc052dc02c42d7de4ca1eb8",
+        "role": "Phase 4 comparative immutable artifact",
+        "claims": [
+          "C1",
+          "S3"
+        ]
+      },
+      "E2_ART_P4V2_GRID": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/phase4v2.json",
+        "sha256": "707a41ee149635a2a4cad84ed7147f64f4a6a4453b27f118b806a3d024cab5f2",
+        "role": "Phase4-v2 80-cell immutable artifact",
+        "claims": [
+          "C1"
+        ]
+      },
+      "E3_ART_ABLATION": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/ablation.json",
+        "sha256": "f11d45cd234f45e7329af02dd24b21bf1d3435157c5c953bef7658e47367f570",
+        "role": "12-cell ablation immutable artifact",
+        "claims": [
+          "S2"
+        ]
+      },
+      "E4_ART_BASELINE": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/baseline_suite.json",
+        "sha256": "9d5603a71b325b0992d9f6d4c7c623b742a671e42f8dd0a3a8f951464b1edc0b",
+        "role": "baseline suite immutable artifact (aggregate_wins)",
+        "claims": [
+          "C1"
+        ]
+      },
+      "E5_ART_SCALABILITY": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/scalability.json",
+        "sha256": "facd3b5b10b2fe512666ac6a9fa571be7190d4dec1fb0b9abbe8ccf7e0659d65",
+        "role": "scalability immutable artifact",
+        "claims": [
+          "S1"
+        ]
+      },
+      "E6_ART_MECHANISM": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/phase5v2_mechanism.json",
+        "sha256": "630206a53b3421ba891e0199cc5eb17dda15461ff6646a0902d51b7599757a8c",
+        "role": "Phase5-v2 mechanism immutable artifact",
+        "claims": [
+          "C1"
+        ]
+      },
+      "E7_ART_SCHEMEC": {
+        "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/schemeC_scaling.json",
+        "sha256": "66eac21b18981dc3ccabc7627ceca55257e9b69fd2a17500f030343b0c8c9b79",
+        "role": "Scheme C scaling immutable artifact",
+        "claims": [
+          "S1"
+        ]
+      }
+    },
+    "edges_claim_to_evidence": {
+      "C1": [
+        "E0_P0_SEMANTIC_REPAIR",
+        "E2_CATALOG_80CELL",
+        "E2_ART_P4V2_GRID",
+        "E4_BASELINE_SUITE",
+        "E4_ART_BASELINE",
+        "E6_MECHANISM_P5V2",
+        "E6_ART_MECHANISM",
+        "E8_P4_COMPARATIVE",
+        "E8_ART_P4_COMPARATIVE"
+      ],
+      "S1": [
+        "E0_P0_SEMANTIC_REPAIR",
+        "E5_SCALABILITY",
+        "E5_ART_SCALABILITY",
+        "E7_SCHEME_C",
+        "E7_ART_SCHEMEC"
+      ],
+      "S2": [
+        "E0_P0_SEMANTIC_REPAIR",
+        "E3_ABLATION_12CELL",
+        "E3_ART_ABLATION"
+      ],
+      "S3": [
+        "E0_P0_SEMANTIC_REPAIR",
+        "E1_FAMILY_SPLIT",
+        "E8_P4_COMPARATIVE",
+        "E8_ART_P4_COMPARATIVE"
+      ]
+    },
+    "edges_evidence_to_claims": {
+      "E0_P0_SEMANTIC_REPAIR": [
+        "C1",
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "E1_FAMILY_SPLIT": [
+        "S3"
+      ],
+      "E2_CATALOG_80CELL": [
+        "C1"
+      ],
+      "E3_ABLATION_12CELL": [
+        "S2"
+      ],
+      "E4_BASELINE_SUITE": [
+        "C1"
+      ],
+      "E5_SCALABILITY": [
+        "S1"
+      ],
+      "E6_MECHANISM_P5V2": [
+        "C1"
+      ],
+      "E7_SCHEME_C": [
+        "S1"
+      ],
+      "E8_P4_COMPARATIVE": [
+        "C1",
+        "S3"
+      ],
+      "E8_ART_P4_COMPARATIVE": [
+        "C1",
+        "S3"
+      ],
+      "E2_ART_P4V2_GRID": [
+        "C1"
+      ],
+      "E3_ART_ABLATION": [
+        "S2"
+      ],
+      "E4_ART_BASELINE": [
+        "C1"
+      ],
+      "E5_ART_SCALABILITY": [
+        "S1"
+      ],
+      "E6_ART_MECHANISM": [
+        "C1"
+      ],
+      "E7_ART_SCHEMEC": [
+        "S1"
+      ]
+    },
+    "boundary_note": "Bidirectional claim-evidence graph over the frozen synthetic route (Phase 1-4).  reactflow_evidence_count=0; no external evidence.  scientific_claim_authorized=false; no SOTA / real-data superiority / biological or population generalization claim.  Registration only; does not set SCIENTIFIC_SUBMISSION_READY."
+  },
+  "canonical_payload_sha256": "db5d25b7dd92cde17a86669c9819826ed4c535209bb87870876fed2f4a51ccdb",
+  "artifact": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase6/claim_evidence_graph_v2.json",
+    "sha256": "524814f86230ba85a5c5eefd9679e3772877d1015b387495c22664f5e20f129b"
+  },
+  "boundary_note": "Bidirectional claim-evidence graph over the frozen synthetic route (Phase 1-4).  reactflow_evidence_count=0; no external evidence.  scientific_claim_authorized=false; no SOTA / real-data superiority / biological or population generalization claim.  Registration only; does not set SCIENTIFIC_SUBMISSION_READY."
+}
