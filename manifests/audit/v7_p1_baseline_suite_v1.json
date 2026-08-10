@@ -1,0 +1,67 @@
+{
+  "schema": "d2t_rna.v7_p1_baseline_suite_manifest.v1",
+  "phase": "P1_6_4",
+  "authority_role": "BASELINE_COMPARABLE_ONLY_HEADLINE",
+  "status": "COMPARABLE_ONLY_SYNTHETIC",
+  "scientific_claim_authorized": false,
+  "receipt": {
+    "created_at": "2026-08-10T07:23:26.086782+00:00",
+    "hostname": "d2t-rna-remote",
+    "note": "non-deterministic metadata outside canonical payload"
+  },
+  "payload": {
+    "schema": "d2t_rna.v7_p1_baseline_suite.v1",
+    "head": "165d3146c2b4745d8ce207b11191202eb74c7bcb",
+    "branch": "main",
+    "correctness_reference": "exhaustive_oracle",
+    "comparable_labels": [
+      "full_matrix",
+      "random",
+      "greedy_test_cover",
+      "eig",
+      "chernoff",
+      "lm2r_heuristic",
+      "t2_integer_lp"
+    ],
+    "n_cells": 80,
+    "headline_ranked_cells": 64,
+    "aggregate_wins": {
+      "full_matrix": 0,
+      "random": 0,
+      "greedy_test_cover": 0,
+      "eig": 4,
+      "chernoff": 60,
+      "lm2r_heuristic": 0,
+      "t2_integer_lp": 0
+    },
+    "not_comparable_candidates": [
+      {
+        "id": "controlled_sensing",
+        "reason": "adaptive/sequential multihypothesis active sensing; no complete registered D, no replayable exact certificate"
+      },
+      {
+        "id": "active_sequential_hypothesis_testing",
+        "reason": "sequential ASHT; no complete registered D, no replayable certificate"
+      },
+      {
+        "id": "m2_seq_m2r",
+        "reason": "RNA structure inference; different observation law/estimand; no decision certificate over complete D"
+      },
+      {
+        "id": "markov_basis_fiber",
+        "reason": "fiber connectivity criterion only; no decision/budget/no-go consequence"
+      },
+      {
+        "id": "bayesian_t_optimal",
+        "reason": "EIG/optimality design without exact collision-or-separation certificate over complete D"
+      }
+    ],
+    "superiority_claim": false
+  },
+  "canonical_payload_sha256": "9d6d88277106a80e12d3dc0ea1b463c1b1ad99beaf25e1e7fd056187643fa431",
+  "artifact": {
+    "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/baseline_suite.json",
+    "sha256": "9d5603a71b325b0992d9f6d4c7c623b742a671e42f8dd0a3a8f951464b1edc0b"
+  },
+  "boundary_note": "model-conditional synthetic evaluation only; comparable-only headline among internal baselines; oracle is a correctness reference and is never ranked; external NOT_COMPARABLE candidates are listed separately; no SOTA / superiority claim."
+}
