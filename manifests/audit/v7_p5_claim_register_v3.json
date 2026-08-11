@@ -1,0 +1,62 @@
+{
+  "schema": "d2t_rna.p5_claim_register.v3",
+  "phase": "P0-10",
+  "purpose": "CLAIM_REGISTER_CERTIFIABLE_SOFTWARE",
+  "paper_eligible": false,
+  "scientific_claim_authorized": false,
+  "source_evidence": {
+    "confirmation": {
+      "path": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v3-confirmation/20260811T163031+0800/confirmation_report.json",
+      "sha256": "3c2f1ffdb30ecd317b0cf5951f2f4b5909a16dd7433adf191fb4febc6a0c096f",
+      "paper_eligible": false,
+      "purpose": "PRE_COMMITTED_SYNTHETIC_STRESS_SUITE"
+    },
+    "precommit": {
+      "path": "manifests/audit/v7_precommit_receipt.json",
+      "sha256": "69c9523562d61002b3a1299d3d44110ac22c85d4e2cf03f04ae37fcf5b42b512"
+    },
+    "confirmation_verdict": {
+      "path": "manifests/audit/v7_confirmation_verdict_v3.json",
+      "sha256": "da6112704441f00747dc3721107292eb16c61d75a2b15ebd2d925079238e3a5d"
+    }
+  },
+  "core_claim": {
+    "claim_id": "C1_CERTIFIABLE_SOUNDNESS",
+    "wording": "D2T_FIXED_BUDGET_SOLVER produces an exact, self-contained, independently-verifiable certificate of randomised-minimax error (and Track-C cost-to-endpoint) for finite-budget multi-action discrimination, with no-gos and coverage reported; this is a soundness/certificate/compute capability claim, NOT a cost-superiority claim.",
+    "estimand": "randomized_minimax_error / cost-to-endpoint",
+    "status": "SUPPORTED_BY_CONFIRMATION_AS_SOUNDNESS_ONLY",
+    "superiority_claim": false,
+    "permitted": [
+      "exact certificate",
+      "verifiable",
+      "no-go bounds",
+      "coverage"
+    ],
+    "prohibited": [
+      "cost superiority over chernoff",
+      "GO_SYNTHETIC_METHODS",
+      "SOTA",
+      "meaningful improvement"
+    ]
+  },
+  "secondary_claims": [
+    {
+      "claim_id": "S1",
+      "wording": "All 20 precommitted confirmation cells were solvable; 0 withheld/failed kept in denominator.",
+      "supported": true
+    },
+    {
+      "claim_id": "S2",
+      "wording": "Median Track C cost reduction vs strongest comparator chernoff = 0.0, below the pre-registered 10% GO threshold; cost-superiority is NOT established.",
+      "supported": true
+    },
+    {
+      "claim_id": "S3",
+      "wording": "External comparator toy parity could not be verified from available full text (all UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING); no headline comparator superiority is claimed.",
+      "supported": true
+    }
+  ],
+  "n_claims": 4,
+  "go_decision": "TERMINAL_BLOCKED_COMPLETE_CANDIDATE",
+  "pivot": "PIVOT_CERTIFIABLE_SOFTWARE"
+}
