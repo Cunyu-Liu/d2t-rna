@@ -104,8 +104,11 @@ def test_full_panel_measured_separation_certificate():
     cert = collision_or_separation(model, panel)
     assert cert.status == "IFF"
     assert cert.gamma > 0
-    assert cert.enumeration_matches_lp is True
-    assert cert.lp_strong_duality is True
+    # P0-2: DISCRETE_CATALOG certifies by pure exact enumeration and must not
+    # call the convex LP, so enumeration_matches_lp is only a cross-object
+    # diagnostic (False because the LP is not run here), never a discrete gate.
+    assert cert.enumeration_matches_lp is False
+    assert cert.lp_strong_duality is False
 
 
 def test_single_measured_best_probe_sufficient_repeats_reach_kappa():

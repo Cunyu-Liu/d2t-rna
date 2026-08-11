@@ -195,3 +195,218 @@ def aggregate_real_data_route(
             "BLOCKED_PENDING_ARCHIVE_QUALIFICATION",
         ),
     )
+
+
+# ===========================================================================
+# P0-8: v3 seven-scope data-qualification recheck (corrected rules)
+#
+# The P0-8 audit recheck applies six known corrections on top of the v2
+# fail-closed qualification layer.  It records one qualification record per
+# *scope* (not per dataset) across seven scopes, using a closed v3 verdict
+# vocabulary and a fail-closed aggregate real-data route.
+# ===========================================================================
+
+# --- v3 closed verdict vocabulary -----------------------------------------
+V3_GO = "GO"
+V3_CONDITIONAL = "CONDITIONAL"
+V3_TERMINATED_FOR_CURRENT_DATA = "TERMINATED_FOR_CURRENT_DATA"
+V3_UNKNOWN_NOT_ASSERTED = "UNKNOWN_NOT_ASSERTED"
+
+V3_VERDICT_VOCABULARY = frozenset(
+    {
+        V3_GO,
+        V3_CONDITIONAL,
+        V3_TERMINATED_FOR_CURRENT_DATA,
+        V3_UNKNOWN_NOT_ASSERTED,
+    }
+)
+
+# Correction 2: the three ADD scopes are each their own independent statistical
+# unit and MUST NEVER be merged into a single unit.
+ADD_SCOPES_NEVER_MERGED = ("ADD71_STD_0001", "ADDAPO_DCP_0000", "ADDRSW_SHP_0003")
+
+# The eight atomic real-data criteria that must ALL be simultaneously satisfied
+# for the real-data route to be open (fail-closed aggregate, correction 6).
+REAL_DATA_ATOMIC_CRITERIA = (
+    "raw_counts",
+    "exact_filename_and_hash",
+    "source_url_and_retrieval_date",
+    "verified_license_text",
+    "independent_unit_dag",
+    "executable_action",
+    "real_marginal_cost",
+    "calibrated_likelihood",
+)
+
+# Global aggregate state for the current data holdings.  It stays
+# TERMINATED_FOR_CURRENT_DATA until ALL eight atomic real-data criteria are
+# simultaneously satisfied (they are not; see v7_data_qualification_v3.json).
+REAL_DATA_ROUTE = REAL_DATA_ROUTE_TERMINATED_FOR_CURRENT_DATA
+
+
+@dataclass(frozen=True)
+class DataQualificationV3:
+    """A P0-8 fail-closed qualification record for one scope (v3 schema).
+
+    Verdict is from the closed v3 vocabulary; fail-closed evidence (raw counts,
+    executable action, real marginal cost, verified license, independent-unit
+    DAG, calibrated likelihood) is carried as booleans so the aggregate route
+    can be derived mechanically and never hand-written.
+    """
+
+    schema_id: str
+    schema_version: str
+    scope_id: str
+    purpose: str
+    paper_eligible: bool
+    accession: str
+    exact_filename: str
+    hash_sha256: str
+    source_url: str
+    retrieval_date: str
+    license_text: str
+    license_version: str
+    license_receipt: str
+    raw_counts_present: bool
+    raw_counts: str
+    depth: str
+    biological_replicate_crosswalk: str
+    technical_replicate_crosswalk: str
+    merge_history: str
+    normalization_history: str
+    missingness: str
+    error_fields: str
+    per_position_error_used_by_likelihood: bool
+    historical_exposure: str
+    independent_unit: str
+    dependency_dag: str
+    action_executable: bool
+    real_marginal_cost: bool
+    calibrated_likelihood: bool
+    selection_diagnostic_confirmation_role: str
+    verdict: str
+    corrections_applied: tuple[str, ...] = ()
+    reasons: tuple[str, ...] = ()
+    sources: tuple[str, ...] = ()
+
+    @property
+    def fail_closed_evidence_missing(self) -> tuple[str, ...]:
+        """Correction 6: raw counts / executable action / real marginal cost."""
+        missing: list[str] = []
+        if not self.raw_counts_present:
+            missing.append("raw_counts")
+        if not self.action_executable:
+            missing.append("executable_action")
+        if not self.real_marginal_cost:
+            missing.append("real_marginal_cost")
+        return tuple(missing)
+
+    @property
+    def real_data_atomic_criteria_met(self) -> bool:
+        """True iff ALL eight atomic real-data criteria hold for this scope."""
+        return all(
+            (
+                self.raw_counts_present,
+                bool(self.exact_filename and self.hash_sha256),
+                bool(self.source_url and self.retrieval_date),
+                bool(self.license_receipt == "VERIFIED"),
+                bool(self.independent_unit and self.dependency_dag),
+                self.action_executable,
+                self.real_marginal_cost,
+                self.calibrated_likelihood,
+            )
+        )
+
+
+# --- corrected-rule helpers (P0-8) ----------------------------------------
+
+
+def add_scopes_never_merged(unit_accessions: Sequence[str]) -> bool:
+    """Correction 2: a single independent statistical unit may contain at most
+    one of the three ADD scope accessions; the ADD scopes must never be merged
+    into one unit.  Returns True iff no merge is present."""
+    hits = [a for a in ADD_SCOPES_NEVER_MERGED if a in unit_accessions]
+    return len(hits) <= 1
+
+
+def license_requires_verified_text(
+    *,
+    publicly_downloadable: bool,
+    verified_license_receipt: bool,
+) -> bool:
+    """Correction 3: public / accessibility is NOT the same as a license.  A
+    scope counts as licensed only when a verified license text/receipt exists,
+    never merely because it is publicly downloadable."""
+    return bool(verified_license_receipt)
+
+
+def classify_sample_kind(*, claimed_as: str) -> str:
+    """Correction 4: classify a sample-size number by its true kind.  Count
+    depth (e.g. Phase2 Bernoulli sensitivity n=9806/1565/388/93/39 reads per
+    condition) is count depth, NOT biological replicate N; only a value whose
+    kind is actually biological replicates may be reported as biological N."""
+    if claimed_as == "biological_replicates":
+        return "BIOLOGICAL_N"
+    if claimed_as == "count_depth":
+        return "COUNT_DEPTH"
+    return "UNKNOWN"
+
+
+def constructed_identical_positions_role(*, constructed: bool) -> str:
+    """Correction 5: constructed identical positions are only a zero-separation
+    control-flow test, not real data."""
+    if constructed:
+        return "ZERO_SEPARATION_CONTROL_FLOW_ONLY"
+    return "REAL_DATA"
+
+
+def fail_closed_v3_verdict(
+    *,
+    raw_counts_present: bool,
+    executable_action: bool,
+    real_marginal_cost: bool,
+) -> str:
+    """Correction 6: if any of raw counts / executable action / real marginal
+    cost is missing, the scope is TERMINATED_FOR_CURRENT_DATA (fail-closed)."""
+    if not (raw_counts_present and executable_action and real_marginal_cost):
+        return V3_TERMINATED_FOR_CURRENT_DATA
+    return V3_CONDITIONAL  # GO additionally requires all eight atomic criteria
+
+
+def aggregate_real_data_route_v3(
+    records: Sequence[DataQualificationV3],
+) -> dict:
+    """P0-8 aggregate real-data route (fail-closed).  The route stays
+    TERMINATED_FOR_CURRENT_DATA unless some scope satisfies ALL eight atomic
+    real-data criteria simultaneously (none do on the current holdings)."""
+    verdicts = [r.verdict for r in records]
+    satisfying = [
+        r.scope_id for r in records if r.real_data_atomic_criteria_met
+    ]
+    if all(v == V3_TERMINATED_FOR_CURRENT_DATA for v in verdicts):
+        return {
+            "route": REAL_DATA_ROUTE_TERMINATED_FOR_CURRENT_DATA,
+            "open": False,
+            "satisfying_scopes": [],
+            "reason": (
+                "all seven scopes fail-closed (missing raw counts, executable "
+                "action, and/or real marginal cost); no scope meets all eight "
+                "atomic real-data criteria"
+            ),
+        }
+    if satisfying:
+        return {
+            "route": "OPEN_FOR_SATISFYING_SCOPES",
+            "open": True,
+            "satisfying_scopes": satisfying,
+            "reason": "at least one scope satisfies all eight atomic real-data criteria",
+        }
+    return {
+        "route": REAL_DATA_ROUTE_TERMINATED_FOR_CURRENT_DATA,
+        "open": False,
+        "satisfying_scopes": [],
+        "reason": (
+            "no scope is GO; remaining scopes do not satisfy all eight atomic "
+            "real-data criteria"
+        ),
+    }

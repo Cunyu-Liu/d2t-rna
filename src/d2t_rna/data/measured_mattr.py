@@ -28,7 +28,8 @@ Dataset (registered, CC0, RMDB accession MTTR1_MGTI_0001)
       ANNOTATION_DATA:1   MgCl2 0 mM     (metal-ion depleted / unfolded)
       ANNOTATION_DATA:32  MgCl2 50 mM    (metal-ion saturated / folded)
   * per-position reactivity AND per-position measurement standard error
-    (REACTIVITY_ERROR:1 / :32) are both parsed and used.
+    (REACTIVITY_ERROR:1 / :32) are both parsed but NOT used by the clamp
+    likelihood (P0-8 correction 1); per_position_error_used=False.
 
 Observation channel (binarized measured reactivity)
   Identical to the add/glycine cases.  For each probed position ``u`` and
