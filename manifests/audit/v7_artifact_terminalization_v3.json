@@ -1,0 +1,65 @@
+{
+  "schema": "d2t_rna.v7_artifact_terminalization.v3",
+  "authority_role": "FINAL_TERMINALIZATION",
+  "generator": "D2T-RNA v7 science-repair execution (P0-1)",
+  "generator_commit": "73b3897be29312146b3f856fb73238418c2acd0a",
+  "receipt": {
+    "created_at": "2026-08-11T13:24:04.787381+08:00",
+    "principle": "Old bytes preserved; authority tombstoned."
+  },
+  "payload": {
+    "head": "73b3897be29312146b3f856fb73238418c2acd0a",
+    "tree": "df99168d940a0cd433fd16fa567854294efe9f71",
+    "paper_render_resolution": "RENDERER_MUST_REJECT_INVALID_ID",
+    "families": [
+      {
+        "artifact_family": "p0_repair_acceptance",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "v3_lineage_slot": "phase4v3-diagnostic / corrected v3"
+      },
+      {
+        "artifact_family": "phase4v2_minimax_catalog",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "v3_lineage_slot": "phase4v3-diagnostic / corrected v3"
+      },
+      {
+        "artifact_family": "phase5_mechanism",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "v3_lineage_slot": "phase4v3-diagnostic / corrected v3"
+      },
+      {
+        "artifact_family": "phase4_comparative",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "v3_lineage_slot": "phase4v3-diagnostic / corrected v3"
+      },
+      {
+        "artifact_family": "real_measured_certificates",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "DESCRIPTIVE_ONLY",
+        "final_status": "DESCRIPTIVE_ONLY",
+        "paper_eligible": false,
+        "v3_lineage_slot": "phase4v3-diagnostic / corrected v3"
+      },
+      {
+        "artifact_family": "paper_readiness",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "final_status": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "v3_lineage_slot": "phase4v3-diagnostic / corrected v3"
+      }
+    ]
+  }
+}

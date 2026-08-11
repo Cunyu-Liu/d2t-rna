@@ -1,0 +1,34 @@
+{
+  "schema": "d2t_rna.v7_claim_freeze.v3",
+  "authority_role": "CLAIM_FREEZE",
+  "generator": "D2T-RNA v7 science-repair execution (P0-1)",
+  "generator_commit": "73b3897be29312146b3f856fb73238418c2acd0a",
+  "receipt": {
+    "created_at": "2026-08-11T13:24:04.787381+08:00",
+    "note": "Non-deterministic metadata."
+  },
+  "payload": {
+    "head": "73b3897be29312146b3f856fb73238418c2acd0a",
+    "tree": "df99168d940a0cd433fd16fa567854294efe9f71",
+    "scientific_claim_authorized": false,
+    "current_stage": "A",
+    "submission_status": "SCIENTIFIC_SUBMISSION_BLOCKED",
+    "sota_status": "SOTA_NOT_ADJUDICATED",
+    "real_data_route": "TERMINATED_FOR_CURRENT_DATA",
+    "prohibited_claims_until_gate": [
+      "measured_sample_size",
+      "absolute_probability",
+      "repeat_count",
+      "wet_lab_saving",
+      "cross_system_transferability",
+      "sota_superiority",
+      "real_measured_certificate_with_bare_gamma_as_TV"
+    ],
+    "downgraded_measured_claims": {
+      "add_miniTTR_n3": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+      "glycine_n15": "PERMANENT_DESCRIPTIVE_DOWNGRADE",
+      "sam_iii_n3": "PERMANENT_DESCRIPTIVE_DOWNGRADE"
+    },
+    "reactflow_evidence_count_allowed": 0
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "schema": "d2t_rna.v7_artifact_authority_index.v3",
+  "authority_role": "ARTIFACT_AUTHORITY_INDEX",
+  "generator": "D2T-RNA v7 science-repair execution (P0-1)",
+  "generator_commit": "73b3897be29312146b3f856fb73238418c2acd0a",
+  "receipt": {
+    "created_at": "2026-08-11T13:24:04.787381+08:00"
+  },
+  "payload": {
+    "head": "73b3897be29312146b3f856fb73238418c2acd0a",
+    "tree": "df99168d940a0cd433fd16fa567854294efe9f71",
+    "authority_principle": "Role-sensitive; bytes preserved, scientific authority revoked.",
+    "d2t_paper_eligible_reactflow_evidence_count": 0,
+    "index": [
+      {
+        "artifact": "manifests/audit/v7_p0_repair_acceptance.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "42c9c2fa75091b1ed1778b5ee267587516577ee9786a4225d74428da86f9b236",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/audit/v7_phase1_acceptance_v2.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "b4323a3bbe90f6a6ea6392d5a519a4e27d1b61d3dc60978d2750bb812ff5f05f",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/phase4v2.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "707a41ee149635a2a4cad84ed7147f64f4a6a4453b27f118b806a3d024cab5f2",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/audit/v7_p5_claim_register_v2.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "cada52f415b808a165141ebcb872eebfc504c82209c50e1f5650dbf62e4c7100",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4v2/phase5v2_mechanism.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "630206a53b3421ba891e0199cc5eb17dda15461ff6646a0902d51b7599757a8c",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase5/mechanism.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "80b764c8d6d19895fe33973ff7cdd6e60279d4df9998cff13669105b3816da27",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/audit/v7_p4_comparative_v1.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "96548c93824fde24045710e89bdf3a3b326bb697ee4f39e4fd7745e566f6e5ed",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "/mnt/cunyuliu/d2t-rna/artifacts/phase4/p4_comparative.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "2ca6190e61d29aa0753d92c4d5e34e8fc16a45b0fbc052dc02c42d7de4ca1eb8",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/data/add_qualification_v2.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "DESCRIPTIVE_ONLY",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "c7405d2f6ab7b83178def93cd74249b4d024bdcd91ecac68180d87df8c76eec8",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/data/glycine_qualification_v2.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "DESCRIPTIVE_ONLY",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "8bf1576b2cbce6ffe8c63ddbea52f0237ffff61ea140bd91aa174eb99e09994e",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/data/minittr_qualification_v2.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "DESCRIPTIVE_ONLY",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "db52450b5def4672a121b6d914f5e8025ee3b805327bf46ff0eb18edea4b6f2f",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/paper/paper_submission_readiness.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "02608c32e8ed167b673f165c63181801771230251a7cce831757f4b9fd474ba1",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/paper/submission_readiness_report.md",
+        "role": "scientific_evidence",
+        "file_integrity": "FILE_NOT_FOUND",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "FILE_NOT_FOUND",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/audit/v7_p6_submission_receipt.json",
+        "role": "scientific_evidence",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "4a47365929b77c515f5da9eea76ad256f546c8ff6beba405bc959800e64e0e6d",
+        "schema": "legacy/authority-tombstone",
+        "superseded_by": "phase4v3-diagnostic / corrected v3 lineage",
+        "note": "Bytes preserved for audit; scientific authority revoked until v3 regeneration."
+      },
+      {
+        "artifact": "manifests/audit/v7_claim_evidence_graph_v2.json",
+        "role": "claim_graph",
+        "file_integrity": "LEGACY_VALID",
+        "scientific_interpretation": "LEGACY_INVALID",
+        "paper_eligible": false,
+        "terminal_status": "TERMINALIZED",
+        "sha256": "5e0ffe5da922f670d1c256087e46ffbc01923ce1a9d9110ba76f38ccd4eb0e92",
+        "schema": "legacy/authority-tombstone",
+        "note": "Only 4 synthetic nodes; not full-coverage; requires v3 claim-evidence rebuild."
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "d2t_rna.v7_p0_semantic_repair_snapshot.v3",
+  "phase": "P0-1",
+  "created_at": "2026-08-11T13:24:04.787381+08:00",
+  "snapshot_kind": "SEMANTIC_REPAIR_PRECONDITION_FREEZE",
+  "head": "73b3897be29312146b3f856fb73238418c2acd0a",
+  "tree": "df99168d940a0cd433fd16fa567854294efe9f71",
+  "origin_main": "12f6e2defb46c6062951d73bb7bf8e8b608c3c10",
+  "branch": "audit/p0-semantic-repair-20260811",
+  "ahead_behind": {
+    "ahead": 26,
+    "behind": 0
+  },
+  "worktree_clean": true,
+  "git_status": "## audit/p0-semantic-repair-20260811\n?? scripts/audit/",
+  "contract": {
+    "path": "提示词/D2T-RNA提示词.md",
+    "sha256": "776662393e42ff2fd5d662cc0ad8ac4896224097d1ace987c60d1ab166e5d67c"
+  },
+  "code_scope": "remote /home/cunyuliu/d2t-rna",
+  "python": "3.11.15",
+  "state": {
+    "P0_SEMANTIC_REPAIR": "P0_BLOCKED_WITH_EVIDENCE",
+    "SEMANTIC_SOFTWARE_SUCCESS": "WITHDRAWN_PENDING_REPAIR",
+    "COMPARATIVE_SYNTHETIC_STATUS": "INVALID_PENDING_METRIC_AND_METHOD_ROLE_REPAIR",
+    "REAL_DATA_ROUTE": "TERMINATED_FOR_CURRENT_DATA",
+    "SOTA_STATUS": "SOTA_NOT_ADJUDICATED",
+    "SCIENTIFIC_SUBMISSION_STATUS": "SCIENTIFIC_SUBMISSION_BLOCKED",
+    "CURRENT_STAGE": "A"
+  },
+  "note": "Snapshot binds the audit object; it does not claim any code repair is complete."
+}
