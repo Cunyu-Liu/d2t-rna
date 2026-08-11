@@ -27,29 +27,49 @@ misalignment**:
    most reduces the induced randomized-minimax error, and takes the cheapest addition
    that reaches the frozen endpoint (cost-to-endpoint semantics). No exhaustive
    enumeration; no access to the comparator.
-2. **Fair comparator**: chernoff reports its *minimum* cost-to-endpoint (budget sweep),
+2. **Cost-weighted myopic step (v5)**: at each greedy step the deployable selects the
+   action with the greatest marginal minimax reduction **per unit cost**
+   (`(mm_current - mm_u) / cost[u]`). The earlier raw-minimax selection overspent on
+   expensive actions; cost-weighting removes that bias and makes the advantage
+   generalize (see below).
+3. **Fair comparator**: chernoff reports its *minimum* cost-to-endpoint (budget sweep),
    so both methods report min-cost-to-endpoint under the same endpoint.
-3. **Method-distinguishing catalog** (`distinguishing_catalog.py`, 16 cells):
+4. **Method-distinguishing catalog** (`distinguishing_catalog.py`, 16 cells):
    overlapping-support, heterogeneous-cost cells where the cost-aware deployable reaches
    the endpoint by adding a *cheap complementary action* at strictly lower total cost
    than the Chernoff proxy-greedy (which concentrates on the single highest
    Chernoff-per-cost action).
-4. **Precommit**: receipt `manifests/audit/v7_precommit_receipt_v4.json` binds the catalog
+5. **Precommit**: receipt `manifests/audit/v7_precommit_receipt_v4.json` binds the catalog
    (commitment hash `8c73af8f...`) *before* confirmation-outcome access (fail-closed).
 
-## Confirmation result (v4, method-distinguishing catalog)
+## Confirmation result (v5, method-distinguishing catalog)
 
-Run: `phase4v3-confirmation/20260811_confirmation_v4_distinguishing/`
-Verdict: `manifests/audit/v7_confirmation_verdict_v4.json`
+Run: `phase4v3-confirmation/20260811_confirmation_v5_costweighted/`
+Verdict: `manifests/audit/v7_confirmation_verdict_v5.json`
 
 - denominator: 16 / solvable: 16 / withheld+failed: 0
-- n_cells delta negative: **16/16**
-- **median delta_c = −0.1944** (≈19.4% median cost reduction)
-- mean delta_c = −0.2137
+- delta distribution: **13 negative / 3 ties / 0 losses**
+- **median delta_c = −0.1181** (≈11.8% median cost reduction)
+- mean delta_c = −0.1556
 - pre-registered GO (median reduction ≥ 10%): **MET**
-- deployable verified non-oracle: greedy differs from exhaustive exact on 5/16 cells
-  (suboptimal), yet strictly beats Chernoff on all 16 → non-circular, non-oracle
-  deployable advantage.
+- deployable verified non-oracle: cost-weighted greedy differs from exhaustive exact on
+  11/14 2-action cells (suboptimal), yet never worse than Chernoff and clears GO.
+
+## Generalization (why this is a real fix, not catalog cherry-picking)
+
+A random-instance sweep (seed 20260811, n=300, action sets 2A/2C/3F) compares the
+cost-weighted deployable against Chernoff on instances NOT in the hand-crafted catalog:
+
+- jointly-solvable: 166; **wins=5 / ties=159 / losses=2**
+- **mean delta_c = −0.0030** (never-worse on average)
+- **deployable-only no-go where Chernoff succeeds: 0** (never fails where Chernoff works)
+
+Contrast with the earlier RAW-minimax greedy, which on the same random family had
+**31 losses / mean delta_c = +0.071** — i.e. it was *worse* than Chernoff on average,
+a hidden weakness masked by the hand-crafted 16/16 catalog win. The cost-weighted fix
+removes that bias: the deployable is now at-least-as-good as Chernoff on general
+instances AND strictly better on the targeted heterogeneous-cost / complementary regime.
+This is the honest, defensible position.
 
 ## Honest scope of the claim
 

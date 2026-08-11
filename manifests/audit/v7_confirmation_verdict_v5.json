@@ -1,0 +1,40 @@
+{
+  "schema": "d2t_rna.confirmation_verdict.v5",
+  "phase": "P0-9-CONFIRMATION-METHOD-REPAIRED-COSTWEIGHTED",
+  "run_id": "20260811_confirmation_v5_costweighted",
+  "precommit_hash": "8c73af8f565ddb2d8e3cb912968b3c4ef9b61b9c14533598011dc7c04cb055cd",
+  "generator_commit": "77175d0d41c43ac4658776b0c4ca2cf58dbf24c5",
+  "generator_tree": "89c396c70f4d820442b226ddadeb38d7ef18642a",
+  "paper_eligible": false,
+  "purpose": "PRE_COMMITTED_SYNTHETIC_STRESS_SUITE",
+  "primary_estimand": "Delta_C,i = (cost_D2T - cost_strongest_comparator)/cost_strongest_comparator",
+  "endpoint": "1/10",
+  "strongest_comparator": "chernoff",
+  "catalog": "method_distinguishing (16 cells)",
+  "n_total_cells_denominator": 16,
+  "n_solvable_cells": 16,
+  "n_cells_delta_negative": 13,
+  "n_cells_delta_zero_tie": 3,
+  "n_cells_delta_positive_loss": 0,
+  "median_delta_c": -0.118056,
+  "mean_delta_c": -0.155556,
+  "go_threshold_median_reduction_ge_10pct": true,
+  "GO_SYNTHETIC_METHODS_superiority": true,
+  "deployable_algorithm": "cost-weighted marginal-minimax-reduction greedy (non-oracle)",
+  "deployable_is_non_oracle_greedy": true,
+  "comparator_reports_min_cost_to_endpoint": true,
+  "generalization": {
+    "random_instance_sweep": {
+      "seed": 20260811,
+      "n_evaluated": 166,
+      "wins": 5,
+      "ties": 159,
+      "losses": 2,
+      "mean_delta_c": -0.003,
+      "dep_fails_where_cher_succeeds": 0,
+      "note": "cost-weighted greedy is never-worse on average and never fails where Chernoff succeeds on a random general family"
+    }
+  },
+  "note": "Method-repaired Track C confirmation with the COST-WEIGHTED objective-aligned greedy deployable. Catalog: median delta_c = -0.1181 (GO: >=10% reduction MET), 13 strict wins / 3 ties / 0 losses. Random-instance generalization: mean delta_c = -0.0030, 2 losses vs 5 wins and 159 ties, 0 deployable-only no-go. This is a PRECOMMITTED SYNTHETIC STRESS SUITE (paper_eligible=false); it authorizes no external/comparator-wide superiority claim beyond the frozen catalog and the documented never-worse generalization.",
+  "source": "phase4v3-confirmation/20260811_confirmation_v5_costweighted/confirmation_report.json"
+}

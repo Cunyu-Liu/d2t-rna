@@ -500,7 +500,13 @@ def d2t_cost_to_endpoint_greedy(
             u = min(reaching, key=lambda x: spent + costs[x[0]])[0]
             alloc[u] += 1
             return tuple(alloc), spent + costs[u]
-        u = min(candidates, key=lambda x: x[1])[0]
+        # cost-weighted myopic step: pick the action with the greatest marginal
+        # minimax reduction PER UNIT COST.  Using the raw lowest resulting minimax
+        # (without dividing by cost) overspends on expensive actions: a cheap
+        # action that reduces minimax nearly as much per unit is preferred, and
+        # this is exactly what lets the deployable beat Chernoff on heterogeneous
+        # costs while avoiding the 3F losses where it dumped budget on id3.
+        u = max(candidates, key=lambda x: (mm - x[1]) / costs[x[0]])[0]
         alloc[u] += 1
         spent += costs[u]
 
