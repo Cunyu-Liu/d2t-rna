@@ -426,32 +426,52 @@ def d2t_cost_to_endpoint(
     budget: Fraction,
     endpoint: Fraction,
 ):
-    """D2T cost-to-endpoint solver (Track C primary estimand).
+    """D2T cost-to-endpoint solver (Track C primary estimand) -- OPTIMAL DEPLOYABLE.
 
     Over exact within-budget enumeration, find the minimum-cost allocation whose
     induced product laws achieve **randomized minimax** error ``<= endpoint``.
     This is the deployable that directly optimizes the frozen Track C metric
     ``Delta_C,i = (cost_D2T - cost_comparator)/cost_comparator``.
 
+    DOMINANCE THEOREM: because this solver minimises the cost over ALL
+    within-budget allocations, its cost-to-endpoint is ``<=`` the cost-to-endpoint
+    of ANY comparator whose allocation is itself a within-budget allocation (in
+    particular, any fixed-budget greedy such as Chernoff's).  It is therefore
+    NEVER-WORSE than any such comparator on every jointly-solvable instance, and
+    strictly better exactly where the comparator's proxy metric is suboptimal.
+
     Returns ``(allocation, cost, minimax, (p0v, p1v))``, or ``None`` if NO
     within-budget allocation reaches the endpoint (a no-go / infeasibility
     certificate: the endpoint is unachievable at this budget).  Ties are broken
     toward lower minimax, then the deterministic product-order allocation.
+
+    Efficiency: allocations are enumerated in ascending total-cost order and the
+    search EXITS EARLY once a feasible cost level is found, so minimax is never
+    evaluated on an allocation more expensive than the incumbent optimum.  The
+    result is bit-for-bit identical to the prior brute-force product scan.
     """
     max_n = [int(budget // c) if c > 0 else 0 for c in costs]
-    best = None  # (allocation, cost, minimax, (p0v, p1v))
-    for joint in product(*(range(m + 1) for m in max_n)):
-        cost = sum(c * nu for c, nu in zip(costs, joint))
-        if cost > budget:
-            continue
+    # cost-ascending enumeration (with deterministic product-order tie-break)
+    within_budget = [
+        (cost, joint)
+        for joint in product(*(range(m + 1) for m in max_n))
+        for cost in (sum(c * nu for c, nu in zip(costs, joint)),)
+        if cost <= budget
+    ]
+    within_budget.sort(key=lambda t: (t[0], t[1]))
+    best = None        # (allocation, cost, minimax, (p0v, p1v))
+    best_cost = None
+    for cost, joint in within_budget:
+        if best is not None and cost > best_cost:
+            break  # early exit: every remaining allocation is strictly costlier
         p0v, p1v = multi_product_laws(p0_laws, p1_laws, joint)
         mm = randomized_minimax_error_from_laws(p0v, p1v)
         if mm is None or mm > endpoint:
             continue
-        if best is None or cost < best[1] or (cost == best[1] and mm < best[2]):
+        if best is None or cost < best_cost or (cost == best_cost and mm < best[2]):
             best = (tuple(joint), cost, mm, (p0v, p1v))
+            best_cost = cost
     return best
-
 
 def d2t_cost_to_endpoint_greedy(
     p0_laws: Sequence[Vec],

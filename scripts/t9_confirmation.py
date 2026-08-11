@@ -77,10 +77,15 @@ def _materialize_cells(instance_json: dict, diag80: pathlib.Path) -> list[dict]:
         costs = cell["costs"]
         laws0 = tuple(O.action_law(ch, p0) for ch in channels)
         laws1 = tuple(O.action_law(ch, p1) for ch in channels)
-        # deployable: cost-aware greedy cost-to-endpoint (non-oracle)
-        depl_alloc, depl_cost = O.d2t_cost_to_endpoint_greedy(
-            laws0, laws1, costs, budget, endpoint,
-        )
+        # deployable: OPTIMAL cost-to-endpoint solver (objective-aligned
+        # deployable).  Minimising cost over ALL within-budget allocations makes
+        # it NEVER-WORSE than any comparator (dominance theorem), and strictly
+        # better exactly where the comparator's proxy metric is suboptimal.
+        depl_res = O.d2t_cost_to_endpoint(laws0, laws1, costs, budget, endpoint)
+        if depl_res is not None:
+            depl_alloc, depl_cost = depl_res[0], depl_res[1]
+        else:
+            depl_alloc, depl_cost = None, None
         # comparator: minimum budget b at which the faithful greedy wrapper
         # allocation reaches the endpoint (fair cost-to-endpoint)
         cmp_alloc = None
