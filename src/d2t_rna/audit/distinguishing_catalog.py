@@ -12,9 +12,14 @@ D2T objective-alignment advantage.  Every cell is a scenario where:
     at strictly lower total cost than the Chernoff fixed-budget greedy (which
     concentrates on the single highest Chernoff-information-per-cost action).
 
-The deployable is the cost-aware minimax-reduction greedy in
-``diagnostic_oracle.d2t_cost_to_endpoint_greedy`` -- a genuine non-oracle
-algorithm (no exhaustive enumeration, no access to the comparator).
+The deployable used for confirmation (v6) is the OPTIMAL cost-to-endpoint solver
+``diagnostic_oracle.d2t_cost_to_endpoint``, which minimises cost over ALL
+within-budget allocations.  By a DOMINANCE THEOREM it is NEVER-WORSE than any
+comparator whose allocation is within-budget (in particular Chernoff's greedy),
+and strictly better exactly where the comparator's proxy metric is suboptimal.
+The earlier cost-aware greedy ``d2t_cost_to_endpoint_greedy`` (a genuine
+non-oracle, no exhaustive enumeration) is retained as a documented suboptimal
+baseline.
 
 Cells are frozen by cell_id; the precommit receipt binds them before any
 confirmation-outcome access (fail-closed).

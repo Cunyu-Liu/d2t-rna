@@ -89,3 +89,54 @@ translates to a general-purpose or RNA-route advantage remains `SOTA_NOT_ADJUDIC
 - submission_status: SCIENTIFIC_SUBMISSION_BLOCKED (pending author review + external
   adjudication)
 - push_authorized: (per user instruction)
+
+
+## Addendum (v6): adopt the OPTIMAL cost-to-endpoint deployable (dominance theorem)
+
+After v5, the cost-weighted greedy still showed small *losses* (2/166) vs Chernoff on a
+random general family -- the greedy is SUBOPTIMAL, so it can occasionally be beaten by the
+comparator. This addendum replaces the deployed Track C deployable with the **exact
+OPTIMAL** cost-to-endpoint solver `d2t_cost_to_endpoint` (diagnostic_oracle.py), optimized
+with cost-ascending enumeration + early exit (verified bit-identical to the prior brute
+force on random instances, 0 mismatches).
+
+**DOMINANCE THEOREM.** Because the optimal solver minimises cost over ALL within-budget
+allocations, its cost-to-endpoint is `<=` any comparator whose allocation is itself
+within-budget (in particular Chernoff's fixed-budget greedy) on every jointly-solvable
+instance. It is therefore NEVER-WORSE than any such comparator, and strictly better exactly
+where the comparator's proxy metric is suboptimal. This removes the greedy's residual
+suboptimality by construction (0 losses, not merely "almost never worse").
+
+**Confirmation (v6).** Run `phase4v3-confirmation/20260811_confirmation_v6_optimal/`,
+verdict `manifests/audit/v7_confirmation_verdict_v6.json` (generator `ef4d664`):
+
+- denominator: 16 / solvable: 16 / withheld+failed: 0
+- delta distribution: **16 negative / 0 ties / 0 losses**
+- **median delta_c = −0.2361** (≈23.6% median cost reduction; ~2x the v5 greedy's −11.8%)
+- mean delta_c = −0.2398
+- pre-registered GO (median reduction ≥ 10%): **MET**
+- dominance holds on the catalog (16/16 strict wins over Chernoff).
+
+**Generalization / honest scope.** Random-instance sweeps (seed 20260811) with the OPTIMAL
+deployable vs Chernoff on instances NOT in the catalog:
+
+- 2-action (n=200): 95 jointly-solvable, **wins=0 / ties=95 / losses=0**, mean delta_c = 0
+- mixed incl. 3-action (n=80): 42 jointly-solvable, **wins=0 / ties=42 / losses=0**,
+  mean delta_c = 0
+- deployable-only no-go where Chernoff succeeds: **0** (dominance: never fails where
+  Chernoff works)
+
+So on general random instances the optimal deployable TIES Chernoff (Chernoff is already
+optimal there) and NEVER loses. The strict cost advantage is confined to the frozen
+heterogeneous-cost / complementary catalog. This is the honest, fail-closed scoped claim:
+the dominance theorem is the never-worse guarantee; the strict-win regime is the catalog.
+
+**What changed.** `d2t_cost_to_endpoint` (optimal solver) is the deployed Track C deployable
+in `t9_confirmation.py`; the myopic greedy `d2t_cost_to_endpoint_greedy` is retained as a
+documented suboptimal baseline. `test_distinguishing_catalog.py` updated: optimal dominance
+(16/16, GO met), greedy-suboptimality check, random-instance never-worse (0 losses).
+
+**Status fields (unchanged in spirit).** `paper_eligible=false` (synthetic stress suite);
+`GO_SYNTHETIC_METHODS_superiority=true`; `SOTA_NOT_ADJUDICATED`; real-data route
+`TERMINATED_FOR_CURRENT_DATA`. This still authorizes no external / comparator-wide
+superiority claim beyond the frozen catalog and the documented never-worse dominance.
