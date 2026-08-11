@@ -1,0 +1,145 @@
+{
+  "schema": "d2t_rna.precommit_receipt.v3",
+  "status": "PRECOMMITTED_SYNTHETIC_STRESS_SUITE",
+  "purpose": "PRE_COMMITTED_SYNTHETIC_STRESS_SUITE",
+  "paper_eligible": false,
+  "cost_cap_hash": "7f103f2a0c2dc90cfe2f38326d43f5a3b43bc8f88ba4daece97c842710b1c505",
+  "endpoint": "1/10",
+  "endpoint_float": 0.1,
+  "strongest_comparator": "chernoff",
+  "comparator_set": [
+    "chernoff",
+    "eig",
+    "full_matrix",
+    "greedy_test_cover",
+    "lm2r_heuristic",
+    "random",
+    "t2_integer_lp"
+  ],
+  "comparator_set_hash": "9359d0f98cadc868fe06b802b2d6796d00fb4237349e137cea793ca51e522fcd",
+  "method_role_registry_hash": "e8214b609faea31e86a4ab78a6ab8404db2fee3145520648409abaa2a8745a52",
+  "instance_json": {
+    "schema": "d2t_rna.precommit.instance_json.v3",
+    "n_cells": 20,
+    "budget": 8,
+    "cost_per_action": 1,
+    "cells": [
+      {
+        "cell_id": "CA_p1::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CA_p2::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CA_p3::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CA_p4::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CA_p5::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CB_p1::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CB_p2::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CB_p3::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CB_p4::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CB_p5::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CC_p1::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CC_p2::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CC_p3::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CC_p4::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CC_p5::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CD_p1::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CD_p2::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CD_p3::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CD_p4::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      },
+      {
+        "cell_id": "CD_p5::b8::x_uniform",
+        "budget": 8,
+        "cost": 1
+      }
+    ]
+  },
+  "seeds": {
+    "stress_suite_seed": 20260811,
+    "instance_generator_seed": 20260811,
+    "allocation_seed": 0
+  },
+  "exclusion_rules": {
+    "oracle_never_ranked": true,
+    "withheld_kept_in_denominator": true,
+    "paper_eligible_false": true,
+    "purpose": "PRE_COMMITTED_SYNTHETIC_STRESS_SUITE"
+  },
+  "generator_commit": "1897c2b82dac001aab1696c83ea11ee477b209c1",
+  "generator_tree": "07b12d3a2662e0a453ddf11e32c5341174da3e71",
+  "note": "PRECOMMITTED_SYNTHETIC_STRESS_SUITE -- no external custodian / access isolation exists, so this is NOT a 'sealed external confirmation'; the commitment hash binds the precommit payload before any confirmation-outcome access.",
+  "commitment_hash": "a9e10191549a1f04859b319e7da1c9397e179bbcee298c4f722d438bf58f0774",
+  "canonical_payload": "{\"comparator_set\":[\"chernoff\",\"eig\",\"full_matrix\",\"greedy_test_cover\",\"lm2r_heuristic\",\"random\",\"t2_integer_lp\"],\"comparator_set_hash\":\"9359d0f98cadc868fe06b802b2d6796d00fb4237349e137cea793ca51e522fcd\",\"cost_cap_hash\":\"7f103f2a0c2dc90cfe2f38326d43f5a3b43bc8f88ba4daece97c842710b1c505\",\"endpoint\":\"1/10\",\"endpoint_float\":0.1,\"exclusion_rules\":{\"oracle_never_ranked\":true,\"paper_eligible_false\":true,\"purpose\":\"PRE_COMMITTED_SYNTHETIC_STRESS_SUITE\",\"withheld_kept_in_denominator\":true},\"generator_commit\":\"1897c2b82dac001aab1696c83ea11ee477b209c1\",\"generator_tree\":\"07b12d3a2662e0a453ddf11e32c5341174da3e71\",\"instance_json\":{\"budget\":8,\"cells\":[{\"budget\":8,\"cell_id\":\"CA_p1::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CA_p2::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CA_p3::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CA_p4::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CA_p5::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CB_p1::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CB_p2::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CB_p3::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CB_p4::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CB_p5::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CC_p1::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CC_p2::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CC_p3::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CC_p4::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CC_p5::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CD_p1::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CD_p2::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CD_p3::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CD_p4::b8::x_uniform\",\"cost\":1},{\"budget\":8,\"cell_id\":\"CD_p5::b8::x_uniform\",\"cost\":1}],\"cost_per_action\":1,\"n_cells\":20,\"schema\":\"d2t_rna.precommit.instance_json.v3\"},\"method_role_registry_hash\":\"e8214b609faea31e86a4ab78a6ab8404db2fee3145520648409abaa2a8745a52\",\"paper_eligible\":false,\"purpose\":\"PRE_COMMITTED_SYNTHETIC_STRESS_SUITE\",\"schema\":\"d2t_rna.precommit_receipt.v3\",\"seeds\":{\"allocation_seed\":0,\"instance_generator_seed\":20260811,\"stress_suite_seed\":20260811},\"status\":\"PRECOMMITTED_SYNTHETIC_STRESS_SUITE\",\"strongest_comparator\":\"chernoff\"}"
+}

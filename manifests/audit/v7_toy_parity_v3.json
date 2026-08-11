@@ -1,0 +1,50 @@
+{
+  "schema": "d2t_rna.wrappers.toy_parity.v3",
+  "n_wrappers": 4,
+  "n_headline_eligible": 0,
+  "n_unknown_full_text": 4,
+  "headline_eligible": [],
+  "results": [
+    {
+      "wrapper_id": "controlled_sensing",
+      "method_id": "chernoff",
+      "toy_case_name": "chernoff_CA_p1_budget8",
+      "published_value": null,
+      "observed_value": null,
+      "status": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "headline_eligible": false,
+      "detail": "No verified published toy value available from the original full text for the Chernoff controlled-sensing method; the wrapper is faithfully implemented but is NOT headline-eligible."
+    },
+    {
+      "wrapper_id": "fixed_horizon_ht",
+      "method_id": "fixed_horizon_ht",
+      "toy_case_name": "fixed_horizon_ht_CA_p1_budget8",
+      "published_value": null,
+      "observed_value": null,
+      "status": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "headline_eligible": false,
+      "detail": "No verified published toy value available for fixed-horizon active hypothesis testing; NOT headline-eligible."
+    },
+    {
+      "wrapper_id": "bayesian_eig",
+      "method_id": "eig",
+      "toy_case_name": "eig_CA_p1_budget8",
+      "published_value": null,
+      "observed_value": null,
+      "status": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "headline_eligible": false,
+      "detail": "No verified published toy value available for Bayesian EIG / decision-region determination; NOT headline-eligible."
+    },
+    {
+      "wrapper_id": "test_cover",
+      "method_id": "greedy_test_cover",
+      "toy_case_name": "test_cover_CA_p1_budget8",
+      "published_value": null,
+      "observed_value": null,
+      "status": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "headline_eligible": false,
+      "detail": "No verified published toy value available for the Moret & Shapiro test-cover heuristic; NOT headline-eligible."
+    }
+  ],
+  "note": "Wrappers without a verifiable published toy value are marked UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING and are NOT headline-eligible; no parity number is invented."
+}

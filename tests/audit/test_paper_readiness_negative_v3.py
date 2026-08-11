@@ -179,14 +179,39 @@ def _golden(tmp_path, mutate=None):
     return repo
 
 
+def _with_clean_d2t_import(repo, func, *args, **kw):
+    """Run ``func`` with d2t_rna resolving to ``repo`` src, then restore the
+    interpreter's import state EXACTLY so no cross-test pollution leaks.
+
+    Importing d2t_rna from a temp repo replaces the real ``d2t_rna.*`` module
+    objects in sys.modules with ones pointing at a deleted temp dir; if left in
+    place, every later ``d2t_rna.*`` relative import in the suite fails with
+    ``No module named d2t_rna.t2``.  We snapshot the original module objects and
+    sys.path, drop every d2t_rna.* entry before the call, then restore them.
+    """
+    orig = {m: sys.modules[m] for m in list(sys.modules)
+            if m == "d2t_rna" or m.startswith("d2t_rna.")}
+    path_before = list(sys.path)
+    src = os.path.join(repo, "src")
+    if src not in sys.path:
+        sys.path.insert(0, src)
+    for m in list(orig):
+        del sys.modules[m]
+    try:
+        return func(*args, **kw)
+    finally:
+        for m in list(sys.modules):
+            if m == "d2t_rna" or m.startswith("d2t_rna."):
+                del sys.modules[m]
+        for m, mod in orig.items():
+            sys.modules[m] = mod
+        sys.path[:] = path_before
+
+
 def _compute(repo, **kw):
     """Run the gate against ``repo``, clearing any cached d2t_rna so the import
     resolves to this repo's src (not a previously-built golden)."""
-    sys.path.insert(0, os.path.join(repo, "src"))
-    for m in [m for m in list(sys.modules)
-              if m == "d2t_rna" or m.startswith("d2t_rna.")]:
-        del sys.modules[m]
-    return GATE.compute(repo, **kw)
+    return _with_clean_d2t_import(repo, GATE.compute, repo, **kw)
 
 
 NEGATIVE_CHECKS = [
@@ -210,7 +235,7 @@ def test_clean_positive_exits_zero_and_all_negative_pass(tmp_path):
     assert res["gates_all_pass"] is True
     for c in NEGATIVE_CHECKS:
         assert res["checks"][c]["status"] == "PASS", c
-    code = GATE.main(["--repo", repo, "--check"])
+    code = _cli(repo)
     assert code == 0
 
 
@@ -329,11 +354,7 @@ def test_fixture10_import_origin_unknown_fails(tmp_path):
 # ---- 10/10 CLI non-zero for each negative fixture ---------------------------
 def _cli(repo, *args):
     """Run the gate CLI against ``repo`` with a deterministic d2t_rna import."""
-    sys.path.insert(0, os.path.join(repo, "src"))
-    for m in [m for m in list(sys.modules)
-              if m == "d2t_rna" or m.startswith("d2t_rna.")]:
-        del sys.modules[m]
-    return GATE.main(["--repo", repo, "--check", *args])
+    return _with_clean_d2t_import(repo, GATE.main, ["--repo", repo, "--check", *args])
 
 
 def _append(root, rel, text):

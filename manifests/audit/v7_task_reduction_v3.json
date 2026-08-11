@@ -1,0 +1,275 @@
+{
+  "schema": "d2t_rna.task_reduction_registry.v3",
+  "phase": "P0-9",
+  "generator": "task_reduction.py",
+  "paper_eligible": false,
+  "purpose": "DECISION_REGISTRY_OR_METHOD_ROLE",
+  "is_result_artifact": false,
+  "n_categories": 9,
+  "verdict_bucket_summary": {
+    "COMPARABLE_ON_SEPARATE_TRACK": [
+      "active_sequential_ht_separate_track"
+    ],
+    "MATCHED_COMPARABLE": [
+      "bayesian_eig_decision_region",
+      "controlled_sensing_fixed_sample_open_loop",
+      "fixed_horizon_active_hypothesis_testing",
+      "test_cover"
+    ],
+    "NOT_COMPARABLE_WITH_REASON": [
+      "M2_M2R_M2seq_action_realism",
+      "SHAPEseq_DMS_MaP_count_likelihood_calibration",
+      "rna_rational_design",
+      "robust_T_KL_discrimination"
+    ],
+    "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING": []
+  },
+  "closest_prior_art_with_nontrivial_d2t_capability": [
+    {
+      "category_id": "controlled_sensing_fixed_sample_open_loop",
+      "category_name": "Controlled sensing (fixed-sample / open-loop)",
+      "verdict": "MATCHED_COMPARABLE",
+      "d2t_capability_gap": "GENUINE CLOSEST PRIOR ART. Nontrivial D2T capability left open: exact, finite-budget, interval-arithmetic-verified achievability upper bound and no-go lower bound for Track-C cost-to-fixed-risk-endpoint minimization, plus explicit oracle cross-validation -- none of which appear in the asymptotic (exponent-based) controlled-sensing literature (Chernoff delta^A is asymptotic and not second-order efficient; Keener 1984)."
+    },
+    {
+      "category_id": "fixed_horizon_active_hypothesis_testing",
+      "category_name": "Fixed-horizon active hypothesis testing",
+      "verdict": "MATCHED_COMPARABLE",
+      "d2t_capability_gap": "Leaves the same nontrivial D2T capability open as #1: exact certified finite-budget randomised-minimax and a certified no-go lower bound, rather than asymptotic exponents or unverified DP bounds."
+    },
+    {
+      "category_id": "bayesian_eig_decision_region",
+      "category_name": "Bayesian expected-information-gain / decision-region determination",
+      "verdict": "MATCHED_COMPARABLE",
+      "d2t_capability_gap": "Runs the same task as a comparator, but maximises information rather than certified risk; D2T's exact cost-to-endpoint with certificate is the residual capability."
+    },
+    {
+      "category_id": "test_cover",
+      "category_name": "Test Cover (minimum test set for exact identification)",
+      "verdict": "MATCHED_COMPARABLE",
+      "d2t_capability_gap": "Test Cover is a deterministic binary covering problem (exact identification, no probabilities, no risk endpoint). D2T replaces this with probabilistic multi-action allocation under a randomised-minimax risk endpoint and a cost budget, with exact rational certificates -- a nontrivial extension beyond binary covering."
+    }
+  ],
+  "categories": [
+    {
+      "category_id": "controlled_sensing_fixed_sample_open_loop",
+      "category_name": "Controlled sensing (fixed-sample / open-loop)",
+      "key_references": [
+        "Chernoff 1959, Ann. Math. Statist. 30(3):345-360 (sequential design of experiments; delta^A) -- fixed-sample open-loop control is the special case",
+        "Nitinawarat, Atia & Veeravalli 2013, IEEE TAC 58(10):2451-2464 (controlled sensing for multihypothesis testing; fixed-sample open-loop is asymptotically optimal for binary HT; pure stationary open-loop policy)"
+      ],
+      "hypothesis_space": "M-ary simple hypotheses (binary in Chernoff core); fully specified laws under each hypothesis",
+      "action_control_space": "Finite set of repeatable sensing actions/experiments; open-loop (pre-planned) integer allocation of samples to actions",
+      "observation_model": "Each action induces a categorical/multinomial observation law; conditionally independent given the chosen control",
+      "fixed_sequential": "Fixed sample size (fixed-sample open-loop); sequential variant exists (Chernoff sequential design) but the open-loop case is fixed-sample",
+      "adaptive_nonadaptive": "Non-adaptive (open-loop) for the fixed-sample case; adaptive for the sequential variant",
+      "budget_cost": "Sampling cost / fixed total sample size; per-action non-uniform costs in the 2013 extension",
+      "loss_endpoint": "Maximal error probability driven to zero asymptotically (error exponent / Chernoff information); decision-making risk in the sequential variant",
+      "robustness_nuisance": "None -- laws fully specified; technical 'positivity' assumption in Chernoff",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "Asymptotic (exponent) optimality only; no finite-budget exact risk certificate in the classical work",
+      "computational_guarantee": "Polynomial per-step allocation; asymptotic exponent-optimality; no exact finite-horizon guarantee",
+      "rna_action_realism": "N/A (generic sensing; no RNA action model)",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "MATCHED_COMPARABLE",
+      "reduction_reasoning": "The repo already runs a `chernoff` comparator (Chernoff-information greedy allocator, see evaluation/matrix.py), which is the frozen strongest comparator in track_c_primary_decision.json (coverage 60/64, family_cluster_mean_cost 8.0). This is a faithful instance of fixed-sample controlled sensing under the SAME task / information / cost / horizon / endpoint as D2T.",
+      "d2t_capability_gap": "GENUINE CLOSEST PRIOR ART. Nontrivial D2T capability left open: exact, finite-budget, interval-arithmetic-verified achievability upper bound and no-go lower bound for Track-C cost-to-fixed-risk-endpoint minimization, plus explicit oracle cross-validation -- none of which appear in the asymptotic (exponent-based) controlled-sensing literature (Chernoff delta^A is asymptotic and not second-order efficient; Keener 1984)."
+    },
+    {
+      "category_id": "fixed_horizon_active_hypothesis_testing",
+      "category_name": "Fixed-horizon active hypothesis testing",
+      "key_references": [
+        "Naghshvar & Javidi 2013, Ann. Statist. 41(6):2703-2738 (active sequential hypothesis testing; dynamic-programming lower bounds; fixed-horizon is the non-stopping specialisation)",
+        "Naghshvar et al. 'Fixed-Horizon Active Hypothesis Testing and Anomaly Detection', IEEE TSP (adaptive allocation over a fixed horizon)"
+      ],
+      "hypothesis_space": "M-ary simple hypotheses, Bayesian prior over hypotheses",
+      "action_control_space": "Finite set K of sensing actions; adaptive within a fixed horizon (or open-loop when adaptivity is disallowed)",
+      "observation_model": "Categorical observation laws per action, conditionally independent given action; Bayesian belief state update",
+      "fixed_sequential": "Fixed horizon (bounded number of observations); no early-stopping in the fixed-horizon form",
+      "adaptive_nonadaptive": "Adaptive (feedback) within the horizon in the active form; the repo comparator base is open-loop fixed-budget",
+      "budget_cost": "Fixed total cost / horizon length; sampling cost per action",
+      "loss_endpoint": "Error probability (or risk) minimised for a fixed horizon; DP lower bounds on optimal total cost",
+      "robustness_nuisance": "None",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "Dynamic-programming lower bounds and asymptotic optimality; no exact finite-budget rational certificate for the randomised-minimax endpoint",
+      "computational_guarantee": "DP is exponential in state for M>2; heuristic policies give asymptotic optimality; no poly exact solver for the cost-to-endpoint problem",
+      "rna_action_realism": "N/A",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "MATCHED_COMPARABLE",
+      "reduction_reasoning": "A fixed-horizon, non-adaptive allocation is the SAME framework as the D2T fixed-budget-to-fixed-endpoint problem (allocation vector over a finite action set, bounded total cost, minimising risk). The repo comparators (full_matrix, random, chernoff, eig) are all fixed-budget open-loop allocations of this type and are run on the identical task.",
+      "d2t_capability_gap": "Leaves the same nontrivial D2T capability open as #1: exact certified finite-budget randomised-minimax and a certified no-go lower bound, rather than asymptotic exponents or unverified DP bounds."
+    },
+    {
+      "category_id": "active_sequential_ht_separate_track",
+      "category_name": "Active sequential hypothesis testing (separate track)",
+      "key_references": [
+        "Chernoff 1959 (sequential design, delta^A randomized policy)",
+        "Naghshvar & Javidi 2013, Ann. Statist. 41(6):2703-2738",
+        "Bessler 1960 (general M-ary sequential design)"
+      ],
+      "hypothesis_space": "M-ary simple hypotheses, Bayesian prior",
+      "action_control_space": "Finite set K of sensing actions chosen adaptively at each time step; stopping rule included",
+      "observation_model": "Categorical per-action laws; sequential belief update",
+      "fixed_sequential": "Sequential (variable-length): stopping time is part of the policy",
+      "adaptive_nonadaptive": "Adaptive (full feedback + stopping)",
+      "budget_cost": "Total cost = cumulative control cost up to the stopping time; non-uniform control cost",
+      "loss_endpoint": "Expected total cost (delay + wrong-declaration penalty); asymptotic optimality in the Chernoff sense",
+      "robustness_nuisance": "None",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "Lower bounds via DP and asymptotic optimality; no exact finite-budget rational endpoint certificate",
+      "computational_guarantee": "Asymptotic optimality / positive information acquisition rate; DP exponential",
+      "rna_action_realism": "N/A",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "COMPARABLE_ON_SEPARATE_TRACK",
+      "reduction_reasoning": "The stopping-time (sequential) structure uses a genuinely different information/cost model than D2T: D2T Track C fixes the budget and minimises cost to a fixed risk endpoint with an integer open-loop allocation; active sequential HT adaptively stops. It is therefore COMPARABLE only on a SEPARATE track, not the same task/horizon/endpoint.",
+      "d2t_capability_gap": "Not the primary comparator track; a valid separate-track comparison would require its own pre-registered endpoint, not the frozen Track C endpoint."
+    },
+    {
+      "category_id": "robust_T_KL_discrimination",
+      "category_name": "Robust T / KL discrimination (Huber, Wasserstein/TV uncertainty sets)",
+      "key_references": [
+        "Huber 1965 (epsilon-contamination robust testing; least favourable distributions)",
+        "Chen, Gao & Ren 2015/2021 (general decision theory for Huber epsilon-contamination; robust minimax)",
+        "Wasserstein-uncertainty robust HT (DRO reformulations)"
+      ],
+      "hypothesis_space": "Composite hypothesis classes / uncertainty sets around nominal laws (epsilon-contamination, TV/Wasserstein/KL balls)",
+      "action_control_space": "No action control in the classical framework (passive single observation stream); no multi-action allocation",
+      "observation_model": "Observation law lies in an uncertainty/contamination neighbourhood; minimax over the set",
+      "fixed_sequential": "Mostly fixed-sample; sequential e-value variants exist",
+      "adaptive_nonadaptive": "Non-adaptive (passive) in the classical framework",
+      "budget_cost": "Sample complexity to bound worst-case error; no action-cost allocation",
+      "loss_endpoint": "Worst-case (robust minimax) type-I/II error over the uncertainty set",
+      "robustness_nuisance": "YES -- the entire problem is defined by the nuisance uncertainty/contamination set; D2T has no such set",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "LFD / robust-minimax characterisation; no interval-arithmetic certificate machinery",
+      "computational_guarantee": "Some tractable convex reformulations (Wasserstein); generally harder than D2T's exact finite enumeration",
+      "rna_action_realism": "N/A",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "NOT_COMPARABLE_WITH_REASON",
+      "reduction_reasoning": "Different optimisation problem: D2T assumes fully-specified categorical laws (no nuisance/contamination set) and optimises a multi-action cost-constrained allocation; robust discrimination instead minimaxes over distributional uncertainty sets with a passive stream. The robustness_nuisance axis is structurally absent from D2T.",
+      "d2t_capability_gap": "D2T would need an explicit nuisance/uncertainty set to be comparable; adding one is out of the current scope and would change the problem."
+    },
+    {
+      "category_id": "bayesian_eig_decision_region",
+      "category_name": "Bayesian expected-information-gain / decision-region determination",
+      "key_references": [
+        "Lindley 1956 (Bayesian experimental design / information gain)",
+        "DeGroot 1962 (uncertainty, information and sequential experiments)",
+        "Bernardo / Bayesian OED (EIG maximisation)"
+      ],
+      "hypothesis_space": "Simple/composite hypotheses with a Bayesian prior; decision-region (acceptance) geometry under uncertainty",
+      "action_control_space": "Finite set of experiments; allocation chosen to maximise expected information gain",
+      "observation_model": "Categorical/likelihood models; posterior (belief) evolution",
+      "fixed_sequential": "Both fixed-sample and sequential OED variants",
+      "adaptive_nonadaptive": "Adaptive in sequential OED; open-loop in non-adaptive OED",
+      "budget_cost": "Cost budget for experiments",
+      "loss_endpoint": "Expected information gain (EIG) / expected posterior uncertainty -- an INFORMATION objective, not a risk/error objective",
+      "robustness_nuisance": "None",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "No exact finite-budget risk certificate; EIG is typically estimated (MC / bounds)",
+      "computational_guarantee": "EIG estimation is expensive; no exact rational solution for the D2T risk endpoint",
+      "rna_action_realism": "N/A",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "MATCHED_COMPARABLE",
+      "reduction_reasoning": "The repo runs an `eig` comparator (Hellinger-information greedy allocator, evaluation/matrix.py), i.e. Bayesian-EIG-style allocation on the SAME task / cost / horizon / endpoint. It is a registered comparator (coverage 4/64, family_cluster_mean_cost 8.0) in the frozen decision registry, though its objective (information) differs from D2T's (risk).",
+      "d2t_capability_gap": "Runs the same task as a comparator, but maximises information rather than certified risk; D2T's exact cost-to-endpoint with certificate is the residual capability."
+    },
+    {
+      "category_id": "test_cover",
+      "category_name": "Test Cover (minimum test set for exact identification)",
+      "key_references": [
+        "Moret & Shapiro 1985/1991, 'On Minimizing a Set of Tests', SIAM J. Sci. Stat. Comput. (test cover theory; greedy heuristics)",
+        "Crowston, Gutin et al. 2012 (parameterized complexity of Test Cover; O(log n) approx via Set Cover)",
+        "Garey & Johnson (NP-hardness)"
+      ],
+      "hypothesis_space": "Finite set of items/candidates to identify uniquely; binary separability between every pair",
+      "action_control_space": "Finite set of binary tests; choose a minimum-cost subcollection that separates every pair (a test cover)",
+      "observation_model": "Binary test outcomes (which side of the test each item falls on); deterministic separation, no probabilities",
+      "fixed_sequential": "Fixed (set selection); no sequential stopping",
+      "adaptive_nonadaptive": "Non-adaptive (open-loop selection of a covering set)",
+      "budget_cost": "Cost of the chosen tests; minimise total cost of the cover",
+      "loss_endpoint": "Exact unique identification (zero discrimination error) via a covering set; NOT a probabilistic risk endpoint",
+      "robustness_nuisance": "None",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "NP-hard; approximation ratio O(log n) vs optimal; no risk certificate",
+      "computational_guarantee": "NP-hard, O(log n)-approx greedy; no exact polynomial algorithm",
+      "rna_action_realism": "Deterministic test separation only; no probabilistic RNA observation model",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "MATCHED_COMPARABLE",
+      "reduction_reasoning": "The repo runs a `greedy_test_cover` comparator (TV-separation greedy allocator, evaluation/matrix.py) on the SAME task/cost/horizon/endpoint; it is a registered comparator (coverage 0/64, family_cluster_mean_cost 8.0) in the frozen decision registry. Test Cover is genuine closest prior art for the action-selection combinatorial core.",
+      "d2t_capability_gap": "Test Cover is a deterministic binary covering problem (exact identification, no probabilities, no risk endpoint). D2T replaces this with probabilistic multi-action allocation under a randomised-minimax risk endpoint and a cost budget, with exact rational certificates -- a nontrivial extension beyond binary covering."
+    },
+    {
+      "category_id": "rna_rational_design",
+      "category_name": "RNA rational design (inverse folding / sequence design)",
+      "key_references": [
+        "Inverse-folding / RNA design literature (e.g. NUPACK, RNAinverse, linearFold / Eterna-style design)",
+        "D2T-RNA is the motivating application of the D2T task"
+      ],
+      "hypothesis_space": "RNA sequence space to be designed; objective is a target structure/function, not a statistical hypothesis",
+      "action_control_space": "Sequence / modification choices; no sensing-allocation control",
+      "observation_model": "Thermodynamic folding / structure-prediction models (minimum free energy), not categorical observation laws",
+      "fixed_sequential": "Fixed (one-shot design or iterative refinement)",
+      "adaptive_nonadaptive": "Iterative heuristic design",
+      "budget_cost": "Design/optimisation cost, not measurement sampling cost",
+      "loss_endpoint": "Structural/functional fitness (e.g. MFE distance, expression level); no error-probability endpoint",
+      "robustness_nuisance": "Uncertainty in folding parameters",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "No formal risk/error certificate (heuristic optimisers)",
+      "computational_guarantee": "NP-hard / heuristic search (stochastic, dynamic programming); no exact guarantees",
+      "rna_action_realism": "Directly RNA; defines the DESIGN objective, not the discrimination action model",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "NOT_COMPARABLE_WITH_REASON",
+      "reduction_reasoning": "RNA rational design solves the sequence-design / inverse-folding problem (optimise a target structure), which is a DIFFERENT task from the D2T budgeted-hypothesis-test discrimination problem. RNA is only the motivating application domain of D2T; the design methods are not solution methods for the D2T decision problem.",
+      "d2t_capability_gap": "Not a comparator; relevant only as application framing for the D2T action model (see categories #8, #9)."
+    },
+    {
+      "category_id": "M2_M2R_M2seq_action_realism",
+      "category_name": "M2 / M2R / M2-seq mutational-profiling action realism",
+      "key_references": [
+        "M2-seq style mutational profiling / MA (mutagenesis) action realism for the D2T action model (repo: data/measured_mattr.py, rna.py)"
+      ],
+      "hypothesis_space": "D2T two-hypothesis discrimination (H0/H1 over sequence states); the actions are mutational-profiling experiments",
+      "action_control_space": "Realistic mutational-profiling actions (what a measurement actually observes); informs rna_action_realism of D2T",
+      "observation_model": "Mutational profile / read-count observation channel",
+      "fixed_sequential": "Fixed",
+      "adaptive_nonadaptive": "Non-adaptive",
+      "budget_cost": "Measurement cost of running a mutational-profiling assay",
+      "loss_endpoint": "None of its own -- it is a realism/specification input, not a loss-endpoint method",
+      "robustness_nuisance": "Protocol-dependent noise",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "None (experimental protocol realism)",
+      "computational_guarantee": "None (experimental)",
+      "rna_action_realism": "HIGH -- this is precisely the action-realism axis",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "NOT_COMPARABLE_WITH_REASON",
+      "reduction_reasoning": "M2/M2R/M2-seq are experimental mutational-profiling protocols that specify the REALISM of the D2T action model (the channel a measurement induces); they are not competing solution algorithms for the D2T decision problem and carry no loss endpoint of their own.",
+      "d2t_capability_gap": "Feeds the rna_action_realism field of the D2T action model; not a comparator."
+    },
+    {
+      "category_id": "SHAPEseq_DMS_MaP_count_likelihood_calibration",
+      "category_name": "SHAPE-Seq / DMS-MaP count-likelihood and calibration",
+      "key_references": [
+        "SHAPE-Seq (structure probing) count-likelihood calibration",
+        "DMS-MaPseq (mutational profiling with next-gen reads) count model / calibration"
+      ],
+      "hypothesis_space": "D2T hypotheses; these methods provide the OBSERVATION MODEL (count likelihood) for structure-probing reads",
+      "action_control_space": "None (a single probing assay); informs the D2T observation model",
+      "observation_model": "Count-likelihood / calibration of probing read counts to structural state",
+      "fixed_sequential": "Fixed",
+      "adaptive_nonadaptive": "Non-adaptive",
+      "budget_cost": "Sequencing depth / read count",
+      "loss_endpoint": "None of its own -- calibration of the observation model",
+      "robustness_nuisance": "Read-depth / bias calibration",
+      "external_information": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "certificate_capability": "None (empirical calibration)",
+      "computational_guarantee": "None",
+      "rna_action_realism": "HIGH -- defines the probabilistic RNA observation channel",
+      "official_implementation_version": "UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING",
+      "verdict": "NOT_COMPARABLE_WITH_REASON",
+      "reduction_reasoning": "SHAPE-Seq / DMS-MaP supply the count-likelihood / calibration of the D2T RNA OBSERVATION MODEL (the probabilistic channel an action induces); they are data/calibration sources, not solution methods for the budgeted discrimination problem, and have no loss endpoint.",
+      "d2t_capability_gap": "Feeds the observation_model field of D2T; not a comparator."
+    }
+  ],
+  "note": "Task-reduction registry (P0-9). Fields not verifiable from full text are marked UNKNOWN_FULL_TEXT_OR_REDUCTION_MISSING; no value is guessed. Verdicts grounded in repo analysis reference the frozen comparator set of track_c_primary_decision.json."
+}
