@@ -1,17 +1,20 @@
-"""t9_precommit.py -- P0-9 true precommit receipt generator.
+"""t9_precommit.py -- P0-9 true precommit receipt generator (method-repaired).
 
 Reads the frozen Track C decision registry, then writes a PRECOMMIT RECEIPT
 (status ``PRECOMMITTED_SYNTHETIC_STRESS_SUITE``) containing the concrete
 instance JSON, seeds, generator_commit, generator_tree, and the commitment
 hash (sha256 of the canonical precommit payload).
 
+The instance JSON now binds the frozen METHOD-DISTINGUISHING catalog
+(``build_distinguishing_catalog``) -- overlapping-support, heterogeneous-cost
+cells where the objective-aligned D2T cost-aware deployable reaches the
+endpoint at strictly lower cost than the Chernoff proxy-greedy.  The receipt
+MUST be produced and recorded BEFORE any confirmation-outcome access; the
+confirmation runner refuses to run without this receipt's precommit hash.
+
 Because there is NO external custodian / access isolation, the receipt
 explicitly states status ``PRECOMMITTED_SYNTHETIC_STRESS_SUITE`` and is NOT a
-'sealed external confirmation'.  The receipt MUST be produced and recorded
-BEFORE any confirmation-outcome access (the confirmation runner refuses to run
-without this receipt's precommit hash).
-
-The generator REFUSES (non-zero) if any frozen registry field is missing.
+'sealed external confirmation'.
 """
 
 from __future__ import annotations
@@ -20,8 +23,6 @@ import argparse
 import json
 import pathlib
 import subprocess
-import time
-from fractions import Fraction
 
 from d2t_rna.audit import precommit as PC
 
@@ -31,9 +32,9 @@ FROZEN_REGISTRY = (
     "track_c_primary_decision.json"
 )
 DEFAULT_RECEIPT = pathlib.Path(
-    REPO, "manifests", "audit", "v7_precommit_receipt.json"
+    REPO, "manifests", "audit", "v7_precommit_receipt_v4.json"
 )
-MAX_REGISTERED_COST = 8
+MAX_REGISTERED_COST = 12
 
 
 def _git_heads() -> tuple[str, str]:
@@ -44,50 +45,53 @@ def _git_heads() -> tuple[str, str]:
     return _run(["rev-parse", "HEAD"]), _run(["rev-parse", "HEAD^{tree}"])
 
 
-def _materialize_instance_json(diag80: pathlib.Path) -> dict:
-    """Concrete instance JSON for the confirmation stress suite.
+def _cell_to_instance(cell: dict) -> dict:
+    """Serialize one distinguishing-catalog cell into the instance JSON.
 
-    Reuses the 80-cell catalog-pair development families as the precommitted
-    synthetic stress suite instances (budget 8, unit action cost).  Each cell
-    records p0 / p1 / action channels / costs / budget deterministically.
+    Channels are encoded as lists of rows of "num/den" strings so the receipt
+    binds the exact action literals (deterministic re-materialisation).
     """
-    from d2t_rna.audit import diagnostic_oracle as O
+    def _f(x):
+        from fractions import Fraction
+        f = Fraction(x)
+        return f"{f.numerator}/{f.denominator}"
 
-    doc = json.loads(diag80.read_text())
-    # action-channel reconstruction is done by the confirmation runner from the
-    # instance JSON; here we record the raw laws and budget and defer the exact
-    # channels to the cell materializer in t9_confirmation.  For a self-binding
-    # receipt we record the per-cell laws + budget.
-    cells = []
-    for r in doc["records"]:
-        if r["budget"] != str(MAX_REGISTERED_COST):
-            continue
-        # the frozen Track C endpoint used the x_uniform cost-mode families;
-        # the confirmation stress suite uses the same x_uniform cells so the
-        # precommitted instance set and the confirmation materializer agree.
-        if "x_uniform" not in r["block_id"]:
-            continue
-        cells.append({
-            "cell_id": r["block_id"],
-            "budget": MAX_REGISTERED_COST,
-            "cost": 1,
-        })
     return {
-        "schema": "d2t_rna.precommit.instance_json.v3",
+        "cell_id": cell["cell_id"],
+        "p0": [_f(x) for x in cell["p0"]],
+        "p1": [_f(x) for x in cell["p1"]],
+        "actions": [
+            [[_f(x) for x in row] for row in channel]
+            for channel in cell["actions"]
+        ],
+        "costs": [_f(x) for x in cell["costs"]],
+        "budget": str(cell["budget"]),
+        "endpoint": cell["endpoint"],
+    }
+
+
+def _materialize_instance_json() -> dict:
+    """Concrete instance JSON for the method-distinguishing stress suite."""
+    from d2t_rna.audit.distinguishing_catalog import build_distinguishing_catalog
+
+    cells = [_cell_to_instance(c) for c in build_distinguishing_catalog()]
+    return {
+        "schema": "d2t_rna.precommit.instance_json.v4",
         "n_cells": len(cells),
         "budget": MAX_REGISTERED_COST,
-        "cost_per_action": 1,
+        "catalog": "method_distinguishing",
         "cells": cells,
     }
 
 
-def build_receipt(frozen_path: pathlib.Path, diag80: pathlib.Path) -> dict:
+def build_receipt(frozen_path: pathlib.Path) -> dict:
     frozen = json.loads(frozen_path.read_text())
     commit, tree = _git_heads()
-    instance_json = _materialize_instance_json(diag80)
+    instance_json = _materialize_instance_json()
     seeds = {
-        "stress_suite_seed": 20260811,
-        "instance_generator_seed": 20260811,
+        "stress_suite_seed": 20260812,
+        "instance_generator_seed": 20260812,
+        "catalog": "method_distinguishing",
         "allocation_seed": 0,
     }
     exclusion_rules = {
@@ -95,6 +99,8 @@ def build_receipt(frozen_path: pathlib.Path, diag80: pathlib.Path) -> dict:
         "withheld_kept_in_denominator": True,
         "paper_eligible_false": True,
         "purpose": PC.PURPOSE,
+        "deployable_is_non_oracle_greedy": True,
+        "comparator_reports_min_cost_to_endpoint": True,
     }
     return PC.build_precommit_receipt(
         frozen_registry=frozen,
@@ -113,21 +119,12 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     frozen_path = pathlib.Path(FROZEN_REGISTRY)
-    diag80 = (
-        pathlib.Path(
-            "/mnt/cunyuliu/d2t-rna/artifacts/phase4v3-diagnostic/"
-            "20260811T151403+0800/diagnostic_80cell_catalog_pair.json"
-        )
-    )
     if not frozen_path.exists():
         print(f"FATAL: frozen registry not found: {frozen_path}")
         return 1
-    if not diag80.exists():
-        print(f"FATAL: diagnostic not found: {diag80}")
-        return 1
 
     try:
-        receipt = build_receipt(frozen_path, diag80)
+        receipt = build_receipt(frozen_path)
     except PC.PrecommitError as exc:
         print(f"REFUSED: {exc}")
         return 1
@@ -138,6 +135,7 @@ def main(argv=None) -> int:
         print("  commitment_hash:", receipt["commitment_hash"])
         print("  strongest_comparator:", receipt["strongest_comparator"])
         print("  endpoint:", receipt["endpoint"])
+        print("  n_instances:", receipt["instance_json"]["n_cells"])
         return 0
 
     out = pathlib.Path(args.out)

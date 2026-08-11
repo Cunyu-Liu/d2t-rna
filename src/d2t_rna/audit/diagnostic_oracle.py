@@ -419,6 +419,92 @@ def min_bayes_allocation(
     return best_alloc, best_cost, best_bayes, best_laws
 
 
+def d2t_cost_to_endpoint(
+    p0_laws: Sequence[Vec],
+    p1_laws: Sequence[Vec],
+    costs: Sequence[Fraction],
+    budget: Fraction,
+    endpoint: Fraction,
+):
+    """D2T cost-to-endpoint solver (Track C primary estimand).
+
+    Over exact within-budget enumeration, find the minimum-cost allocation whose
+    induced product laws achieve **randomized minimax** error ``<= endpoint``.
+    This is the deployable that directly optimizes the frozen Track C metric
+    ``Delta_C,i = (cost_D2T - cost_comparator)/cost_comparator``.
+
+    Returns ``(allocation, cost, minimax, (p0v, p1v))``, or ``None`` if NO
+    within-budget allocation reaches the endpoint (a no-go / infeasibility
+    certificate: the endpoint is unachievable at this budget).  Ties are broken
+    toward lower minimax, then the deterministic product-order allocation.
+    """
+    max_n = [int(budget // c) if c > 0 else 0 for c in costs]
+    best = None  # (allocation, cost, minimax, (p0v, p1v))
+    for joint in product(*(range(m + 1) for m in max_n)):
+        cost = sum(c * nu for c, nu in zip(costs, joint))
+        if cost > budget:
+            continue
+        p0v, p1v = multi_product_laws(p0_laws, p1_laws, joint)
+        mm = randomized_minimax_error_from_laws(p0v, p1v)
+        if mm is None or mm > endpoint:
+            continue
+        if best is None or cost < best[1] or (cost == best[1] and mm < best[2]):
+            best = (tuple(joint), cost, mm, (p0v, p1v))
+    return best
+
+
+def d2t_cost_to_endpoint_greedy(
+    p0_laws: Sequence[Vec],
+    p1_laws: Sequence[Vec],
+    costs: Sequence[Fraction],
+    budget: Fraction,
+    endpoint: Fraction,
+):
+    """D2T cost-to-endpoint DEPLOYABLE: myopic, cost-aware minimax-reduction.
+
+    A genuine non-oracle algorithm (no exhaustive enumeration, no access to the
+    comparator).  Starting from the zero allocation it repeatedly adds one unit
+    to the action that most reduces the induced **randomized-minimax** error;
+    whenever an addition reaches the frozen ``endpoint`` it immediately takes
+    the CHEAPEST such addition and stops (cost-to-endpoint semantics).  This
+    cost-awareness lets it discover a cheaper multi-action mix (e.g. adding a
+    cheap complementary action instead of a further expensive one) that a
+    proxy-scoring fixed-budget greedy (Chernoff) misses.
+
+    Runtime is ``O(budget * n_actions * LP)`` myopic steps.  Returns
+    ``(allocation, cost)`` or ``(None, None)`` if no within-budget allocation
+    reaches the endpoint (no-go).
+    """
+    n_actions = len(costs)
+    alloc = [0] * n_actions
+    spent = Fraction(0)
+    while True:
+        mm = randomized_minimax_error_from_laws(*multi_product_laws(
+            p0_laws, p1_laws, tuple(alloc)))
+        if mm is not None and mm <= endpoint:
+            return tuple(alloc), spent
+        candidates = []
+        for u in range(n_actions):
+            if spent + costs[u] > budget:
+                continue
+            alloc[u] += 1
+            mm_u = randomized_minimax_error_from_laws(*multi_product_laws(
+                p0_laws, p1_laws, tuple(alloc)))
+            alloc[u] -= 1
+            if mm_u is not None:
+                candidates.append((u, mm_u))
+        if not candidates:
+            return None, None
+        reaching = [(u, mm) for u, mm in candidates if mm <= endpoint]
+        if reaching:
+            u = min(reaching, key=lambda x: spent + costs[x[0]])[0]
+            alloc[u] += 1
+            return tuple(alloc), spent + costs[u]
+        u = min(candidates, key=lambda x: x[1])[0]
+        alloc[u] += 1
+        spent += costs[u]
+
+
 def evaluate_cell(
     p0_laws,
     p1_laws,

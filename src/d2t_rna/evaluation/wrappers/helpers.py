@@ -21,6 +21,12 @@ def chernoff_information(q0, q1) -> float:
     """Chernoff information ``C = -log min_{0<=s<=1} sum_y q0^s q1^(1-s)``.
 
     Faithful to the controlled-sensing / Chernoff-information selection rule.
+
+    Correct handling of disjoint support: if the two laws have disjoint support
+    the minimum of ``sum_y q0^s q1^(1-s)`` over ``s in [0,1]`` is ``0``, giving
+    Chernoff information ``+infinity`` (perfect, error-free separation).
+    Returning ``0.0`` in that case would make a perfectly-separating channel
+    look uninformative and mis-rank actions, so we return ``+inf``.
     """
     import math
 
@@ -49,7 +55,7 @@ def chernoff_information(q0, q1) -> float:
             lo = m1
     best = min(best, tilde((lo + hi) / 2.0))
     if best <= 0.0:
-        return 0.0
+        return float("inf")
     return float(-math.log(best))
 
 

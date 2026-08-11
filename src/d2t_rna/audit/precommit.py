@@ -246,6 +246,7 @@ def require_confirmation_inputs(
 
 WITHHELD = "WITHHELD_RANDOMIZED_MINIMAX_UNAVAILABLE"
 TIMEOUT = "TIMEOUT"
+NO_GO = "NO_GO_ENDPOINT_UNREACHABLE"
 FAILURE = "FAILURE"
 
 
@@ -262,13 +263,16 @@ def evaluate_confirmation_cell(
     endpoint: Fraction,
     run_id: str,
 ) -> dict:
-    """Evaluate one confirmation cell.
+    """Evaluate one confirmation cell under Track C cost-to-endpoint semantics.
 
-    The deployable and the frozen comparator each produce an allocation; the
-    independent oracle evaluates both.  Oracle-derived regret is written only
-    in *solvable* cells (where the minimax LP is available), and an oracle row
-    is NEVER ranked (fail-closed guard).  Every returned record carries
-    ``paper_eligible=false`` and ``purpose=PRE_COMMITTED_SYNTHETIC_STRESS_SUITE``.
+    The deployable is the D2T cost-to-endpoint solver (min-cost allocation
+    reaching the frozen endpoint under randomized minimax; ``None`` => no-go).
+    The frozen comparator (chernoff) is a fixed-budget method.  For each we
+    record ``reached_endpoint`` and ``cost_to_endpoint``.  The independent
+    oracle is the minimum-cost-to-endpoint reference; its regret is written
+    ONLY in endpoint-solvable cells and it is NEVER ranked (fail-closed).
+    Every returned record carries ``paper_eligible=false`` and
+    ``purpose=PRE_COMMITTED_SYNTHETIC_STRESS_SUITE``.
     """
     from d2t_rna.audit import diagnostic_oracle as O
 
@@ -282,9 +286,31 @@ def evaluate_confirmation_cell(
         return {"cost": cost, "randomized_minimax_error": mm, "n_outcomes": len(p0v)}
 
     def _record(method_id, alloc):
+        if alloc is None:
+            # no-go: deployable could not reach the endpoint within budget
+            return {
+                "task_id": "P0-9-CONFIRMATION",
+                "run_id": run_id,
+                "cell_id": cell_id,
+                "method_id": method_id,
+                "method_role": classify_method_role(method_id).value,
+                "allocation": None,
+                "cost": str(budget),
+                "cost_to_endpoint": None,
+                "reached_endpoint": False,
+                "randomized_minimax_error": None,
+                "n_outcomes": None,
+                "status": NO_GO,
+                "paper_eligible": PAPER_ELIGIBLE,
+                "purpose": PURPOSE,
+            }, None
         try:
             res = _eval(alloc)
             role = classify_method_role(method_id)
+            reached = (
+                res["randomized_minimax_error"] is not None
+                and res["randomized_minimax_error"] <= endpoint
+            )
             row = {
                 "task_id": "P0-9-CONFIRMATION",
                 "run_id": run_id,
@@ -293,6 +319,8 @@ def evaluate_confirmation_cell(
                 "method_role": role.value,
                 "allocation": list(alloc),
                 "cost": str(res["cost"]),
+                "cost_to_endpoint": str(res["cost"]) if reached else None,
+                "reached_endpoint": reached,
                 "randomized_minimax_error": (
                     str(res["randomized_minimax_error"])
                     if res["randomized_minimax_error"] is not None else None
@@ -300,7 +328,7 @@ def evaluate_confirmation_cell(
                 "n_outcomes": res["n_outcomes"],
                 "status": (
                     WITHHELD if res["randomized_minimax_error"] is None
-                    else "COMPUTED"
+                    else (NO_GO if not reached else "COMPUTED")
                 ),
                 "paper_eligible": PAPER_ELIGIBLE,
                 "purpose": PURPOSE,
@@ -313,7 +341,9 @@ def evaluate_confirmation_cell(
                 "cell_id": cell_id,
                 "method_id": method_id,
                 "method_role": classify_method_role(method_id).value,
-                "allocation": list(alloc),
+                "allocation": list(alloc) if alloc is not None else None,
+                "cost_to_endpoint": None,
+                "reached_endpoint": False,
                 "status": FAILURE,
                 "failure_reason": str(exc),
                 "paper_eligible": PAPER_ELIGIBLE,
@@ -323,31 +353,39 @@ def evaluate_confirmation_cell(
     dep_row, dep = _record("D2T_FIXED_BUDGET_SOLVER", deployable_alloc)
     comp_row, comp = _record("chernoff", comparator_alloc)
 
-    # oracle row: regret written ONLY in solvable cells, never ranked
+    # oracle row: independent cost-to-endpoint reference; regret ONLY in
+    # endpoint-solvable cells, never ranked (fail-closed).
     oracle_rows = []
     regret = None
     solvable = False
-    if dep is not None and dep["randomized_minimax_error"] is not None \
-            and comp is not None and comp["randomized_minimax_error"] is not None:
+    dep_reached = bool(dep is not None and dep_row["reached_endpoint"])
+    comp_reached = bool(comp is not None and comp_row["reached_endpoint"])
+    if dep is not None and comp is not None \
+            and dep["randomized_minimax_error"] is not None \
+            and comp["randomized_minimax_error"] is not None:
         solvable = True
-        # oracle = minimum-cost allocation that reaches the endpoint (Track C)
-        oracle_alloc, oracle_cost, _, _ = O.min_bayes_allocation(
-            p0_laws, p1_laws, tuple(Fraction(c) for c in costs), Fraction(budget)
+        # independent cost-to-endpoint reference (minimum cost to reach endpoint)
+        oracle_cte = O.d2t_cost_to_endpoint(
+            p0_laws, p1_laws, tuple(Fraction(c) for c in costs),
+            Fraction(budget), endpoint,
         )
         # regret is only a reference value; never ranked
         assert_no_oracle_ranking(
             MethodRole.ORACLE, "regret", method_id="INDEPENDENT_ORACLE_EXACT"
         )
-        regret = float(dep["cost"] - oracle_cost)
+        oracle_cost = oracle_cte[1] if oracle_cte is not None else None
+        if dep_reached and oracle_cost is not None:
+            regret = float(Fraction(dep_row["cost_to_endpoint"]) - oracle_cost)
         oracle_rows.append({
             "task_id": "P0-9-CONFIRMATION",
             "run_id": run_id,
             "cell_id": cell_id,
             "method_id": "INDEPENDENT_ORACLE_EXACT",
             "method_role": "oracle",
-            "allocation": list(oracle_alloc),
-            "cost": str(oracle_cost),
-            "regret_solvable_only": str(regret),
+            "allocation": list(oracle_cte[0]) if oracle_cte is not None else None,
+            "cost_to_endpoint": str(oracle_cost) if oracle_cost is not None else None,
+            "reached_endpoint": oracle_cte is not None,
+            "regret_solvable_only": str(regret) if regret is not None else None,
             "solvable": True,
             "paper_eligible": PAPER_ELIGIBLE,
             "purpose": PURPOSE,
@@ -358,6 +396,8 @@ def evaluate_confirmation_cell(
         "budget": str(budget),
         "endpoint": str(endpoint),
         "solvable": solvable,
+        "deployable_reached_endpoint": dep_reached,
+        "comparator_reached_endpoint": comp_reached,
         "deployable": dep_row,
         "comparator": comp_row,
         "oracle_regret_solvable_only": oracle_rows,
