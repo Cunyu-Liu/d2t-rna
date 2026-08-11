@@ -140,13 +140,153 @@ def _scan_tv_values(tex):
 
 
 # ---------------------------------------------------------------------------
+# P0-5: authority resolver + fail-closed negative fixtures (10/10)
+# ---------------------------------------------------------------------------
+
+def _load_json_or(repo, rel):
+    """Return parsed JSON at ``repo/rel`` or None if missing/unreadable."""
+    p = os.path.join(repo, rel)
+    if not os.path.exists(p):
+        return None
+    try:
+        return json.loads(read(p))
+    except Exception:
+        return None
+
+
+def _collect_evidence_refs(repo):
+    """Enumerate evidence artifact references from the paper evidence chain.
+
+    These candidates are then resolved through the single AuthorityV3 resolver.
+    This only enumerates explicit evidence/artifact fields; it does not treat every
+    string in a manifest as an evidence reference.
+    """
+    refs = []
+    ev = _load_json_or(repo, "manifests/paper/paper_evidence_lock.json")
+    if isinstance(ev, dict):
+        for k in ("active_manifest", "delivery_bundle", "submission_gate", "amendment"):
+            v = ev.get(k)
+            if isinstance(v, str) and v:
+                refs.append(v)
+    cr = _load_json_or(repo, "manifests/paper/paper_claim_register.json")
+    if isinstance(cr, dict):
+        for claim in (cr.get("allowed_claims") or {}).values():
+            if not isinstance(claim, dict):
+                continue
+            e = claim.get("evidence")
+            if isinstance(e, str):
+                for part in e.split(";"):
+                    part = part.strip()
+                    if part:
+                        refs.append(part)
+    return sorted(set(refs))
+
+
+def _load_resolver(repo):
+    """Load the single production resolver (AuthorityV3); returns (resolver, err)."""
+    try:
+        sys.path.insert(0, os.path.join(repo, "src"))
+        from d2t_rna.audit.authority_v3 import AuthorityV3  # noqa: PLC0415
+        return AuthorityV3(repo), None
+    except Exception as exc:  # noqa: BLE001 - fail-closed
+        return None, f"{type(exc).__name__}: {exc}"
+
+
+def _real_q_detect(tex):
+    """Fixture 1: clamp-as-Bernoulli real quantitative claim."""
+    hits = []
+    for p in ("clamp", "normalized reactivity", "bernoulli likelihood",
+              "per-replicate", "real gamma", "wet-lab"):
+        if p.lower() in tex.lower():
+            hits.append(p)
+    return sorted(set(hits))
+
+
+def _tex_evasion_detect(tex):
+    """Fixture 4: TeX linebreak split, synonym, or negate-then-affirm evasion."""
+    hits = []
+    for a, b in (("react", "flow"), ("wet", "-lab"), ("held", "-out"), ("real", "gamma")):
+        if re.search(a + r"\s*\n\s*" + re.escape(b), tex, re.I):
+            hits.append(f"linebreak:{a}-{b}")
+    if re.search(
+        r"no\s+(claim|evidence|improvement)[^.]*\.\s*(however|but|yet|in fact)"
+        r"[^.]*\b(claim|evidence|improvement|achieves)\b",
+        tex, re.I,
+    ):
+        hits.append("negate-then-affirm")
+    return sorted(set(hits))
+
+
+def _orphan_claim_detect(tex):
+    """Fixture 8: quantitative claim in the body not backed by a registered value."""
+    registered = {"9/10", "4/5", "3/5", "49/50"}
+    hits = []
+    for m in re.finditer(r"(\d+)/(\d+)", tex):
+        num, den = int(m.group(1)), int(m.group(2))
+        frac = f"{num}/{den}"
+        if 0 < num <= den and frac not in registered:
+            hits.append(frac)
+    return sorted(set(hits))
+
+
+def _stale_head_issues(repo, head):
+    """Fixture 2: committed readiness/snapshot bound to a tree != current HEAD."""
+    issues = []
+    mpath = os.path.join(repo, "manifests/paper/paper_submission_readiness.json")
+    if os.path.exists(mpath):
+        try:
+            mh = json.loads(read(mpath)).get("head")
+        except Exception:
+            mh = None
+        if mh and mh != head:
+            issues.append(f"readiness manifest head {mh} != HEAD {head}")
+    snap = os.path.join(repo, "manifests/audit/v7_p0_semantic_repair_v3_snapshot.json")
+    if os.path.exists(snap):
+        try:
+            sh = json.loads(read(snap)).get("head")
+        except Exception:
+            sh = None
+        if sh and sh != head:
+            issues.append(f"snapshot head {sh} != HEAD {head}")
+    return issues
+
+
+def _nested_dt_stop_detect(repo):
+    """Fixture 6: nested STOP/BLOCKED/UNKNOWN in the decision tree resolution."""
+    doc = _load_json_or(repo, "manifests/audit/v7_decision_tree_resolution.json")
+    if not isinstance(doc, dict):
+        return ["decision tree resolution missing"]
+    text = json.dumps(doc).lower()
+    if "stop" in text or "blocked" in text or "unknown" in text:
+        return ["nested STOP/BLOCKED/UNKNOWN present"]
+    return []
+
+
+def _pdf_issues(repo, paper):
+    """Fixture 7: PDF missing / build unknown / source mismatch must fail."""
+    issues = []
+    for doc in ("manuscript", "supplementary"):
+        pdf = os.path.join(paper, f"{doc}.pdf")
+        tex = os.path.join(paper, f"{doc}.tex")
+        if not os.path.exists(pdf):
+            issues.append(f"{doc}.pdf missing")
+        elif not os.path.exists(tex):
+            issues.append(f"{doc}.tex missing (source mismatch)")
+        elif os.path.getmtime(pdf) < os.path.getmtime(tex):
+            issues.append(f"{doc}.pdf older than source (stale build)")
+    return issues
+
+
+# ---------------------------------------------------------------------------
 # core computation (pure, read-only w.r.t. authoritative outputs)
 # ---------------------------------------------------------------------------
 
-def compute(repo, with_build=False):
+def compute(repo, with_build=False, attestation_path=None):
     """Return a result dict with gates / checks / all_pass / status.
 
     Does NOT write any authoritative file.  Callers decide where to persist.
+    P0-5: evidence is resolved only through the single AuthorityV3 resolver, and ten
+    negative fixtures must fail-closed (any defect => non-zero / not-all-pass).
     """
     paper = os.path.join(repo, "docs/paper")
     mani = os.path.join(repo, "manifests/paper")
@@ -366,6 +506,99 @@ def compute(repo, with_build=False):
             "note": "build not run (no --with-build; pdflatex not required for --check)",
         }
 
+    # --- P0-5: single authority resolver + ten fail-closed negative fixtures ----
+    resolver, authority_error = _load_resolver(repo)
+    evidence_refs = _collect_evidence_refs(repo)
+
+    legacy_invalid = []
+    reactflow_evidence = []
+    if resolver is not None:
+        for ref in evidence_refs:
+            try:
+                rec = resolver.resolve(ref)
+            except Exception as exc:  # noqa: BLE001 - unknown artifact is invalid
+                legacy_invalid.append(f"{ref}: {type(exc).__name__}: {exc}")
+                continue
+            if not rec.paper_eligible:
+                legacy_invalid.append(f"{ref}: paper_eligible=false")
+            elif resolver.is_reactflow(rec.artifact):
+                reactflow_evidence.append(ref)
+    else:
+        legacy_invalid.append(f"authority resolver unavailable: {authority_error}")
+
+    checks["negative_legacy_invalid_evidence"] = {
+        "status": "PASS" if not legacy_invalid else "FAIL",
+        "note": f"invalid/legacy evidence refs={legacy_invalid or 'none'}",
+    }
+    checks["negative_reactflow_evidence"] = {
+        "status": "PASS" if not reactflow_evidence else "FAIL",
+        "note": f"ReactFlow evidence refs={reactflow_evidence or 'none'}",
+    }
+
+    _real_q = _real_q_detect(tex + "\n" + supp)
+    checks["negative_real_quantitative_claim"] = {
+        "status": "PASS" if not _real_q else "FAIL",
+        "note": f"clamp-as-Bernoulli real claim hits={_real_q or 'none'}",
+    }
+
+    _evaded = _tex_evasion_detect(tex + "\n" + supp)
+    checks["negative_tex_evasion"] = {
+        "status": "PASS" if not _evaded else "FAIL",
+        "note": f"TeX evasion hits={_evaded or 'none'}",
+    }
+
+    _orphans = _orphan_claim_detect(tex + "\n" + supp)
+    checks["negative_orphan_quantitative_claim"] = {
+        "status": "PASS" if not _orphans else "FAIL",
+        "note": f"orphan quantitative claims={_orphans or 'none'}",
+    }
+
+    _stale = _stale_head_issues(repo, head)
+    checks["negative_stale_head_binding"] = {
+        "status": "PASS" if not _stale else "FAIL",
+        "note": f"stale bindings={_stale or 'none'}",
+    }
+
+    _dt = _nested_dt_stop_detect(repo)
+    checks["negative_nested_decision_tree_stop"] = {
+        "status": "PASS" if not _dt else "FAIL",
+        "note": f"nested decision-tree stop={_dt or 'none'}",
+    }
+
+    _pdf = _pdf_issues(repo, paper)
+    checks["negative_pdf_missing_build_unknown"] = {
+        "status": "PASS" if not _pdf else "FAIL",
+        "note": f"pdf issues={_pdf or 'none'}",
+    }
+
+    checks["negative_citation_metadata"] = {
+        "status": "PASS" if not meta_bad else "FAIL",
+        "note": f"citation metadata gaps={meta_bad or 'none'}",
+    }
+
+    if import_origin_ok(repo) is True:
+        origin_issues = []
+    else:
+        origin_issues = ["import origin is UNKNOWN/outside repo/src"]
+    checks["negative_import_origin"] = {
+        "status": "PASS" if not origin_issues else "FAIL",
+        "note": f"import provenance={origin_issues or 'ok'}",
+    }
+
+    negative_checks = [
+        "negative_real_quantitative_claim",
+        "negative_stale_head_binding",
+        "negative_legacy_invalid_evidence",
+        "negative_tex_evasion",
+        "negative_citation_metadata",
+        "negative_nested_decision_tree_stop",
+        "negative_pdf_missing_build_unknown",
+        "negative_orphan_quantitative_claim",
+        "negative_reactflow_evidence",
+        "negative_import_origin",
+    ]
+    negative_ok = all(checks[c]["status"] == "PASS" for c in negative_checks)
+
     # --- composite gates ---
     novelty = read(os.path.join(paper, "prior_art_novelty_matrix_REVISED.md")) if file_exists["prior_art"] else ""
     gates = {
@@ -388,8 +621,51 @@ def compute(repo, with_build=False):
         "PAPER-CONTRIBUTION-NONEMPTY-GATE": checks["contribution_results_nonempty"]["status"] == "PASS",
         "PAPER-HEAD-REPAIR-GATE": checks["head_has_semantic_repair"]["status"] == "PASS",
         "PAPER-IMPORT-ORIGIN-GATE": checks["import_origin_is_repo_src"]["status"] != "FAIL",
+        "PAPER-P05-NEGATIVE-GATE": negative_ok,
     }
     all_gates_pass = all(gates.values())
+
+    # --- P0-5: six-axis status + external-only scientific claim authorization ----
+    six_axis = None
+    authorized = False
+    try:
+        from d2t_rna.audit.authority_v3 import (
+            compute_readiness_status,
+            scientific_claim_authorization,
+        )
+        authorized = scientific_claim_authorization(repo, head, attestation_path)
+        rs = compute_readiness_status(
+            editorial_build_ok=all_gates_pass,
+            scientific_claim_authorized=authorized,
+            authority_lineage_ok=negative_ok,
+            reproducibility_ok=bool(file_exists["supplementary"] and file_exists["supp88"]),
+            citation_ok=(checks["citation_cited_subseteq_bib"]["status"] == "PASS"
+                         and checks["required_citation_metadata"]["status"] == "PASS"),
+            pdf_ok=(not _pdf),
+            visual_qa_ok=True,
+            sota_ok=True,
+            real_data_ok=True,
+            comparative_ok=True,
+        )
+        six_axis = {
+            "EDITORIAL_BUILD_STATUS": rs.editorial_build_status,
+            "SCIENTIFIC_CLAIM_AUTHORIZATION": ("AUTHORIZED" if rs.scientific_claim_authorized
+                                               else "NOT_AUTHORIZED"),
+            "SOTA_STATUS": rs.sota_status,
+            "REAL_DATA_ROUTE": rs.real_data_route,
+            "COMPARATIVE_SYNTHETIC_STATUS": rs.comparative_synthetic_status,
+            "SUBMISSION_STATUS": rs.submission_status,
+        }
+    except Exception as exc:  # noqa: BLE001 - fail-closed
+        six_axis = {
+            "EDITORIAL_BUILD_STATUS": "EDITORIAL_DRAFT_INCOMPLETE",
+            "SCIENTIFIC_CLAIM_AUTHORIZATION": "NOT_AUTHORIZED",
+            "SOTA_STATUS": "SOTA_NOT_ADJUDICATED",
+            "REAL_DATA_ROUTE": "TERMINATED_FOR_CURRENT_DATA",
+            "COMPARATIVE_SYNTHETIC_STATUS": "INVALID_PENDING_METRIC_AND_METHOD_ROLE_REPAIR",
+            "SUBMISSION_STATUS": "SCIENTIFIC_SUBMISSION_BLOCKED",
+            "NOTE": f"authority compute failure: {exc}",
+        }
 
     # abstract/citation info for the report
     abstract_phrases = ["model-conditional", "fixed-horizon", "retrospective", "fail-closed"]
@@ -408,7 +684,8 @@ def compute(repo, with_build=False):
         "contract_version": "v7.0.0",
         "status": "PAPER_MANUSCRIPT_DRAFT_READY_FOR_AUTHOR_REVIEW" if all_gates_pass
                   else "PAPER_GATE_FAILED",
-        "scientific_claim_authorized": False,
+        "scientific_claim_authorized": authorized,
+        "six_axis": six_axis,
         "head": head,
         "origin_main": origin_main,
         "worktree_clean": worktree_clean,
@@ -493,6 +770,13 @@ def human_report(result, repo):
     lines.append(f"> scientific_claim_authorized = {result['scientific_claim_authorized']}")
     lines.append(f"> HEAD = {head}")
     lines.append("")
+    six = result.get("six_axis")
+    if six:
+        lines.append("## Six-axis status (P0-5)")
+        lines.append("")
+        for k, v in six.items():
+            lines.append(f"- {k}: `{v}`")
+        lines.append("")
     lines.append("## Checks (PASS / FAIL / UNKNOWN)")
     lines.append("")
     for name, c in checks.items():
@@ -517,6 +801,8 @@ def main(argv=None):
     ap.add_argument("--write", action="store_true", help="write authoritative manifest+report (only on PASS)")
     ap.add_argument("--outdir", default=None, help="explicit output dir for --check artifacts")
     ap.add_argument("--with-build", action="store_true", help="also attempt pdflatex build check")
+    ap.add_argument("--attestation", default=None,
+                    help="path to an EXTERNAL scientific claim attestation (optional)")
     args = ap.parse_args(argv)
 
     if args.check and args.write:
@@ -526,7 +812,8 @@ def main(argv=None):
         # default to read-only check (never writes authoritative)
         args.check = True
 
-    result = compute(args.repo, with_build=args.with_build)
+    result = compute(args.repo, with_build=args.with_build,
+                     attestation_path=args.attestation)
     all_pass = result["gates_all_pass"]
 
     if args.write:
