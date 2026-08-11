@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "d2t_rna.evaluation_result.v3",
+  "title": "Evaluation Result V3",
+  "description": "Exact evaluation result separating the equal-prior Bayes average error from the true randomized minimax error, with per-hypothesis abstention quantities. Track R primary endpoint is randomized_minimax_error; Bayes is secondary. If randomized_minimax_error is unavailable (LP unsupported/out of scale) status is WITHHELD_RANDOMIZED_MINIMAX_UNAVAILABLE and the field is null; Bayes is never substituted. Abstention is never folded back into randomized_minimax_error unless an explicit abstention_loss is registered.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "status",
+    "estimand",
+    "bayes_average_error",
+    "randomized_minimax_error",
+    "alpha",
+    "beta",
+    "kappa_0",
+    "kappa_1",
+    "rho_0",
+    "rho_1",
+    "abstain_probability",
+    "abstention_loss_name",
+    "abstention_loss_value"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": { "const": "d2t_rna.evaluation_result.v3" },
+    "schema_version": { "const": "3" },
+    "status": {
+      "enum": [
+        "COMPUTED",
+        "WITHHELD_RANDOMIZED_MINIMAX_UNAVAILABLE"
+      ]
+    },
+    "estimand": {
+      "enum": [
+        "BAYES_AVERAGE_ERROR",
+        "RANDOMIZED_MINIMAX_ERROR"
+      ]
+    },
+    "bayes_average_error": {
+      "pattern": "^-?[0-9]+(/[0-9]+)?$"
+    },
+    "randomized_minimax_error": {
+      "oneOf": [
+        { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+        { "type": "null" }
+      ]
+    },
+    "alpha": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "beta": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "kappa_0": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "kappa_1": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "rho_0": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "rho_1": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "abstain_probability": { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+    "abstention_loss_name": {
+      "oneOf": [
+        { "type": "string" },
+        { "type": "null" }
+      ]
+    },
+    "abstention_loss_value": {
+      "oneOf": [
+        { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+        { "type": "null" }
+      ]
+    }
+  }
+}

@@ -403,12 +403,19 @@ class OracleResult:
     n: tuple[int, ...]                      # repeats per action
     cost: Fraction                           # sum_u c_u n_u
     product_tv: Fraction                     # TV(P0^n, P1^n)
-    minimax_error: Fraction                  # (1/2) sum_joint min(P0,P1)
+    # LEGACY: ``minimax_error`` was mislabelled -- it actually stores the
+    # equal-prior Bayes average error (1/2) sum_joint min(P0,P1).  It must NOT
+    # be silently aliased to a V3 risk field; read it only through
+    # d2t_rna.evaluation.result.legacy_oracle_minimax_error.  New code must use
+    # EvaluationResultV3 (bayes_average_error / randomized_minimax_error).
+    minimax_error: Fraction                  # LEGACY Bayes-average (mislabelled)
     correct_decl: Fraction                   # (P0(dH0)+P1(dH1))/2
     wrong_decl: Fraction                     # (P0(dH1)+P1(dH0))/2
     abstain: Fraction                        # (P0(a)+P1(a))/2
     outcome_count: int                       # number of joint outcomes
     product_bhattacharyya: Fraction | None   # exact when perfect squares
+    bayes_average_error: Fraction | None = None          # == legacy minimax_error value
+    randomized_minimax_error: Fraction | None = None     # None = not computed on legacy object
 
     def replay_sha256(self) -> str:
         payload = {
@@ -524,6 +531,8 @@ class MultiActionOracle:
             abstain=abstain / _F(2),
             outcome_count=count,
             product_bhattacharyya=bhat,
+            bayes_average_error=minimax_error,
+            randomized_minimax_error=None,
         )
 
 
