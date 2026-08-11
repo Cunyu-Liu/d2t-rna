@@ -59,8 +59,9 @@ def _base(**kw):
         ({"beta": _F(6, 10)}, T2cConstructiveStatus.BOUND_NOT_DECISIVE),
         # (d) candidate rule but budget/cost not verified -> NO_GO
         ({"budget_cost_verified": False}, T2cConstructiveStatus.NO_GO),
-        # (e) full rule with certified risk + verified budget -> CONSTRUCTIVELY_FEASIBLE
-        ({}, T2cConstructiveStatus.CONSTRUCTIVELY_FEASIBLE),
+        # (e) P0-4: full bools + caller alpha/beta are NOT constructive; this
+        #     path only reports NECESSARY_ONLY (positive requires v3 recompute)
+        ({}, T2cConstructiveStatus.NECESSARY_ONLY),
     ],
 )
 def test_constructive_feasibility_all_branches(kwargs, expected):

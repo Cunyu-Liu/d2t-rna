@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "d2t_rna.t2_certificate.v3",
+  "title": "T2 Certificate V3",
+  "description": "Self-contained T2b certificate (P0-4). Binds every input identity (model, spec, catalog, action panel, allocation) and result so an independent verifier needs only the certificate and the registered raw model. DISCRETE_CATALOG certificates are produced by pure exact enumeration and never carry fabricated convex weights. Non-deterministic metadata (e.g. timestamp) never enters the canonical evidentiary payload hash.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "schema_version",
+    "theorem",
+    "status",
+    "uncertainty_kind",
+    "separation_measure",
+    "model_hash",
+    "spec_hash",
+    "catalog_hash",
+    "action_panel_hash",
+    "allocation_hash",
+    "panel",
+    "gamma_l1",
+    "gamma_tv",
+    "product_tv",
+    "p0",
+    "p1",
+    "difference_witness",
+    "convex_mixture_weights",
+    "primal_receipt",
+    "dual_receipt",
+    "generator_commit",
+    "generator_tree",
+    "verifier_version",
+    "verifier_receipt",
+    "collapsed"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_id": { "const": "d2t_rna.t2_certificate.v3" },
+    "schema_version": { "const": "3" },
+    "theorem": { "const": "T2b" },
+    "status": {
+      "enum": ["IFF", "NECESSARY_ONLY", "SUFFICIENT_ONLY", "COUNTEREXAMPLE"]
+    },
+    "uncertainty_kind": {
+      "enum": ["DISCRETE_CATALOG", "CONVEX_HULL"]
+    },
+    "separation_measure": {
+      "enum": ["ACTION_L1", "ACTION_TV", "PRODUCT_TV"]
+    },
+    "model_hash": { "type": "string", "minLength": 1 },
+    "spec_hash": { "type": "string", "minLength": 1 },
+    "catalog_hash": { "type": "string", "minLength": 1 },
+    "action_panel_hash": { "type": "string", "minLength": 1 },
+    "allocation_hash": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "panel": { "type": "array", "items": { "type": "string" } },
+    "gamma_l1": {
+      "oneOf": [
+        { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+        { "type": "null" }
+      ]
+    },
+    "gamma_tv": {
+      "oneOf": [
+        { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+        { "type": "null" }
+      ]
+    },
+    "product_tv": {
+      "oneOf": [
+        { "pattern": "^-?[0-9]+(/[0-9]+)?$" },
+        { "type": "null" }
+      ]
+    },
+    "p0": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["numerator", "denominator"],
+            "properties": {
+              "numerator": { "type": "integer" },
+              "denominator": { "type": "integer", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "p1": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["numerator", "denominator"],
+            "properties": {
+              "numerator": { "type": "integer" },
+              "denominator": { "type": "integer", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "difference_witness": {
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["numerator", "denominator"],
+            "properties": {
+              "numerator": { "type": "integer" },
+              "denominator": { "type": "integer", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "convex_mixture_weights": {
+      "oneOf": [
+        { "type": "object" },
+        { "type": "null" }
+      ]
+    },
+    "primal_receipt": { "type": "string", "minLength": 1 },
+    "dual_receipt": { "type": "string", "minLength": 1 },
+    "generator_commit": { "type": "string" },
+    "generator_tree": { "type": "string" },
+    "verifier_version": { "type": "string", "minLength": 1 },
+    "verifier_receipt": { "type": "string" },
+    "collapsed": { "type": "boolean" }
+  }
+}

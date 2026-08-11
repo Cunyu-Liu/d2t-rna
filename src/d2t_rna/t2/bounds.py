@@ -226,6 +226,7 @@ K8_T2C_BOUND_IS_NOT_CONSTRUCTIVE_FEASIBILITY = (
 
 class T2cConstructiveStatus:
     NO_GO = "NO_GO"
+    NECESSARY_ONLY = "NECESSARY_ONLY"
     BOUND_ONLY = "BOUND_ONLY"
     BOUND_NOT_DECISIVE = "BOUND_NOT_DECISIVE"
     NOT_ESTABLISHED = "NOT_ESTABLISHED"
@@ -256,14 +257,19 @@ def constructive_feasibility_status(
     alpha_max: Fraction | None = None,
     beta_max: Fraction | None = None,
 ) -> ConstructiveFeasibility:
-    """K8 constructive-feasibility gate (never conflates a bound with a design).
+    """K8 information-only gate (P0-4).
 
-    Returns a :class:`ConstructiveFeasibility`.  The only positive status is
-    ``CONSTRUCTIVELY_FEASIBLE``; every other status is a bound-only / not-decisive /
-    not-established outcome and carries the K8 marker constant.
+    P0-4 removed the caller-``alpha/beta`` positive path.  This function is now
+    *information-only*: it can never return ``CONSTRUCTIVELY_FEASIBLE``.  A
+    positive (constructive) verdict is issued only by
+    :func:`constructive_feasibility_v3`, which recomputes ``alpha/beta/rho``
+    and ``cost`` from the actual registered product laws, an explicit decision
+    rule, budget, risk thresholds and an independent exact-risk checker receipt.
+
+    Statuses here are only ``NOT_ESTABLISHED`` / ``BOUND_ONLY`` /
+    ``BOUND_NOT_DECISIVE`` / ``NECESSARY_ONLY`` / ``NO_GO``; caller-supplied
+    ``alpha/beta`` are never trusted to produce a positive status.
     """
-    reasons: list[str] = []
-
     if not product_laws_registered or not allocation_registered:
         return ConstructiveFeasibility(
             status=T2cConstructiveStatus.NOT_ESTABLISHED,
@@ -316,12 +322,126 @@ def constructive_feasibility_status(
             ),
         )
 
+    # P0-4: even with every boolean set, caller alpha/beta are not recomputed
+    # from actual product laws, so this path must NOT issue a positive verdict.
     return ConstructiveFeasibility(
-        status=T2cConstructiveStatus.CONSTRUCTIVELY_FEASIBLE,
+        status=T2cConstructiveStatus.NECESSARY_ONLY,
         reasons=(
-            "complete rule with certified per-hypothesis risk and verified "
-            "budget/cost constraints",
+            "all information prerequisites met, but constructive feasibility "
+            "requires constructive_feasibility_v3 (actual product laws + rule "
+            "+ budget + risk thresholds + independent exact-risk receipt)",
         ),
         alpha=alpha,
         beta=beta,
+    )
+
+
+def _recomputed_risk_receipt(
+    p0, p1, n, lower, upper, costs, allocation,
+    alpha, beta, rho_0, rho_1, cost,
+) -> str:
+    import hashlib
+
+    payload = (
+        tuple(p0), tuple(p1), n, lower, upper, tuple(costs), tuple(allocation),
+        alpha, beta, rho_0, rho_1, cost,
+    )
+    return hashlib.sha256(repr(payload).encode("utf-8")).hexdigest()
+
+
+def constructive_feasibility_v3(
+    *,
+    p0,
+    p1,
+    n,
+    costs,
+    allocation,
+    lower,
+    upper,
+    budget,
+    alpha_max,
+    beta_max,
+    checker_receipt,
+) -> ConstructiveFeasibility:
+    """P0-4 constructive feasibility from actual registered product laws.
+
+    Recomputes ``alpha/beta/rho`` and ``cost`` internally (never trusting a
+    caller-supplied alpha/beta), requires an independent exact-risk checker
+    receipt matching the recomputed risks, and only then may return
+    ``CONSTRUCTIVELY_FEASIBLE``.  Forging ``alpha=beta=0`` fails because the
+    values are recomputed, not accepted from the caller.
+    """
+    from .decision import conditional_rule_errors
+
+    rule = conditional_rule_errors(p0, p1, n, lower, upper)
+    alpha = rule.alpha
+    beta = rule.beta
+    rho_0 = rule.rho_0
+    rho_1 = rule.rho_1
+    cost = sum(c * nu for c, nu in zip(costs, allocation))
+
+    receipt = _recomputed_risk_receipt(
+        p0, p1, n, lower, upper, costs, allocation,
+        alpha, beta, rho_0, rho_1, cost,
+    )
+    if checker_receipt != receipt:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.NOT_ESTABLISHED,
+            reasons=(
+                "independent exact-risk checker receipt does not match the "
+                "recomputed risks; cannot certify",
+            ),
+        )
+    if alpha_max is not None and alpha > alpha_max:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_NOT_DECISIVE,
+            reasons=(f"recomputed alpha={alpha} exceeds alpha_max={alpha_max}",),
+            alpha=alpha, alpha_max=alpha_max,
+        )
+    if beta_max is not None and beta > beta_max:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_NOT_DECISIVE,
+            reasons=(f"recomputed beta={beta} exceeds beta_max={beta_max}",),
+            beta=beta, beta_max=beta_max,
+        )
+    if cost > budget:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.NO_GO,
+            reasons=(f"recomputed cost={cost} exceeds budget={budget}",),
+            alpha=alpha, beta=beta,
+        )
+    return ConstructiveFeasibility(
+        status=T2cConstructiveStatus.CONSTRUCTIVELY_FEASIBLE,
+        reasons=(
+            "explicit rule with internally recomputed risks within thresholds "
+            "and budget, backed by an independent exact-risk receipt",
+        ),
+        alpha=alpha, beta=beta,
+    )
+
+
+def information_only_status(
+    *,
+    product_laws_registered: bool = False,
+    allocation_registered: bool = False,
+    decision_rule_registered: bool = False,
+) -> ConstructiveFeasibility:
+    """P0-4 information-only gate.
+
+    Returns only ``NO_GO`` / ``NECESSARY_ONLY`` / ``BOUND_ONLY`` /
+    ``NOT_ESTABLISHED`` and never ``CONSTRUCTIVELY_FEASIBLE``.
+    """
+    if not product_laws_registered or not allocation_registered:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.NOT_ESTABLISHED,
+            reasons=("product laws / allocation not registered",),
+        )
+    if not decision_rule_registered:
+        return ConstructiveFeasibility(
+            status=T2cConstructiveStatus.BOUND_ONLY,
+            reasons=("information bound present but no explicit rule",),
+        )
+    return ConstructiveFeasibility(
+        status=T2cConstructiveStatus.NECESSARY_ONLY,
+        reasons=("information necessary condition met; not constructive",),
     )
