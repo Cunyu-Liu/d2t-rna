@@ -61,8 +61,11 @@ def test_full_panel_separation_certificate():
     cert = collision_or_separation(model, full)
     assert cert.status == "IFF"
     assert cert.gamma > 0
-    assert cert.enumeration_matches_lp is True
-    assert cert.lp_strong_duality is True
+    # P0-2: DISCRETE_CATALOG path is pure exact enumeration; it does not invoke
+    # the convex-hull LP, so the LP diagnostic fields are not computed here.
+    assert cert.enumeration_gamma == cert.gamma
+    assert cert.enumeration_matches_lp is False
+    assert cert.lp_strong_duality is False
     assert cert.separation_witness is not None
 
 

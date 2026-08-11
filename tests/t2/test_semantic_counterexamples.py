@@ -74,30 +74,29 @@ def _convex_counterexample() -> T2FiniteModel:
     )
 
 
-def test_t2b_convexification_fails_closed():
+def test_t2b_convexification_discrete_certificate_is_valid():
+    # P0-2: the DISCRETE_CATALOG path certifies purely from exact enumeration
+    # and does NOT invoke the convex-hull LP.  The convex hulls of the two
+    # catalogs overlap (LP optimum 0), but the discrete object is a valid
+    # separation with gamma_l1=1/2.  The convex LP is a separate object and is
+    # never used as a gate on the discrete certificate.
     model = _convex_counterexample()
     cert = collision_or_separation(model, ["id"])
-    # The two engines disagree -> no formal certificate.
-    assert cert.enumeration_matches_lp is False
-    assert cert.status == "COUNTEREXAMPLE"
-    assert cert.gamma is None
-    # Both values are preserved for evidence.
+    assert cert.status == "IFF"
+    assert cert.gamma == Fraction(1, 2)
     assert cert.enumeration_gamma == Fraction(1, 2)
-    assert cert.lp_optimal is not None
-    assert cert.lp_optimal == Fraction(0)
+    assert cert.enumeration_matches_lp is False  # cross-object diagnostic only
+    assert cert.separation_witness is not None
 
 
-def test_t2b_convexification_never_iff():
+def test_t2b_convex_hull_engine_is_unsupported():
     model = _convex_counterexample()
-    cert = collision_or_separation(model, ["id"])
-    assert cert.status != "IFF"
-    assert cert.collision_witness is None
-    assert cert.separation_witness is None
+    from d2t_rna.t2.spec import UNCERTAINTY_CONVEX, TheoremSpec
+    spec = TheoremSpec(UNCERTAINTY_CONVEX, "ACTION_L1")
+    cert = collision_or_separation(model, ["id"], spec=spec)
+    assert cert.status == "UNSUPPORTED_SPEC"
+    assert cert.gamma is None
 
-
-# ---------------------------------------------------------------------------
-# 2. Forged checker must reject catalog-outside / non-normalized / v!=p1-p0
-# ---------------------------------------------------------------------------
 
 def test_forged_checker_rejects_catalog_outside_triple():
     theta0 = ((Fraction(1), Fraction(0)),)
@@ -262,5 +261,6 @@ def test_regression_existing_iff_fixtures_unaffected():
     cert = collision_or_separation(two_by_two_alternating(), ["full_obs"])
     assert cert.status == "IFF"
     assert cert.gamma == 1
-    assert cert.enumeration_matches_lp is True
-    assert cert.lp_strong_duality is True
+    # P0-2: discrete path is pure enumeration; LP diagnostic fields not computed.
+    assert cert.enumeration_matches_lp is False
+    assert cert.lp_strong_duality is False

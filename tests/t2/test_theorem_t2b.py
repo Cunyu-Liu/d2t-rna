@@ -31,8 +31,9 @@ def test_two_by_two_row_obs_is_collision():
     assert cert.status == "IFF"
     assert cert.gamma == 0
     assert cert.collision_witness is not None
-    assert cert.enumeration_matches_lp is True
-    assert cert.lp_strong_duality is True
+    # P0-2: discrete path is pure enumeration; LP diagnostic fields not computed.
+    assert cert.enumeration_matches_lp is False
+    assert cert.lp_strong_duality is False
 
 
 def test_two_by_two_full_obs_is_separation():
@@ -41,8 +42,9 @@ def test_two_by_two_full_obs_is_separation():
     assert cert.status == "IFF"
     assert cert.gamma == 1
     assert cert.separation_witness is not None
-    assert cert.enumeration_matches_lp is True
-    assert cert.lp_strong_duality is True
+    # P0-2: discrete path is pure enumeration; LP diagnostic fields not computed.
+    assert cert.enumeration_matches_lp is False
+    assert cert.lp_strong_duality is False
 
 
 def test_no_cycle_empty_difference():
@@ -74,7 +76,8 @@ def test_cancellation_counterexample_is_collision():
     assert cert.status == "IFF"
     assert cert.gamma == 0
     assert cert.collision_witness is not None
-    assert cert.enumeration_matches_lp is True
+    # P0-2: discrete path is pure enumeration; LP diagnostic fields not computed.
+    assert cert.enumeration_matches_lp is False
 
 
 def test_exact_collision_certificate():
@@ -92,7 +95,8 @@ def test_near_collision_positive_small_separation():
     assert cert.gamma == Fraction(1, 4)
     assert 0 < cert.gamma < 1
     assert cert.separation_witness is not None
-    assert cert.enumeration_matches_lp is True
+    # P0-2: discrete path is pure enumeration; LP diagnostic fields not computed.
+    assert cert.enumeration_matches_lp is False
 
 
 def test_strict_separation():
@@ -103,7 +107,11 @@ def test_strict_separation():
     assert cert.separation_witness is not None
 
 
-def test_lp_strong_duality_holds_for_all_fixtures():
+def test_discrete_certificates_valid_across_fixtures():
+    # P0-2: the discrete path certifies purely from exact enumeration.  The
+    # convex-LP diagnostics (lp_strong_duality / enumeration_matches_lp) are NOT
+    # computed on the discrete path, so they are False here.  The gamma/status/
+    # witness values remain the exact discrete certificate.
     for model, panel in [
         (two_by_two_alternating(), "row_obs"),
         (two_by_two_alternating(), "full_obs"),
@@ -114,8 +122,8 @@ def test_lp_strong_duality_holds_for_all_fixtures():
     ]:
         cert = collision_or_separation(model, [panel])
         assert cert.status == "IFF"
-        assert cert.lp_strong_duality is True, (model.name, panel)
-        assert cert.enumeration_matches_lp is True, (model.name, panel)
+        assert cert.lp_strong_duality is False, (model.name, panel)
+        assert cert.enumeration_matches_lp is False, (model.name, panel)
 
 
 def test_certificate_is_frozen_dataclass():

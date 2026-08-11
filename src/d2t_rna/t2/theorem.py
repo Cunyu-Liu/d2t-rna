@@ -20,16 +20,18 @@ For a finite catalog the infimum over ``D`` is attained, so the theorem is
 non-atomic / infimum-only obstruction case (contract section 5.2 boundary),
 where only one direction is certified.
 
-This module builds the separation ``gamma(S)`` as an exact rational LP,
-solves it (primal and dual), extracts the witness, and cross-checks the LP
-value against the exhaustive enumeration engine.  Floating-point status or
-caller hashes are never treated as proof.
+For a finite catalog the separation ``gamma(S)`` is computed exactly by
+exhaustive enumeration of the discrete difference set ``D`` (the
+``DISCRETE_CATALOG`` object).  ``build_gamma_lp`` builds the *separate*
+convex-hull LP, which optimises over the convex hulls of the catalogs and
+solves a different problem; it is retained only as an explicit convex /
+diagnostic object and is never used as a gate on the discrete certificate.
 
-**P0-3 fail-closed gate.**  The enumerated (discrete-catalog) engine and the
-LP (convex-hull) engine solve two *different* problems.  When they disagree
-(``enumeration_matches_lp == False``) the certifier must NOT emit a formal
-``IFF`` collision-or-separation certificate: it returns status
-``COUNTEREXAMPLE`` with ``gamma=None`` and preserves both values for evidence.
+**P0-2 repair.**  The DISCRETE_CATALOG path certifies purely from exact
+enumeration and never invokes the convex-hull LP.  Previously the discrete
+path called the convex LP unconditionally and wrongly returned
+``COUNTEREXAMPLE, gamma=None`` for a legitimate discrete certificate
+(``gamma_l1=1/2``) whenever the convex hulls overlapped (``gamma=0``).
 The raw separation is reported as action-level L1 (``gamma``) and, when the
 declared ``TheoremSpec`` measure is a TV, as ``gamma_tv = gamma / 2 in [0,1]``.
 """
@@ -40,8 +42,7 @@ from dataclasses import dataclass, field, replace
 from fractions import Fraction
 from typing import Sequence
 
-from .lp import LpResult, solve_lp
-from .model import Action, T2FiniteModel, marginal_apply
+from .model import Action, T2FiniteModel
 from .spec import (
     MEASURE_PRODUCT_TV,
     UNCERTAINTY_CONVEX,
@@ -253,12 +254,12 @@ def collision_or_separation(
 
     Returns a ``T2bCertificate`` with the direction (``IFF`` for finite
     catalogs), the collision witness (gamma = 0) or separation witness
-    (gamma > 0), the exact LP primal/dual certificates, and the enumeration
-    cross-check.
+    (gamma > 0), all computed exactly by enumeration of the discrete
+    difference set.
 
-    **P0-3 gate.**  When the discrete enumeration and the convex-hull LP
-    disagree, no formal certificate is issued: ``status`` is
-    ``COUNTEREXAMPLE``, ``gamma`` is ``None``, and both values are preserved.
+    **P0-2 repair.**  The DISCRETE_CATALOG path is pure exact enumeration and
+    does not call the convex-hull LP.  CONVEX_HULL uncertainty and PRODUCT_TV
+    separation are not currently certified and return ``UNSUPPORTED_SPEC``.
     ``spec`` declares which uncertainty object and separation measure the
     certificate is about.
     """
@@ -300,153 +301,40 @@ def collision_or_separation(
 
 
     # Enumeration results (exact, DISCRETE_CATALOG engine).
+    # P0-2 repair: the DISCRETE_CATALOG path certifies purely from exact
+    # enumeration and NEVER calls the convex-hull LP.  The convex LP solves
+    # a different problem (optimising over the convex hulls); invoking it on
+    # the discrete path wrongly rejected valid discrete certificates as
+    # COUNTEREXAMPLE whenever the hulls overlapped.  enumeration_matches_lp
+    # remains only a cross-object diagnostic and is not a discrete gate.
     enum_collision = collision_witness(model, panel)
     from .witness import panel_separation
 
     sep = panel_separation(model, panel)
     enum_gamma = sep.gamma
 
-    # D empty -> vacuous separation (no admissible cross-class difference).
-    # This is a certified IFF with gamma=None and never a collision certificate.
-    if enum_gamma is None:
-        return T2bCertificate(
-            panel=tuple(panel),
-            enumeration_gamma=None,
-            collapsed=True,
-            status="IFF",
-            gamma=None,
-            spec=spec,
-            notes=("D empty: vacuous separation.",),
-        )
-
-    # LP solves gamma(S) over the CONVEX_HULL engine.
-    n_real, c, A, b, layout = build_gamma_lp(model, panel)
-    res: LpResult = solve_lp(c, A, b)
-
     cert = T2bCertificate(panel=tuple(panel), enumeration_gamma=enum_gamma, spec=spec)
-    if res.status != "OPTIMAL":
-        cert = replace(
-            cert,
-            notes=(f"LP status {res.status!r}; falling back to enumeration.",),
-        )
-        return _with_tv(_certify_from_enumeration(cert, model, panel, enum_collision, enum_gamma))
-
-    lp_opt = res.objective
-    cert = replace(cert, lp_optimal=lp_opt)
-    matches = enum_gamma is not None and lp_opt == enum_gamma
-    cert = replace(cert, enumeration_matches_lp=matches)
-
-    # P0-3 fail-closed: the two engines disagree -> no formal certificate.
-    if enum_gamma is not None and not matches:
-        return replace(
-            cert,
-            status="COUNTEREXAMPLE",
-            gamma=None,
-            notes=cert.notes + (
-                "enumeration_gamma != lp_optimal: discrete catalog and convex "
-                "relaxation disagree; the certificate is not well-posed and no "
-                "formal collision-or-separation certificate is issued.",
-            ),
-        )
-
-    # Recover the witness from the LP primal (x_1 - x_0).
-    J0, J1 = layout["J0"], layout["J1"]
-    n_states = model.n_states
-    x0 = [Fraction(0) for _ in range(n_states)]
-    x1 = [Fraction(0) for _ in range(n_states)]
-    for j in range(J0):
-        lam = res.primal[j]
-        for w in range(n_states):
-            x0[w] += lam * model.theta_0[j][w]
-    for k in range(J1):
-        lam = res.primal[J0 + k]
-        for w in range(n_states):
-            x1[w] += lam * model.theta_1[k][w]
-    v = tuple(x1[w] - x0[w] for w in range(n_states))
-
-    # Marginal collision check on the LP witness.
-    m0 = marginal_apply(model, x0)
-    m1 = marginal_apply(model, x1)
-    cert = replace(cert, lp_primal_feasible=(res.status == "OPTIMAL" and m0 == m1))
-
-    # Strong duality: dual objective should equal primal optimum.
-    # dual[i] is the shadow price for row i; b^T dual == c^T x at optimum.
-    dual_obj = sum((b[i] * res.dual[i] for i in range(len(b))), Fraction(0))
-    strong = res.dual_available and dual_obj == lp_opt and lp_opt >= 0
-    cert = replace(
-        cert,
-        lp_dual_feasible=res.dual_available,
-        lp_strong_duality=strong,
-    )
-
-    if lp_opt == 0:
-        # Collision branch: witness must be nonzero and blind to the panel.
-        if any(x != 0 for x in v):
-            cert = replace(
-                cert, collision_witness=v, gamma=Fraction(0), status="IFF"
-            )
-        elif enum_collision is not None:
-            cert = replace(
-                cert,
-                collision_witness=enum_collision,
-                gamma=Fraction(0),
-                status="IFF",
-                lp_strong_duality=strong,
-            )
-        else:
-            cert = replace(
-                cert,
-                status="NECESSARY_ONLY",
-                notes=cert.notes
-                + ("LP optimum 0 but no nonzero witness recovered; infimum-only.",),
-            )
-    else:
-        # Separation branch.
-        cert = replace(
-            cert,
-            separation_witness=v,
-            gamma=lp_opt,
-            status="IFF",
-            lp_strong_duality=strong and lp_opt > 0,
-        )
-
-    return _with_tv(cert)
-
-
-def _certify_from_enumeration(
-    cert: T2bCertificate,
-    model: T2FiniteModel,
-    panel: Sequence[str],
-    enum_collision,
-    enum_gamma,
-) -> T2bCertificate:
-    """Fallback certificate built purely from the exact enumeration engine.
-
-    This certifies the ``DISCRETE_CATALOG`` problem only; it never claims
-    agreement with the convex-hull LP (``enumeration_matches_lp`` stays
-    ``False`` here).
-    """
-    cert = replace(cert, enumeration_gamma=enum_gamma)
     if enum_collision is not None:
-        return replace(
-            cert,
-            collision_witness=enum_collision,
-            gamma=Fraction(0),
-            status="IFF",
-            enumeration_matches_lp=False,
+        return _with_tv(
+            replace(cert, collision_witness=enum_collision, gamma=Fraction(0), status="IFF")
         )
     if enum_gamma is None:
-        return replace(
-            cert,
-            collapsed=True,
-            status="IFF",
-            gamma=None,
-            notes=cert.notes + ("D empty: vacuous separation.",),
+        return _with_tv(
+            replace(
+                cert,
+                collapsed=True,
+                status="IFF",
+                gamma=None,
+                notes=("D empty: vacuous separation.",),
+            )
         )
-    return replace(
-        cert,
-        separation_witness=enum_collision,
-        gamma=enum_gamma,
-        status="IFF",
-        enumeration_matches_lp=False,
+    return _with_tv(
+        replace(
+            cert,
+            separation_witness=sep.witness_v,
+            gamma=enum_gamma,
+            status="IFF",
+        )
     )
+
+
