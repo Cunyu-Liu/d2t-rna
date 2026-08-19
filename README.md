@@ -1,5 +1,12 @@
 # D2T-RNA
 
+> **PROJECT STOPPED — ARCHIVED (owner decision 2026-08-18).**
+> This repository is frozen as an auditable archive and is **not** being advanced.
+> Terminal status & handoff: [`docs/audit/v7_project_terminal_status_20260818.md`](docs/audit/v7_project_terminal_status_20260818.md)
+> Git terminal tag: `project-stop-20260818` (audit branch `audit/p0-semantic-repair-20260811`, HEAD `0754581`).
+> Status: `scientific_claim_authorized=false`, `SOTA_NOT_ADJUDICATED`, `REAL_DATA_ROUTE=TERMINATED_FOR_CURRENT_DATA`, `SCIENTIFIC_SUBMISSION_BLOCKED`.
+> The content below reflects the earlier in-progress state and is retained for historical context only.
+
 D2T-RNA is being implemented against the frozen v6.1 contract for exact synthetic risk–coverage proofs, finite-observed-dataset subsampling QA, carefully delimited within-realized-library model-conditional risk, and fail-closed RORC stress evaluation.
 
 Current status: Tasks 1–4 are accepted on public `main`. This tree contains the Task 5 finite-scenario proof, independent bounded-integer checker, planner-failure, structural baseline, and RORC evaluation implementation. Task 5 engineering acceptance requires its candidate manifest, public focused commit, and external post-commit closure; a passing synthetic fixture or baseline comparison is not a scientific result. Task 3 does not prove real access chronology or scientific truth validity; its credential must be replayed from raw inputs and is not a bearer token. Task 4 reports and replay credentials are distinct, synthetic-only, non-bearer artifacts and do not open the Task 2 certificate path. No scientific certificate has been issued: within-library proof validity remains pending replay, new-library certification is a hard no-go, and observed-data closure/QA has not been executed. add, SAM-III, and RORC remain historically semantically exposed and retrospective-only.
