@@ -5,7 +5,7 @@ title:
   Registered Evaluation and Fail-Closed RNA Data Qualification
 
 authors:
-  - name: Cunyu Liu
+  - name: cunyuliu
     affiliation: Zhejiang University
     email: tylcy020509@qq.com
     orcid: (omitted)
