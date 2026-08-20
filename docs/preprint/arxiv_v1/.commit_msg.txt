@@ -1,0 +1,21 @@
+preprint: arXiv v1 negative-result report (D2T-RNA) - honest 8-page manuscript + ancillary + submission package
+
+docs/preprint/arxiv_v1/ created from immutable tag project-stop-20260818.
+
+Deliverables:
+* main.tex: 9-section English negative-result methods/software preprint
+  (finite controlled-testing prototype; production-audit corrections incl.
+  discrete/convex dispatch and Bayes-vs-minimax separation; negative registered
+  20-cell synthetic evaluation, median Delta_C=0, GO not met; why exact-oracle
+  dominance is circular; fail-closed 7-scope RNA data qualification; lessons,
+  limitations, conclusion, appendix). Builds clean: 8 pages, overfull=0,
+  underfull=0, undefined=0.
+* references.bib: 15 verified citations.
+* fig_evidence_flow.tikz + fig_delta_c.tikz (20-cell Delta_C; median 0, GO fail).
+* anc/confirmation_v3.csv + anc/data_qualification.csv (derived public tables).
+* arxiv_metadata.txt, claim_evidence_ledger.md, build_*.py, main.pdf, submission_source.zip.
+* Claim boundary enforced: forbidden wording appears only as explicit revocation
+  or non-claim (no RNA SOTA / validated design / real gamma / transfer /
+  never-worse superiority / full-certificate / all-tests-pass claims).
+* Code link points to tag project-stop-20260818; statuses preserved:
+  REAL_DATA_ROUTE=TERMINATED, SOTA_NOT_ADJUDICATED, SUBMISSION_BLOCKED.

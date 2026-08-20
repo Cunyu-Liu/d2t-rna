@@ -1,0 +1,21 @@
+% fig_delta_c.tikz — 20-cell v3 relative cost difference (median 0, GO not met)
+\begin{tikzpicture}[x=0.42cm,y=1.7cm]
+  % axes
+  \draw[->] (-0.8,0) -- (21.4,0) node[right,font=\small] {cell index};
+  \draw[->] (0,-1.2) -- (0,0.12) node[above,font=\small] {$\Delta_C$};
+  % GO threshold
+  \draw[dashed,thick,orange] (0,-0.10) -- (21,-0.10)
+        node[midway,below=4pt,font=\scriptsize,orange] {GO threshold $-0.10$};
+  % all 20 cells at 0 (ties and the 3 lower cells share the 0 baseline)
+  \foreach \i in {1,...,20} { \fill[gray!35] (\i-0.35,0) rectangle (\i+0.35,0); }
+  % the 3 lower cells: CC_p3=13, CC_p4=14, CD_p3=18
+  \foreach \i in {13,14,18} { \fill[blue!70] (\i-0.35,0) rectangle (\i+0.35,-0.875); }
+  % median line at 0
+  \draw[thick,red] (0,0) -- (21,0) node[right,font=\scriptsize,red] {median $= 0$};
+  % labels for the 3 lower cells
+  \node[font=\scriptsize,blue!70!black,anchor=north] at (13,-1.02) {CC\_p3};
+  \node[font=\scriptsize,blue!70!black,anchor=north] at (14,-1.02) {CC\_p4};
+  \node[font=\scriptsize,blue!70!black,anchor=north] at (18,-1.02) {CD\_p3};
+  % GO not met annotation
+  \node[font=\scriptsize,align=center,text=orange!80!black] at (10.5,0.05) {GO not met: median $0 > -0.10$};
+\end{tikzpicture}

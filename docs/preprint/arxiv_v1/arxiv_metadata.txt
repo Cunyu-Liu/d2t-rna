@@ -1,0 +1,68 @@
+# arXiv v1 submission metadata (D2T-RNA negative-result preprint)
+
+title:
+  D2T-RNA: An Auditable Finite Controlled-Testing Prototype with a Negative
+  Registered Evaluation and Fail-Closed RNA Data Qualification
+
+authors:
+  - name: Cunyu Liu
+    affiliation: Zhejiang University
+    email: tylcy020509@qq.com
+    orcid: (omitted)
+
+primary_category: q-bio.QM
+cross_list: stat.ME
+# Not cs.LG: the project has no machine-learning training, neural networks, or
+# representation learning.
+
+license:
+  arXiv.org perpetual, non-exclusive license 1.0 (irrevocable once submitted)
+
+comments:
+  - Negative-result methods/software preprint (limited finite controlled-testing
+    prototype; pre-registered synthetic evaluation did not meet its cost goal;
+    real-data route terminated for current data).
+  - Code availability: https://github.com/Cunyu-Liu/d2t-rna/tree/project-stop-20260818
+  - Code is source-visible and proprietary (license unchanged in this round).
+  - Two known positive-path readiness regression tests fail; "all tests pass" is
+    not claimed and no automated submission gate is asserted.
+  - No RNA SOTA, validated experiment design, transferability, or real-data
+    quantitative certificate is claimed.
+
+abstract: (1920-char limit; identical to main.tex abstract)
+  D2T-RNA is an auditable software prototype for finite, non-adaptive categorical
+  controlled testing: given a finite catalog of hypotheses, categorical observation
+  actions with registered costs, and a fixed observation horizon, it computes exact
+  separation/collision status, equal-prior Bayes average error, randomized minimax
+  error, and cost-to-endpoint allocations, and emits independently reproducible
+  certificates. We report three findings. First, a production audit corrected a
+  central semantic defect: the discrete-certificate path had been silently
+  dispatching to a convex-hull relaxation, and a single scalar had conflated
+  equal-prior Bayes average error with randomized minimax error; the repaired
+  interface separates these estimands, and the classical counterexamples (1/4 vs.
+  1/3; 81/512 vs. 81/337) are now distinguished exactly. Second, a pre-registered
+  synthetic evaluation on 20 frozen cells, with a Chernoff fixed-budget comparator
+  and a frozen randomized-minimax endpoint, did not meet its pre-specified
+  cost-reduction goal: the median relative cost difference is 0, with 3 of 20 cells
+  strictly cheaper and 17 tied. A subsequent post-hoc search using an exact optimal
+  solver yields definitional "never-worse" dominance and is therefore not a
+  performance finding. Third, a fail-closed audit of seven RNA structure-probing
+  scopes (ADD, glycine, miniTTR, SAM-III, RORC) shows that none qualifies for a
+  real likelihood, an executable action, a real marginal cost, or independent
+  experimental units; the real-data route is terminated for current data. The
+  contribution is a limited, auditable finite controlled-testing prototype with an
+  honest negative registered evaluation and a documented evidence boundary, not an
+  RNA SOTA method.
+
+ancillary_files:
+  - anc/confirmation_v3.csv   (20-cell derived public table, no third-party data)
+  - anc/data_qualification.csv (7-scope qualification status only)
+
+source_package:
+  submission_source.zip containing: main.tex, references.bib, fig_evidence_flow.tikz,
+  fig_delta_c.tikz, anc/*.csv, arxiv_metadata.txt, claim_evidence_ledger.md.
+  Excludes: the full proprietary repo, caches, private paths, third-party raw RNA
+  data, and /mnt contents.
+
+termination:
+  project stopped; no further model/benchmark/real-data development.

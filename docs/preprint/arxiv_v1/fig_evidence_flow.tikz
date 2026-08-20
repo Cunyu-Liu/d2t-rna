@@ -1,0 +1,30 @@
+% fig_evidence_flow.tikz — evidence/data flow and four-layer conclusion boundary
+\begin{tikzpicture}[
+  node distance=0.55cm,
+  box/.style={draw, rounded corners=2pt, align=center, font=\small, minimum width=6.2cm, minimum height=0.85cm},
+  layer/.style={draw, rounded corners=2pt, align=center, font=\scriptsize, minimum width=4.4cm, minimum height=0.7cm},
+  ->, >=Stealth
+]
+  % data flow (left column)
+  \node[box] (raw) {Raw RNA archives \\ (ADD / glycine / miniTTR / SAM-III / RORC)};
+  \node[box, fill=red!12, below=of raw] (qual) {Fail-closed data qualification \\ {\scriptsize all 7 scopes TERMINATED\_FOR\_CURRENT\_DATA}};
+  \node[box, below=of qual] (model) {Finite registered model \\ {\scriptsize hypotheses $\cdot$ categorical actions $\cdot$ costs $\cdot$ fixed horizon}};
+  \node[box, below=of model] (solver) {Exact solver + certificate \\ {\scriptsize discrete dispatch $\cdot$ Bayes vs.\ minimax separated}};
+  \node[box, below=of solver] (eval) {Registered synthetic evaluation (20 cells) \\ {\scriptsize median $\Delta_C = 0$, GO not met}};
+  \node[box, below=of eval] (claim) {Claim boundary \\ {\scriptsize limited prototype + negative result + evidence boundary}};
+  \draw[->] (raw) -- (qual);
+  \draw[->] (qual) -- (model);
+  \draw[->] (model) -- (solver);
+  \draw[->] (solver) -- (eval);
+  \draw[->] (eval) -- (claim);
+
+  % four-layer conclusion boundary (right column)
+  \node[layer, fill=green!12, right=1.1cm of raw, yshift=-0.4cm] (L1) {Software correctness \\ {\scriptsize exact arithmetic, tests, hashes}};
+  \node[layer, fill=blue!12, below=of L1] (L2) {Mathematical conditionality \\ {\scriptsize catalog / law / independence assumptions}};
+  \node[layer, fill=yellow!20, below=of L2] (L3) {Benchmark fairness \\ {\scriptsize matched objective, endpoint, method identity}};
+  \node[layer, fill=orange!15, below=of L3] (L4) {Biological evidence \\ {\scriptsize real likelihood / action / cost / unit}};
+  \draw[->] (raw.east) -- (L1.west);
+  \draw[->] (model.east) -- (L2.west);
+  \draw[->] (eval.east) -- (L3.west);
+  \draw[->] (qual.east) -- (L4.west);
+\end{tikzpicture}
